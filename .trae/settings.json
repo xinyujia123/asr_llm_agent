@@ -1,0 +1,20 @@
+{
+    // 允许 Pylance 索引 Conda 环境中的第三方库源码
+    "python.analysis.extraPaths": [
+        "/root/miniconda3/envs/funasr_env/lib/python3.10/site-packages"
+    ],
+    // 自动补全也指向这里
+    "python.autoComplete.extraPaths": [
+        "/root/miniconda3/envs/funasr_env/lib/python3.10/site-packages"
+    ],
+    // 确保使用你选定的解释器
+    "python.defaultInterpreterPath": "~/miniconda3/envs/funasr_env/bin/python",
+    // 提高索引深度，确保能搜到嵌套的定义
+    "python.analysis.indexing": true,
+    "python.analysis.packageIndexDepths": [
+        {
+            "name": "funasr",
+            "depth": 5
+        }
+    ]
+}

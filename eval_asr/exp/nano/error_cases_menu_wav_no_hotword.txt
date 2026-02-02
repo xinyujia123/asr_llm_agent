@@ -1,0 +1,13 @@
+ID: 3
+Ref: 打开体征采集界面。
+Hyp: 打开提升开机界面
+Ref(eval): 打开体征采集界面
+Hyp(eval): 打开提升开机界面
+CER: 0.5000
+
+ID: 6
+Ref: 打开治疗。
+Hyp: 打开质量
+Ref(eval): 打开治疗
+Hyp(eval): 打开质量
+CER: 0.5000

@@ -1,0 +1,11 @@
+
+Benchmark Report
+================
+Total Files: 180
+Overall CER: 0.0375
+Overall Accuracy: 0.9625
+Total Duration: 5100.06 s
+Total Inference Time: 257.62 s
+Overall RTF: 0.0505
+Average Latency: 1.4312 s/file
+    
