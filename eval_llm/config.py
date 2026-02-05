@@ -5,6 +5,17 @@ dotenv_path = find_dotenv()
 load_dotenv(dotenv_path)
 
 
+# 默认用于生成标准答案的模型
+GROUND_TRUTH_MODEL = "qwen"
+THINKING = True
+INFERENCE = False
+
+# 数据路径
+DATA_DIR = "/workspace/dataset/asr_llm"
+RAW_DATA_PATH = os.path.join(DATA_DIR, "nurse_script_tn.txt")
+BENCHMARK_SAVE_DIR= "/workspace/audio_llm_agent/eval_llm/benchmark"
+
+
 # API 配置
 # 建议通过环境变量设置，或者直接在此修改
 API_CONFIG = {
@@ -21,13 +32,12 @@ API_CONFIG = {
     "glm": {
         "api_key": os.getenv("GLM_API_KEY", "YOUR_GLM_API_KEY"),
         "model": "glm-4.7"
+    },
+    "deepseek": {
+        "api_key": os.getenv("DEEPSEEK_API_KEY", "YOUR_DEEPSEEK_API_KEY"),
+        "base_url": "https://api.deepseek.com/v1",
+        "model":  "deepseek-reasoner" if THINKING else "deepseek-chat"
     }
 }
 
-# 默认用于生成标准答案的模型
-GROUND_TRUTH_MODEL = "glm"
 
-# 数据路径
-DATA_DIR = "/workspace/dataset/asr_llm"
-RAW_DATA_PATH = os.path.join(DATA_DIR, "nurse_script_tn.txt")
-BENCHMARK_SAVE_PATH = "/workspace/audio_llm_agent/eval_llm/benchmark/output.jsonl"

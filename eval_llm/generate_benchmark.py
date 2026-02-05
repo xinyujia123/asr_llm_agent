@@ -2,26 +2,34 @@ import os
 import json
 import re
 import time
+import random
 from datetime import datetime
 from typing import List, Dict, Any
 from .utils import parse_nurse_scripts
 from .llm_client import LLMClient,ZP_LLMClient
-from .config import RAW_DATA_PATH, BENCHMARK_SAVE_PATH, GROUND_TRUTH_MODEL
 from .schema import EXPECTED_KEYS
+from .config import (
+    RAW_DATA_PATH, 
+    BENCHMARK_SAVE_DIR, 
+    GROUND_TRUTH_MODEL, 
+    THINKING, 
+    INFERENCE
+)
 
 # 导入提示词
 import sys
 sys.path.append('/workspace/audio_llm_agent')
-from sak.prompts import MEDICAL_EXTRACTOR_PROMPT
+from sak.prompts import MEDICAL_EXTRACTOR_PROMPT, MEDICAL_EXTRACTOR_PROMPT_INFERENCE
 
 def generate_benchmark():
     # 1. 解析数据
-    limit = 30
+    limit = 50
     thinking = False
     start_time = time.time()
     scripts = parse_nurse_scripts(RAW_DATA_PATH)
     end_time = time.time()
     print(f"Loaded {len(scripts)} scenarios from {RAW_DATA_PATH} in {end_time - start_time:.3f} seconds")
+
 
     # 2. 初始化 LLM 客户端
     try:
@@ -32,6 +40,7 @@ def generate_benchmark():
     except Exception as e:
         print(f"Failed to initialize LLM client: {e}")
         return
+    print(f"using model {GROUND_TRUTH_MODEL}, thinking={THINKING}, inference={INFERENCE}") 
 
     # 3. 准备生成
     detailed_results = []
@@ -41,16 +50,21 @@ def generate_benchmark():
     # 限制生成数量进行测试，如果需要全量生成请修改此处
     
     for i, script in enumerate(scripts[:limit]):
+        if 'glm' in GROUND_TRUTH_MODEL:
+            client = ZP_LLMClient(GROUND_TRUTH_MODEL)
+        time.sleep(random.uniform(2, 5))
         print(f"[{i+1}/{limit}] Processing: {script['title']}")
-        
         
         now = datetime.now()
         formatted_time= now.strftime("%Y-%m-%d %H:%M:%S")
-        system_prompt = MEDICAL_EXTRACTOR_PROMPT.replace("{CURRENT_SYS_TIME}", formatted_time)
+        if INFERENCE:
+            system_prompt = MEDICAL_EXTRACTOR_PROMPT_INFERENCE.replace("{CURRENT_SYS_TIME}", formatted_time)
+        else:
+            system_prompt = MEDICAL_EXTRACTOR_PROMPT.replace("{CURRENT_SYS_TIME}", formatted_time)
         
         # 调用 LLM
         start_time = time.time()
-        response_content, reasoning_content = client.chat(system_prompt, script['text'], thinking=thinking)
+        response_content, reasoning_content = client.chat(system_prompt, script['text'], thinking=THINKING)
         end_time = time.time()
         print(f"  LLM response time: {end_time - start_time:.3f} seconds")
         
@@ -81,7 +95,7 @@ def generate_benchmark():
             end_time = time.time()
             print(f"  JSON parsing time: {end_time - start_time:.3f} seconds")
 
-            detailed_results.append({
+            results.append({
                 "id": script['id'],
                 "input_text": script['text'],
                 "raw_output": response_content,
@@ -93,7 +107,7 @@ def generate_benchmark():
             })
         except Exception as e:
             print(f"  Failed to parse JSON for {script['id']}: {e}")
-            detailed_results.append({
+            results.append({
                 "id": script['id'],
                 "input_text": script['text'],
                 "raw_output": response_content,
@@ -102,18 +116,27 @@ def generate_benchmark():
             })
             continue
         
-        # 避免请求过快
-        time.sleep(2)
 
-    name, ext = os.path.splitext(BENCHMARK_SAVE_PATH)
-    new_path = f"{name}_{GROUND_TRUTH_MODEL}_{'think' if thinking else 'no_think'}_{limit}{ext}"
-    # 4. 保存结果
-    with open(new_path, 'w', encoding='utf-8') as f:
-        for entry in detailed_results:
-            f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+    think_str = "think" if THINKING else "no_think"
+    infer_str = "infer" if INFERENCE else "no_infer"
+    base_name = f"{GROUND_TRUTH_MODEL}_{think_str}_{infer_str}_{limit}"
+    filename = f"{base_name}.jsonl"
+    save_path = os.path.join(BENCHMARK_SAVE_DIR, filename)
+    
+    # 自动处理重名文件
+    counter = 1
+    while os.path.exists(save_path):
+        save_path = os.path.join(BENCHMARK_SAVE_DIR, f"{base_name}_{counter}.jsonl")
+        counter += 1
 
-    print(f"Successfully generated benchmark with {len(results)} entries at {new_path}")
+    with open(save_path, 'w', encoding='utf-8') as f:
+        for entry in results:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+
+    print(f"Successfully generated benchmark with {len(results)} entries at {save_path}")
 
 if __name__ == "__main__":
     # 注意：运行此脚本需要配置 API Key
-    generate_benchmark()
+    times = 3
+    for i in range(times):
+        generate_benchmark()

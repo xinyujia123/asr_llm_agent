@@ -27,8 +27,10 @@ MEDICAL_JSON_SCHEMA = {
     "urination": "排尿（选项：正常、异常）",
     "defecation": "排便（选项：正常、异常）"
 }
+
 EXPECTED_KEYS = list(MEDICAL_JSON_SCHEMA.keys())
 UNCERTAIN_KEYS = ["diagnosis", "allergyHistory", "catheter"]
+CERTAIN_KEYS = list(set(EXPECTED_KEYS) - set(UNCERTAIN_KEYS))
 
 # 定义标准 Schema 规范
 MEDICAL_JSON_SCHEMA_E1 = {
@@ -87,7 +89,7 @@ def json_schema_check(json_data: Dict[str, Any]) -> bool:
 
 if __name__ == "__main__":
     # 测试数据
-    jsonl_path = "/workspace/audio_llm_agent/eval_llm/benchmark/output_kimi_30.jsonl"
+    jsonl_path = "/workspace/audio_llm_agent/eval_llm/benchmark/output_kimi_think_90.jsonl"
     # 读取 JSONL 文件
     with open(jsonl_path, 'r', encoding='utf-8') as f:
         lines = f.readlines()
@@ -97,7 +99,7 @@ if __name__ == "__main__":
     for line in lines:
         json_data = json.loads(line.strip())
         try:
-            validate(instance=json_data["ground_truth"], schema=MEDICAL_JSON_SCHEMA_E1)
+            validate(instance=json_data["cleaned_json"], schema=MEDICAL_JSON_SCHEMA_E1)
             valid_count += 1
         except ValidationError as e:
             print(f"ValidationError: {e}")
