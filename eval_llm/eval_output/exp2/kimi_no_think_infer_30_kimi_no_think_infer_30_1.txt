@@ -1,0 +1,38 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 27
+Mismatch Records: 3
+
+Record 9:
+  Key: sleep (certain)
+    kimi: 异常
+    kimi: None
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 12:
+  Key: catheter (uncertain)
+    kimi: 氧气管、静脉通路
+    kimi: 氧气管
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 13:
+  Key: diet (certain)
+    kimi: 异常
+    kimi: None
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------

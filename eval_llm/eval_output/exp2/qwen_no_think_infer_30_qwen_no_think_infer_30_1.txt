@@ -1,0 +1,71 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 24
+Mismatch Records: 6
+
+Record 1:
+  Key: consciousness (certain)
+    qwen: None
+    qwen: 清楚
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 8:
+  Key: consciousness (certain)
+    qwen: 清楚
+    qwen: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 14:
+  Key: consciousness (certain)
+    qwen: None
+    qwen: 清楚
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 21:
+  Key: skin (certain)
+    qwen: 破损、皮疹
+    qwen: 破损、其他
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 27:
+  Key: catheter (uncertain)
+    qwen: None
+    qwen: 静脉通路
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 29:
+  Key: consciousness (certain)
+    qwen: 清楚
+    qwen: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------

@@ -1,0 +1,63 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 25
+Mismatch Records: 5
+
+Record 0:
+  Key: catheter (uncertain)
+    qwen: None
+    qwen: 心电监护
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 1:
+  Key: consciousness (certain)
+    qwen: None
+    qwen: 清楚
+  Key: diagnosis (uncertain)
+    qwen: None
+    qwen: 术后
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 8:
+  Key: consciousness (certain)
+    qwen: 清楚
+    qwen: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 20:
+  Key: admissionMethod (certain)
+    qwen: 其他
+    qwen: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 21:
+  Key: skin (certain)
+    qwen: 破损、皮疹
+    qwen: 破损
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------

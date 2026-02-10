@@ -1,0 +1,49 @@
+=== Comparison Results ===
+Total Records: 50
+Perfect Matches: 46
+Mismatch Records: 4
+
+Record 17:
+  Key: diagnosis (uncertain)
+    gemini: None
+    openai: 术后状态
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  openai Reasoning:
+None
+--------------------
+Record 26:
+  Key: urination (certain)
+    gemini: None
+    openai: 异常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  openai Reasoning:
+None
+--------------------
+Record 33:
+  Key: diagnosis (uncertain)
+    gemini: None
+    openai: 顺铂化疗
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  openai Reasoning:
+None
+--------------------
+Record 34:
+  Key: diet (certain)
+    gemini: None
+    openai: 正常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  openai Reasoning:
+None
+--------------------

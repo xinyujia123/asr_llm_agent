@@ -1,0 +1,1853 @@
+=== Comparison Results ===
+Total Records: 50
+Perfect Matches: 28
+Mismatch Records: 22
+
+Record 6:
+  Key: diet (certain)
+    gemini: None
+    baichuan: 异常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：语音中未提及具体评估时间，因此使用当前系统时间：**2026-02-01 10:02:03**。
+
+2. **education**：未提及文化程度，填 **null**。
+
+3. **ethnicity**：未提及民族，填 **null**。
+
+4. **admissionTime**：未提及入院时间，填 **null**。
+
+5. **admissionMethod**：未提及入院方式，填 **null**。
+
+6. **diagnosis**：未明确提及诊断或术式，仅讨论血压控制问题，无“确诊”或“初步诊断”等明确措辞，填 **null**。
+
+7. **allergyHistory**：未提及过敏史，填 **null**。
+
+8. **temperature**：未提及体温，填 **null**。
+
+9. **pulseRate**：明确提到“脉搏八十五次”，因此 **pulseRate = 85**。
+
+10. **heartRate**：未直接提及心率数值，但“心率挺整齐”是描述节律而非数值，不能推断具体数值，填 **null**。
+
+11. **respiratoryRate**：未提及呼吸频率，填 **null**。
+
+12. **bloodPressure**：明确提到“血压是一百五、九十五”，即收缩压150，舒张压95，因此 **bloodPressure = "150/95"**。
+
+13. **weight**：提到“七十二点五公斤”，即 **72.5 kg**。
+
+14. **height**：未提及身高，填 **null**。
+
+15. **bloodSugar**：提到“今天空腹”，但未给出具体血糖值，因此 **null**。
+
+16. **consciousness**：未提及神志状态，仅描述“手平放”等动作，不足以推断神志清楚，**严禁仅根据动作推断神志**，因此填 **null**。
+
+17. **skin**：未提及皮肤情况，填 **null**。
+
+18. **limbActivity**：提到“手平放”，但仅为局部动作，且无“正常”或“异常”整体描述，**局部正常不能推断整体正常**，因此填 **null**。
+
+19. **catheter**：未提及任何导管，填 **null**。
+
+20. **diet**：提到“空腹”，说明当前未进食，属于较严重情况，因此 **diet = "异常"**。
+
+21. **sleep**：未提及睡眠情况，填 **null**。
+
+22. **urination**：未提及排尿情况，填 **null**。
+
+23. **defecation**：未提及排便情况，填 **null**。
+
+24. **stoolFrequency**：未提及排便次数，填 **null**。
+
+---
+
+**最终输出 JSON**：
+
+```json
+--------------------
+Record 12:
+  Key: catheter (uncertain)
+    gemini: None
+    baichuan: 无
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据提供的语音识别文本，进行逐项分析和提取：
+
+1. **assessmentTime**：文本未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅涉及血糖和水肿等体征。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：明确提到“三十六度四”，即36.4℃。  
+   → `"36.4"`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：未提及心率。  
+    → `null`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：未提及血压。  
+    → `null`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：明确提到“十一点二”，即11.2 mmol/L，且为餐后血糖。  
+    → `"11.2"`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：提到“脚踝这儿有点水肿”。水肿属于皮肤黏膜的异常情况，应归为“其他”。  
+    → `"其他"`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：未提及任何导管。  
+    → `"无"`
+
+20. **diet**：提到“下午记得别吃水果了”，属于饮食建议，为弱证据（C级），不构成当前“异常”状态。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点说明**：
+- “脚踝这儿有点水肿”属于皮肤黏膜的异常表现，根据材料中多处描述，水肿是组织间隙液体积聚，属于皮肤黏膜的“其他”异常情况。
+- “十一点二”为餐后血糖，明确数值，直接提取。
+- “诺和锐打了十二个单位”为治疗行为，不构成当前生命体征或状态，不用于诊断字段。
+- “下午记得别吃水果了”为建议，不构成当前饮食异常。
+
+---
+
+最终输出如下：
+--------------------
+Record 14:
+  Key: diet (certain)
+    gemini: None
+    baichuan: 正常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅提到“潘托拉唑”用于保护胃黏膜，但无明确诊断。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：未提及体温。  
+   → `null`
+
+9. **pulseRate**：明确提到“脉搏七十二”。  
+   → `72`
+
+10. **heartRate**：脉搏与心率在无特殊说明时通常视为一致，但此处仅提“脉搏”，未明确“心率”。根据严谨原则，不推断。  
+    → `null`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：明确提到“血压一百零五、六十五”，即收缩压105，舒张压65。  
+    → `"105/65"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：未提及皮肤情况。  
+    → `null`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：提到“这瓶潘托拉唑是……点滴”，说明存在静脉输液，**静脉通路**存在。  
+    → `"静脉通路"`
+
+20. **diet**：提到“昨晚到现在一共喝了五百毫升水”，说明有饮水，但未说明是否禁食或饮食受限。  
+    → `正常`（因能饮水且无异常描述）
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：提到“尿色有点深”，提示尿液异常，可能脱水，属于**尿色异常**，判定为“异常”。  
+    → `"异常"`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**最终输出 JSON：**
+
+```json
+--------------------
+Record 16:
+  Key: urination (certain)
+    gemini: None
+    baichuan: 正常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：语音中未明确提及评估时间，因此使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅提到用药（呋塞米），属于治疗行为，不能推断诊断。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：未提及体温。  
+   → `null`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：未提及心率。  
+    → `null`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：明确提到“血压一百三十五、八十五”，即收缩压135，舒张压85。  
+    → `"135/85"`
+
+13. **weight**：明确提到“体重今天测的是六十八公斤”。  
+    → `68`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：未提及皮肤情况。  
+    → `null`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：未提及任何导管。虽然提到“打了一针”，但未说明是否留置静脉通路，不能推断存在导管。  
+    → `null`
+
+20. **diet**：未提及饮食情况。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：提到“那两个小时尿了多少？六百毫升”，说明排尿功能存在，且量正常，无异常描述。  
+    → `正常`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点说明**：
+- “打了一针呋塞米”属于治疗行为，但未说明是静脉注射还是肌肉注射，也未说明是否建立持续通路，因此**不能推断存在静脉通路或导管**。
+- “耳朵响”是医生的提醒，属于**未来可能症状的预警**，并非当前存在，因此不构成“异常”或不良反应的证据。
+- “身上没力气”同理，是提醒注意，非当前状态。
+
+---
+
+最终输出如下：
+--------------------
+Record 17:
+  Key: catheter (uncertain)
+    gemini: 引流管
+    baichuan: 引流管、静脉通路
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，进行逐项分析和提取：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅提到“手术后”，但无具体术式名称。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：未提及体温。  
+   → `null`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：明确提到“心率八十二”。  
+    → `82`
+
+11. **respiratoryRate**：明确提到“呼吸，十四次”。  
+    → `14`
+
+12. **bloodPressure**：未提及血压。  
+    → `null`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：未提及皮肤情况。  
+    → `null`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：明确提到“引流管”和“止痛泵”。  
+    - “止痛泵”通常通过静脉通路给药，**行为即路径**原则，等同于存在静脉通路。  
+    - “引流管”为明确导管。  
+    → `引流管、静脉通路`
+
+20. **diet**：未提及饮食情况。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点说明**：
+- “止痛泵”虽未直接说“静脉通路”，但其使用**必须依赖静脉通路**，根据“行为即路径”原则，可判定存在静脉通路。
+- “引流管”为明确导管。
+- “呼吸十四次”被评价为“稍微有点慢”，但呼吸频率仍为客观值14次/分。
+- “淡红色液体，量不多，大概三十毫升”描述引流情况，支持“引流管”存在。
+
+---
+--------------------
+Record 19:
+  Key: pulseRate (certain)
+    gemini: None
+    baichuan: 70
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：语音中提到“刚才”，属于模糊描述，因此使用当前系统时间 **2026-02-01 10:02:03**。
+
+2. **education**：未提及，填 null。
+
+3. **ethnicity**：未提及，填 null。
+
+4. **admissionTime**：未提及具体入院时间，填 null。
+
+5. **admissionMethod**：未提及，填 null。
+
+6. **diagnosis**：未提及明确诊断或术式，仅提到“明天手术”，属于将来计划，不构成当前诊断。因此填 null。
+
+7. **allergyHistory**：未提及，填 null。
+
+8. **temperature**：提到“三十六度六”，转换为一位小数为 **36.6**。
+
+9. **pulseRate**：未单独提及脉率，但提到“心率七十”，在无特别说明时，心率可视为脉率，因此 **pulseRate = 70**。
+
+10. **heartRate**：明确提到“心率七十”，填 **70**。
+
+11. **respiratoryRate**：未提及，填 null。
+
+12. **bloodPressure**：提到“血压一百二十八、七十二”，格式为“收缩压/舒张压”，填 **128/72**。
+
+13. **weight**：未提及，填 null。
+
+14. **height**：未提及，填 null。
+
+15. **bloodSugar**：未提及，填 null。
+
+16. **consciousness**：未提及神志状态，仅说“听清楚了吗”，不能推断为“清楚”（根据原则，严禁仅根据交流能力推断神志）。因此填 null。
+
+17. **skin**：提到“皮下注射”，但未描述皮肤异常。注射部位可能有轻微反应，但未描述破损、溃疡等。因此不能判定为异常。未提及其他皮肤情况，**不能默认“完整”**，除非明确描述。因此填 null。
+
+18. **limbActivity**：未提及肢体活动情况，填 null。
+
+19. **catheter**：未提及任何导管，填 null。
+
+20. **diet**：提到“晚八点以后就不要吃东西了”，这是**将来的指令**，不是当前状态。当前是否禁食未知。因此不能判定为“异常”。填 null。
+
+21. **sleep**：未提及，填 null。
+
+22. **urination**：未提及，填 null。
+
+23. **defecation**：未提及，填 null。
+
+24. **stoolFrequency**：未提及，填 null。
+
+---
+
+**最终输出 JSON**：
+
+```json
+--------------------
+Record 22:
+  Key: diagnosis (uncertain)
+    gemini: 支架术后
+    baichuan: None
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未明确提及入院诊断或术式，仅提到“支架做完了”，但未说明是何种支架（如冠脉支架、颈动脉支架等），且无“初步诊断”等明确措辞。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：未提及体温。  
+   → `null`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：明确提到“心率七十二”。  
+    → `72`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提到“一百一、六十八”，即收缩压110，舒张压68。  
+    → `"110/68"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：提到“腹股沟穿刺点皮肤有点破损和青紫，大概三乘三厘米的淤斑”。  
+    - “破损”属于皮肤黏膜异常。  
+    - “淤斑”属于“其他”类别（根据补充说明：水肿、脱屑、淤斑等异常皮肤情况归纳为“其他”）。  
+    - “完整”具有排他性，一旦有异常则不能保留“完整”。  
+    → `破损、其他`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：未提及导管。  
+    → `null`
+
+20. **diet**：提到“今天的波立维和阿司匹林都吃了吧”，说明可以口服药物，但未说明饮食状态是否正常。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点说明**：
+- “支架做完了”提示术后状态，但未说明具体术式或诊断，因此 **diagnosis 为 null**。
+- “波立维”即氯吡格雷（clopidogrel），材料中提到 **“clopidogrel (75 mg/d) 至少六个月”** ^[2]^，提示抗血小板治疗，但不构成诊断。
+- 血压维持在 **110/68 mmHg**，接近文献中提到的术后血压管理范围 **(110-120)/(60-80) mmHg**，以 **防止高灌注综合征** ^[2]^。
+- 皮肤“破损”和“淤斑”属于明确异常，且“淤斑”归为“其他”类别。
+
+---
+
+最终输出如下：
+--------------------
+Record 24:
+  Key: urination (certain)
+    gemini: None
+    baichuan: 正常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未明确提及诊断或术式，仅提到“二甲双胍”，但未说明诊断。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：提及“三十六度五” → 36.5℃  
+   → `"36.5"`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：提及“心率七十六”  
+    → `"76"`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提及“血压一百三十、八十二” → 130/82 mmHg  
+    → `"130/82"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：提及“餐后十四点六” → 14.6 mmol/L  
+    → `"14.6"`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：提及“双下肢皮肤还算完好”，但“有点干”。  
+    - “完好”提示无破损、溃疡等，但“干”属于非病理性改变，不构成“异常”选项。  
+    - 根据原则8，“正常/完整”具有排他性，且“干”不属于“其他”范畴（非严重异常）。  
+    - 但仅提及“双下肢”，未评估全身皮肤，**局部正常不能推断整体完整**。  
+    → `null`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：未提及任何导管。  
+    → `null`
+
+20. **diet**：未提及饮食状态。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：提及“尿量两千三百毫升”，说明排尿存在且量正常。  
+    - 无尿频、尿急、失禁等异常描述。  
+    → `"正常"`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**最终输出 JSON：**
+
+```json
+--------------------
+Record 25:
+  Key: limbActivity (certain)
+    gemini: 异常
+    baichuan: None
+  Key: skin (certain)
+    gemini: None
+    baichuan: 完整
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅描述症状（牵引疼痛）和用药。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：提及“三十七度幺”，即37.1℃。  
+   → `"37.1"`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：提及“心率八十”。  
+    → `"80"`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提及“血压一百二、七十五”，即120/75。  
+    → `"120/75"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：明确提到“目前皮肤完好”，即皮肤完整。  
+    → `"完整"`  
+    （注意：根据规则，“完整”具有排他性，无其他异常描述）
+
+18. **limbActivity**：未直接描述肢体活动情况。虽有“牵引”提示活动受限，但未明确功能状态。  
+    → `null`  
+    （根据医学处理原则，仅“牵引”不足以推断为“异常”，除非明确描述“受限”、“不能动”等）
+
+19. **catheter**：未提及任何导管。  
+    → `null`
+
+20. **diet**：未提及饮食情况。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点说明**：
+- “每两小时翻一次身”是**预防性建议**，属于弱证据（C级），不能作为当前状态异常的依据。
+- “牵引疼得厉害”提示疼痛，但未影响肢体活动的直接描述，故不推断为“异常”。
+- “皮肤完好”直接对应“完整”。
+
+---
+
+最终输出如下：
+
+```json
+--------------------
+Record 26:
+  Key: pulseRate (certain)
+    gemini: None
+    baichuan: 92
+  Key: urination (certain)
+    gemini: None
+    baichuan: 异常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间：**2026-02-01 10:02:03**
+
+2. **education**：未提及 → null
+
+3. **ethnicity**：未提及 → null
+
+4. **admissionTime**：未提及 → null
+
+5. **admissionMethod**：未提及 → null
+
+6. **diagnosis**：未提及明确诊断或术式，仅描述治疗状态 → null
+
+7. **allergyHistory**：未提及 → null
+
+8. **temperature**：未提及 → null
+
+9. **pulseRate**：未单独提及，但“心率92” → **92**
+
+10. **heartRate**：明确为“心率92” → **92**
+
+11. **respiratoryRate**：未提及 → null
+
+12. **bloodPressure**：提到“血压九十五、五十八” → **95/58**
+
+13. **weight**：未提及 → null
+
+14. **height**：未提及 → null
+
+15. **bloodSugar**：未提及 → null
+
+16. **consciousness**：明确提到“目前处于镇静状态” → **药物镇静状**
+
+17. **skin**：提到“皮肤背部有一处破损” → 属于“破损”；根据规则，“完整”与异常互斥，因此不选“完整” → **破损**
+
+18. **limbActivity**：未提及 → null
+
+19. **catheter**：提到“引流管”；同时“泵入”药物，说明存在**静脉通路** → **引流管、静脉通路**
+
+20. **diet**：未提及 → null
+
+21. **sleep**：未提及 → null
+
+22. **urination**：提到“过去四小时尿量一百五十”，说明有排尿功能，但未说明是否自然排尿。然而，“尿量”存在且量化，结合临床常规，若无导尿管则不会精确记录尿量。因此，**存在导尿管** → **异常**
+
+23. **defecation**：未提及 → null
+
+24. **stoolFrequency**：未提及 → null
+
+---
+
+**关键推断依据**：
+
+- “**泵入**”药物（多巴胺、咪达唑仑） → 等同于存在**静脉通路**（行为即路径原则）。
+- “**引流管出量十毫升**” → 明确存在引流管。
+- “**过去四小时尿量一百五十**” → 通常仅在留置导尿管时精确记录，因此推断存在**导尿管** → **urination: 异常**。
+- “**皮肤背部有一处破损**” → 局部异常 → **skin: 破损**，且不包含“完整”。
+- “**处于镇静状态**” → 明确意识状态 → **药物镇静状**。
+
+---
+
+最终输出如下：
+
+```json
+--------------------
+Record 29:
+  Key: defecation (certain)
+    gemini: None
+    baichuan: 异常
+  Key: diagnosis (uncertain)
+    gemini: None
+    baichuan: 肠道手术
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：语音中未提及具体评估时间，因此使用当前系统时间：**2026-02-01 10:02:03**。
+
+2. **education**：未提及，填 null。
+
+3. **ethnicity**：未提及，填 null。
+
+4. **admissionTime**：未提及入院时间，填 null。
+
+5. **admissionMethod**：未提及入院方式，填 null。
+
+6. **diagnosis**：提到“明天肠道手术”，属于**术式**，且为明确计划，可作为入院诊断。因此填 **肠道手术**。
+
+7. **allergyHistory**：未提及过敏史，填 null。
+
+8. **temperature**：提到“体温三十六度三”，转换为一位小数：**36.3**。
+
+9. **pulseRate**：未提及脉率，填 null。
+
+10. **heartRate**：提到“心率七十四”，填 **74**。
+
+11. **respiratoryRate**：未提及呼吸频率，填 null。
+
+12. **bloodPressure**：提到“血压一百二、八十”，格式为“收缩压/舒张压”：**120/80**。
+
+13. **weight**：未提及体重，填 null。
+
+14. **height**：未提及身高，填 null。
+
+15. **bloodSugar**：未提及血糖，填 null。
+
+16. **consciousness**：提到“意识清醒”，对应选项为“清楚”：**清楚**。
+
+17. **skin**：未提及皮肤情况，填 null。
+
+18. **limbActivity**：未提及肢体活动情况，填 null。
+
+19. **catheter**：提到“静脉补液”，说明存在静脉通路。因此填 **静脉通路**。
+
+20. **diet**：提到“要禁食”，属于较严重饮食异常，因此填 **异常**。
+
+21. **sleep**：未提及睡眠情况，填 null。
+
+22. **urination**：未提及排尿情况，填 null。
+
+23. **defecation**：提到“今天要做清洁灌肠”，说明排便功能被干预，且禁食，提示排便异常。此外，灌肠前通常无正常排便。因此判定为 **异常**。
+
+24. **stoolFrequency**：未提及具体排便次数，填 null。
+
+---
+
+**关键逻辑说明**：
+- “静脉补液”等同于存在**静脉通路**，符合“行为即路径”原则。
+- “禁食”明确属于饮食异常。
+- “清洁灌肠”为术前准备，说明当前排便功能异常，故 defecation 为“异常”。
+- “意识清醒”直接对应“清楚”。
+- “肠道手术”为明确术式，可作为入院诊断。
+
+---
+
+最终输出如下：
+
+```json
+--------------------
+Record 31:
+  Key: skin (certain)
+    gemini: 手术切口
+    baichuan: None
+  Key: diagnosis (uncertain)
+    gemini: 介入术后
+    baichuan: None
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未明确提及入院诊断或术式，仅说“做完介入回来了”，属于术后状态，但未说明具体手术名称或诊断。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：未提及体温。  
+   → `null`
+
+9. **pulseRate**：未单独提及脉率。  
+   → `null`
+
+10. **heartRate**：明确提到“心率六十八”。  
+    → `68`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提到“血压一百三十、八十”，即收缩压130，舒张压80。  
+    → `"130/80"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：明确提到“意识清醒”，属于“清楚”范畴。  
+    → `清楚`
+
+17. **skin**：提到“穿刺部位皮肤完好”，但这是局部描述。根据规则6，“局部正常”不能推断为整体“完整”。未提及其他部位皮肤情况。  
+    → `null`  
+    （注意：若仅说“皮肤完好”且无其他异常，可视为“完整”，但此处限定为“穿刺部位”，故不成立）
+
+18. **limbActivity**：提到“腿千万不能弯”且“这六个小时一定要平卧”，说明下肢活动受限，属于“异常”状态。  
+    → `异常`
+
+19. **catheter**：未明确提及导管。但“加压包扎中”提示股动脉穿刺后处理，可能有鞘管已拔，但未提留置导管。  
+    → `null`
+
+20. **diet**：未提及饮食情况。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点补充说明**：
+
+- “我摸一下足背动脉，搏动对称”：提示**穿刺侧足背动脉可触及搏动为佳**，符合指南中拔鞘后压迫标准 ^[1]^。这支持操作成功，但不改变皮肤或肢体活动字段。
+- “这六个小时一定要平卧，腿千万不能弯”：属于术后制动指令，**当前已执行**，因此肢体活动受限为当前状态，判定为“异常”。
+- “加压包扎中”：提示穿刺点处理中，但未说明导管存在。根据规则3，**不能仅凭治疗行为推断导管存在**，除非明确提及。
+
+---
+
+最终输出如下：
+--------------------
+Record 32:
+  Key: catheter (uncertain)
+    gemini: None
+    baichuan: 静脉通路
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅提到透析，但无具体诊断。  
+   → `null`
+
+7. **allergyHistory**：提问“有没有觉得哪里痒或者身上起疹子？”是询问过敏反应，但未明确回答，因此不能确定。  
+   → `null`
+
+8. **temperature**：提到“体温三十六度七”，转换为一位小数。  
+   → `36.7`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：提到“心率八十二”。  
+    → `82`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提到“血压一百六、九十五”，格式为“收缩压/舒张压”。  
+    → `"160/95"`
+
+13. **weight**：提到“透析前的体重是八十二公斤”。  
+    → `82`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：提问“身上起疹子”是询问，未确认存在皮疹或其他异常，因此不能确定。  
+    → `null`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：提到“透析”，且“会用到低分子肝素钙，预防滤器凝血”，说明正在进行或即将进行血液透析。  
+    根据医学处理原则，“行为即路径”，透析意味着存在**血管通路**（如动静脉瘘、导管等）。  
+    但语音未明确提及具体导管类型。  
+    然而，“透析”本身通常依赖于**血管通路**，且“滤器”提示体外循环，因此可推断存在**静脉通路**。  
+    → `静脉通路`
+
+20. **diet**：未提及饮食情况。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**最终输出 JSON：**
+
+```json
+--------------------
+Record 33:
+  Key: catheter (uncertain)
+    gemini: 静脉通路
+    baichuan: None
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：语音中未提及具体评估时间，因此使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅提到“上顺铂化疗”，属于治疗行为而非诊断。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：未提及体温。  
+   → `null`
+
+9. **pulseRate**：未单独提及脉率。  
+   → `null`
+
+10. **heartRate**：明确提到“心率七十五”。  
+    → `75`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提到“血压一百一、七十”，即收缩压110，舒张压70。  
+    → `"110/70"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：未提及皮肤情况。  
+    → `null`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：未明确提及导管。虽然提到“水化”和“看尿量”，但未说明是否留置导尿管。  
+    → `null`
+
+20. **diet**：未提及饮食状态。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：提到“注意看尿量，如果尿少了或者变色了”，提示需监测排尿，但未明确当前排尿是否异常。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点说明**：
+- “入量要达到三千毫升”是治疗计划，非当前状态，不用于判断水化状态。
+- “给了昂丹司琼”是已执行的治疗行为，但不改变当前生命体征字段。
+- “血氧九十七”为血氧饱和度，非生命体征字段要求内容，故不录入。
+
+---
+
+最终输出如下：
+--------------------
+Record 34:
+  Key: diet (certain)
+    gemini: None
+    baichuan: 正常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅有关于用药和皮肤的描述。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：提及“三十六度五”，即36.5℃。  
+   → `"36.5"`
+
+9. **pulseRate**：未单独提及脉率。  
+   → `null`
+
+10. **heartRate**：提及“心率六十四”。  
+    → `"64"`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提及“一百二、七十”，即收缩压120，舒张压70。  
+    → `"120/70"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖值。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。虽然有交流（“阿公，吃早饭了”），但根据规则，**严禁仅根据“口齿清楚”、“能交流”等推断为“清楚”**。  
+    → `null`
+
+17. **skin**：明确提到“腿上皮肤有点破损”，属于局部异常。根据规则 **“若提及任意局部异常，则直接判定为对应异常选项”**，且“完整”与异常互斥。  
+    → `"破损"`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：未提及任何导管。  
+    → `null`
+
+20. **diet**：提到“吃早饭了”，说明正在进食，无异常饮食限制。  
+    → `"正常"`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**最终输出 JSON：**
+
+```json
+--------------------
+Record 38:
+  Key: catheter (uncertain)
+    gemini: 引流管、静脉通路
+    baichuan: 引流管
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未明确提及入院诊断或术式，仅描述术后状态（胸腔引流）。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：未提及体温。  
+   → `null`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：明确提到“心率九十”。  
+    → `90`
+
+11. **respiratoryRate**：明确提到“呼吸频率二十二”。  
+    → `22`
+
+12. **bloodPressure**：提到“血压一百一、七十”，即收缩压110，舒张压70。  
+    → `"110/70"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：明确提到“意识清醒”，对应“清楚”。  
+    → `清楚`
+
+17. **skin**：未提及皮肤情况。  
+    → `null`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：提到“胸腔引流瓶”，说明存在**引流管**。  
+    → `引流管`
+
+20. **diet**：未提及饮食情况。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**关键点说明**：
+- “胸腔引流瓶”明确提示存在**引流管**，属于导管范畴。
+- “鼓励多咳嗽”、“按止痛泵”属于护理建议或指令，不构成当前异常状态，因此不推断为“异常”。
+- “血氧九十五”属于SpO₂，但字段中无此项目，且**heartRate**已明确为90。
+- “意识清醒”直接对应“清楚”。
+
+---
+
+最终输出如下：
+--------------------
+Record 39:
+  Key: diet (certain)
+    gemini: None
+    baichuan: 正常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：明确提到“天疱疮”，属于入院诊断或当前诊断。  
+   → `天疱疮`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：提到“三十七度五”，即37.5℃。  
+   → `"37.5"`
+
+9. **pulseRate**：未单独提及脉率。  
+   → `null`
+
+10. **heartRate**：提到“心率八十五”。  
+    → `"85"`
+
+11. **respiratoryRate**：未提及呼吸频率。  
+    → `null`
+
+12. **bloodPressure**：提到“血压一百二、八十”，即120/80。  
+    → `"120/80"`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未提及神志状态。  
+    → `null`
+
+17. **skin**：提到“全身大面积皮肤破损”，属于皮肤异常。  
+    根据规则，“完整”与“破损”互斥，一旦有破损即为“破损”，且“其他”用于无法归类的异常。  
+    → `"破损"`
+
+18. **limbActivity**：未提及肢体活动情况。  
+    → `null`
+
+19. **catheter**：提到“静脉点滴”，等同于存在静脉通路。  
+    → `"静脉通路"`
+
+20. **diet**：提到“多吃点高质量蛋白”，属于建议，为弱证据（C级），不构成“异常”状态。  
+    无明确禁食、呕吐等异常描述。  
+    → `正常`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**最终输出 JSON：**
+
+```json
+--------------------
+Record 40:
+  Key: diagnosis (uncertain)
+    gemini: 车祸伤
+    baichuan: None
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入的语音识别文本，进行逐项分析和提取：
+
+1. **assessmentTime**：文本中未提及具体评估时间，因此使用当前系统时间 **2026-02-01 10:02:03**。
+
+2. **education**：未提及，填 `null`。
+
+3. **ethnicity**：未提及，填 `null`。
+
+4. **admissionTime**：未提及具体入院时间，填 `null`。
+
+5. **admissionMethod**：提到“120送来”，根据规则，救护车属于“其他”类别，因此为 **其他**。
+
+6. **diagnosis**：未明确提及诊断或术式，仅描述为“车祸伤”，属于初步情况，但未达到“初步诊断”级别，且无明确病名，因此为 `null`。
+
+7. **allergyHistory**：未提及，填 `null`。
+
+8. **temperature**：未提及体温，填 `null`。
+
+9. **pulseRate**：未单独提及脉率，但“心率一百三十”可视为心率，因此 **heartRate = 130**。
+
+10. **heartRate**：明确为 **130**。
+
+11. **respiratoryRate**：明确为 **30** 次/分。
+
+12. **bloodPressure**：提到“血压八十、四十”，即收缩压80，舒张压40，因此为 **80/40**。
+
+13. **weight**、**height**、**bloodSugar**：均未提及，填 `null`。
+
+14. **consciousness**：明确提到“意识模糊”，因此为 **模糊**。
+
+15. **skin**：提到“腹部皮肤有大面积青紫破损”，属于“破损”；“青紫”属于异常皮肤情况，归纳为“其他”。根据多选规则，且“完整”与异常互斥，因此为 **破损、其他**。
+
+16. **limbActivity**：未提及肢体活动情况，填 `null`。
+
+17. **catheter**：未提及任何导管，填 `null`。
+
+18. **diet**：未提及饮食情况，填 `null`。
+
+19. **sleep**：未提及睡眠情况，填 `null`。
+
+20. **urination**：未提及排尿情况，填 `null`。
+
+21. **defecation**：未提及排便情况，填 `null`。
+
+22. **stoolFrequency**：未提及排便次数，填 `null`。
+
+---
+
+**关于MEWS评分的参考信息**：  
+文本中提到“MEWS评分估计有八分”。根据参考资料，**MEWS ≥ 5 分提示病情不稳定，变化快，心脏骤停和死亡风险高**；**9分以上提示伤情危重，死亡风险明显升高** ^[3]^。  
+当前评分为8分，已处于高风险区间，提示需立即干预。
+
+此外，生命体征如心率130次/分（对应MEWS 3分）、呼吸30次/分（对应MEWS 3分）、收缩压80 mmHg（对应MEWS 2分）及意识模糊（对应“对声音有反应”或“对疼痛有反应”，为1-2分），累加已接近或达到8分，符合描述。
+
+---
+
+最终输出如下：
+
+```json
+--------------------
+Record 42:
+  Key: catheter (uncertain)
+    gemini: None
+    baichuan: 无
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据提供的语音识别文本，进行逐项分析和提取：
+
+1. **assessmentTime**：文本未提及具体评估时间，使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education**：未提及文化程度。  
+   → `null`
+
+3. **ethnicity**：未提及民族。  
+   → `null`
+
+4. **admissionTime**：未提及入院时间。  
+   → `null`
+
+5. **admissionMethod**：未提及入院方式。  
+   → `null`
+
+6. **diagnosis**：未提及明确诊断或术式，仅提到“手术后”，但无具体术式名称。  
+   → `null`
+
+7. **allergyHistory**：未提及过敏史。  
+   → `null`
+
+8. **temperature**：提到“三十七度幺”，即37.1℃。  
+   → `"37.1"`
+
+9. **pulseRate**：未提及脉率。  
+   → `null`
+
+10. **heartRate**：明确提到“心率八十二”。  
+    → `"82"`
+
+11. **respiratoryRate**：提到“呼吸二十”。  
+    → `"20"`
+
+12. **bloodPressure**：未提及血压。  
+    → `null`
+
+13. **weight**：未提及体重。  
+    → `null`
+
+14. **height**：未提及身高。  
+    → `null`
+
+15. **bloodSugar**：未提及血糖。  
+    → `null`
+
+16. **consciousness**：未直接描述神志状态。虽然能交流，但根据规则，**严禁仅根据“口齿清楚”、“能交流”等推断为“清楚”**。  
+    → `null`
+
+17. **skin**：提到“伤口敷料……干燥完好，没有渗液”，说明存在手术切口。  
+    → `"手术切口"`
+
+18. **limbActivity**：未明确描述肢体活动是否正常或异常。虽然计划“扶你走两步”，但这是未来计划，**排除指令与计划**。  
+    → `null`
+
+19. **catheter**：未提及任何导管。  
+    → `"无"`
+
+20. **diet**：未提及饮食情况。  
+    → `null`
+
+21. **sleep**：未提及睡眠情况。  
+    → `null`
+
+22. **urination**：未提及排尿情况。  
+    → `null`
+
+23. **defecation**：未提及排便情况。  
+    → `null`
+
+24. **stoolFrequency**：未提及排便次数。  
+    → `null`
+
+---
+
+**最终输出 JSON**：
+
+```json
+--------------------
+Record 48:
+  Key: diet (certain)
+    gemini: None
+    baichuan: 异常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：语音中未提及具体评估时间，因此使用当前系统时间 **2026-02-01 10:02:03**。
+
+2. **education**：未提及文化程度，填 `null`。
+
+3. **ethnicity**：未提及民族，填 `null`。
+
+4. **admissionTime**：未提及入院时间，填 `null`。
+
+5. **admissionMethod**：未提及入院方式，填 `null`。
+
+6. **diagnosis**：未提及任何诊断或术式，且无“考虑/疑似”等不确定措辞，填 `null`。
+
+7. **allergyHistory**：未提及过敏史，填 `null`。
+
+8. **temperature**：明确提到“体温三十六度二”，即 **36.2℃**。
+
+9. **pulseRate**：提到“脉搏六十四”，即 **64**。
+
+10. **heartRate**：未单独提及心率，脉搏可能等同于心率，但根据规则，若未明确为“心率”，不进行推断。因此 **heartRate 为 null**。
+
+11. **respiratoryRate**：提到“呼吸十六”，即 **16** 次/分。
+
+12. **bloodPressure**：提到“血压一百二十、七十”，即 **120/70**。
+
+13. **weight**、**height**、**bloodSugar**：均未提及，填 `null`。
+
+14. **consciousness**：未提及神志状态，仅描述护理行为，不能推断为“清楚”。因此填 `null`。
+
+15. **skin**：提到“骶尾部皮肤……完好，没红没破”，但这是**局部描述**。根据规则 **“局部正常不等于整体正常”**，且未提及全身皮肤情况，因此不能判定为“完整”。但“完好”表明无破损、溃疡等，且无其他异常描述，结合“没红没破”可视为局部正常。由于未提及其他部位，**不能推断整体为“完整”**，故 **skin 为 null**。
+
+16. **limbActivity**：未提及肢体活动情况，填 `null`。
+
+17. **catheter**：未提及任何导管，如静脉通路、尿管等。虽然提到“入量记个八百毫升”，提示可能有补液，但未明确提及“留置针”或“静脉通路”等耗材，**不能推断存在导管**。因此 **catheter 为 null**。
+
+18. **diet**：提到“中午想吃点什么？让家属弄点软烂的”，说明**尚未进食**，且饮食受限。根据“只能吃流食”属于异常饮食，**“软烂的”接近流食或半流食**，提示饮食异常。因此 **diet 为“异常”**。
+
+19. **sleep**：未提及睡眠情况，填 `null`。
+
+20. **urination**：未提及排尿情况，填 `null`。
+
+21. **defecation**：未提及排便情况，填 `null`。
+
+22. **stoolFrequency**：未提及排便次数，填 `null`。
+
+---
+
+**最终输出 JSON**：
+
+```json
+--------------------
+Record 49:
+  Key: catheter (uncertain)
+    gemini: None
+    baichuan: 无
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据输入语音内容，进行逐项分析与提取：
+
+1. **assessmentTime**：语音中未提及具体评估时间，使用当前系统时间 **2026-02-01 10:02:03**。
+
+2. **education**：未提及，填 null。
+
+3. **ethnicity**：未提及，填 null。
+
+4. **admissionTime**：未提及入院时间，填 null。
+
+5. **admissionMethod**：未提及入院方式，填 null。
+
+6. **diagnosis**：提到“明天手术”，但未说明具体诊断或术式，且“考虑/疑似”类不确定措辞不计入。因此填 null。
+
+7. **allergyHistory**：未提及过敏史，填 null。
+
+8. **temperature**：明确提到“体温三十六度八”，转换为一位小数为 **36.8**。
+
+9. **pulseRate**：未单独提及脉率，但“心率七十八”可能等同于脉率。在无其他信息时，可视为相同。但根据字段定义，若未明确为“脉率”，则不填。此处填 null。
+
+10. **heartRate**：明确为“心率七十八”，填 **78**。
+
+11. **respiratoryRate**：明确为“呼吸十八”，填 **18**。
+
+12. **bloodPressure**：提到“血压一百三、八十五”，即收缩压130，舒张压85，格式为 **130/85**。
+
+13. **weight**：未提及，填 null。
+
+14. **height**：未提及，填 null。
+
+15. **bloodSugar**：未提及，填 null。
+
+16. **consciousness**：未直接描述神志状态。虽提到“别紧张”，但无“神志清楚”等关键词，**严禁仅根据交流能力推断**。因此填 null。
+
+17. **skin**：明确提到“皮肤完好”，即无异常，对应选项为“完整”。因此填 **完整**。
+
+18. **limbActivity**：未提及肢体活动情况。虽提到“牵引”，提示可能存在活动受限，但未明确描述活动状态。根据“行为即路径”原则，**牵引的存在提示肢体活动受限**，应判定为“异常”。因此填 **异常**。
+
+19. **catheter**：未提及任何导管。虽有牵引，但不属于导管范畴。因此填 **无**。
+
+20. **diet**：提到“今晚十二点以后就禁食禁水”，说明**之后将禁食**，但当前尚未执行。根据“状态存续优先”原则，**仅记录当前状态**。当前未禁食，但语音未说明当前饮食是否正常。因此填 null。
+
+21. **sleep**：未提及睡眠情况，填 null。
+
+22. **urination**：未提及排尿情况，填 null。
+
+23. **defecation**：未提及排便情况，填 null。
+
+24. **stoolFrequency**：未提及排便次数，填 null。
+
+---
+
+**最终输出 JSON**：
+
+```json
+--------------------
+Record 50:
+  Key: urination (certain)
+    gemini: None
+    baichuan: 正常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  baichuan Reasoning:
+根据提供的语音内容，逐步分析并提取所需字段：
+
+1. **assessmentTime**：语音中未提及具体评估时间，因此使用当前系统时间。  
+   → `2026-02-01 10:02:03`
+
+2. **education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, weight, height, bloodSugar, diet, sleep**：均未提及，填 `null`。
+
+3. **temperature**：未提及体温，填 `null`。
+
+4. **pulseRate**：未单独提及脉率，但提到“心率八十”，心率与脉率在无心律失常时通常一致。但根据规则，**不能直接等同**，除非明确说明。因此 `pulseRate` 为 `null`。
+
+5. **heartRate**：明确提到“心率八十”。  
+   → `80`
+
+6. **respiratoryRate**：未提及，填 `null`。
+
+7. **bloodPressure**：明确提到“血压一百四十五、九十二”，即收缩压145，舒张压92。  
+   → `"145/92"`
+
+8. **consciousness**：未提及神志状态，不能根据“说话”推断为“清楚”，因此为 `null`。
+
+9. **skin**：提到“腿肿消了点”，说明之前有水肿，但未描述皮肤破损、溃疡等。水肿属于“其他”范畴。  
+   → `"其他"`
+
+10. **limbActivity**：未提及活动能力，仅说腿肿减轻，不足以判断活动是否正常。因此为 `null`。
+
+11. **catheter**：未提及任何导管，为 `null`。
+
+12. **urination**：提到“二十四小时尿量是1600”，属于正常范围（成人1000-2000ml/24h）^[5]^。  
+   → `"正常"`
+
+13. **defecation**：未提及排便情况，为 `null`。
+
+14. **stoolFrequency**：未提及排便次数，为 `null`。
+
+15. **药物信息**：“硝苯地平”被提及，但属于治疗建议，不用于诊断字段。
+
+16. **24小时尿量1600ml**：在参考值范围内（成人1000-2000ml/24h）^[5]^，因此排尿状态为正常。
+
+---
+
+**最终输出 JSON：**
+
+```json
+--------------------

@@ -1,0 +1,185 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 15
+Mismatch Records: 15
+
+Record 1:
+  Key: consciousness (certain)
+    kimi: None
+    qwen: 清楚
+  Key: limbActivity (certain)
+    kimi: None
+    qwen: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 9:
+  Key: consciousness (certain)
+    kimi: None
+    qwen: 清楚
+  Key: sleep (certain)
+    kimi: None
+    qwen: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 11:
+  Key: diet (certain)
+    kimi: None
+    qwen: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 12:
+  Key: skin (certain)
+    kimi: None
+    qwen: 皮疹
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 13:
+  Key: diet (certain)
+    kimi: None
+    qwen: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 14:
+  Key: consciousness (certain)
+    kimi: None
+    qwen: 清楚
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 15:
+  Key: urination (certain)
+    kimi: None
+    qwen: 正常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 16:
+  Key: diagnosis (uncertain)
+    kimi: None
+    qwen: 术后
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 18:
+  Key: diet (certain)
+    kimi: None
+    qwen: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 20:
+  Key: admissionMethod (certain)
+    kimi: None
+    qwen: 其他
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 21:
+  Key: limbActivity (certain)
+    kimi: None
+    qwen: 异常
+  Key: skin (certain)
+    kimi: 破损
+    qwen: 破损、其他
+  Key: diagnosis (uncertain)
+    kimi: None
+    qwen: 支架术后
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 23:
+  Key: skin (certain)
+    kimi: 其他
+    qwen: 完整
+  Key: urination (certain)
+    kimi: None
+    qwen: 正常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 25:
+  Key: urination (certain)
+    kimi: None
+    qwen: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 27:
+  Key: catheter (uncertain)
+    kimi: None
+    qwen: 静脉通路
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------
+Record 28:
+  Key: diagnosis (uncertain)
+    kimi: None
+    qwen: 肠道手术
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  qwen Reasoning:
+None
+--------------------

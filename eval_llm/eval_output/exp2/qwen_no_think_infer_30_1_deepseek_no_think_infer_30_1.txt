@@ -1,0 +1,187 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 14
+Mismatch Records: 16
+
+Record 1:
+  Key: consciousness (certain)
+    qwen: 清楚
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 6:
+  Key: admissionMethod (certain)
+    qwen: 其他
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 9:
+  Key: consciousness (certain)
+    qwen: 清楚
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 11:
+  Key: diet (certain)
+    qwen: 异常
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 12:
+  Key: skin (certain)
+    qwen: 皮疹
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 13:
+  Key: diet (certain)
+    qwen: 异常
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 14:
+  Key: consciousness (certain)
+    qwen: 清楚
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 15:
+  Key: urination (certain)
+    qwen: 正常
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 16:
+  Key: diagnosis (uncertain)
+    qwen: 术后
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 18:
+  Key: diet (certain)
+    qwen: 异常
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 20:
+  Key: admissionMethod (certain)
+    qwen: 其他
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 21:
+  Key: skin (certain)
+    qwen: 破损、其他
+    deepseek: 破损
+  Key: limbActivity (certain)
+    qwen: 异常
+    deepseek: None
+  Key: diagnosis (uncertain)
+    qwen: 支架术后
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 23:
+  Key: urination (certain)
+    qwen: 正常
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 25:
+  Key: urination (certain)
+    qwen: 异常
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 27:
+  Key: catheter (uncertain)
+    qwen: 静脉通路
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 28:
+  Key: diagnosis (uncertain)
+    qwen: 肠道手术
+    deepseek: None
+
+  [Reasoning Output]
+  qwen Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------

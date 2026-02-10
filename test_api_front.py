@@ -6,7 +6,7 @@ import time  # 1. 引入 time 模块
 API_URL = "http://localhost:8000/api/agent"
 #API_URL = "http://118.121.197.67:8000/api/agent"
 # 本地测试音频路径
-TEST_AUDIO = "test/dataset/nurse_audio/18.amr"
+TEST_AUDIO = "/workspace/dataset/asr_llm/nurse_audio/18.amr"
 
 def test_api():
     print(f"正在准备上传音频: {TEST_AUDIO} ...")

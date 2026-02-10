@@ -6,7 +6,7 @@ import random
 from datetime import datetime
 from typing import List, Dict, Any
 from .utils import parse_nurse_scripts
-from .llm_client import LLMClient,ZP_LLMClient
+from .llm_client import LLMClient,ZP_LLMClient,BaichuanClient
 from .schema import EXPECTED_KEYS
 from .config import (
     RAW_DATA_PATH, 
@@ -19,17 +19,15 @@ from .config import (
 # 导入提示词
 import sys
 sys.path.append('/workspace/audio_llm_agent')
-from sak.prompts import MEDICAL_EXTRACTOR_PROMPT, MEDICAL_EXTRACTOR_PROMPT_INFERENCE
+from sak.prompts import MEDICAL_EXTRACTOR_PROMPT, MEDICAL_EXTRACTOR_PROMPT_INFERENCE_V1
 
 def generate_benchmark():
     # 1. 解析数据
     limit = 50
-    thinking = False
     start_time = time.time()
     scripts = parse_nurse_scripts(RAW_DATA_PATH)
     end_time = time.time()
     print(f"Loaded {len(scripts)} scenarios from {RAW_DATA_PATH} in {end_time - start_time:.3f} seconds")
-
 
     # 2. 初始化 LLM 客户端
     try:
@@ -52,13 +50,15 @@ def generate_benchmark():
     for i, script in enumerate(scripts[:limit]):
         if 'glm' in GROUND_TRUTH_MODEL:
             client = ZP_LLMClient(GROUND_TRUTH_MODEL)
+        if 'baichuan' in GROUND_TRUTH_MODEL:
+            client = BaichuanClient(GROUND_TRUTH_MODEL)
         time.sleep(random.uniform(2, 5))
         print(f"[{i+1}/{limit}] Processing: {script['title']}")
         
         now = datetime.now()
         formatted_time= now.strftime("%Y-%m-%d %H:%M:%S")
         if INFERENCE:
-            system_prompt = MEDICAL_EXTRACTOR_PROMPT_INFERENCE.replace("{CURRENT_SYS_TIME}", formatted_time)
+            system_prompt = MEDICAL_EXTRACTOR_PROMPT_INFERENCE_V1.replace("{CURRENT_SYS_TIME}", formatted_time)
         else:
             system_prompt = MEDICAL_EXTRACTOR_PROMPT.replace("{CURRENT_SYS_TIME}", formatted_time)
         
@@ -116,7 +116,6 @@ def generate_benchmark():
             })
             continue
         
-
     think_str = "think" if THINKING else "no_think"
     infer_str = "infer" if INFERENCE else "no_infer"
     base_name = f"{GROUND_TRUTH_MODEL}_{think_str}_{infer_str}_{limit}"
@@ -137,6 +136,4 @@ def generate_benchmark():
 
 if __name__ == "__main__":
     # 注意：运行此脚本需要配置 API Key
-    times = 3
-    for i in range(times):
-        generate_benchmark()
+    generate_benchmark()

@@ -70,21 +70,24 @@ Are they semantically equivalent? Reply with ONLY "YES" or "NO".
         return False
 
 def main():
-    model_1 = "kimi"
-    model_2 = "qwen"
+    model_1 = "qwen"
+    model_2 = "deepseek"
+    exp = "exp2"
     think = True
     think_ex = "think" if think else "no_think"
     infer = True
     infer_ex = "infer" if infer else "no_infer"
-    file1_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/{model_1}_{think_ex}_{infer_ex}_40.jsonl"
-    file2_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/{model_2}_{think_ex}_{infer_ex}_40.jsonl"
+    file_dir = os.path.join("/workspace/audio_llm_agent/eval_llm/benchmark", exp)
+    file1_path = f"{file_dir}/{model_1}_{think_ex}_{infer_ex}_30.jsonl"
+    file2_path = f"{file_dir}/{model_2}_{think_ex}_{infer_ex}_30.jsonl"
 
     custom = True
     if custom:
-        model_1 = "qwen"
-        model_2 = "qwen"
-        file1_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/kimi_think_no_infer_50_1.jsonl"
-        file2_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/kimi_think_no_infer_50_2.jsonl"
+        model_1 = "gemini"
+        model_2 = "kimi"
+        exp = "gold_exp"
+        file1_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/gold_exp/gemini_think_infer_50.jsonl"
+        file2_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/gold_exp/kimi_think_infer_50.jsonl"
 
 
     if not os.path.exists(file1_path) or not os.path.exists(file2_path):
@@ -178,7 +181,7 @@ def main():
             results["perfect_matches"] += 1
         else:
             results["mismatches"].append({
-                "index": i,
+                "index": i+1,
                 "diffs": mismatches_in_record,
                 f"reasoning_{model_1}": record1.get("reasoning_output"),
                 f"reasoning_{model_2}": record2.get("reasoning_output")
@@ -193,10 +196,11 @@ def main():
     
     if results["mismatches"]:
         print("\n--- Detailed Mismatches ---")
-        output_dir = "/workspace/audio_llm_agent/eval_llm/eval_output/"
-        os.makedirs(output_dir, exist_ok=True)
-        output_file = os.path.join(output_dir, 
-        file1_path.split("/")[-1].replace('.jsonl','')+'_'+file2_path.split("/")[-1].replace('.jsonl','')+'.txt')
+        output_dir = os.path.join("/workspace/audio_llm_agent/eval_llm/eval_output/", exp)
+        if not os.path.exists(output_dir):
+            os.makedirs(output_dir, exist_ok=True)
+        file_name = file1_path.split("/")[-1].replace('.jsonl','')+'_'+file2_path.split("/")[-1].replace('.jsonl','')+'.txt'
+        output_file = os.path.join(output_dir, file_name)
         
         with open(output_file, "w", encoding="utf-8") as f:
             f.write("=== Comparison Results ===\n")

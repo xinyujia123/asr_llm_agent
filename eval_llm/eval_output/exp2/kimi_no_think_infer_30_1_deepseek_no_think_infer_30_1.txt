@@ -1,0 +1,49 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 26
+Mismatch Records: 4
+
+Record 1:
+  Key: limbActivity (certain)
+    kimi: None
+    deepseek: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 6:
+  Key: admissionMethod (certain)
+    kimi: 其他
+    deepseek: None
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 9:
+  Key: sleep (certain)
+    kimi: None
+    deepseek: 异常
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------
+Record 23:
+  Key: skin (certain)
+    kimi: 其他
+    deepseek: 完整
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------

@@ -1,0 +1,27 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 28
+Mismatch Records: 2
+
+Record 1:
+  Key: limbActivity (certain)
+    glm: None
+    glm: 异常
+
+  [Reasoning Output]
+  glm Reasoning:
+None
+  glm Reasoning:
+None
+--------------------
+Record 3:
+  Key: catheter (uncertain)
+    glm: 静脉通路
+    glm: 氧气管、静脉通路
+
+  [Reasoning Output]
+  glm Reasoning:
+None
+  glm Reasoning:
+None
+--------------------

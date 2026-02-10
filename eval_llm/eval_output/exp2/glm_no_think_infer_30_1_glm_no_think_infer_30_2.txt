@@ -1,0 +1,49 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 26
+Mismatch Records: 4
+
+Record 1:
+  Key: limbActivity (certain)
+    glm: 异常
+    glm: None
+
+  [Reasoning Output]
+  glm Reasoning:
+None
+  glm Reasoning:
+None
+--------------------
+Record 3:
+  Key: catheter (uncertain)
+    glm: 氧气管、静脉通路
+    glm: 静脉通路
+
+  [Reasoning Output]
+  glm Reasoning:
+None
+  glm Reasoning:
+None
+--------------------
+Record 9:
+  Key: sleep (certain)
+    glm: 异常
+    glm: None
+
+  [Reasoning Output]
+  glm Reasoning:
+None
+  glm Reasoning:
+None
+--------------------
+Record 17:
+  Key: consciousness (certain)
+    glm: None
+    glm: 昏迷
+
+  [Reasoning Output]
+  glm Reasoning:
+None
+  glm Reasoning:
+None
+--------------------

@@ -1,0 +1,16 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 29
+Mismatch Records: 1
+
+Record 13:
+  Key: diet (certain)
+    deepseek: None
+    deepseek: 异常
+
+  [Reasoning Output]
+  deepseek Reasoning:
+None
+  deepseek Reasoning:
+None
+--------------------

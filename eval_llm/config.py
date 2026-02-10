@@ -6,14 +6,15 @@ load_dotenv(dotenv_path)
 
 
 # 默认用于生成标准答案的模型
-GROUND_TRUTH_MODEL = "qwen"
+GROUND_TRUTH_MODEL = "kimi"
 THINKING = True
-INFERENCE = False
+INFERENCE = True
+EXP = 'gold_exp'
 
 # 数据路径
 DATA_DIR = "/workspace/dataset/asr_llm"
 RAW_DATA_PATH = os.path.join(DATA_DIR, "nurse_script_tn.txt")
-BENCHMARK_SAVE_DIR= "/workspace/audio_llm_agent/eval_llm/benchmark"
+BENCHMARK_SAVE_DIR= os.path.join("/workspace/audio_llm_agent/eval_llm/benchmark", EXP)
 
 
 # API 配置
@@ -37,6 +38,11 @@ API_CONFIG = {
         "api_key": os.getenv("DEEPSEEK_API_KEY", "YOUR_DEEPSEEK_API_KEY"),
         "base_url": "https://api.deepseek.com/v1",
         "model":  "deepseek-reasoner" if THINKING else "deepseek-chat"
+    },
+    "baichuan": {
+        "api_key": os.getenv("BAICHUAN_API_KEY", "YOUR_BEICHUAN_API_KEY"),
+        "base_url": "https://api.baichuan-ai.com/v1",
+        "model":  "Baichuan-M3-PLUS"
     }
 }
 

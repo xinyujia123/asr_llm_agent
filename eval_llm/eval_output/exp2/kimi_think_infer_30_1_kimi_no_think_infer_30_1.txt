@@ -1,0 +1,85 @@
+=== Comparison Results ===
+Total Records: 30
+Perfect Matches: 23
+Mismatch Records: 7
+
+Record 6:
+  Key: admissionMethod (certain)
+    kimi: None
+    kimi: 其他
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 9:
+  Key: urination (certain)
+    kimi: 异常
+    kimi: None
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 12:
+  Key: catheter (uncertain)
+    kimi: 静脉通路、氧气管
+    kimi: 氧气管
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 17:
+  Key: catheter (uncertain)
+    kimi: None
+    kimi: 静脉通路
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 21:
+  Key: limbActivity (certain)
+    kimi: 异常
+    kimi: None
+  Key: diagnosis (uncertain)
+    kimi: 支架术后
+    kimi: None
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 22:
+  Key: catheter (uncertain)
+    kimi: 呼吸机、氧气管
+    kimi: 氧气管
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
+Record 29:
+  Key: catheter (uncertain)
+    kimi: 静脉通道
+    kimi: None
+
+  [Reasoning Output]
+  kimi Reasoning:
+None
+  kimi Reasoning:
+None
+--------------------
