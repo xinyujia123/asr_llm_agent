@@ -1,0 +1,357 @@
+=== Comparison Results ===
+Total Records: 20
+Perfect Matches: 17
+Mismatch Records: 3
+
+Record 2:
+  Key: limbActivity (certain)
+    qwen: None
+    qwen: 异常
+
+  [Reasoning Output]
+  qwen (File 1) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 语音未明确提及评估具体时间点，仅用“现在”指代，故 assessmentTime 采用当前系统时间：2026-02-01 10:02:03。
+   - “手术回来三个小时了”描述术后状态，但未提供入院具体时间（如“今日08:00入院”），无法推算 admissionTime，填 null。
+
+2. **等价映射与ASR修正**：
+   - “皮肤切口...完好的”：明确指手术切口部位状态。“手术切口”为 skin 字段有效选项；“完好的”描述切口无渗血/感染，但属局部评价且存在切口，依据规则“局部≠整体”及“存在手术切口时不可选‘完整’”，仅保留“手术切口”。
+   - “心率...九十二次” → heartRate: "92.0"（明确术语“心率”，非脉率）。
+   - “呼吸二十次” → respiratoryRate: "20.0"。
+   - “体温三十七度二” → temperature: "37.2"（数值合理，37.2℃在生理范围内；“有点低热”为解释性语言，不干扰数值提取）。
+   - “血氧饱和度九十八”：字段未要求，忽略。
+   - “刀口”“保持姿势别乱动”：属医嘱或局部描述，无全局肢体活动/神志明确陈述，不触发 limbActivity 或 consciousness。
+   - 未提及入院诊断具体病名或手术类型（仅“手术回来”），依据规则“不可填‘手术后’（缺乏特异性）”，diagnosis 填 null。
+   - 无任何导管、过敏史、饮食睡眠排泄等明确描述，相关字段均不推断。
+
+3. **数值与逻辑校验**：
+   - 所有提取数值（37.2, 92.0, 20.0）均在人类生理合理范围。
+   - skin 字段：仅“手术切口”被明确提及且符合术后状态；“完好的”不等同于“完整”（规则：存在切口即排除“完整”选项），故 skin 仅含 ["手术切口"]。
+   - catheter：无“输液”“尿管”等关键词，不触发静脉通路等推断（规则：需明确描述）。
+   - admissionMethod/admissionTime：未描述入院时转运方式或时间，填 null。
+   - allergyHistory：未提及“无过敏”或具体过敏源，填 null（非“无”）。
+
+4. **排除干扰项**：
+   - “低热是正常的”“别乱动”属解释/建议，按规则不作为异常依据。
+   - 无远期/近期指令影响当前状态判定。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "37.2",
+  "pulseRate": null,
+  "heartRate": "92.0",
+  "respiratoryRate": "20.0",
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": ["手术切口"],
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  qwen (File 2) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - assessmentTime：未明确提及具体评估时间点，仅用“现在”指代，采用当前系统时间 "2026-02-01 10:02:03"。
+   - admissionTime：提及“手术回来三个小时了”，但“手术返回病房时间”≠“入院时间”，且无入院具体时间线索，填 null。
+
+2. **等价映射与ASR修正**：
+   - “皮肤切口...完好的”：明确指手术切口状态，“切口”映射 skin 选项“手术切口”；“完好”描述切口愈合良好，但存在切口即排除“完整”选项（规则：存在非“完整”选项时严禁保留“完整”）。
+   - “保持这个姿势别乱动”：属术后制动医嘱，规则明确“制动”为肢体活动异常标准，且为当前执行状态（非远期计划），故 limbActivity = "异常"。
+   - “心率九十二次”：明确数值，映射 heartRate；pulseRate 未单独提及，填 null。
+   - “呼吸二十次”：映射 respiratoryRate。
+   - “体温三十七度二”：明确数值 37.2℃（在生理范围内），保留；“有点低热是正常的”为解释性描述，不影响数值提取（规则：有明确数值则提取）。
+   - 无语音识别明显错误需修正（如“书长压”等未出现）。
+
+3. **数值处理**：
+   - temperature: "37.2" → "37.2"
+   - heartRate: "九十二" → "92.0"
+   - respiratoryRate: "二十" → "20.0"
+   - 其他数值类字段（血压、体重等）未提及，填 null。
+
+4. **逻辑推断检查**：
+   - skin：存在“手术切口”状态，选 ["手术切口"]；不可含“完整”（规则：非“完整”选项存在时强制移除“完整”）。
+   - limbActivity：医嘱“别乱动”=当前制动状态 → "异常"（规则：制动属异常标准，且为即时执行要求）。
+   - consciousness：无“神志/意识”等明确描述词，仅询问感受，填 null（规则：禁止行为推断）。
+   - diagnosis：仅提“手术”，无具体病名或“XX术后”表述，填 null（规则：不可填“手术后”）。
+   - catheter：无导管相关描述（如输液、尿管），不推断，填 null。
+   - 其他字段（饮食、睡眠等）无符合规则的异常或正常描述，填 null。
+   - 血氧饱和度（98%）非目标字段，忽略。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "37.2",
+  "pulseRate": null,
+  "heartRate": "92.0",
+  "respiratoryRate": "20.0",
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": ["手术切口"],
+  "limbActivity": "异常",
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------
+Record 12:
+  Key: skin (certain)
+    qwen: None
+    qwen: ['其他']
+
+  [Reasoning Output]
+  qwen (File 1) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 文本未明确提及评估具体时间点（仅“测个餐后血糖”为动作描述），根据规则使用当前系统时间：2026-02-01 10:02:03。
+   - “下午记得别吃水果”为未来建议，不用于时间推算。
+
+2. **等价映射与ASR修正**：
+   - “十一点二” → 血糖值 11.2 mmol/L（明确数值，非模糊描述）。
+   - “三十六度四” → 体温 36.4℃（符合生理范围）。
+   - “脚踝这儿有点水肿”：属局部描述（规则：局部≠整体），不能推断全身皮肤状态；水肿按规则映射为“其他”，但因未评价全身皮肤，skin 字段填 null。
+   - “诺和锐打了十二个单位”：为皮下注射胰岛素动作，非留置导管（规则：一次性注射针头≠导管），catheter 不提取。
+   - “别吃水果”为饮食建议（规则：建议/提醒不作为异常证据），且未提及禁食、吞咽困难等异常标准，diet 填 null。
+
+3. **数值与逻辑校验**：
+   - 血糖 11.2、体温 36.4 均在合理范围，保留一位小数。
+   - 无血压、心率、呼吸等数值提及。
+   - 无入院时间、诊断、过敏史、神志、肢体活动全局描述等关键信息。
+   - 无导管、造口、尿管等提及，故 urination/defecation 无触发逻辑。
+   - 未提及排便频率、睡眠、体重等字段内容。
+
+4. **排除干扰项**：
+   - “水肿”为局部体征，不触发 skin 多选字段（规则：局部描述≠全身评价）。
+   - 无“四肢活动正常/异常”等全局肢体描述，limbActivity 填 null。
+   - 无诊断病名或术后状态明确表述（仅胰岛素使用），diagnosis 填 null。
+   - 无过敏史相关表述，allergyHistory 填 null。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "36.4",
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": "11.2",
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  qwen (File 2) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 语音未明确提及评估具体时间点（“十一点二”为血糖数值，非时间）。
+   - 根据规则，未提及具体时间时使用当前系统时间：2026-02-01 10:02:03。
+
+2. **等价映射与ASR修正**：
+   - “餐后血糖...十一点二” → bloodSugar: "11.2"（单位mmol/L，保留一位小数）。
+   - “体温...三十六度四” → temperature: "36.4"（℃）。
+   - “脚踝这儿有点水肿” → 属于皮肤黏膜局部异常描述；根据规则：水肿映射为skin选项“其他”；规则强调“局部异常即需记录异常项”，且“任意异常即非完整”，故skin应含["其他"]，排除“完整”。
+   - “早上的诺和锐打了十二个单位” → 已完成的治疗行为，非当前体征状态，不提取。
+   - “下午记得别吃水果”“把腿抬高” → 均为建议/远期提醒，按规则不作为当前状态依据。
+   - 无“神志/意识”明确描述词 → consciousness: null。
+   - 无导管、入院信息、过敏史、文化程度、民族等提及 → 对应字段填null。
+
+3. **数值与逻辑校验**：
+   - 血糖11.2、体温36.4均在生理合理范围，保留。
+   - 未提及其他生命体征（脉率、心率、呼吸、血压、体重、身高）→ 均为null。
+   - 脚踝水肿属局部异常，但未描述“活动受限/疼痛不敢动”等肢体活动异常标准 → limbActivity: null（规则：局部异常≠全局肢体活动异常）。
+   - 无饮食异常关键词（禁食/呕吐等），建议不计入 → diet: null。
+   - 无排尿/排便异常描述，无造口/导尿管 → urination/defecation: null。
+   - 无排便频率具体描述 → stoolFrequency: null。
+
+4. **关键规则复核**：
+   - skin字段：因明确提及“水肿”（映射“其他”），强制排除“完整”，仅保留["其他"]。
+   - 所有“建议/提醒”内容严格排除，不参与状态推断。
+   - 无模糊数值（如“左右”“高烧”），所有提取数值均为明确表述。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "36.4",
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": "11.2",
+  "consciousness": null,
+  "skin": ["其他"],
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------
+Record 16:
+  Key: urination (certain)
+    qwen: None
+    qwen: 正常
+
+  [Reasoning Output]
+  qwen (File 1) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 文本未明确提及评估具体时间点，仅含“刚才”“今天”等模糊表述。
+   - 根据规则，使用当前系统时间：2026-02-01 10:02:03。
+
+2. **等价映射（ASR修正）**：
+   - “血压一百三十五、八十五” → 明确对应收缩压135、舒张压85，无识别歧义。
+   - “六十八公斤” → 体重68.0（保留一位小数）。
+   - “打了一针呋塞米”“尿六百毫升”：属已执行治疗与出量记录，非当前导管状态或排尿异常症状描述。
+   - “耳朵响/没力气”为预防性提醒，属建议类语句，按规则不作为异常证据。
+
+3. **数值处理**：
+   - 体重：68公斤 → "68.0"。
+   - 血压：135/85 → "135/85"（双值完整，格式合规）。
+   - 尿量600ml（2小时）：仅为出量记录，未描述排尿困难、尿痛等异常症状，且无导尿管提及，不触发urination异常。
+
+4. **逻辑推断检查**：
+   - 无文化程度、民族、入院信息、诊断、过敏史、神志、皮肤、导管、肢体活动、饮食、睡眠、排便等明确描述 → 均填null。
+   - “打针”为单次注射，无“正在输液”“留置针”等描述 → catheter不推断为“静脉通路”。
+   - 无局部/全局皮肤评价 → skin为null。
+   - 无排便频率描述 → stoolFrequency为null。
+   - 所有提醒语句（“注意听…”）按规则排除，不用于推断任何异常字段。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": "135/85",
+  "weight": "68.0",
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  qwen (File 2) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 文本中无明确评估时间点，仅含“早上”“刚才”等模糊表述，根据规则使用当前系统时间：2026-02-01 10:02:03。
+
+2. **等价映射（ASR修正）**：
+   - “血压一百三十五、八十五” → 明确为收缩压135、舒张压85，映射为"135/85"（参考示例，血压数值保留整数格式）。
+   - “体重六十八公斤” → weight: "68.0"（规则要求保留一位小数）。
+   - “打了一针呋塞米”：为已执行的注射操作，针头已拔除，不属于当前存在的导管（规则：导管需为持续存在的侵入式管状器械）。
+   - “尿了多少？六百毫升”：仅记录尿量数值，无“导尿管/尿管”等关键词，无法推断存在导尿装置；尿量增多为利尿剂作用结果，但规则明确“尿量多”未列入排尿异常标准，且无尿频/急/痛、血尿、失禁等异常描述 → urination: "正常"。
+   - “注意听...耳朵响或没力气”：属于医疗提醒（规则2），不作为当前体征异常证据，不影响consciousness、limbActivity等字段。
+
+3. **数值与逻辑校验**：
+   - 体重68.0kg、血压135/85均在生理合理范围。
+   - 无民族、文化程度、入院信息、诊断、过敏史、神志描述等关键词。
+   - 无皮肤、肢体活动、饮食、睡眠、排便相关描述。
+   - 无导管关键词（如尿管、留置针等），“打针”为瞬时操作，不触发catheter推断（规则：仅“正在输液/泵入”等持续状态可推断静脉通路）。
+
+4. **关键排除项**：
+   - 排尿：无导尿管提及 → 不触发urination异常；尿量数值本身不构成异常标准。
+   - 导管：注射行为已完成，无持续导管存在证据 → catheter: null。
+   - 所有“建议/提醒”类语句严格排除（规则2）。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": "135/85",
+  "weight": "68.0",
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": "正常",
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------

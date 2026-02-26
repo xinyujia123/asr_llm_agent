@@ -19,11 +19,11 @@ from .config import (
 # 导入提示词
 import sys
 sys.path.append('/workspace/audio_llm_agent')
-from sak.prompts import MEDICAL_EXTRACTOR_PROMPT, MEDICAL_EXTRACTOR_PROMPT_INFERENCE_V1
+from sak.prompts import MEDICAL_EXTRACTOR_PROMPT, MEDICAL_EXTRACTOR_PROMPT_INFERENCE_V1, MEDICAL_EXTRACTOR_PROMPT_INFERENCE_V2_1
 
 def generate_benchmark():
     # 1. 解析数据
-    limit = 50
+    limit = 20
     start_time = time.time()
     scripts = parse_nurse_scripts(RAW_DATA_PATH)
     end_time = time.time()
@@ -58,7 +58,7 @@ def generate_benchmark():
         now = datetime.now()
         formatted_time= now.strftime("%Y-%m-%d %H:%M:%S")
         if INFERENCE:
-            system_prompt = MEDICAL_EXTRACTOR_PROMPT_INFERENCE_V1.replace("{CURRENT_SYS_TIME}", formatted_time)
+            system_prompt = MEDICAL_EXTRACTOR_PROMPT_INFERENCE_V2_1.replace("{CURRENT_SYS_TIME}", formatted_time)
         else:
             system_prompt = MEDICAL_EXTRACTOR_PROMPT.replace("{CURRENT_SYS_TIME}", formatted_time)
         
@@ -72,8 +72,17 @@ def generate_benchmark():
         # 尝试解析 JSON
         try:
             start_time = time.time()
-            match = re.search(r'\{.*\}', response_content, re.DOTALL)
-            raw_data = json.loads(match.group())
+            # 1. 优先尝试匹配标准格式 ===JSON=== ... ===End JSON===
+            json_match = re.search(r'===JSON===\s*(\{.*?\})\s*===End JSON===', response_content, re.DOTALL)
+            if json_match:
+                raw_data = json.loads(json_match.group(1))
+            else:
+                # 2. Fallback: 尝试查找第一个 { 和最后一个 } 之间的内容
+                match = re.search(r'\{.*\}', response_content, re.DOTALL)
+                if match:
+                    raw_data = json.loads(match.group())
+                else:
+                    raise ValueError("No JSON content found")
 
             missed_keys = []
             appended_keys = []
@@ -136,4 +145,5 @@ def generate_benchmark():
 
 if __name__ == "__main__":
     # 注意：运行此脚本需要配置 API Key
-    generate_benchmark()
+    for i in range(2):
+        generate_benchmark()

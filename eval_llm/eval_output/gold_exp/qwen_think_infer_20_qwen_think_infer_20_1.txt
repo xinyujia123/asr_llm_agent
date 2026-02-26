@@ -1,0 +1,234 @@
+=== Comparison Results ===
+Total Records: 20
+Perfect Matches: 18
+Mismatch Records: 2
+
+Record 14:
+  Key: urination (certain)
+    qwen: 正常
+    qwen: None
+
+  [Reasoning Output]
+  qwen (File 1) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 语音未明确提及评估具体时间点（仅含“今天”“昨晚”等模糊时间词），依据规则使用当前系统时间：2026-02-01 10:02:03。
+
+2. **等价映射与ASR修正**：
+   - “点滴” → 明确指静脉输液，依据规则推断存在“静脉通路”。
+   - “血压一百零五、六十五” → 标准收缩压/舒张压表述，映射为"105/65"。
+   - “脉搏七十二” → 明确指脉率，非心率（字段区分），映射为pulseRate。
+   - “尿色有点深” → 规则明确说明“尿色深”属正常人可能出现情况，不构成排尿异常证据。
+   - “今天还恶心吗？” → 为询问句，无患者应答确认当前状态；“恶心”未被确认存在，且未达饮食异常标准（呕吐/禁食等），不触发diet异常。
+   - “潘托拉唑”“补液”等为治疗建议/药物说明，属提醒类内容，不作为当前体征状态依据。
+
+3. **数值处理**：
+   - 脉搏72 → 保留一位小数："72.0"。
+   - 血压105/65 → 格式合规，直接保留。
+   - 饮水量500ml、尿色描述等非结构化字段，不提取。
+
+4. **逻辑推断检查**：
+   - 导管：存在“点滴” → catheter = "静脉通路"。
+   - 排尿：无导尿管/尿管提及；尿色深被规则排除为异常 → urination = "正常"。
+   - 饮食：无“禁食/呕吐/吞咽困难”等明确异常描述 → diet = null。
+   - 皮肤、神志、肢体活动等：无全身性或明确状态描述 → 均为null。
+   - 过敏史：未提及“无过敏史”或具体过敏源 → allergyHistory = null。
+   - 入院相关字段（时间/方式/诊断）：全文无相关信息 → 全部null。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": "72.0",
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": "105/65",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": "静脉通路",
+  "diet": null,
+  "sleep": null,
+  "urination": "正常",
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  qwen (File 2) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 文本未明确提及评估具体时间点，仅含“今天”“昨晚到现在”等模糊表述。
+   - 根据规则：未明确时间时使用当前系统时间 → `assessmentTime: "2026-02-01 10:02:03"`。
+
+2. **等价映射与ASR修正**：
+   - “血压一百零五、六十五” → 标准血压读法，映射为 `bloodPressure: "105/65"`。
+   - “脉搏七十二” → 明确指脉率，映射为 `pulseRate: "72.0"`（保留一位小数）。
+   - “点滴” → 医疗语境中指静脉输液，根据规则推断存在 `静脉通路`。
+   - “尿色有点深” → 规则明确说明“尿色深”属正常人可能出现情况，**不构成排尿异常**。
+   - “今天还恶心吗？” → 为询问句，无患者当前状态确认；且“恶心”未达饮食异常标准（需明确“呕吐/禁食/吞咽困难”等），**不提取为diet异常**。
+   - 无“神志/意识”等关键词描述，consciousness 为 null。
+   - 无皮肤、肢体、排便等全身性评价，相关字段均为 null。
+   - 无过敏史、诊断、入院信息等明确陈述，对应字段填 null。
+
+3. **数值与逻辑校验**：
+   - 血压 105/65、脉率 72 均在生理合理范围，保留。
+   - “喝了五百毫升水”为液体摄入记录，非生命体征字段，忽略。
+   - “补点液”为医嘱建议，规则明确“建议/提醒”不作为当前状态证据。
+   - 无多选冲突（如 skin 未提及），无需处理排他逻辑。
+
+4. **导管推断**：
+   - “点滴” → 符合“正在输液”条件 → 推断 `catheter: "静脉通路"`。
+   - 无其他导管提及（如尿管、胃管等），不扩展。
+
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": "72.0",
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": "105/65",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": "静脉通路",
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------
+Record 16:
+  Key: urination (certain)
+    qwen: 正常
+    qwen: None
+
+  [Reasoning Output]
+  qwen (File 1) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 文本未明确提及评估具体时间点（仅含“刚才”“今天”等模糊表述），依据规则使用当前系统时间：2026-02-01 10:02:03。
+
+2. **等价映射与ASR修正**：
+   - “血压一百三十五、八十五” → 明确对应收缩压135、舒张压85，映射为"135/85"。
+   - “六十八公斤” → 体重数值，规范为"68.0"（保留一位小数）。
+   - “六百毫升”为2小时尿量记录，属出入量监测内容，非排尿状态异常描述；呋塞米为利尿剂，尿量增加属药物预期反应，无尿频/急/痛、血尿、失禁、排尿困难等异常症状描述，且未提及导尿管/尿管，故排尿状态判为“正常”。
+   - “打了一针呋塞米”为单次注射（呋塞米注射液体积通常<10ml），不满足“推注大剂量药物（>50ml）”条件，无法推断存在静脉通路；无“接尿袋”“留置针”等导管明确描述，catheter填null。
+   - “耳朵响/没力气”为用药后注意事项提醒，属建议性语句，依据规则不作为当前异常证据。
+
+3. **数值与逻辑校验**：
+   - 体重68.0、血压135/85均在生理合理范围。
+   - 无民族、文化程度、入院信息、诊断、过敏史、神志、皮肤、肢体活动、饮食、睡眠、排便等相关描述。
+   - 无局部否定或需排除的远期指令。
+
+4. **关键字段判定**：
+   - urination：尿量600ml/2h属利尿剂作用下正常范围，无异常症状且无导尿管提及 → "正常"。
+   - catheter：无导管明确描述或有效推断依据 → null。
+   - 其他未提及字段严格填null。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": "135/85",
+  "weight": "68.0",
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": "正常",
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  qwen (File 2) Reasoning:
+===Thinking===
+1. **时间处理**：
+   - 文本未明确提及评估具体时间点，仅含“刚才”“今天”等模糊表述。
+   - 根据规则，使用当前系统时间：2026-02-01 10:02:03。
+
+2. **等价映射（ASR修正）**：
+   - “血压一百三十五、八十五” → 明确对应收缩压135、舒张压85，无识别歧义。
+   - “六十八公斤” → 体重68.0（保留一位小数）。
+   - “打了一针呋塞米”“尿六百毫升”：属已执行治疗与出量记录，非当前导管状态或排尿异常症状描述。
+   - “耳朵响/没力气”为预防性提醒，属建议类语句，按规则不作为异常证据。
+
+3. **数值处理**：
+   - 体重：68公斤 → "68.0"。
+   - 血压：135/85 → "135/85"（双值完整，格式合规）。
+   - 尿量600ml（2小时）：仅为出量记录，未描述排尿困难、尿痛等异常症状，且无导尿管提及，不触发urination异常。
+
+4. **逻辑推断检查**：
+   - 无文化程度、民族、入院信息、诊断、过敏史、神志、皮肤、导管、肢体活动、饮食、睡眠、排便等明确描述 → 均填null。
+   - “打针”为单次注射，无“正在输液”“留置针”等描述 → catheter不推断为“静脉通路”。
+   - 无局部/全局皮肤评价 → skin为null。
+   - 无排便频率描述 → stoolFrequency为null。
+   - 所有提醒语句（“注意听…”）按规则排除，不用于推断任何异常字段。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": "135/85",
+  "weight": "68.0",
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------

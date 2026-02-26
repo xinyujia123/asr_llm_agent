@@ -1,0 +1,131 @@
+=== Comparison Results ===
+Total Records: 20
+Perfect Matches: 18
+Mismatch Records: 2
+
+Record 4:
+  Key: catheter (uncertain)
+    gemini: 静脉通路
+    kimi: 鼻导管、静脉通路
+
+  [Reasoning Output]
+  gemini (File 1) Reasoning:
+None
+  kimi (File 2) Reasoning:
+===Thinking===
+1. **时间**：
+   - 当前系统时间：2026-02-01 10:02:03
+   - 语音中未提及具体评估时间点，使用当前系统时间。
+
+2. **等价映射（ASR修正）**：
+   - "吊水" -> 输液治疗，推断存在静脉通路。
+   - "吸上氧气" + "氧流量开的是每分钟两升" -> 推断存在鼻导管吸氧。
+   - "腋温" -> 测量方式说明，非当前数据。
+
+3. **数值处理**：
+   - "体温三十八度五" -> temperature: "38.5"（生理范围合理）。
+   - "呼吸频率...二十四次" -> respiratoryRate: "24.0"。
+   - "脉搏一百零二" -> pulseRate: "102.0"。
+   - "血氧是九十四" -> 无对应字段，舍弃。
+
+4. **逻辑推断检查**：
+   - **导管**："这一瓶水吊完"表明正在输液 -> catheter包含"静脉通路"；"吸上氧气"且调节氧流量 -> 包含"鼻导管"。最终为"鼻导管、静脉通路"。
+   - **神志**：患者能对话，但文本无明确"神志/意识"描述词，根据规则禁止通过行为推断，consciousness为null。
+   - **诊断**：仅提及症状（胸闷、发烧），无明确诊断病名，diagnosis为null。
+   - **其他字段**：未提及则为null。
+
+5. **排除远期指令**：
+   - "我再给你测个腋温"为将来动作，不计入当前状态。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "38.5",
+  "pulseRate": "102.0",
+  "heartRate": null,
+  "respiratoryRate": "24.0",
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "catheter": "鼻导管、静脉通路",
+  "limbActivity": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------
+Record 13:
+  Key: catheter (uncertain)
+    gemini: 静脉通路
+    kimi: 静脉通路、鼻导管
+
+  [Reasoning Output]
+  gemini (File 1) Reasoning:
+None
+  kimi (File 2) Reasoning:
+===Thinking===
+1. **时间**：文本未明确提及评估时间，使用当前系统时间 2026-02-01 10:02:03。
+
+2. **等价映射（ASR修正）**：
+   - "三十八度九" -> temperature: "38.9"
+   - "心率九十五" -> heartRate: "95.0"（明确提及"心率"而非"脉率"）
+   - "呼吸频率二十二次" -> respiratoryRate: "22.0"
+   - "输头孢曲松" -> 正在静脉输液，推断存在静脉通路
+   - "氧气流量调到三升每分钟" -> 患者正在接受低流量鼻导管吸氧，推断存在鼻导管
+
+3. **数值处理**：
+   - 体温：38.9℃（保留一位小数）
+   - 心率：95.0次/分
+   - 呼吸频率：22.0次/分
+   - 血氧93%：接口无此字段，忽略
+
+4. **逻辑推断检查**：
+   - **导管**："今天开始输头孢曲松"表明正在输液，符合"静脉通路"推断条件；"氧气流量调到三升每分钟"明确提示鼻导管给氧。因此 catheter: "静脉通路、鼻导管"。
+   - **皮肤**："观察有没有皮疹"属于医嘱建议，非当前已存在状态，故 skin: null。
+   - **诊断**：虽使用抗生素，但无明确诊断名称，故 diagnosis: null。
+   - **过敏史**：观察皮疹属于用药预防措施，非已有过敏史，故 allergyHistory: null。
+   - **其他字段**：未提及文化程度、民族、入院信息、血压、体重、身高、血糖、神志、肢体活动、饮食、睡眠、排尿排便等，均为 null。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "38.9",
+  "pulseRate": null,
+  "heartRate": "95.0",
+  "respiratoryRate": "22.0",
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "catheter": "静脉通路、鼻导管",
+  "limbActivity": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------

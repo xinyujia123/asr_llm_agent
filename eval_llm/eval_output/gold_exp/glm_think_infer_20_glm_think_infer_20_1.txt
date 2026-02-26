@@ -1,0 +1,295 @@
+=== Comparison Results ===
+Total Records: 20
+Perfect Matches: 17
+Mismatch Records: 3
+
+Record 5:
+  Key: urination (certain)
+    glm: 异常
+    glm: 正常
+  Key: catheter (uncertain)
+    glm: 静脉通路、尿管
+    glm: 静脉通路
+
+  [Reasoning Output]
+  glm (File 1) Reasoning:
+===Thinking===
+1. 时间：
+当前系统时间：2026-02-01 10:02:03。
+文本中未提及具体评估时间，仅提到"刚才"和"晚点"，因此使用当前系统时间。
+
+2. 等价映射（ASR修正）：
+文本中没有明显的语音识别错误需要修正。
+
+3. 数值处理：
+- "生理盐水五百毫升" -> 静脉入量500毫升
+- "尿量大概是三百五十毫升" -> 尿量350毫升
+- "颜色是淡黄色的，挺清亮" -> 尿液描述，但不是数值数据
+
+4. 逻辑推断检查：
+- "静脉入量五百" -> 推断存在静脉通路（导管）
+- "尿量大概是三百五十毫升" -> 有尿袋，推断存在导尿管（导管）
+- "记得喂点水" -> 是未来计划，不计入当前状态
+- "晚点我再来记总数" -> 是未来计划，不计入当前状态
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": "静脉通路、尿管",
+  "diet": null,
+  "sleep": null,
+  "urination": "异常",
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  glm (File 2) Reasoning:
+===Thinking===
+1. 时间：
+当前系统时间：2026-02-01 10:02:03。
+文本中未提及具体评估时间，仅提到"刚才"和"晚点我再来记总数"，因此使用当前系统时间作为评估时间。
+
+2. 等价映射（ASR修正）：
+文本中没有明显的语音识别错误需要修正。
+
+3. 数值处理：
+- "生理盐水五百毫升" -> 静脉入量500毫升
+- "尿量大概是三百五十毫升" -> 尿量350毫升
+
+4. 逻辑推断检查：
+- "静脉入量五百" -> 表明患者有静脉通路，因此catheter字段应包含"静脉通路"
+- "尿量大概是三百五十毫升，颜色是淡黄色的，挺清亮" -> 表明患者排尿正常，因此urination字段应为"正常"
+- 其他字段如体温、血压、心率等均未提及，应填null
+- "今天病人喝水了吗？记得喂点水" -> 这是提醒，不是当前状态，不计入diet字段
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": "静脉通路",
+  "diet": null,
+  "sleep": null,
+  "urination": "正常",
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------
+Record 7:
+  Key: heartRate (certain)
+    glm: None
+    glm: 110.0
+  Key: pulseRate (certain)
+    glm: 110.0
+    glm: None
+  Key: catheter (uncertain)
+    glm: 静脉通路、鼻导管
+    glm: 静脉通路
+
+  [Reasoning Output]
+  glm (File 1) Reasoning:
+===Thinking===
+1. 时间：
+当前系统时间 2026-02-01 10:02:03。
+文本中提到"急诊刚送来一位"，但没有具体时间点。根据规则，如果未提及具体时间，则使用当前系统时间。
+所以评估时间 assessmentTime 应为 "2026-02-01 10:02:03"。
+
+2. 等价映射（ASR修正）：
+检查文本中没有明显的语音识别错误需要修正。
+
+3. 数值处理：
+- 血压：BP九十、六十 -> bloodPressure: "90/60"
+- 脉搏：一百一十 -> pulseRate: "110.0"
+- 呼吸：二十六 -> respiratoryRate: "26.0"
+
+4. 逻辑推断检查：
+- "到达时意识模糊" -> consciousness: "模糊"
+- "已经建立了静脉通道" -> catheter: "静脉通路"
+- "目前正在吸氧" -> 吸氧通常使用鼻导管，所以 catheter 还应包括 "鼻导管"
+- "初步诊断是失血性休克" -> diagnosis: "失血性休克"
+- 其他字段如教育、民族、入院时间等均未提及，填null
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": "失血性休克",
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": "110.0",
+  "heartRate": null,
+  "respiratoryRate": "26.0",
+  "bloodPressure": "90/60",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": "模糊",
+  "skin": null,
+  "limbActivity": null,
+  "catheter": "静脉通路、鼻导管",
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  glm (File 2) Reasoning:
+===Thinking===
+1.时间：
+当前时间 2026-02-01 10:02:03。
+文本中提到"急诊刚送来一位"，但没有具体时间点。根据规则，如果未提及具体时间，则使用当前系统时间。
+
+2.等价映射（ASR修正）：
+文本中没有明显的语音识别错误需要修正。
+
+3.数值处理：
+- "BP九十、六十" -> bloodPressure: "90/60"
+- "脉搏一百一十" -> heartRate: "110.0"
+- "呼吸二十六" -> respiratoryRate: "26.0"
+
+4.逻辑推断检查：
+- "意识模糊" -> consciousness: "模糊"
+- "已经建立了静脉通道" -> catheter: "静脉通路"
+- "初步诊断是失血性休克" -> diagnosis: "失血性休克"
+- "目前正在吸氧" - 虽然提到吸氧，但没有明确提到导管类型，不推断具体导管
+- 其他字段均未提及，保持为null
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": "失血性休克",
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": "110.0",
+  "respiratoryRate": "26.0",
+  "bloodPressure": "90/60",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": "模糊",
+  "skin": null,
+  "limbActivity": null,
+  "catheter": "静脉通路",
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------
+Record 8:
+  Key: heartRate (certain)
+    glm: None
+    glm: 108.0
+  Key: temperature (certain)
+    glm: None
+    glm: 36.8
+  Key: skin (certain)
+    glm: None
+    glm: ['破损']
+  Key: bloodPressure (certain)
+    glm: None
+    glm: 120/86
+  Key: respiratoryRate (certain)
+    glm: None
+    glm: 21.0
+
+  [Reasoning Output]
+  glm (File 1) Reasoning:
+
+  glm (File 2) Reasoning:
+===Thinking===
+1. 时间：
+当前系统时间 2026-02-01 10:02:03。
+文本中没有提到具体评估时间，只说"来量个体温"，所以使用当前系统时间。
+
+2. 等价映射（ASR修正）：
+"幺零八"（方言表达）-> "108" -> heartRate: "108.0"
+"一百二、八十六" -> bloodPressure: "120/86"
+
+3. 数值处理：
+"三十六度八" -> temperature: "36.8"
+"二一次" -> respiratoryRate: "21.0"
+
+4. 逻辑推断检查：
+"皮肤有点破损" -> skin: ["破损"]（有破损就不能同时有"完整"）
+其他字段如神志、肢体活动、饮食、睡眠、排尿、排便等未提及，均为null
+未提及导管、过敏史、入院方式、诊断等，均为null
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "36.8",
+  "pulseRate": null,
+  "heartRate": "108.0",
+  "respiratoryRate": "21.0",
+  "bloodPressure": "120/86",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": ["破损"],
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------

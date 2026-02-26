@@ -1,0 +1,2540 @@
+=== Comparison Results ===
+Total Records: 20
+Perfect Matches: 1
+Mismatch Records: 19
+
+Record 1:
+  Key: respiratoryRate (certain)
+    gemini: 18.0
+    glm: 18
+  Key: heartRate (certain)
+    gemini: 75.0
+    glm: 75
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本（“王大爷早啊，昨晚睡得怎么样？来，先测个血压。嗯……血压是一百三十八、八十二，稍微有点高啊。体温我看看，三十六度七，挺正常的。我看你这心电监护，心率七十五，呼吸十八次。一会儿记得把早饭吃了，药别忘了吃。”）。
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：**
+        *   严谨提取（未提及 = null）。
+        *   严谨推断（不确定 = null）。
+        *   多值提取规范（单选 vs 多选）。
+        *   转录语意修正（语音识别误差）。
+        *   输出格式：仅标准 JSON 字符串。
+    *   **医学处理原则：**
+        *   证据等级（A/B/C）。
+        *   状态存续优先（排除指令/计划）。
+        *   行为即路径（静脉通路逻辑）。
+        *   级联一致性（器具 -> 功能）。
+        *   非病理改变豁免原则。
+        *   局部 ≠ 整体（皮肤/肢体）。
+        *   局部否定 ≠ 全局否定。
+        *   正常互斥原则。
+
+2. **分析输入文本：**
+    *   “王大爷早啊，昨晚睡得怎么样？” -> 问候语，询问睡眠（未回答）。
+    *   “来，先测个血压。” -> 动作。
+    *   “嗯……血压是一百三十八、八十二，稍微有点高啊。” -> 血压：138/82。
+    *   “体温我看看，三十六度七，挺正常的。” -> 体温：36.7。
+    *   “我看你这心电监护，心率七十五，呼吸十八次。” -> 心率：75，呼吸频率：18。提及“心电监护”。
+    *   “一会儿记得把早饭吃了，药别忘了吃。” -> 将来时指令（“一会儿记得”）。*关键：* 这是否意味着当前饮食状态异常？不，这是关于*未来*行动的指令。这是否意味着当前睡眠状态异常？不，这是一个问题，未回答。
+
+3. **逐字段提取：**
+
+    *   **assessmentTime**: 未提及具体时间。使用系统时间：`2026-02-01 10:02:03`。
+    *   **education**: 未提及。 -> `null`。
+    *   **ethnicity**: 未提及。 -> `null`。
+    *   **admissionTime**: 未提及。 -> `null`。
+    *   **admissionMethod**: 未提及。 -> `null`。
+    *   **diagnosis**: 未提及。 -> `null`。
+    *   **allergyHistory**: 未提及。 -> `null`。
+    *   **temperature**: “三十六度七” -> `36.7`。
+    *   **pulseRate**: 未提及（仅提及心率）。 -> `null`。
+    *   **heartRate**: “心率七十五” -> `75`。
+    *   **respiratoryRate**: “呼吸十八次” -> `18`。
+    *   **bloodPressure**: “一百三十八、八十二” -> `138/82`。
+    *   **weight**: 未提及。 -> `null`。
+    *   **height**: 未提及。 -> `null`。
+    *   **bloodSugar**: 未提及。 -> `null`。
+    *   **consciousness**: 未提及（患者正在交流，但严格来说，没有明确的“神志/意识”关键词，如“清楚”、“嗜睡”等。虽然“王大爷早啊”暗示了意识，但提示要求“必须有明确的‘神志/意识’等描述”。文本中没有明确说明“神志清楚”。因此，根据“严谨提取”原则，应为 `null`）。
+    *   **skin**: 未提及。 -> `null`。
+    *   **limbActivity**: 未提及。 -> `null`。
+    *   **catheter**: 提及“心电监护”。提示说明：“面罩、造口、心电监护若未提及其导管耗材，则不属于导管”。因此，`null`。
+    *   **diet**: “一会儿记得把早饭吃了”。这是指令/计划，不是当前状态。当前状态未知。 -> `null`。
+    *   **sleep**: “昨晚睡得怎么样？”是一个问题，未回答。 -> `null`。
+    *   **urination**: 未提及。 -> `null`。
+    *   **defecation**: 未提及。 -> `null`。
+    *   **stoolFrequency**: 未提及。 -> `null`。
+
+4. **审查与完善：**
+    *   *检查血压：* 138/82。格式正确。
+    *   *检查体温：* 36.7。格式正确。
+    *   *检查心率：* 75。
+    *   *检查呼吸频率：* 18。
+    *   *检查意识：* 文本暗示患者清醒（回答问候，测量生命体征），但提示明确指出：“必须有明确的‘神志/意识’等描述。严禁仅根据‘口齿清楚’、‘能交流’、‘睁眼’等单纯的运动或发音表现推断为‘清楚’”。由于文本没有说“神志清楚”，我必须将其设为 `null`。
+    *   *检查导管：* “心电监护”不是导管。
+    *   *检查饮食：* “一会儿记得把早饭吃了”是将来时。当前饮食状态未知。
+
+5. **构建 JSON：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "36.7",
+      "pulseRate": null,
+      "heartRate": "75",
+      "respiratoryRate": "18",
+      "bloodPressure": "138/82",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终验证：**
+    *   我是否遗漏了什么？
+    *   “稍微有点高啊” - 关于血压的评论，不是诊断。
+    *   “挺正常的” - 关于体温的评论。
+    *   “一会儿记得把早饭吃了” - 指令。
+    *   “药别忘了吃” - 指令。
+    *   所有提取均严格基于提供的文本和约束条件。
+
+7. **生成输出。**
+--------------------
+Record 2:
+  Key: respiratoryRate (certain)
+    gemini: 20.0
+    glm: 20
+  Key: heartRate (certain)
+    gemini: 92.0
+    glm: 92
+  Key: skin (certain)
+    gemini: ['手术切口']
+    glm: None
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本（“十二床李姐，手术回来三个小时了。现在感觉怎么样？刀口疼得厉害吗？血氧饱和度是九十八，挺好。心率快一点，九十二次，呼吸二十次。体温三十七度二，有点低热是正常的。皮肤切口我看了一下，目前是完好的，没有渗血。保持这个姿势别乱动啊。”）。
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **输出：** 包含特定字段的 JSON 字符串。
+    *   **关键原则：** 严谨提取、医学推断（证据等级）、状态存续优先、行为即路径、级联一致性、非病理改变豁免、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐字段处理输入文本：**
+
+    *   **文本：** “十二床李姐，手术回来三个小时了。现在感觉怎么样？刀口疼得厉害吗？血氧饱和度是九十八，挺好。心率快一点，九十二次，呼吸二十次。体温三十七度二，有点低热是正常的。皮肤切口我看了一下，目前是完好的，没有渗血。保持这个姿势别乱动啊。”
+
+    *   **assessmentTime**：未提及具体时间。使用当前系统时间。
+        *   值：`2026-02-01 10:02:03`
+
+    *   **education**：未提及。
+        *   值：`null`
+
+    *   **ethnicity**：未提及。
+        *   值：`null`
+
+    *   **admissionTime**：未提及。
+        *   值：`null`
+
+    *   **admissionMethod**：未提及。
+        *   值：`null`
+
+    *   **diagnosis**：提及“手术回来”。根据原则：“患者本次入院相关的‘术后状态’（如：前列腺术后，必须带有明确的手术名称）应直接映射为 diagnosis，除非有更明确的入院病名或者入院诊断。”
+        *   文本仅说“手术回来”，未提及具体手术名称（如“阑尾炎术后”或“胆囊切除术后”）。
+        *   值：`null`
+
+    *   **allergyHistory**：未提及。
+        *   值：`null`
+
+    *   **temperature**：“体温三十七度二” -> 37.2。
+        *   值：`37.2`
+
+    *   **pulseRate**：未提及（仅提及心率）。
+        *   值：`null`
+
+    *   **heartRate**：“心率快一点，九十二次” -> 92。
+        *   值：`92`
+
+    *   **respiratoryRate**：“呼吸二十次” -> 20。
+        *   值：`20`
+
+    *   **bloodPressure**：未提及。
+        *   值：`null`
+
+    *   **weight**：未提及。
+        *   值：`null`
+
+    *   **height**：未提及。
+        *   值：`null`
+
+    *   **bloodSugar**：未提及。
+        *   值：`null`
+
+    *   **consciousness**：未提及。患者正在回答问题（“现在感觉怎么样？”），但未明确说明“神志清楚”。原则：“严禁仅根据‘口齿清楚’、‘能交流’、‘睁眼’等单纯的运动或发音表现推断为‘清楚’”。
+        *   值：`null`
+
+    *   **skin**：“皮肤切口我看了一下，目前是完好的，没有渗血。”
+        *   原则：“局部 ≠ 整体”。仅提及“切口”。
+        *   原则：“完整指全身皮肤完整”。
+        *   由于仅提及切口，不能推断全身皮肤“完整”。
+        *   值：`null`
+
+    *   **limbActivity**：“保持这个姿势别乱动啊。”
+        *   这是一个指令/命令（“保持这个姿势别乱动啊”），不一定是当前受限的描述，尽管暗示了限制。
+        *   原则：“排除指令与计划……凡是带有‘准备……’、‘我们要……’、‘快去……’、‘待会……’等祈使句或将来时描述的动作，一律不计入当前状态。”
+        *   “保持这个姿势别乱动啊”是一个命令。它没有明确说明“患者目前无法活动”。
+        *   值：`null`
+
+    *   **catheter**：未提及。
+        *   值：`null`
+
+    *   **diet**：未提及。
+        *   值：`null`
+
+    *   **sleep**：未提及。
+        *   值：`null`
+
+    *   **urination**：未提及。
+        *   值：`null`
+
+    *   **defecation**：未提及。
+        *   值：`null`
+
+    *   **stoolFrequency**：未提及。
+        *   值：`null`
+
+3. **审查与完善：**
+
+    *   *检查 diagnosis*：文本说“手术回来”。这是否算作诊断？提示说：“患者本次入院相关的‘术后状态’（如：前列腺术后，必须带有明确的手术名称）应直接映射为 diagnosis”。由于缺少具体的手术名称，我无法映射它。所以是 null。
+    *   *检查 skin*：文本说“皮肤切口我看了一下，目前是完好的”。这是局部的。原则：“若语音仅提及特定部位正常……严禁映射为‘完整’”。所以是 null。
+    *   *检查 limbActivity*：“保持这个姿势别乱动啊”。这是一个命令。原则：“排除指令与计划……凡是带有‘准备……’、‘我们要……’、‘快去……’、‘待会……’等祈使句或将来时描述的动作，一律不计入当前状态。”所以是 null。
+    *   *检查 consciousness*：患者正在被问“现在感觉怎么样？”，暗示他们有反应，但原则禁止在没有明确关键词的情况下推断“清楚”。所以是 null。
+
+4. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "37.2",
+      "pulseRate": null,
+      "heartRate": "92",
+      "respiratoryRate": "20",
+      "bloodPressure": null,
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+5. **最终润色：** 确保严格遵守 JSON 格式（无 Markdown）。
+
+    *   输入：“十二床李姐，手术回来三个小时了。现在感觉怎么样？刀口疼得厉害吗？血氧饱和度是九十八，挺好。心率快一点，九十二次，呼吸二十次。体温三十七度二，有点低热是正常的。皮肤切口我看了一下，目前是完好的，没有渗血。保持这个姿势别乱动啊。”
+    *   提取：
+        *   体温：37.2
+        *   心率：92
+        *   呼吸：20
+        *   其他均为 null。
+
+    *   等等，让我再次检查“手术回来”是否暗示了诊断。提示说：“患者本次入院相关的‘术后状态’（如：前列腺术后，必须带有明确的手术名称）应直接映射为 diagnosis”。由于缺少具体的手术名称，我无法映射它。所以是 null。
+    *   “皮肤切口我看了一下，目前是完好的” -> 局部描述。原则：“局部 ≠ 整体”。所以是 null。
+    *   “保持这个姿势别乱动啊” -> 命令。原则：“排除指令与计划”。所以是 null。
+
+    结果看起来很可靠。
+--------------------
+Record 3:
+  Key: heartRate (certain)
+    gemini: 68.0
+    glm: 68
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“检查一下十五床。患者目前处于嗜睡状态，能唤醒。来，看我手电筒。左侧瞳孔三毫米，对光反射灵敏；右侧瞳孔也是三毫米，对光反射灵敏。血压一百二十六、七十四，心率六十八。继续观察神志变化，要是发现呕吐立刻叫我。”
+    *   **当前系统时间：** 2026-02-01 10:02:03
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、仅输出标准 JSON 字符串。
+    *   **医学处理原则：** “证据等级 + 阈值”、状态存续优先（排除指令/计划）、行为即路径、级联一致性、非病理改变豁免原则、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “检查一下十五床。” -> 上下文信息，无目标数据。
+
+    *   “患者目前处于嗜睡状态，能唤醒。”
+        *   `consciousness`：明确提及“嗜睡”。选项：清楚、嗜睡、模糊、昏睡、昏迷、浅昏迷、中昏迷、深昏迷、药物镇静状、麻醉未醒。
+        *   匹配：“嗜睡”。
+        *   结果：`consciousness`: "嗜睡"。
+
+    *   “来，看我手电筒。左侧瞳孔三毫米，对光反射灵敏；右侧瞳孔也是三毫米，对光反射灵敏。”
+        *   瞳孔大小和反射。这些不是目标字段。
+        *   结果：忽略。
+
+    *   “血压一百二十六、七十四，”
+        *   `bloodPressure`：“一百二十六”（126），“七十四”（74）。
+        *   格式：“收缩压/舒张压”。
+        *   结果：`bloodPressure`: "126/74"。
+
+    *   “心率六十八。”
+        *   `heartRate`：“六十八”（68）。
+        *   结果：`heartRate`: "68"。
+
+    *   “继续观察神志变化，要是发现呕吐立刻叫我。”
+        *   “继续观察……” -> 指令/计划，不是当前状态。
+        *   “要是发现呕吐……” -> 假设/未来/指令。不是当前状态“呕吐”。
+        *   `diet`：未提及当前饮食状态。
+        *   结果：忽略。
+
+3. **根据字段评估：**
+
+    *   **assessmentTime**：未提及。使用系统时间。 -> "2026-02-01 10:02:03"
+    *   **education**：未提及。 -> null
+    *   **ethnicity**：未提及。 -> null
+    *   **admissionTime**：未提及。 -> null
+    *   **admissionMethod**：未提及。 -> null
+    *   **diagnosis**：未提及。 -> null
+    *   **allergyHistory**：未提及。 -> null
+    *   **temperature**：未提及。 -> null
+    *   **pulseRate**：未提及（仅提及心率）。 -> null
+    *   **heartRate**：提及“六十八”。 -> "68"
+    *   **respiratoryRate**：未提及。 -> null
+    *   **bloodPressure**：提及“一百二十六、七十四”。 -> "126/74"
+    *   **weight**：未提及。 -> null
+    *   **height**：未提及。 -> null
+    *   **bloodSugar**：未提及。 -> null
+    *   **consciousness**：提及“嗜睡”。 -> "嗜睡"
+    *   **skin**：未提及。 -> null
+    *   **limbActivity**：未提及。 -> null
+    *   **catheter**：未提及。 -> null
+    *   **diet**：未提及（呕吐是假设/未来指令）。 -> null
+    *   **sleep**：未提及。 -> null
+    *   **urination**：未提及。 -> null
+    *   **defecation**：未提及。 -> null
+    *   **stoolFrequency**：未提及。 -> null
+
+4. **最终审查与格式化：**
+
+    *   检查约束：
+        *   JSON 格式？是。
+        *   无 Markdown？是。
+        *   严谨提取？是。
+        *   “要是发现呕吐” -> 忽略（未来/假设）。
+        *   “嗜睡” -> 已提取。
+
+5. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": null,
+      "heartRate": "68",
+      "respiratoryRate": null,
+      "bloodPressure": "126/74",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": "嗜睡",
+      "skin": null,
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+--------------------
+Record 4:
+  Key: respiratoryRate (certain)
+    gemini: 24.0
+    glm: 24
+  Key: pulseRate (certain)
+    gemini: 102.0
+    glm: 102
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本（“张叔，今天觉得胸闷好点没？吸上氧气感觉怎么样？我看下，氧流量开的是每分钟两升。现在的血氧是九十四，呼吸频率还是快，二十四次。体温三十八度五，还在发烧。脉搏一百零二。这一瓶水吊完记得叫我，我再给你测个腋温。”）。
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、输出格式（仅 JSON）。
+    *   **医学处理原则：** 证据等级（A/B/C）、状态存续优先、行为即路径、级联一致性、非病理改变豁免原则、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **分析输入文本：**
+    *   “张叔，今天觉得胸闷好点没？” -> 闲聊/问诊。无结构化数据。
+    *   “吸上氧气感觉怎么样？” -> 提及吸氧。
+    *   “我看下，氧流量开的是每分钟两升。” -> 氧流量 2L/min。*注意：字段列表中没有 SpO2 或氧流量字段。*
+    *   “现在的血氧是九十四” -> SpO2 94%。*注意：字段列表中没有 SpO2 字段。*
+    *   “呼吸频率还是快，二十四次。” -> 呼吸频率 = 24。
+    *   “体温三十八度五，还在发烧。” -> 体温 = 38.5。
+    *   “脉搏一百零二。” -> 脉率 = 102。
+    *   “这一瓶水吊完记得叫我” -> 提及静脉输液（“这一瓶水吊完”）。
+    *   “我再给你测个腋温。” -> 未来动作，忽略。
+
+3. **逐字段提取：**
+
+    *   **assessmentTime**: 未提及具体时间。使用当前系统时间。 -> `2026-02-01 10:02:03`
+    *   **education**: 未提及。 -> `null`
+    *   **ethnicity**: 未提及。 -> `null`
+    *   **admissionTime**: 未提及。 -> `null`
+    *   **admissionMethod**: 未提及。 -> `null`
+    *   **diagnosis**: 提及“胸闷”、“发烧”。这些是症状，不是诊断。没有“疑似/考虑”等措辞，但也无正式诊断。 -> `null`
+    *   **allergyHistory**: 未提及。 -> `null`
+    *   **temperature**: “三十八度五” -> 38.5。 -> `38.5`
+    *   **pulseRate**: “脉搏一百零二” -> 102。 -> `102`
+    *   **heartRate**: 未提及（脉搏 != 心率，虽然通常接近，但严格提取）。 -> `null`
+    *   **respiratoryRate**: “二十四次” -> 24。 -> `24`
+    *   **bloodPressure**: 未提及。 -> `null`
+    *   **weight**: 未提及。 -> `null`
+    *   **height**: 未提及。 -> `null`
+    *   **bloodSugar**: 未提及。 -> `null`
+    *   **consciousness**: 未提及（患者能回答问题，但“证据等级”原则要求明确的“神志/意识”描述，严禁仅根据“能交流”推断）。 -> `null`
+    *   **skin**: 未提及。 -> `null`
+    *   **limbActivity**: 未提及。 -> `null`
+    *   **catheter**: “这一瓶水吊完” -> 暗示静脉通路（输液）。原则：“行为即路径” -> “挂上某药物”或“吊完”暗示静脉通路。 -> `静脉通路`
+    *   **diet**: 未提及。 -> `null`
+    *   **sleep**: 未提及。 -> `null`
+    *   **urination**: 未提及。 -> `null`
+    *   **defecation**: 未提及。 -> `null`
+    *   **stoolFrequency**: 未提及。 -> `null`
+
+4. **根据原则进行审查和完善：**
+
+    *   *原则：严谨推断* -> “吸上氧气” -> 能推断“鼻导管”吗？不能。原则明确指出：“听到‘吸上氧气’……不能推断存在鼻导管，因为可能用了无创氧气面罩……如果结果不确定，需要拒绝该推断结果。” -> 所以，catheter 仅包含“静脉通路”。
+    *   *原则：行为即路径* -> “这一瓶水吊完” -> 暗示静脉通路。正确。
+    *   *原则：证据等级* -> “胸闷”、“发烧”是症状，不是诊断。Diagnosis 为 null。
+    *   *原则：局部 ≠ 整体* -> 不适用。
+    *   *原则：输出格式* -> 仅 JSON。
+
+5. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "38.5",
+      "pulseRate": "102",
+      "heartRate": null,
+      "respiratoryRate": "24",
+      "bloodPressure": null,
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "静脉通路",
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终检查：**
+    *   体温：38.5（正确）。
+    *   脉率：102（正确）。
+    *   呼吸频率：24（正确）。
+    *   导管：“静脉通路”（基于“这一瓶水吊完”）。氧气被提及，但未推断导管类型（鼻导管 vs 面罩），因此未添加。
+    *   诊断：null（症状存在，无诊断）。
+    *   神志：null（患者能说话，但未明确说明“神志清楚”）。
+
+    *关于“静脉通路”的自我修正*：文本说“这一瓶水吊完记得叫我”。这暗示目前正在输液。根据“行为即路径”原则（“挂上某药物”），这算作静脉通路。
+
+    *关于“吸上氧气”的自我修正*：文本说“吸上氧气”。原则：“严禁仅根据主机设备推断具体连接耗材……听到‘使用呼吸机’不得自动推断为‘气管插管’……”。虽然氧气面罩/鼻导管不是呼吸机，但原则“听到‘吸上氧气’不能推断存在鼻导管”是具体的。所以，catheter 中不包含氧气。
+
+    *关于“胸闷”的自我修正*：这是症状，不是诊断。Diagnosis 为 null。
+
+    *关于“发烧”的自我修正*：这是症状/体征，不是诊断。Diagnosis 为 null。
+
+    *关于“血氧”的自我修正*：字段列表中没有 SpO2 字段。忽略。
+
+    *关于“氧流量”的自我修正*：字段列表中没有氧流量字段。忽略。
+
+    *关于“腋温”的自我修正*：未来动作（“我再给你测个”）。忽略。
+
+    *关于“呼吸频率还是快”的自我修正*：数值是 24。“快”是描述，数值是 24。
+
+    *关于“脉搏”的自我修正*：数值是 102。
+
+    *关于“assessmentTime”的自我修正*：使用当前系统时间。
+
+    *关于“consciousness”的自我修正*：患者回答问题（“觉得胸闷好点没？”），但原则说“严禁仅根据‘口齿清楚’、‘能交流’……推断为‘清楚’”。所以 null。
+
+    *关于“catheter”的自我修正*：“这一瓶水吊完” -> 静脉通路。
+
+    最终 JSON 看起来很可靠。
+--------------------
+Record 6:
+  Key: pulseRate (certain)
+    gemini: 85.0
+    glm: 85
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“五零八房的老刘，今天空腹体重测了吗？七十二点五公斤是吧，比前天轻了点。来，手平放。血压是一百五、九十五，还是没降下来啊。脉搏八十五次。你这个降压药是不是没按时吃？心率挺整齐的，但血压得控制住，不然容易头晕。”
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、标准 JSON 输出。
+    *   **医学处理原则：** “证据等级 + 阈值”、状态存续优先、行为即路径、级联一致性、非病理改变豁免原则、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “五零八房的老刘” -> 上下文信息（房间、姓名），与目标字段无关。
+    *   “今天空腹体重测了吗？” -> 提及体重。
+    *   “七十二点五公斤是吧” -> **weight**: 72.5。
+    *   “比前天轻了点” -> 上下文，无具体数据。
+    *   “来，手平放” -> 指令，非状态。
+    *   “血压是一百五、九十五” -> **bloodPressure**: 150/95。
+    *   “还是没降下来啊” -> 上下文，暗示高血压病史，但不是诊断字段所需的明确“入院诊断”。
+    *   “脉搏八十五次” -> **pulseRate**: 85。
+    *   “你这个降压药是不是没按时吃？” -> 关于用药依从性的问题，非当前状态。
+    *   “心率挺整齐的” -> 描述“整齐”通常意味着正常，但字段 `heartRate` 需要一个数值。文本说“整齐”，没有给出数字。所以 `heartRate` 为 null。
+    *   “但血压得控制住，不然容易头晕” -> 建议/警告（证据等级 C），非当前状态。头晕是潜在后果，非当前状态。
+
+3. **提取并映射到字段：**
+
+    *   **assessmentTime**: 文本说“今天”。未提及具体时间。使用当前系统时间：`2026-02-01 10:02:03`。
+    *   **education**: 未提及。 -> `null`。
+    *   **ethnicity**: 未提及。 -> `null`。
+    *   **admissionTime**: 未提及。 -> `null`。
+    *   **admissionMethod**: 未提及。 -> `null`。
+    *   **diagnosis**: 提及“降压药”暗示高血压，但未明确说明“入院诊断：高血压”。原则：“考虑/疑似/待排”等不确定措辞，一律为 null。此处仅为暗示。 -> `null`。
+    *   **allergyHistory**: 未提及。 -> `null`。
+    *   **temperature**: 未提及。 -> `null`。
+    *   **pulseRate**: “脉搏八十五次” -> `85`。
+    *   **heartRate**: “心率挺整齐的” -> 无数值。 -> `null`。
+    *   **respiratoryRate**: 未提及。 -> `null`。
+    *   **bloodPressure**: “血压是一百五、九十五” -> `150/95`。
+    *   **weight**: “七十二点五公斤” -> `72.5`。
+    *   **height**: 未提及。 -> `null`。
+    *   **bloodSugar**: 未提及。 -> `null`。
+    *   **consciousness**: 未提及。 -> `null`。
+    *   **skin**: 未提及。 -> `null`。
+    *   **limbActivity**: 未提及。 -> `null`。
+    *   **catheter**: 未提及。 -> `null`。
+    *   **diet**: “空腹”暗示测量状态，非饮食限制（如禁食）。 -> `null`。
+    *   **sleep**: 未提及。 -> `null`。
+    *   **urination**: 未提及。 -> `null`。
+    *   **defecation**: 未提及。 -> `null`。
+    *   **stoolFrequency**: 未提及。 -> `null`。
+
+4. **根据原则进行审查：**
+    *   *严谨提取：* 仅提取明确陈述的内容。
+    *   *诊断：* “降压药”暗示高血压，但不是明确的诊断。保持为 null。
+    *   *心率：* “整齐”是定性描述，不是定量描述。保持为 null。
+    *   *血压：* “一百五、九十五” -> 150/95。正确。
+    *   *体重：* “七十二点五” -> 72.5。正确。
+    *   *时间：* “今天” -> 当前系统时间。正确。
+
+5. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": "85",
+      "heartRate": null,
+      "respiratoryRate": null,
+      "bloodPressure": "150/95",
+      "weight": "72.5",
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终检查：**
+    *   我是否遗漏了什么？“手平放”是指令。“没降下来”是评论。“容易头晕”是警告。
+    *   “空腹”是否意味着饮食异常？不，它描述的是测量条件（空腹体重），而非饮食限制（如禁食）。
+    *   “降压药”是否意味着诊断？不，这是用药史/依从性问题。
+    *   “心率整齐”是否意味着心率？不，没有数字。
+
+    看起来不错。继续输出。
+--------------------
+Record 7:
+  Key: respiratoryRate (certain)
+    gemini: 26.0
+    glm: 26
+  Key: pulseRate (certain)
+    gemini: 110.0
+    glm: 110
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析用户请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本（“接个班，急诊刚送来一位。男性，四十五岁。到达时意识模糊，BP九十、六十，脉搏一百一十，呼吸二十六。已经建立了静脉通道，目前正在吸氧。瞳孔是对称的，大概二点五左右，对光反射迟钝。病史提供人是家属，初步诊断是失血性休克。”）。
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、输出标准 JSON。
+    *   **医学处理原则：** 证据等级（A/B/C）、状态存续优先（排除指令/计划）、行为即路径（静脉通路逻辑）、级联一致性（导管 -> 功能异常）、非病理改变豁免、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2.  **逐字段提取与处理：**
+
+    *   **assessmentTime**：文本未提及具体评估时间（“接个班，急诊刚送来一位”暗示当前语境）。使用当前系统时间。
+        *   结果：`2026-02-01 10:02:03`
+
+    *   **education**：未提及。
+        *   结果：`null`
+
+    *   **ethnicity**：未提及。
+        *   结果：`null`
+
+    *   **admissionTime**：文本称“急诊刚送来一位”。未提及具体时间戳。
+        *   结果：`null`
+
+    *   **admissionMethod**：文本称“急诊刚送来一位”。未提及具体方式（步行、轮椅、平车等）。“急诊”是地点/来源，不是方式。
+        *   结果：`null`
+
+    *   **diagnosis**：文本称“初步诊断是失血性休克”。说明指出“仅填写语音中提及的诊断（初步诊断也算）或明确术式”。
+        *   结果：`失血性休克`
+
+    *   **allergyHistory**：未提及。
+        *   结果：`null`
+
+    *   **temperature**：未提及。
+        *   结果：`null`
+
+    *   **pulseRate**：文本称“脉搏一百一十”。
+        *   结果：`110`
+
+    *   **heartRate**：未明确提及（脉搏不是心率，尽管通常相关，但严格提取要求区分）。
+        *   结果：`null`
+
+    *   **respiratoryRate**：文本称“呼吸二十六”。
+        *   结果：`26`
+
+    *   **bloodPressure**：文本称“BP九十、六十”。格式：“收缩压/舒张压”。
+        *   结果：`90/60`
+
+    *   **weight**：未提及。
+        *   结果：`null`
+
+    *   **height**：未提及。
+        *   结果：`null`
+
+    *   **bloodSugar**：未提及。
+        *   结果：`null`
+
+    *   **consciousness**：文本称“到达时意识模糊”。说明指出“必须有明确的‘神志/意识’等描述”。“意识模糊”是标准医学术语。
+        *   结果：`模糊`
+
+    *   **skin**：未提及。
+        *   结果：`null`
+
+    *   **limbActivity**：未提及。
+        *   结果：`null`
+
+    *   **catheter**：文本称“已经建立了静脉通道”。说明指出“具体内容包括静脉通路（含留置针）……”。因此，“静脉通道”映射为“静脉通路”。文本称“目前正在吸氧”。说明指出“严禁仅根据主机设备推断具体连接耗材……例如：听到‘使用呼吸机’不得自动推断为‘气管插管’……”。同理，“吸氧”并不自动意味着“鼻导管”（可能是面罩）。因此，仅提取“静脉通路”。
+        *   结果：`静脉通路`
+
+    *   **diet**：未提及。
+        *   结果：`null`
+
+    *   **sleep**：未提及。
+        *   结果：`null`
+
+    *   **urination**：未提及。未提及尿管。
+        *   结果：`null`
+
+    *   **defecation**：未提及。
+        *   结果：`null`
+
+    *   **stoolFrequency**：未提及。
+        *   结果：`null`
+
+3.  **根据原则进行审查：**
+    *   *严谨提取*：未提及的字段为 null。
+    *   *严谨推断*：“吸氧” -> 未推断为鼻导管。“意识模糊” -> 已提取。
+    *   *转录语意修正*：“BP九十、六十” -> “90/60”。
+    *   *医学处理原则*：
+        *   “已经建立了静脉通道” -> “静脉通路”（行为即路径）。
+        *   “吸氧” -> 未推断具体导管类型（保守）。
+        *   “初步诊断” -> 已提取。
+
+4.  **构建 JSON：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": "失血性休克",
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": "110",
+      "heartRate": null,
+      "respiratoryRate": "26",
+      "bloodPressure": "90/60",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": "模糊",
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "静脉通路",
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+5.  **最终检查：**
+    *   我是否遗漏了什么？“瞳孔是对称的，大概二点五左右，对光反射迟钝” -> 这些不是目标字段（瞳孔大小/反射）。
+    *   “男性，四十五岁” -> 性别和年龄不是目标字段。
+    *   “病史提供人是家属” -> 不是目标字段。
+    *   “急诊刚送来一位” -> 暗示入院，但未给出时间或方式。
+    *   “BP九十、六十” -> 90/60。
+    *   “脉搏一百一十” -> 110。
+    *   “呼吸二十六” -> 26。
+    *   “意识模糊” -> 模糊。
+    *   “建立了静脉通道” -> 静脉通路。
+    *   “吸氧” -> 未推断导管。
+
+    看起来正确。
+--------------------
+Record 8:
+  Key: respiratoryRate (certain)
+    gemini: 21.0
+    glm: 21
+  Key: heartRate (certain)
+    gemini: 108.0
+    glm: 108
+  Key: skin (certain)
+    gemini: ['破损']
+    glm: 破损
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“阿婆，来量个体温。三十六度八，不烧了。心率是幺零八，怎么这么快？是不是刚才动弹了？呼吸二一次。血压是一百二、八十六。我看你这皮肤有点破损，是在哪儿蹭的吗？一会儿我给你涂点药。记得多喝温开水啊。”
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、标准 JSON 输出。
+    *   **医学处理原则：** “证据等级 + 阈值”（A/B/C）、状态存续优先（排除指令/计划）、行为即路径、级联一致性、非病理改变豁免原则、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “阿婆，来量个体温。” -> 问候/动作。无数据。
+    *   “三十六度八，不烧了。” -> **temperature**: 36.8。
+    *   “心率是幺零八，怎么这么快？是不是刚才动弹了？” -> **heartRate**: 108。（注：“幺零八” = 108）。
+    *   “呼吸二一次。” -> **respiratoryRate**: 21。（注：“二一次” = 21）。
+    *   “血压是一百二、八十六。” -> **bloodPressure**: 120/86。
+    *   “我看你这皮肤有点破损，是在哪儿蹭的吗？” -> **skin**: “破损”。（证据等级 A：明确的“破损”状态）。
+    *   “一会儿我给你涂点药。” -> 计划/指令。忽略。
+    *   “记得多喝温开水啊。” -> 建议/指令（证据等级 C）。忽略。
+
+3. **根据字段提取并验证数据：**
+
+    *   **assessmentTime**: 未提及具体时间。使用当前系统时间：`2026-02-01 10:02:03`。
+    *   **education**: 未提及。 -> `null`。
+    *   **ethnicity**: 未提及。 -> `null`。
+    *   **admissionTime**: 未提及。 -> `null`。
+    *   **admissionMethod**: 未提及。 -> `null`。
+    *   **diagnosis**: 未提及。 -> `null`。
+    *   **allergyHistory**: 未提及。 -> `null`。
+    *   **temperature**: “三十六度八” -> `36.8`。
+    *   **pulseRate**: 未提及（仅提及心率）。 -> `null`。
+    *   **heartRate**: “幺零八” -> `108`。
+    *   **respiratoryRate**: “二一次” -> `21`。
+    *   **bloodPressure**: “一百二、八十六” -> `120/86`。
+    *   **weight**: 未提及。 -> `null`。
+    *   **height**: 未提及。 -> `null`。
+    *   **bloodSugar**: 未提及。 -> `null`。
+    *   **consciousness**: 未提及（“阿婆”暗示有意识，但需要明确的“神志/意识”描述）。 -> `null`。
+    *   **skin**: “皮肤有点破损” -> `破损`。（原则：局部异常意味着整体异常）。
+    *   **limbActivity**: 未提及（“动弹了”是过去式/疑问，不是当前状态评估）。 -> `null`。
+    *   **catheter**: 未提及。 -> `null`。
+    *   **diet**: 未提及（“多喝温开水”是建议，不是当前饮食状态）。 -> `null`。
+    *   **sleep**: 未提及。 -> `null`。
+    *   **urination**: 未提及。 -> `null`。
+    *   **defecation**: 未提及。 -> `null`。
+    *   **stoolFrequency**: 未提及。 -> `null`。
+
+4. **根据原则进行最终审查：**
+    *   *严谨提取：* 仅提取明确陈述的内容。
+    *   *严谨推断：* “动弹了”是关于心率快的原因的疑问，不是当前肢体活动受限的陈述。因此，limbActivity 为 null。
+    *   *转录语意修正：* “幺零八” -> 108。“二一次” -> 21。
+    *   *医学处理原则：*
+        *   皮肤：“破损”是明确的异常。证据等级 A。
+        *   饮食：“多喝温开水”是建议（证据等级 C），不是当前饮食状态（如禁食）。所以 diet 为 null。
+        *   意识：未提及“神志清楚”或类似词汇。所以 consciousness 为 null。
+
+5. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "36.8",
+      "pulseRate": null,
+      "heartRate": "108",
+      "respiratoryRate": "21",
+      "bloodPressure": "120/86",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": "破损",
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终润色：** 确保输出为纯 JSON 字符串，无 Markdown。
+
+    *   检查 temperature：“三十六度八” -> 36.8。正确。
+    *   检查 heartRate：“幺零八” -> 108。正确。
+    *   检查 respiratoryRate：“二一次” -> 21。正确。
+    *   检查 bloodPressure：“一百二、八十六” -> 120/86。正确。
+    *   检查 skin：“破损”。正确。
+    *   检查 diet：“记得多喝温开水” -> 建议，非状态。Null。正确。
+
+    结果看起来很可靠。
+--------------------
+Record 9:
+  Key: respiratoryRate (certain)
+    gemini: 30.0
+    glm: 30
+  Key: heartRate (certain)
+    gemini: 115.0
+    glm: 115
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本（“小宝贝今天乖不乖呀？医生叔叔听听心跳。心率比较快，一百一十五次，小朋友紧张。体温三十九度幺，还是高热。呼吸三十次，肺部听诊有点杂音。家属记得多物理降温，要是还是烧得这么厉害，我们要考虑换个抗生素了。”）。
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：**
+        *   严谨提取（未提及 = null）。
+        *   严谨推断（不确定 = null）。
+        *   多值提取规范（单选 vs 多选）。
+        *   转录语意修正（例如“幺” -> “1”）。
+        *   输出格式：仅标准 JSON 字符串。
+    *   **医学处理原则：**
+        *   证据等级（A/B vs C）。
+        *   状态存续优先（排除指令/计划）。
+        *   行为即路径（静脉通路逻辑）。
+        *   级联一致性（导管 -> 功能异常）。
+        *   非病理改变豁免原则。
+        *   局部 ≠ 整体（特定部位正常 ≠ 全身正常）。
+        *   局部否定 ≠ 全局否定。
+        *   正常互斥原则。
+
+2.  **分析输入文本：**
+    *   “小宝贝今天乖不乖呀？” -> 对话填充词，无数据。
+    *   “医生叔叔听听心跳。” -> 动作，无数据。
+    *   “心率比较快，一百一十五次，小朋友紧张。” -> **heartRate**: 115。
+    *   “体温三十九度幺，还是高热。” -> **temperature**: 39.1（“幺” -> 1）。
+    *   “呼吸三十次，” -> **respiratoryRate**: 30。
+    *   “肺部听诊有点杂音。” -> 体征，但未映射到特定字段（如皮肤、肢体等）。可能是诊断线索，但“肺部杂音”不是 `diagnosis` 的标准诊断名称（通常需要疾病名称，如“肺炎”）。文本说“考虑换个抗生素”，暗示感染，但未明确说明诊断名称。因此 `diagnosis` 为 null。
+    *   “家属记得多物理降温，” -> 指令/建议（证据等级 C）。不是当前状态。
+    *   “要是还是烧得这么厉害，我们要考虑换个抗生素了。” -> 未来计划/条件（证据等级 C）。不是当前状态。
+
+3.  **逐字段提取：**
+
+    *   **assessmentTime**: 未提及。使用系统时间 -> "2026-02-01 10:02:03"。
+    *   **education**: 未提及 -> null。
+    *   **ethnicity**: 未提及 -> null。
+    *   **admissionTime**: 未提及 -> null。
+    *   **admissionMethod**: 未提及 -> null。
+    *   **diagnosis**: 提及“肺部听诊有点杂音”和“考虑换个抗生素”。这些是体征和计划，不是明确的诊断名称（如“肺炎”）。-> null。
+    *   **allergyHistory**: 未提及 -> null。
+    *   **temperature**: “三十九度幺” -> 39.1。
+    *   **pulseRate**: 未提及（仅提及心率）-> null。
+    *   **heartRate**: “一百一十五次” -> 115。
+    *   **respiratoryRate**: “三十次” -> 30。
+    *   **bloodPressure**: 未提及 -> null。
+    *   **weight**: 未提及 -> null。
+    *   **height**: 未提及 -> null。
+    *   **bloodSugar**: 未提及 -> null。
+    *   **consciousness**: 未提及（“小朋友紧张”是情绪状态，不是神志）-> null。
+    *   **skin**: 未提及 -> null。
+    *   **limbActivity**: 未提及 -> null。
+    *   **catheter**: 未提及 -> null。
+    *   **diet**: 未提及 -> null。
+    *   **sleep**: 未提及 -> null。
+    *   **urination**: 未提及 -> null。
+    *   **defecation**: 未提及 -> null。
+    *   **stoolFrequency**: 未提及 -> null。
+
+4.  **根据原则进行审查：**
+    *   *转录语意修正*：“三十九度幺” -> 39.1。正确。
+    *   *严谨提取*：未提及的字段为 null。正确。
+    *   *证据等级*：“考虑换个抗生素”是计划（C级），不是当前诊断。“物理降温”是建议（C级），不是当前状态。正确。
+    *   *诊断*：“肺部杂音”是体征，不是诊断名称。正确。
+
+5.  **构建 JSON：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "39.1",
+      "pulseRate": null,
+      "heartRate": "115",
+      "respiratoryRate": "30",
+      "bloodPressure": null,
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6.  **最终检查：**
+    *   我是否遗漏了什么？“心率比较快” -> 115。“体温三十九度幺” -> 39.1。“呼吸三十次” -> 30。
+    *   “肺部听诊有点杂音”是否映射到任何内容？不，它不在目标列表中。
+    *   “考虑换个抗生素”是否暗示感染？是的，但 `diagnosis` 需要明确的名称或手术名称。“考虑”是不确定的。
+    *   “小朋友紧张”是否映射到 `consciousness`？不，紧张是情绪，不是神志（清楚、嗜睡等）。
+
+7.  **生成输出。**
+--------------------
+Record 10:
+  Key: respiratoryRate (certain)
+    gemini: 16.0
+    glm: 16
+  Key: heartRate (certain)
+    gemini: 62.0
+    glm: 62
+  Key: sleep (certain)
+    gemini: None
+    glm: 异常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本（“最后巡一下病房。二十号床，还没睡呢？血氧监控我看一下，九十六，正常。心率六十二，呼吸十六。我看你这引流袋，出量大概五十毫升，血性液体。体温刚才护士量过是三十七度。早点休息吧，有什么不舒服按床头铃。”）。
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **输出：** 包含特定字段的 JSON 字符串。
+    *   **关键原则：** 严谨提取、医学推断（证据等级）、状态存续优先、行为即路径、级联一致性、非病理改变豁免、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐字段分析输入文本：**
+
+    *   **文本：** “最后巡一下病房。二十号床，还没睡呢？血氧监控我看一下，九十六，正常。心率六十二，呼吸十六。我看你这引流袋，出量大概五十毫升，血性液体。体温刚才护士量过是三十七度。早点休息吧，有什么不舒服按床头铃。”
+
+    *   **assessmentTime**：未提及具体时间。“刚才”指的是体温，但语境是“最后巡一下病房”。由于未提及具体时间，使用当前系统时间。
+        *   *结果：* "2026-02-01 10:02:03"
+
+    *   **education**：未提及。
+        *   *结果：* null
+
+    *   **ethnicity**：未提及。
+        *   *结果：* null
+
+    *   **admissionTime**：未提及。
+        *   *结果：* null
+
+    *   **admissionMethod**：未提及。
+        *   *结果：* null
+
+    *   **diagnosis**：未提及。
+        *   *结果：* null
+
+    *   **allergyHistory**：未提及。
+        *   *结果：* null
+
+    *   **temperature**：“体温刚才护士量过是三十七度”。
+        *   *结果：* "37.0"
+
+    *   **pulseRate**：未提及（心率是 heartRate）。
+        *   *结果：* null
+
+    *   **heartRate**：“心率六十二”。
+        *   *结果：* "62"
+
+    *   **respiratoryRate**：“呼吸十六”。
+        *   *结果：* "16"
+
+    *   **bloodPressure**：未提及。
+        *   *结果：* null
+
+    *   **weight**：未提及。
+        *   *结果：* null
+
+    *   **height**：未提及。
+        *   *结果：* null
+
+    *   **bloodSugar**：未提及。
+        *   *结果：* null
+
+    *   **consciousness**：未提及（“还没睡呢”是关于睡眠/清醒，不是医学上的神志状态如“清楚”、“嗜睡”等。虽然“还没睡”暗示清醒，但“神志”字段需要特定的医学术语。提示说“必须有明确的‘神志/意识’等描述”。“还没睡”不是医学神志描述）。
+        *   *结果：* null
+
+    *   **skin**：未提及。
+        *   *结果：* null
+
+    *   **limbActivity**：未提及。
+        *   *结果：* null
+
+    *   **catheter**：“我看你这引流袋”。
+        *   *分析：* “引流袋”意味着存在“引流管”。这属于“具体内容”。
+        *   *结果：* "引流管"
+
+    *   **diet**：未提及。
+        *   *结果：* null
+
+    *   **sleep**：“还没睡呢”。
+        *   *分析：* 这暗示了失眠或仅仅是当前状态。然而，查看“睡眠”的定义：“异常指入睡困难、早醒、药物辅助入睡等较严重情况”。“还没睡”可能只是因为现在是早上（系统时间 10:02）或者只是失眠。但通常，在医疗语境中，如果医生说“还没睡”，这暗示了睡眠问题。让我们看看证据等级。这是对当前状态的观察（“还没睡呢？”）。这符合“入睡困难”或仅仅是“异常”状态。然而，系统时间是 10:02 AM。如果现在是上午 10 点，病人“还没睡”可能意味着他们整晚没睡（失眠）或者他们醒着。考虑到“早点休息吧”的语境，这暗示了病人*应该*睡觉但没睡，或者医生在查房。等等，系统时间是 10:02 AM。如果医生说“早点休息吧”，这可能是夜班查房？或者文本是通用的。让我们严格遵循文本。“还没睡呢” -> 睡眠异常（失眠/入睡困难）。
+        *   *细化：* 提示说“异常指入睡困难、早醒、药物辅助入睡等较严重情况”。“还没睡”表明他们无法入睡或醒着。这算作“异常”。
+        *   *结果：* "异常"
+
+    *   **urination**：未提及（引流袋可能是针对其他体液，如术后引流，不一定是尿管，除非特别说明。文本说“血性液体”，可能是术后引流。所以 urination 是 null）。
+        *   *结果：* null
+
+    *   **defecation**：未提及。
+        *   *结果：* null
+
+    *   **stoolFrequency**：未提及。
+        *   *结果：* null
+
+3. **根据原则进行审查和细化：**
+
+    *   **assessmentTime**：使用系统时间。正确。
+    *   **temperature**：37 -> 37.0。正确。
+    *   **heartRate**：62。正确。
+    *   **respiratoryRate**：16。正确。
+    *   **catheter**：“引流袋” -> “引流管”。正确。
+    *   **sleep**：“还没睡呢”。这是否算作“异常”？是的，失眠/无法入睡是睡眠异常。证据等级 A（现状陈述：“还没睡”）。
+    *   **consciousness**：“还没睡”不是“清楚”、“嗜睡”等。它是 null。
+    *   **bloodPressure**：未提及。
+    *   **pulseRate**：未提及。
+
+4. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "37.0",
+      "pulseRate": null,
+      "heartRate": "62",
+      "respiratoryRate": "16",
+      "bloodPressure": null,
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "引流管",
+      "diet": null,
+      "sleep": "异常",
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+5. **最终检查：**
+    *   “血氧监控我看一下，九十六，正常” -> 血氧饱和度不是目标字段。
+    *   “我看你这引流袋” -> catheter: "引流管"。
+    *   “还没睡呢” -> sleep: "异常"。
+    *   “体温刚才护士量过是三十七度” -> temperature: "37.0"。
+    *   “心率六十二” -> heartRate: "62"。
+    *   “呼吸十六” -> respiratoryRate: "16"。
+
+    看起来不错。
+--------------------
+Record 11:
+  Key: heartRate (certain)
+    gemini: 64.0
+    glm: 64
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“二十八床，现在胸闷的感觉缓解点没？我看硝酸甘油泵入的速度是每小时三毫升。量下血压，一百一十、七十，比刚才降下来点。心率六十四次，挺稳的。如果待会儿觉得头晕或者心慌，一定要立刻按铃，药量我们再调。”
+    *   **当前系统时间：** 2026-02-01 10:02:03
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：**
+        *   严谨提取（未提及 = null）。
+        *   严谨推断（保守原则）。
+        *   多值提取规范（单选 vs 多选）。
+        *   转录语意修正（处理语音识别误差）。
+        *   输出格式：仅标准 JSON 字符串。
+    *   **医学处理原则：**
+        *   证据等级（A/B/C）。
+        *   状态存续优先（排除“准备”、“待会儿”）。
+        *   行为即路径（泵入药物 = 静脉通路）。
+        *   级联一致性（导管 -> 功能异常）。
+        *   非病理改变豁免原则。
+        *   局部 ≠ 整体（特定部位正常 ≠ 全身正常）。
+        *   局部否定 ≠ 全局否定。
+        *   正常互斥原则。
+
+2.  **分析输入文本：**
+    *   “二十八床，现在胸闷的感觉缓解点没？” -> 询问症状，非当前状态数据。
+    *   “我看硝酸甘油泵入的速度是每小时三毫升。” -> **关键信息**：“硝酸甘油泵入”。
+        *   *推断*：泵入药物意味着存在静脉通路（IV access）。
+        *   *字段*：`catheter` -> “静脉通路”。
+    *   “量下血压，一百一十、七十，比刚才降下来点。” -> **关键信息**：血压 110/70。
+        *   *字段*：`bloodPressure` -> “110/70”。
+    *   “心率六十四次，挺稳的。” -> **关键信息**：心率 64。
+        *   *字段*：`heartRate` -> “64”。
+    *   “如果待会儿觉得头晕或者心慌，一定要立刻按铃，药量我们再调。” -> 未来/条件性指令（“如果”、“待会儿”）。忽略。
+
+3.  **逐字段提取：**
+
+    *   **assessmentTime**: 未提及具体时间。使用系统时间。
+        *   值：`2026-02-01 10:02:03`
+    *   **education**: 未提及。
+        *   值：`null`
+    *   **ethnicity**: 未提及。
+        *   值：`null`
+    *   **admissionTime**: 未提及。
+        *   值：`null`
+    *   **admissionMethod**: 未提及。
+        *   值：`null`
+    *   **diagnosis**: 提及“胸闷”（症状），但未提及诊断（如“心绞痛”、“冠心病”）。提示要求“入院诊断”或“明确术式”。“胸闷”是症状，不是诊断。
+        *   值：`null`
+    *   **allergyHistory**: 未提及。
+        *   值：`null`
+    *   **temperature**: 未提及。
+        *   值：`null`
+    *   **pulseRate**: 未提及（提及的是心率）。
+        *   值：`null`
+    *   **heartRate**: “心率六十四次”。
+        *   值：`64`
+    *   **respiratoryRate**: 未提及。
+        *   值：`null`
+    *   **bloodPressure**: “一百一十、七十”。
+        *   值：`110/70`
+    *   **weight**: 未提及。
+        *   值：`null`
+    *   **height**: 未提及。
+        *   值：`null`
+    *   **bloodSugar**: 未提及。
+        *   值：`null`
+    *   **consciousness**: 未提及（患者能回答问题，但提示说“严禁仅根据‘口齿清楚’、‘能交流’、‘睁眼’等单纯的运动或发音表现推断为‘清楚’”）。文本暗示了交流（“缓解点没？”），但未明确说明“神志清楚”。
+        *   值：`null`
+    *   **skin**: 未提及。
+        *   值：`null`
+    *   **limbActivity**: 未提及。
+        *   值：`null`
+    *   **catheter**: “硝酸甘油泵入”。
+        *   *原则*：“行为即路径”：提及“泵入的速度”等同于显性提及了“静脉通路”。
+        *   值：`静脉通路`
+    *   **diet**: 未提及。
+        *   值：`null`
+    *   **sleep**: 未提及。
+        *   值：`null`
+    *   **urination**: 未提及。
+        *   值：`null`
+    *   **defecation**: 未提及。
+        *   值：`null`
+    *   **stoolFrequency**: 未提及。
+        *   值：`null`
+
+4.  **最终审查：**
+    *   `assessmentTime`: 2026-02-01 10:02:03（正确）
+    *   `catheter`: 静脉通路（基于“泵入”正确）
+    *   `bloodPressure`: 110/70（正确）
+    *   `heartRate`: 64（正确）
+    *   其他均为 null。
+
+5.  **构建 JSON：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": null,
+      "heartRate": "64",
+      "respiratoryRate": null,
+      "bloodPressure": "110/70",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "静脉通路",
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6.  **格式化：** 确保输出为纯 JSON 字符串，无 Markdown。
+--------------------
+Record 12:
+  Key: skin (certain)
+    gemini: ['其他']
+    glm: 其他
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析用户请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“王阿姨，测个餐后血糖啊。诶，十一点二，还是有点高。早上的诺和锐打了十二个单位对吧？体温正常，三十六度四。下午记得别吃水果了。我看你脚踝这儿有点水肿，平时坐着的时候把腿抬高一点。”
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、输出格式（仅 JSON）。
+    *   **医学处理原则：** “证据等级 + 阈值”、状态存续优先、行为即路径、级联一致性、非病理改变豁免原则、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “王阿姨，测个餐后血糖啊。” -> 语境：正在测量血糖。
+    *   “诶，十一点二，还是有点高。” -> **bloodSugar**: 11.2。
+    *   “早上的诺和锐打了十二个单位对吧？” -> 语境：胰岛素注射。这是否意味着有导管？通常胰岛素笔是皮下注射，不是像静脉输液那样的留置导管。然而，提示词说“行为即路径……提及‘泵入’、‘推注’、‘挂上’、‘建立双通路’等同于显性提及了‘静脉通路’”。胰岛素笔注射通常*不*被视为“导管”（如静脉输液管、导尿管等）。它是一种给药方式，但不是留置管。所以 `catheter` 为 null。
+    *   “体温正常，三十六度四。” -> **temperature**: 36.4。
+    *   “下午记得别吃水果了。” -> 语境：饮食建议。这是建议（证据等级 C），不是当前状态（如“禁食”）。所以 `diet` 为 null。
+    *   “我看你脚踝这儿有点水肿，” -> **skin**: 水肿。提示词说：“如果描述了水肿、脱屑、淤斑等异常皮肤情况，归纳为其他”。所以 `skin`: "其他"。
+    *   “平时坐着的时候把腿抬高一点。” -> 语境：建议（证据等级 C）。不是当前肢体受限。所以 `limbActivity` 为 null。
+
+3. **根据字段评估具体数据点：**
+
+    *   **assessmentTime**: 未提及具体时间。使用系统时间：2026-02-01 10:02:03。
+    *   **education**: 未提及。-> null。
+    *   **ethnicity**: 未提及。-> null。
+    *   **admissionTime**: 未提及。-> null。
+    *   **admissionMethod**: 未提及。-> null。
+    *   **diagnosis**: 未提及（诺和锐是药物，不是诊断）。-> null。
+    *   **allergyHistory**: 未提及。-> null。
+    *   **temperature**: “三十六度四” -> 36.4。
+    *   **pulseRate**: 未提及。-> null。
+    *   **heartRate**: 未提及。-> null。
+    *   **respiratoryRate**: 未提及。-> null。
+    *   **bloodPressure**: 未提及。-> null。
+    *   **weight**: 未提及。-> null。
+    *   **height**: 未提及。-> null。
+    *   **bloodSugar**: “十一点二” -> 11.2。
+    *   **consciousness**: 未提及。-> null。
+    *   **skin**: “脚踝这儿有点水肿”。规则：“如果描述了水肿……归纳为其他”。-> "其他"。
+    *   **limbActivity**: 未提及（抬高腿的建议不是当前受限）。-> null。
+    *   **catheter**: 未提及（胰岛素笔不是导管）。-> null。
+    *   **diet**: “下午记得别吃水果了”。这是建议（证据等级 C），不是当前状态（如“禁食”）。-> null。
+    *   **sleep**: 未提及。-> null。
+    *   **urination**: 未提及。-> null。
+    *   **defecation**: 未提及。-> null。
+    *   **stoolFrequency**: 未提及。-> null。
+
+4. **完善逻辑：**
+
+    *   *皮肤检查*：“水肿”明确列在“其他”的补充说明中。所以 `skin` = "其他"。
+    *   *饮食检查*：“别吃水果”是建议。提示词说“C（弱证据）：建议……不作为异常证据”。所以 `diet` 为 null。
+    *   *导管检查*：胰岛素注射。提示词说“行为即路径……提及‘泵入’、‘推注’、‘挂上’、‘建立双通路’等同于显性提及了‘静脉通路’”。胰岛素笔注射通常*不*被视为“导管”（如静脉输液管、导尿管等）。它是一种给药方式，但不是留置管。所以 `catheter` 为 null。
+
+5. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "36.4",
+      "pulseRate": null,
+      "heartRate": null,
+      "respiratoryRate": null,
+      "bloodPressure": null,
+      "weight": null,
+      "height": null,
+      "bloodSugar": "11.2",
+      "consciousness": null,
+      "skin": "其他",
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终审查：**
+    *   时间：正确。
+    *   体温：36.4。正确。
+    *   血糖：11.2。正确。
+    *   皮肤：“水肿” -> “其他”。正确。
+    *   饮食：建议 -> null。正确。
+    *   肢体活动：建议 -> null。正确。
+    *   格式：JSON 字符串。
+
+7. **生成输出。**
+--------------------
+Record 13:
+  Key: respiratoryRate (certain)
+    gemini: 22.0
+    glm: 22
+  Key: heartRate (certain)
+    gemini: 95.0
+    glm: 95
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析用户请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“一号床，今天开始输头孢曲松了，观察一下有没有皮疹或者胸闷。体温还是高，三十八度九，心率九十五。呼吸频率二十二次，血氧九十三，稍微低了点，把氧气流量调到三升每分钟。痰咳得出来吗？颜色是什么样的？”
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：**
+        *   严谨提取（未提及 = null）。
+        *   严谨推断（不确定 = null）。
+        *   多值提取规范（单选 vs 多选）。
+        *   转录语意修正（音近词）。
+        *   输出格式：仅标准 JSON 字符串。
+    *   **医学处理原则：**
+        *   证据等级（A/B vs C）。
+        *   状态存续优先（排除指令/计划）。
+        *   行为即路径（静脉通路逻辑）。
+        *   级联一致性（导管 -> 功能异常）。
+        *   非病理改变豁免原则。
+        *   局部 ≠ 整体（皮肤/肢体）。
+        *   局部否定 ≠ 全局否定。
+        *   正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “一号床” -> 床号，非目标字段。忽略。
+    *   “今天开始输头孢曲松了” -> “今天开始输注头孢曲松”。
+        *   *诊断？* 否，这是治疗/药物，不是诊断。
+        *   *过敏史？* 否，未提及过敏。
+        *   *导管？* “输...”意味着静脉通路。原则：“行为即路径”。提及“输...”等同于“静脉通路”。
+        *   *皮肤？* “观察一下有没有皮疹”。这是一个指令/计划（“观察一下”），不是当前状态陈述。原则：“排除指令与计划”。所以，皮肤 = null。
+    *   “观察一下有没有皮疹或者胸闷” -> 指令。忽略。
+    *   “体温还是高，三十八度九” -> “体温仍然高，38.9”。
+        *   *体温：* 38.9。
+    *   “心率九十五” -> “心率 95”。
+        *   *心率：* 95。
+    *   “呼吸频率二十二次” -> “呼吸频率 22”。
+        *   *呼吸频率：* 22。
+    *   “血氧九十三，稍微低了点” -> “血氧 93，稍微有点低”。
+        *   *血氧？* 不是目标字段。
+    *   “把氧气流量调到三升每分钟” -> “把氧气流量调到 3L/min”。
+        *   *导管？* “把氧气流量调到...”暗示氧气设备已连接。然而，原则：“严禁仅根据主机设备推断具体连接耗材...除非语音明确提及‘插管’、‘气切’、‘有创’或‘人工气道’”。此外，原则：“听到‘吸上氧气’、‘氧气开两升’不能推断存在鼻导管，因为可能用了无创氧气面罩或者其他器械”。
+        *   *等等，让我们重读一下关于氧气的具体原则。* “例如：听到‘吸上氧气’、‘氧气开两升’不能推断存在鼻导管...”。所以，catheter = null。
+    *   “痰咳得出来吗？颜色是什么样的？” -> “能咳出痰吗？颜色是什么？”。
+        *   这些是问题/指令，不是状态陈述。忽略。
+
+3. **映射到目标字段：**
+
+    *   **assessmentTime**: 未提及具体时间。使用系统时间：2026-02-01 10:02:03。
+    *   **education**: 未提及。null。
+    *   **ethnicity**: 未提及。null。
+    *   **admissionTime**: 未提及。null。
+    *   **admissionMethod**: 未提及。null。
+    *   **diagnosis**: 未提及（头孢曲松是药物）。null。
+    *   **allergyHistory**: 未提及。null。
+    *   **temperature**: “三十八度九” -> 38.9。
+    *   **pulseRate**: 未提及。null。
+    *   **heartRate**: “九十五” -> 95。
+    *   **respiratoryRate**: “二十二次” -> 22。
+    *   **bloodPressure**: 未提及。null。
+    *   **weight**: 未提及。null。
+    *   **height**: 未提及。null。
+    *   **bloodSugar**: 未提及。null。
+    *   **consciousness**: 未提及。null。
+    *   **skin**: “观察一下有没有皮疹” -> 指令/计划。不是当前状态。null。
+    *   **limbActivity**: 未提及。null。
+    *   **catheter**: “输头孢曲松” -> 静脉通路（行为即路径）。“氧气流量调到...” -> 不能推断具体导管类型（鼻导管 vs 面罩）。所以，只有“静脉通路”。
+    *   **diet**: 未提及。null。
+    *   **sleep**: 未提及。null。
+    *   **urination**: 未提及。null。
+    *   **defecation**: 未提及。null。
+    *   **stoolFrequency**: 未提及。null。
+
+4. **优化与验证：**
+
+    *   *检查 catheter：* 文本说“今天开始输头孢曲松了”。这暗示静脉通路已建立。原则：“行为即路径...提及‘泵入的速度’、‘推注...’、‘挂上某药物’、‘建立双通路（已执行）’时，等同于显性提及了‘静脉通路’”。“输...”符合“挂上某药物”或“泵入”。所以 `catheter` 应该是“静脉通路”。
+    *   *检查 skin：* “观察一下有没有皮疹”。这是对未来的观察指令，不是当前发现。所以 `skin` 是 null。
+    *   *检查 oxygen：* “把氧气流量调到三升每分钟”。原则：“严禁仅根据主机设备推断具体连接耗材...”。所以没有氧气导管。
+    *   *检查 diagnosis：* “头孢曲松”是抗生素，不是诊断。
+    *   *检查 assessmentTime：* 使用系统时间。
+
+5. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": "38.9",
+      "pulseRate": null,
+      "heartRate": "95",
+      "respiratoryRate": "22",
+      "bloodPressure": null,
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "静脉通路",
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终审查：**
+    *   我是否遗漏了什么？“痰咳得出来吗？” -> 问题，忽略。
+    *   “体温还是高” -> “高”是描述，但数值 38.9 已提取。
+    *   “血氧九十三” -> 不是目标字段。
+    *   “胸闷” -> 在“观察一下有没有...”的语境中提到。指令，不是状态。
+    *   “静脉通路”是否有效？是的，“输...”意味着静脉输液。
+
+    *关于“静脉通路”的自我修正：* 提示说“行为即路径...提及‘泵入的速度’、‘推注...’、‘挂上某药物’、‘建立双通路（已执行）’时，等同于显性提及了‘静脉通路’”。“输头孢曲松”是“挂上某药物”或“泵入”的强有力指示。所以是的，包含它。
+
+    *关于“皮肤”的自我修正：* “观察一下有没有皮疹”。这是计划/指令。原则：“排除指令与计划”。所以皮肤是 null。
+
+    *关于“导管”的自我修正：* “把氧气流量调到三升每分钟”。原则：“严禁仅根据主机设备推断具体连接耗材...”。所以没有氧气导管。
+
+    *关于“诊断”的自我修正：* “头孢曲松”是药物。没有诊断。
+
+    *关于“过敏史”的自我修正：* “头孢曲松”是抗生素，但未提及过敏。只是说“今天开始输...”。所以过敏史是 null。
+
+    *关于“评估时间”的自我修正：* 使用系统时间。
+
+    *关于“体温”的自我修正：* 38.9。
+
+    *关于“心率”的自我修正：* 95。
+
+    *关于“呼吸频率”的自我修正：* 22。
+
+    看起来不错。
+--------------------
+Record 14:
+  Key: pulseRate (certain)
+    gemini: 72.0
+    glm: 72
+  Key: urination (certain)
+    gemini: None
+    glm: 异常
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“七床，今天还恶心吗？这瓶潘托拉唑是保护胃黏膜的，点滴速度别自己调啊。血压一百零五、六十五，脉搏七十二。昨晚到现在一共喝了五百毫升水，记录一下。我看尿色有点深，还得再多补点液。”
+    *   **当前系统时间：** 2026-02-01 10:02:03
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、医学推断（证据等级）、状态存续优先、行为即路径、级联一致性、非病理改变豁免、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+    *   **输出格式：** 标准 JSON 字符串。
+
+2. **逐段分析输入文本：**
+
+    *   “七床，今天还恶心吗？”
+        *   “七床”：床号，非目标字段。
+        *   “今天还恶心吗？”：关于症状（恶心）的问题。这是询问，而非当前状态的陈述。根据“严谨提取”和“排除指令与计划/疑问”，这不能作为“diet: 异常”或“diet: 正常”的确认。它暗示了潜在的恶心，但未确认当前状态。-> *diet: null*。
+
+    *   “这瓶潘托拉唑是保护胃黏膜的，点滴速度别自己调啊。”
+        *   “潘托拉唑”：药物名称。
+        *   “保护胃黏膜”：药物作用。
+        *   “点滴速度别自己调”：关于静脉输液的指令。
+        *   *推断*：“点滴”暗示静脉输液。根据“行为即路径”原则（“泵入的速度”、“挂上某药物”、“建立双通路”），提及“点滴”通常暗示存在静脉通路。
+        *   *检查*：“点滴”是否明确暗示“静脉通路”？是的，在医疗语境中，“点滴”是静脉输液的俗称。因此，*catheter: 静脉通路*。
+
+    *   “血压一百零五、六十五，脉搏七十二。”
+        *   “血压一百零五、六十五”：105/65。-> *bloodPressure: "105/65"*。
+        *   “脉搏七十二”：72。-> *pulseRate: 72*。
+
+    *   “昨晚到现在一共喝了五百毫升水，记录一下。”
+        *   “喝了五百毫升水”：摄入量记录。不是生命体征字段（体重/身高/血糖）。-> *weight/height/bloodSugar: null*。
+
+    *   “我看尿色有点深，还得再多补点液。”
+        *   “尿色有点深”：尿液颜色深。这是异常吗？
+        *   *原则*：“非病理改变豁免原则”：“正常的病人情况描述……非异常极端情况……判定为null即可，除非明确说明该部分正常或异常。”
+        *   然而，“尿色有点深”通常提示脱水或潜在问题，但它是“urination: 异常”吗？“urination”的选项包括“尿频/急/痛、血尿、失禁、尿色异常、极少尿/无尿、留置导尿”。
+        *   “尿色有点深”属于“尿色异常”。
+        *   *证据等级*：这是观察（“我看……”）。这是现状陈述。证据等级 A 或 B。
+        *   *决定*：“尿色有点深”是“urination: 异常”的有效提取，因为它符合“urination”字段定义中的“尿色异常”。
+        *   “还得再多补点液”：计划/指令。忽略。
+
+3. **评估所有字段：**
+
+    *   **assessmentTime**: 未提及。使用系统时间。-> *2026-02-01 10:02:03*。
+    *   **education**: 未提及。-> *null*。
+    *   **ethnicity**: 未提及。-> *null*。
+    *   **admissionTime**: 未提及。-> *null*。
+    *   **admissionMethod**: 未提及。-> *null*。
+    *   **diagnosis**: 未提及。-> *null*。
+    *   **allergyHistory**: 未提及。-> *null*。
+    *   **temperature**: 未提及。-> *null*。
+    *   **pulseRate**: “脉搏七十二”。-> *72*。
+    *   **heartRate**: 未提及。-> *null*。
+    *   **respiratoryRate**: 未提及。-> *null*。
+    *   **bloodPressure**: “一百零五、六十五”。-> *"105/65"*。
+    *   **weight**: 未提及。-> *null*。
+    *   **height**: 未提及。-> *null*。
+    *   **bloodSugar**: 未提及。-> *null*。
+    *   **consciousness**: 未提及。-> *null*。
+    *   **skin**: 未提及。-> *null*。
+    *   **limbActivity**: 未提及。-> *null*。
+    *   **catheter**: “点滴”暗示静脉输液。-> *"静脉通路"*。
+    *   **diet**: “今天还恶心吗？”是问题，非状态。-> *null*。
+    *   **sleep**: 未提及。-> *null*。
+    *   **urination**: “尿色有点深”。这属于“urination”定义中的“尿色异常”。-> *"异常"*。
+    *   **defecation**: 未提及。-> *null*。
+    *   **stoolFrequency**: 未提及。-> *null*。
+
+4. **完善与复核：**
+
+    *   *catheter*: “点滴”是否足够强有力？是的，“点滴”是静脉输液的口语表达。提示说“行为即路径……提及‘泵入的速度’、‘挂上某药物’……等同于显性提及了‘静脉通路’”。“点滴”符合“挂上某药物”。
+    *   *urination*: “尿色有点深”是否算作“异常”？定义说“异常指……尿色异常……”。文本说“我看尿色有点深”。这是对异常的观察。所以是“异常”。
+    *   *diet*: “今天还恶心吗？”是问题。我们不能假设他们恶心或正常。所以是 null。
+
+5. **构建 JSON：**
+
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": "72",
+      "heartRate": null,
+      "respiratoryRate": null,
+      "bloodPressure": "105/65",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "静脉通路",
+      "diet": null,
+      "sleep": null,
+      "urination": "异常",
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终润色：** 确保所有格式符合要求（无 Markdown，仅 JSON）。
+
+    *   检查 `bloodPressure` 格式：“105/65”。正确。
+    *   检查 `pulseRate`：“72”。正确。
+    *   检查 `urination`：“异常”。正确。
+    *   检查 `catheter`：“静脉通路”。正确。
+
+    *关于 `urination` 的自我修正*：“尿色有点深”是否足够严重？提示说“异常指……尿色异常……”。它明确列出了“尿色异常”作为异常的标准。因此，提取“异常”是正确的。
+
+    *关于 `catheter` 的自我修正*：“点滴”是否暗示导管？是的，静脉通路需要导管（留置针或中心静脉导管）。提示说“行为即路径……提及‘泵入的速度’、‘挂上某药物’……等同于显性提及了‘静脉通路’”。“点滴”符合“挂上某药物”。
+
+    *关于 `diet` 的自我修正*：“今天还恶心吗？”是问题。我们不能假设他们恶心或正常。所以是 null。
+
+    *关于 `assessmentTime` 的自我修正*：使用系统时间 2026-02-01 10:02:03。
+
+    结果看起来很可靠。
+--------------------
+Record 15:
+  Key: heartRate (certain)
+    gemini: 78.0
+    glm: 78
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“老张，把手握紧我看看。嗯，左边还是没劲。昨晚吃的阿司匹林和阿托伐他汀没反应吧？瞳孔两点五毫米，对光反射灵敏。血压一百四十二、九十，心率七十八。一定要按时吃药，预防血栓再次形成。”
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：**
+        *   严谨提取（未提及 = null）。
+        *   严谨推断（不确定 = null）。
+        *   多值提取规范（单选 vs 多选）。
+        *   转录语意修正（音近词）。
+        *   输出格式：仅标准 JSON 字符串。
+    *   **医学处理原则：**
+        *   证据等级（A/B/C）。需要 A 或 B 级证据才能判定“异常”。
+        *   状态存续优先（排除指令/计划）。
+        *   行为即路径（例如：静脉通路）。
+        *   级联一致性（器具 -> 功能）。
+        *   非病理改变豁免原则。
+        *   局部 ≠ 整体（特定部位正常 ≠ 全身正常）。
+        *   局部否定 ≠ 全局否定。
+        *   正常互斥原则（多选字段）。
+
+2.  **分析输入文本：**
+    *   “老张，把手握紧我看看。” -> 指令/动作，非状态。
+    *   “嗯，左边还是没劲。” -> “左边还是没劲”。这表明肢体活动异常。证据等级 A（明确的现状陈述 + 限制/缺失）。
+    *   “昨晚吃的阿司匹林和阿托伐他汀没反应吧？” -> 药物史/过敏史检查。“没反应”通常意味着无不良反应（无过敏）。然而，严格来说，这是关于过去事件的问题/确认。但通常在医疗语境中，询问“对 X 没反应吧？”暗示“无过敏史”。让我们看看 `allergyHistory`。它说“无”或具体内容。文本暗示“无反应”（无过敏）。但这是明确的陈述吗？这是一个反问句“没反应吧？”。这很模棱两可。然而，通常如果患者对药物有反应，文本会说“有反应”。鉴于“严谨推断”原则，如果不确定，填 null。但“没反应”强烈暗示“无过敏”。让我们看看示例。示例 1：“对青霉素过敏” -> “青霉素”。示例 2：“没有过敏史” -> “无”。这里：“没反应吧？” -> 这不是像“无过敏史”那样明确的“无过敏”陈述。这是一个问题/确认。为了安全起见，我将坚持 null，或者如果解释为确认则填“无”。让我们重读“严谨推断”：“不确定的也填 null”。“没反应吧？”是一个问题。我将把 `allergyHistory` 设为 null。
+    *   “瞳孔两点五毫米，对光反射灵敏。” -> 瞳孔大小和反射。不是目标字段。
+    *   “血压一百四十二、九十，” -> 血压 142/90。格式：“142/90”。
+    *   “心率七十八。” -> 心率 78。
+    *   “一定要按时吃药，预防血栓再次形成。” -> 指令/计划（“一定要”，“预防”）。不是当前状态。诊断？“血栓”是预防的目标，不是当前的诊断陈述（如“诊断为血栓”）。`diagnosis` 为 null。
+
+3.  **逐字段提取：**
+
+    *   **assessmentTime**: 未提及。使用当前系统时间：`2026-02-01 10:02:03`。
+    *   **education**: 未提及。`null`。
+    *   **ethnicity**: 未提及。`null`。
+    *   **admissionTime**: 未提及。`null`。
+    *   **admissionMethod**: 未提及。`null`。
+    *   **diagnosis**: “预防血栓再次形成”暗示病史，而非当前诊断。未提及当前诊断。`null`。
+    *   **allergyHistory**: “没反应吧？”暗示无过敏，但这是一个问题/确认，不是明确的“无过敏史”陈述。根据“严谨推断”，填 `null`。
+    *   **temperature**: 未提及。`null`。
+    *   **pulseRate**: 未提及。`null`。
+    *   **heartRate**: “七十八”。`78`。
+    *   **respiratoryRate**: 未提及。`null`。
+    *   **bloodPressure**: “一百四十二、九十”。`142/90`。
+    *   **weight**: 未提及。`null`。
+    *   **height**: 未提及。`null`。
+    *   **bloodSugar**: 未提及。`null`。
+    *   **consciousness**: 未提及（瞳孔/反射不是神志）。`null`。
+    *   **skin**: 未提及。`null`。
+    *   **limbActivity**: “左边还是没劲”。这是明确的异常（乏力/无力）。选项：正常、异常。结果：`异常`。
+    *   **catheter**: 未提及。`null`。
+    *   **diet**: 未提及。`null`。
+    *   **sleep**: 未提及。`null`。
+    *   **urination**: 未提及。`null`。
+    *   **defecation**: 未提及。`null`。
+    *   **stoolFrequency**: 未提及。`null`。
+
+4.  **审查与完善：**
+    *   *检查 `limbActivity`*：“左边还是没劲”。这符合“异常”（乏力/无力）。正确。
+    *   *检查 `allergyHistory`*：“昨晚吃的阿司匹林和阿托伐他汀没反应吧？”。这是医生/护士确认患者没有反应。在医疗记录中，这通常记录为“无过敏”。然而，提示要求“严谨提取”和“不确定的也填 null”。这是一个问题。如果我将其解释为“患者对阿司匹林/阿托伐他汀无反应”，那就是“无”。但严格来说，文本是“没反应吧？”。为了安全起见，我将坚持 `null`，因为这是一个问题，而不是像“无过敏史”那样的事实陈述。
+    *   *检查 `diagnosis`*：“预防血栓再次形成”。这是计划/病史。不是当前诊断。`null`。
+    *   *检查 `bloodPressure`*：“一百四十二、九十”。`142/90`。正确。
+    *   *检查 `heartRate`*：“七十八”。`78`。正确。
+
+5.  **最终 JSON 构建：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": null,
+      "heartRate": "78",
+      "respiratoryRate": null,
+      "bloodPressure": "142/90",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": "异常",
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6.  **二次检查：**
+    *   “左边还是没劲” -> `limbActivity`: "异常"。正确。
+    *   “没反应吧” -> `allergyHistory`: null。正确（模棱两可的问题）。
+    *   “预防血栓” -> `diagnosis`: null。正确（计划/病史）。
+    *   “血压一百四十二、九十” -> `bloodPressure`: "142/90"。正确。
+    *   “心率七十八” -> `heartRate`: "78"。正确。
+
+    看起来不错。
+--------------------
+Record 16:
+  Key: weight (certain)
+    gemini: 68.0
+    glm: 68
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析用户请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“十六床，早上给你打了一针呋塞米。刚才那两个小时尿了多少？六百毫升是吧，好，记录在出量里。体重今天测的是六十八公斤。血压一百三十五、八十五。注意听，如果觉得耳朵响或者身上没力气，及时跟我们说。”
+    *   **当前系统时间：** 2026-02-01 10:02:03
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、输出标准 JSON。
+    *   **医学处理原则：** “证据等级 + 阈值”（A/B/C）、状态存续优先（排除指令/计划）、行为即路径（静脉通路逻辑）、级联一致性（导管 -> 功能异常）、非病理改变豁免原则、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “十六床，早上给你打了一针呋塞米。”
+        *   “打了一针呋塞米”：这暗示了静脉注射或肌肉注射。由于“呋塞米”是一种利尿剂，通常通过静脉或口服给药。“打了一针”通常暗示注射。
+        *   *推断检查：* “打了一针”是否意味着存在“静脉通路”？
+            *   原则：“行为即路径”。提及“推注”或“打针”通常暗示存在通路。然而，原则指出“严禁仅根据主机设备推断具体连接耗材”。但“打了一针”暗示了建立通路的动作。
+            *   让我们看看 `catheter` 的定义：“具体内容包括静脉通路（含留置针）……”。
+            *   “打了一针”是否意味着*当前*存在静脉通路？通常，打针后针头会被拔除，除非是留置针。文本说“早上给你打了一针”。它没有明确说“留置针”或“静脉通路”。
+            *   然而，呋塞米通常通过静脉推注给药。如果只是肌肉注射，可能不算“静脉通路”。如果不确定，根据“严谨推断”原则，我应该保守处理。
+            *   *重新评估：* “打了一针”是瞬间的动作。它是否意味着*当前*存在导管？不一定。它可能是一次性注射。因此，`catheter` 可能是 null，除非有持续输液的证据。
+            *   *等等*，让我们看看“行为即路径”原则：“提及‘泵入的速度’、‘推注300ml xxx药物’、‘挂上某药物’、‘建立双通路（已执行）’时，等同于显性提及了‘静脉通路’。”
+            *   “打了一针”符合“推注”吗？是的，通常暗示静脉推注。但它是*当前*存在的吗？留置针通常会保留。一次性注射针头不会。没有明确提及“留置针”，我不能 100% 确定有*当前*的静脉通路。
+            *   *决定：* `catheter` = null。（太模棱两可，无法确认当前存在导管）。
+
+    *   “刚才那两个小时尿了多少？六百毫升是吧，好，记录在出量里。”
+        *   “六百毫升”：这是尿量。
+        *   “记录在出量里”：暗示测量了尿量。
+        *   *字段 `urination`：* “正常”还是“异常”？
+            *   2小时600ml = 300ml/小时。这属于多尿（>80-100ml/小时）。
+            *   然而，患者刚用了呋塞米（利尿剂）。这是预期的药理反应。
+            *   原则：“非病理改变豁免原则”：正常的病人情况描述……非异常极端情况……判定为null即可，除非明确说明该部分正常或异常。
+            *   600ml/2h 是“异常”吗？生理上是的，但在这种语境下是病理性的吗？这是药物引起的。
+            *   原则：“严谨推断”。文本没有说“尿量异常”或“多尿”。它只是记录了数值。
+            *   此外，`urination` 选项是“正常”、“异常”。异常包括“尿频/急/痛、血尿、失禁、尿色异常、极少尿/无尿、留置导尿”。
+            *   600ml/2h 不完全符合“尿频”（通常指次数）或“极少尿”。它只是高容量。
+            *   有导管吗？文本问“尿了多少”，暗示患者可能排尿到容器或尿壶中，或者有导尿管。它没有明确说“导尿管”。
+            *   *决定：* `urination` = null。（未明确说明正常/异常，只是记录了数值）。
+
+    *   “体重今天测的是六十八公斤。”
+        *   `weight`：68。
+
+    *   “血压一百三十五、八十五。”
+        *   `bloodPressure`：135/85。
+
+    *   “注意听，如果觉得耳朵响或者身上没力气，及时跟我们说。”
+        *   “耳朵响”（耳鸣）和“身上没力气”（乏力）是呋塞米的副作用。
+        *   这是一个指令/警告（“如果觉得……及时跟我们说”）。
+        *   原则：“排除指令与计划”。这是未来/条件性的（“如果觉得……”）。
+        *   这描述了*当前*状态吗？不，它告诉患者如果出现这些情况要报告。
+        *   *决定：* 不要提取为当前症状。
+
+3. **综合并映射到字段：**
+
+    *   `assessmentTime`：文本说“刚才那两个小时”和“今天测的是”。未提及具体时间。使用当前系统时间：2026-02-01 10:02:03。
+    *   `education`：未提及。-> null。
+    *   `ethnicity`：未提及。-> null。
+    *   `admissionTime`：未提及。-> null。
+    *   `admissionMethod`：未提及。-> null。
+    *   `diagnosis`：未提及。-> null。
+    *   `allergyHistory`：未提及。-> null。
+    *   `temperature`：未提及。-> null。
+    *   `pulseRate`：未提及。-> null。
+    *   `heartRate`：未提及。-> null。
+    *   `respiratoryRate`：未提及。-> null。
+    *   `bloodPressure`：“一百三十五、八十五” -> 135/85。
+    *   `weight`：“六十八公斤” -> 68。
+    *   `height`：未提及。-> null。
+    *   `bloodSugar`：未提及。-> null。
+    *   `consciousness`：未提及。-> null。
+    *   `skin`：未提及。-> null。
+    *   `limbActivity`：未提及。-> null。
+    *   `catheter`：“打了一针呋塞米”。如前所述，这是瞬间的动作，不一定是当前存在的导管。-> null。
+    *   `diet`：未提及。-> null。
+    *   `sleep`：未提及。-> null。
+    *   `urination`：记录了600ml。未说明正常/异常。-> null。
+    *   `defecation`：未提及。-> null。
+    *   `stoolFrequency`：未提及。-> null。
+
+4. **最终审查：**
+    *   我是否遗漏了什么？
+    *   “打了一针呋塞米” -> 暗示利尿剂。尿量600ml/2h。这是高尿量，但由药物引起。没有“异常”标签，我不应该标记为异常。
+    *   “耳朵响/没力气” -> 副作用的警告，不是当前状态。
+    *   “血压一百三十五、八十五” -> 135/85。
+    *   “体重六十八公斤” -> 68。
+
+    *   *关于 `catheter` 的自我修正：* 在许多医疗语境中，“打了一针”暗示静脉注射。如果患者有静脉注射，他们就有静脉通路。然而，如果没有“留置针”或“静脉通路”或“输液”等关键词，严格来说，针头可能已经被拔除。提示要求“严谨提取”。我将坚持 `catheter` 为 null。
+
+    *   *关于 `urination` 的自我修正：* 600ml/2h 是多尿。但它是“异常”吗？选项是“正常、异常”。异常包括“尿频/急/痛、血尿、失禁、尿色异常、极少尿/无尿、留置导尿”。多尿未明确列出。即使它属于“异常”，文本也没有将其*陈述*为异常，只是记录了数值。所以 null 是正确的。
+
+5. **构建 JSON：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": null,
+      "heartRate": null,
+      "respiratoryRate": null,
+      "bloodPressure": "135/85",
+      "weight": "68",
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **最终润色：** 确保所有格式符合要求（无 Markdown，仅 JSON）。
+
+    *   检查 `weight`：“68”（字符串还是数字？示例显示 "36.5" 为字符串）。我将使用 "68"。
+    *   检查 `bloodPressure`："135/85"。
+
+    *   *等等，让我再次检查“打了一针呋塞米”是否暗示 `catheter`。*
+    *   原则：“行为即路径……提及‘泵入的速度’、‘推注300ml xxx药物’、‘挂上某药物’、‘建立双通路（已执行）’时，等同于显性提及了‘静脉通路’。”
+    *   “打了一针”是“推注”吗？是的，通常暗示静脉推注。但它是*当前*存在的吗？留置针通常会保留。一次性注射针头不会。没有明确提及“留置针”，我不能 100% 确定有*当前*的静脉通路。
+    *   *决定：* `catheter` = null。（太模棱两可，无法确认当前存在导管）。
+
+    *   *让我再次检查 `urination`。*
+    *   文本：“刚才那两个小时尿了多少？六百毫升是吧”。
+    *   这暗示患者排尿了。
+    *   有导管吗？如果他们有导管，护士会看引流袋，而不是问“尿了多少”（除非是手动测量引流袋，但通常护士会检查引流袋）。问“尿了多少”暗示患者可能使用了尿壶或便盆，或者护士正在检查引流袋并记录。
+    *   然而，没有明确提及“导尿管”，我不能假设有。
+    *   600ml/2h 是“异常”吗？如前所述，它是由药物引起的多尿。不是病理性的“异常”状态，如失禁或血尿。
+    *   所以 `urination` 保持 null。
+
+    *   *让我再次检查 `diagnosis`。*
+    *   “呋塞米”是一种药物，不是诊断。
+    *   没有提及诊断。
+
+    *   *让我再次检查 `allergyHistory`。*
+    *   未提及。
+
+    *   *让我再次检查 `consciousness`。*
+    *   患者回答问题（“六百毫升是吧”）。但“能交流”不是“清楚”的证据（原则：“严禁仅根据‘口齿清楚’、‘能交流’、‘睁眼’等单纯的运动或发音表现推断为‘清楚’”）。
+    *   所以 `consciousness` 是 null。
+
+    *   *让我再次检查 `limbActivity`。*
+    *   “身上没力气”是警告，不是当前状态。
+    *   所以 `limbActivity` 是 null。
+
+    *   *让我再次检查 `skin`。*
+    *   未提及。
+
+    *   *让我再次检查 `diet`。*
+    *   未提及。
+
+    *   *让我再次检查 `sleep`。*
+    *   未提及。
+
+    *   *让我再次检查 `defecation`。*
+    *   未提及。
+
+    *   *让我再次检查 `stoolFrequency`。*
+    *   未提及。
+
+    *   *让我再次检查 `bloodPressure`。*
+    *   “一百三十五、八十五” -> 135/85。
+
+    *   *让我再次检查 `weight`。*
+    *   “六十八公斤” -> 68。
+
+    *   *让我再次检查 `assessmentTime`。*
+    *   “刚才那两个小时” -> 模糊。使用系统时间。
+
+    *   *结果看起来很可靠。*
+
+    *   *一个细节：* “打了一针呋塞米”。
+    *   这是否暗示 `catheter`？
+    *   如果我严格遵循“行为即路径”：“提及‘推注300ml xxx药物’……等同于显性提及了‘静脉通路’”。
+    *   “打了一针”是推注吗？是的。
+    *   它是否暗示*当前*存在导管？
+    *   通常，在医院环境中，如果患者接受注射，他们有静脉通路（通常是留置针）。一次性静脉注射很少见，因为需要反复扎针。
+    *   然而，提示说“严谨推断”。如果不确定，拒绝。
+    *   “打了一针”是否意味着*当前*有静脉通路？它暗示*曾经*有一个。
+    *   让我们看看示例 2：“同时在打点滴” -> catheter: “尿管、静脉通路”。
+    *   “打了一针”是瞬间的。“打点滴”是持续的。
+    *   我将坚持 `catheter` = null，因为“打了一针”描述的是过去的事件（“早上给你打了一针”），而不是当前存在的设备。
+
+    *   *等等，`urination` 呢？*
+    *   “记录在出量里”。
+    *   这是否暗示 `urination` 是“正常”？
+    *   不，它只是记录了数值。
+    *   它是否暗示 `urination` 是“异常”？
+    *   不，600ml/2h 是利尿剂的结果。
+    *   所以 `urination` = null。
+
+    *   *最终检查 JSON 结构。*
+    *   所有键都存在。
+    *   值格式正确。
+
+    *   *一个边缘情况：* “身上没力气”。
+    *   这是当前状态吗？“如果觉得……及时跟我们说”。这是条件性的。
+    *   所以不是当前状态。
+
+    *   *另一个边缘情况：* “耳朵响”。
+    *   同样，条件性的。
+
+    *   *最终输出生成。*
+--------------------
+Record 17:
+  Key: respiratoryRate (certain)
+    gemini: 14.0
+    glm: 14
+  Key: heartRate (certain)
+    gemini: 82.0
+    glm: 82
+  Key: catheter (uncertain)
+    gemini: 止痛泵、引流管
+    glm: 引流管
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“四十五床，手术后止痛泵带着呢吧？要是还觉得疼，我们刚才加了地佐辛。测下呼吸，十四次，稍微有点慢，要注意。心率八十二，血氧九十九。我看你这引流管里是淡红色的液体，量不多，大概三十毫升，先观察。”
+    *   **当前系统时间：** 2026-02-01 10:02:03
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：** 严谨提取、严谨推断（保守）、多值提取规范、转录语意修正、输出格式（仅 JSON）。
+    *   **医学处理原则：** 证据等级（A/B/C）、状态存续优先（排除指令/计划）、行为即路径（静脉通路逻辑、诊断逻辑）、级联一致性（导管 -> 功能异常）、非病理改变豁免原则、局部 ≠ 整体、局部否定 ≠ 全局否定、正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “四十五床” -> 床号，非目标字段。
+    *   “手术后止痛泵带着呢吧？” -> 提及“止痛泵”。
+        *   *字段 `catheter`*：止痛泵通常连接静脉通路或硬膜外导管。然而，提示词指出：“严禁仅根据主机设备推断具体连接耗材……除非语音明确提及‘插管’、‘气切’、‘有创’或‘人工气道’。”止痛泵是一种设备。它是否算作“导管”？提示词将导管定义为：“具体内容包括静脉通路（含留置针）、鼻导管、气管插管、胃管、鼻肠管、导尿管、引流管、PICC管、造瘘管等侵入式管状医疗器械”。止痛泵本身是泵，不是导管。它*连接*着导管。文本说“带着止痛泵”。它没有明确说“静脉通路”或“硬膜外导管”。根据“严谨推断”原则（如果不确定则拒绝），我不应推断出“静脉通路”或“硬膜外导管”。然而，通常“止痛泵”意味着存在管路。让我们看看“行为即路径”原则：“提及‘泵入的速度’……等同于显性提及了‘静脉通路’”。这里只说了“带着”。它没有说“泵入”。它只是说带着。所以，严格来说，`catheter` 可能是 null，或者如果“止痛泵”被视为一种导管（虽然不太可能，它是一种设备），那就是“止痛泵”。让我们坚持定义：侵入式管状医疗器械。泵不是管子。所以 `catheter` = null？等等，通常在医疗记录中，“止痛泵”意味着管路。但提示词很严格：“严禁仅根据主机设备推断具体连接耗材”。所以，`catheter` = null。
+        *   *字段 `diagnosis`*：“手术后”。提示词说：“患者本次入院相关的‘术后状态’（如：前列腺术后，必须带有明确的手术名称）应直接映射为 diagnosis，除非有更明确的入院病名或者入院诊断。”这里只说了“手术后”，没有具体的手术名称。所以 `diagnosis` = null。
+
+    *   “要是还觉得疼，我们刚才加了地佐辛。” -> “要是还觉得疼”（条件/假设），“我们刚才加了地佐辛”（动作）。
+        *   *字段 `pain`*：不在目标字段中。
+        *   *字段 `catheter`*：“加了地佐辛”。这暗示了给药途径。通常是静脉注射。但“加了”可能意味着加到泵里或注射。没有明确的“静脉”或“泵入”，我不能推断出“静脉通路”。
+
+    *   “测下呼吸，十四次，稍微有点慢，要注意。”
+        *   *字段 `respiratoryRate`*：“十四次” -> 14。
+        *   *字段 `respiratoryRate`*：“稍微有点慢” -> 这是描述，但数值是明确的。
+
+    *   “心率八十二”
+        *   *字段 `heartRate`*：82。
+
+    *   “血氧九十九”
+        *   *字段 `bloodSugar`*：不是。
+        *   *字段 `SpO2`*：不在目标字段中。
+
+    *   “我看你这引流管里是淡红色的液体，量不多，大概三十毫升，先观察。”
+        *   *字段 `catheter`*：“引流管”。这明确在定义列表中（“引流管”）。所以 `catheter` = “引流管”。
+        *   *字段 `defecation/urination`*：引流管通常指手术部位引流（腹腔、胸腔等），不是尿管或造口。所以对 urination/defecation 没有级联影响。
+
+3. **综合并映射到字段：**
+
+    *   **assessmentTime**: 未提及。使用系统时间：“2026-02-01 10:02:03”。
+    *   **education**: 未提及。null。
+    *   **ethnicity**: 未提及。null。
+    *   **admissionTime**: 未提及。null。
+    *   **admissionMethod**: 未提及。null。
+    *   **diagnosis**: “手术后”。提示词说：“必须带有明确的手术名称”。这里缺失。所以 null。
+    *   **allergyHistory**: 未提及。null。
+    *   **temperature**: 未提及。null。
+    *   **pulseRate**: 未提及。null。
+    *   **heartRate**: “八十二” -> 82。
+    *   **respiratoryRate**: “十四次” -> 14。
+    *   **bloodPressure**: 未提及。null。
+    *   **weight**: 未提及。null。
+    *   **height**: 未提及。null。
+    *   **bloodSugar**: 未提及。null。
+    *   **consciousness**: 未提及。null。
+    *   **skin**: 未提及。null。
+    *   **limbActivity**: 未提及。null。
+    *   **catheter**: “引流管”是明确的。“止痛泵”是设备，不是导管，且没有明确连接到“静脉通路”。所以 `catheter` = “引流管”。
+    *   **diet**: 未提及。null。
+    *   **sleep**: 未提及。null。
+    *   **urination**: 未提及。null。
+    *   **defecation**: 未提及。null。
+    *   **stoolFrequency**: 未提及。null。
+
+4. **根据原则进行审查：**
+    *   *严谨提取*：只提取明确的内容。
+    *   *诊断*：“手术后”太模糊。需要具体的手术名称。正确。
+    *   *导管*：“引流管”是明确的。“止痛泵” -> 严格来说，泵不是导管。即使它暗示了管路，提示词也说“严禁仅根据主机设备推断具体连接耗材”。所以只保留“引流管”。
+    *   *生命体征*：呼吸 14，心率 82。正确。
+    *   *时间*：使用系统时间。
+
+5. **最终 JSON 构建：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": null,
+      "heartRate": "82",
+      "respiratoryRate": "14",
+      "bloodPressure": null,
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "引流管",
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **二次检查：**
+    *   “止痛泵”是否暗示“静脉通路”？在现实世界中，是的。在提示词的严格规则下：“严禁仅根据主机设备推断具体连接耗材”。止痛泵是主机设备。所以，不推断静脉通路。
+    *   “手术后”是否算作诊断？提示词：“必须带有明确的手术名称”。文本只说了“手术后”。所以 null。
+    *   “引流管”是否算作导管？是的，明确列出。
+    *   “呼吸十四次” -> 14。
+    *   “心率八十二” -> 82。
+
+    看起来很可靠。
+--------------------
+Record 18:
+  Key: heartRate (certain)
+    gemini: 40.0
+    glm: 40
+  Key: catheter (uncertain)
+    gemini: 静脉通路、气管插管
+    glm: 静脉通路
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析用户请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“快，建立双通路！心率掉到四十了，推一毫克肾上腺素！血压七十、四十，赶紧挂上多巴胺，每小时十毫克泵入。准备气管插管。血氧测不到，快，心肺复苏别停！记录时间，十四点一十分。”
+    *   **当前系统时间：** 2026-02-01 10:02:03。
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：**
+        *   严谨提取（未提及 = null）。
+        *   严谨推断（不确定 = null）。
+        *   多值提取规范（单选 vs 多选）。
+        *   转录语意修正（语音识别误差）。
+        *   输出格式：仅标准 JSON 字符串。
+    *   **医学处理原则：**
+        *   证据等级（A/B/C）。仅当证据等级 ≥ B 时允许填“异常”。
+        *   状态存续优先（排除指令/计划，除非立即生效）。
+        *   行为即路径（例如，“泵入”、“建立双通路” -> 静脉通路）。
+        *   级联一致性（导管 -> 功能异常）。
+        *   非病理改变豁免原则。
+        *   局部 ≠ 整体（特定部位正常 ≠ 全身正常）。
+        *   局部否定 ≠ 全局否定。
+        *   正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+    *   “快，建立双通路！”
+        *   *分析：* 这是一个命令/指令（“快”，“建立”）。然而，原则“状态存续优先”指出：“现在立刻生效的可以计入状态”。在紧急医疗语境中，“建立双通路”通常意味着该动作正在发生或已作为当前状态启动。原则“行为即路径”明确指出：“建立双通路（已执行）”等同于显性提及了“静脉通路”。即使这是一个命令，在像这样的紧急场景中，它通常意味着该动作正在发生或已作为当前状态启动。让我们看看证据等级。这是一个命令（B级证据：护理记录式的描述或命令）。它暗示了静脉通路的存在。
+        *   *字段：* `catheter` -> “静脉通路”。
+
+    *   “心率掉到四十了”
+        *   *分析：* 当前心率是 40。
+        *   *字段：* `heartRate` -> 40。
+
+    *   “推一毫克肾上腺素！”
+        *   *分析：* 给药动作。暗示存在静脉通路（已由“双通路”覆盖）。未直接映射到其他字段。
+
+    *   “血压七十、四十”
+        *   *分析：* 收缩压 70，舒张压 40。
+        *   *字段：* `bloodPressure` -> "70/40"。
+
+    *   “赶紧挂上多巴胺，每小时十毫克泵入。”
+        *   *分析：* “泵入”暗示静脉通路（已覆盖）。
+
+    *   “准备气管插管。”
+        *   *分析：* “准备”是一个计划/未来动作。原则“状态存续优先”：“凡是带有‘准备……’、‘我们要……’、‘快去……’、‘待会……’等祈使句或将来时描述的动作，一律不计入当前状态。”
+        *   *字段：* `catheter`（气管插管） -> null（尚未发生，仅是准备）。
+
+    *   “血氧测不到”
+        *   *分析：* 提及血氧，但目标字段中没有 `oxygenSaturation` 或 `spo2`。忽略。
+
+    *   “快，心肺复苏别停！”
+        *   *分析：* 暗示患者无反应/濒死，但未明确说明“意识”状态，如“昏迷”或“无反应”。然而，心肺复苏通常暗示无意识。但严格来说，文本没有说“意识昏迷”。它描述的是动作。让我们检查 `consciousness`。文本没有明确说明“意识”状态（如“昏迷”、“无反应”）。它描述的是动作。原则“严谨推断”：若不确定，拒绝。心肺复苏暗示无意识，但文本没有明确说明“意识”状态。我将把 `consciousness` 设为 null，以避免在没有明确文本的情况下进行推断，尽管医学上很明显。等等，原则“严谨提取”说“未提及的一律填 null”。文本没有说“意识昏迷”。它描述的是动作。我将把 `consciousness` 设为 null。
+
+    *   “记录时间，十四点一十分。”
+        *   *分析：* 评估时间。当前系统时间是 2026-02-01 10:02:03。文本说“14:10”。由于系统时间是上午 10:02，而文本说 14:10，这暗示是同一天（2026-02-01）的下午 14:10，或者可能是不同的日期。通常，在这些任务中，如果给出了具体时间，我们使用它。如果它相对于系统时间（上午 10 点）是未来的时间，可能是语音记录的回溯或不同的语境。然而，提示说“若语音提及，提取并转换为……”。我将假设日期是今天（2026-02-01），除非另有说明，或者只是提取时间。让我们假设日期是当前日期：2026-02-01 14:10:00。
+        *   *字段：* `assessmentTime` -> "2026-02-01 14:10:00"。
+
+3. **综合并映射到字段：**
+
+    *   **assessmentTime**: “十四点一十分” -> 2026-02-01 14:10:00。
+    *   **education**: 未提及 -> null。
+    *   **ethnicity**: 未提及 -> null。
+    *   **admissionTime**: 未提及 -> null。
+    *   **admissionMethod**: 未提及 -> null。
+    *   **diagnosis**: 未提及（未说明诊断，仅提及治疗） -> null。
+    *   **allergyHistory**: 未提及 -> null。
+    *   **temperature**: 未提及 -> null。
+    *   **pulseRate**: 未提及 -> null。
+    *   **heartRate**: “四十” -> 40。
+    *   **respiratoryRate**: 未提及 -> null。
+    *   **bloodPressure**: “七十、四十” -> "70/40"。
+    *   **weight**: 未提及 -> null。
+    *   **height**: 未提及 -> null。
+    *   **bloodSugar**: 未提及 -> null。
+    *   **consciousness**: 未明确提及（心肺复苏暗示，但文本未说明） -> null。
+    *   **skin**: 未提及 -> null。
+    *   **limbActivity**: 未提及 -> null。
+    *   **catheter**: “建立双通路” -> “静脉通路”。注意：“准备气管插管”是计划，不是当前状态。
+    *   **diet**: 未提及 -> null。
+    *   **sleep**: 未提及 -> null。
+    *   **urination**: 未提及 -> null。
+    *   **defecation**: 未提及 -> null。
+    *   **stoolFrequency**: 未提及 -> null。
+
+4. **根据原则进行审查：**
+    *   *assessmentTime*: “十四点一十分” -> 2026-02-01 14:10:00。（正确）。
+    *   *catheter*: “建立双通路” -> “静脉通路”。原则“行为即路径”：“建立双通路（已执行）” -> 静脉通路。即使这是一个命令，在紧急语境中，它通常意味着该动作正在发生或已作为当前状态启动。原则“状态存续优先”：“现在立刻生效的可以计入状态”。“建立”是一个命令，但“泵入”暗示通路已存在。我将包含“静脉通路”。
+    *   *consciousness*: 文本说“心肺复苏”。原则“严谨推断”：若不确定，拒绝。心肺复苏暗示无意识，但文本没有明确说明“意识”状态。我将把 `consciousness` 设为 null，以避免在没有明确文本的情况下进行推断，尽管医学上很明显。等等，原则“严谨提取”说“未提及的一律填 null”。文本没有说“意识昏迷”。它描述的是动作。我将把 `consciousness` 设为 null。
+    *   *bloodPressure*: “七十、四十” -> "70/40"。（正确）。
+    *   *heartRate*: “四十” -> 40。（正确）。
+
+5. **最终 JSON 构建：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 14:10:00",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": null,
+      "heartRate": "40",
+      "respiratoryRate": null,
+      "bloodPressure": "70/40",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": "静脉通路",
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6. **关于“建立双通路”的自我修正/完善：**
+    *   文本说“快，建立双通路！”。这是一个祈使句。
+    *   原则“状态存续优先”：“凡是带有‘准备……’、‘我们要……’、‘快去……’、‘待会……’等祈使句或将来时描述的动作，一律不计入当前状态。”
+    *   然而，原则“行为即路径”：“建立双通路（已执行）” -> 静脉通路。
+    *   文本说“建立”，而不是“已建立”。但随后它说“推一毫克肾上腺素”和“泵入”。你无法在没有通路的情况下推注或泵入。因此，在记录时间（“记录时间，十四点一十分”）时，通路*必须*存在或正在积极建立中。
+    *   鉴于“泵入”和“推注”的语境，静脉通路的存在由给药动作所暗示。
+    *   因此，`catheter`: "静脉通路" 是有效的。
+
+7. **关于“准备气管插管”的自我修正/完善：**
+    *   文本说“准备气管插管”。
+    *   原则“状态存续优先”：“准备”是计划/未来动作。
+    *   因此，`catheter` 不应包含“气管插管”。
+
+8. **关于“意识”的自我修正/完善：**
+    *   文本：“心肺复苏别停”。
+    *   原则“严谨推断”：若不确定，拒绝。
+    *   虽然心肺复苏意味着无意识，但文本没有明确说明“意识”状态。我将把 `consciousness` 设为 null，以避免在没有明确文本的情况下进行推断，尽管医学上很明显。等等，原则“严谨提取”说“未提及的一律填 null”。文本没有说“意识昏迷”。它描述的是动作。我将把 `consciousness` 设为 null。
+
+9. **最终检查：**
+    *   assessmentTime: 2026-02-01 14:10:00
+    *   heartRate: 40
+    *   bloodPressure: 70/40
+    *   catheter: 静脉通路
+    *   其他：null。
+
+    等等，`pulseRate` 呢？文本说“心率掉到四十了”。没有提及脉率。`pulseRate` 是 null。
+
+    `respiratoryRate` 呢？“血氧测不到”。没有提及呼吸频率。`respiratoryRate` 是 null。
+
+    `diagnosis` 呢？未提及。
+
+    `consciousness` 呢？未明确提及。
+
+    看起来不错。
+--------------------
+Record 19:
+  Key: heartRate (certain)
+    gemini: 70.0
+    glm: 70
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+*   **角色：** 专业的医疗数据录入助手。
+*   **输入：** 语音识别文本：“十二床，明天手术。刚才给你皮下注射了低分子肝素，预防血栓的。血压一百二十八、七十二，心率七十。体温三十六度六，没发烧。晚八点以后就不要吃东西了，水也少喝，听清楚了吗？”
+*   **当前系统时间：** 2026-02-01 10:02:03
+*   **输出格式：** 标准 JSON 字符串（无 Markdown）。
+*   **提取字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+*   **关键原则：**
+    *   严谨提取（未提及 = null）。
+    *   严谨推断（不确定 = null）。
+    *   语义修正（语音识别错误）。
+    *   证据等级（A/B 对比 C）。
+    *   状态存续优先（排除未来/计划，除非立即生效）。
+    *   行为即路径（注射 -> 静脉通路？不，皮下注射不是静脉通路）。
+    *   级联一致性（导管 -> 功能异常）。
+    *   局部 ≠ 整体（局部正常 ≠ 全局正常）。
+    *   局部否定 ≠ 全局否定。
+    *   正常互斥原则。
+
+2. **逐段分析输入文本：**
+
+*   “十二床，明天手术。”
+    *   “明天手术”：这是计划/未来事件。不是当前诊断（除非特别说明“术后状态”，但这里说的是“明天”）。所以 `diagnosis` 为 null。
+    *   “十二床”：床号，不是目标字段。
+
+*   “刚才给你皮下注射了低分子肝素，预防血栓的。”
+    *   “刚才”：时间参考。`assessmentTime` 默认为系统时间（2026-02-01 10:02:03），因为“刚才”是模糊的。
+    *   “皮下注射”：这是医疗行为。它是否暗示了导管？
+        *   皮下注射通常使用针头（注射器），而不是像静脉留置针或 PICC 那样的留置导管。
+        *   原则：“行为即路径”。通常适用于静脉通路（“泵入”、“挂上”）。皮下注射是暂时的。它不暗示留置导管。
+        *   所以 `catheter` 为 null。
+
+*   “血压一百二十八、七十二，”
+    *   “一百二十八、七十二”：128/72。
+    *   `bloodPressure`: "128/72"。
+
+*   “心率七十。”
+    *   “七十”：70。
+    *   `heartRate`: "70"。
+
+*   “体温三十六度六，没发烧。”
+    *   “三十六度六”：36.6。
+    *   `temperature`: "36.6"。
+    *   “没发烧”：确认正常，但数值已存在。
+
+*   “晚八点以后就不要吃东西了，水也少喝，”
+    *   “晚八点以后”：未来时间（今晚 8 点）。
+    *   “不要吃东西了”：禁食的指令/计划。
+    *   原则：“排除指令与计划”。这是针对未来的指令（“晚八点以后”）。它*尚未*发生。
+    *   所以 `diet` 为 null（当前状态）。如果文本说“病人已禁食”，那就是“异常”。但这里说的是“不要吃东西”。
+    *   等等，让我们检查一下“现在立刻生效的可以计入状态”原则。文本说“晚八点以后”。当前时间是 10:02 AM。所以 8 PM 是将来。不是当前状态。
+
+*   “听清楚了吗？”
+    *   确认问题，忽略。
+
+3. **字段提取与验证：**
+
+*   **assessmentTime**: “刚才” -> 使用系统时间 -> "2026-02-01 10:02:03"。
+*   **education**: 未提及 -> null。
+*   **ethnicity**: 未提及 -> null。
+*   **admissionTime**: 未提及 -> null。
+*   **admissionMethod**: 未提及 -> null。
+*   **diagnosis**: “明天手术” -> 未来计划，不是当前诊断。 -> null。
+*   **allergyHistory**: 未提及 -> null。
+*   **temperature**: “三十六度六” -> "36.6"。
+*   **pulseRate**: 未提及 -> null。
+*   **heartRate**: “七十” -> "70"。
+*   **respiratoryRate**: 未提及 -> null。
+*   **bloodPressure**: “一百二十八、七十二” -> "128/72"。
+*   **weight**: 未提及 -> null。
+*   **height**: 未提及 -> null。
+*   **bloodSugar**: 未提及 -> null。
+*   **consciousness**: 未提及（“听清楚了吗”是提问，不是状态描述） -> null。
+*   **skin**: 未提及 -> null。
+*   **limbActivity**: 未提及 -> null。
+*   **catheter**: “皮下注射” -> 不是留置导管。 -> null。
+*   **diet**: “晚八点以后就不要吃东西了” -> 未来指令。当前状态未知。 -> null。
+*   **sleep**: 未提及 -> null。
+*   **urination**: 未提及 -> null。
+*   **defecation**: 未提及 -> null。
+*   **stoolFrequency**: 未提及 -> null。
+
+4. **完善逻辑：**
+
+*   *关于“皮下注射”的自我修正*：它是否暗示了“静脉通路”？不。它是不同的给药途径。它是否暗示了“导管”？不，通常是针头注射。
+*   *关于“明天手术”的自我修正*：这是否暗示了诊断？提示说：“患者本次入院相关的‘术后状态’……应直接映射为 diagnosis”。这里说的是“明天手术”，所以是术前。没有给出诊断名称（如“胆结石”）。所以 `diagnosis` 为 null。
+*   *关于“晚八点以后”的自我修正*：当前时间是 10:02 AM。8 PM 是将来。指令是“不要吃东西”。这是计划，不是当前状态。所以 `diet` 为 null。
+
+5. **最终 JSON 构建：**
+
+```json
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "36.6",
+  "pulseRate": null,
+  "heartRate": "70",
+  "respiratoryRate": null,
+  "bloodPressure": "128/72",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+```
+
+6. **对照约束条件进行最终审查：**
+*   格式：仅 JSON。
+*   时间：2026-02-01 10:02:03。
+*   体温：36.6（正确）。
+*   血压：128/72（正确）。
+*   心率：70（正确）。
+*   逻辑：未来指令（禁食）被忽略。注射行为不等于导管。
+
+看起来不错。
+--------------------
+Record 20:
+  Key: pulseRate (certain)
+    gemini: 68.0
+    glm: 68
+
+  [Reasoning Output]
+  gemini Reasoning:
+None
+  glm Reasoning:
+1. **分析请求：**
+    *   **角色：** 专业的医疗数据录入助手。
+    *   **输入：** 语音识别文本：“陈大爷，这颗是地高辛，专门稳心率的；那颗是氨氯地平，降压用的。别吃混了。我看下现在的脉搏，六十八次，挺规律的。血压一百三、八十，控制得不错。记得药要用温开水送服，别用茶水啊。”
+    *   **当前系统时间：** 2026-02-01 10:02:03
+    *   **目标字段：** assessmentTime, education, ethnicity, admissionTime, admissionMethod, diagnosis, allergyHistory, temperature, pulseRate, heartRate, respiratoryRate, bloodPressure, weight, height, bloodSugar, consciousness, skin, limbActivity, catheter, diet, sleep, urination, defecation, stoolFrequency。
+    *   **关键原则：**
+        *   严谨提取（未提及 = null）。
+        *   严谨推断（不确定 = null）。
+        *   多值提取规范（单选 vs 多选）。
+        *   转录语意修正（例如：“禁食” vs “进食”）。
+        *   输出格式：仅标准 JSON 字符串。
+    *   **医学处理原则：**
+        *   证据等级（A/B/C）。
+        *   状态存续优先（排除指令/计划）。
+        *   行为即路径（静脉通路逻辑）。
+        *   级联一致性（导管 -> 功能异常）。
+        *   非病理改变豁免原则。
+        *   局部 ≠ 整体（皮肤/肢体）。
+        *   局部否定 ≠ 全局否定。
+        *   正常互斥原则。
+
+2.  **分析输入文本：**
+    *   “陈大爷，这颗是地高辛，专门稳心率的；” -> 提及药物（地高辛）和目的（稳心率）。这是关于药物的对话/指导，不是当前生命体征的测量，*除了*后面提到的脉搏。
+    *   “那颗是氨氯地平，降压用的。” -> 提及药物（氨氯地平）和目的（降压）。
+    *   “别吃混了。” -> 指令。
+    *   “我看下现在的脉搏，六十八次，挺规律的。” -> **脉搏：68**。
+    *   “血压一百三、八十，控制得不错。” -> **血压：130/80**。
+    *   “记得药要用温开水送服，别用茶水啊。” -> 指令/建议。
+
+3.  **逐字段提取：**
+
+    *   **assessmentTime**: 文本说“我看下现在的脉搏”。未提及具体时间戳。使用当前系统时间：`2026-02-01 10:02:03`。
+    *   **education**: 未提及。 -> `null`。
+    *   **ethnicity**: 未提及。 -> `null`。
+    *   **admissionTime**: 未提及。 -> `null`。
+    *   **admissionMethod**: 未提及。 -> `null`。
+    *   **diagnosis**: 提及“地高辛”（心率）和“氨氯地平”（血压）。这些是药物，不是诊断。虽然它们暗示了病情（高血压、心律失常），但文本*仅*提及了药物。提示要求“仅填写语音中提及的诊断……或明确术式”。提及药物不是诊断。 -> `null`。
+    *   **allergyHistory**: 未提及。 -> `null`。
+    *   **temperature**: 未提及。 -> `null`。
+    *   **pulseRate**: “脉搏，六十八次” -> `68`。
+    *   **heartRate**: 未明确提及（虽然地高辛是用于心率的，但测量的是脉搏）。 -> `null`。
+    *   **respiratoryRate**: 未提及。 -> `null`。
+    *   **bloodPressure**: “血压一百三、八十” -> `130/80`。
+    *   **weight**: 未提及。 -> `null`。
+    *   **height**: 未提及。 -> `null`。
+    *   **bloodSugar**: 未提及。 -> `null`。
+    *   **consciousness**: 未提及（对话暗示清醒，但需要明确的“神志/意识”描述）。 -> `null`。
+    *   **skin**: 未提及。 -> `null`。
+    *   **limbActivity**: 未提及。 -> `null`。
+    *   **catheter**: 未提及。 -> `null`。
+    *   **diet**: 未提及（提及服药用水，不是饮食状况）。 -> `null`。
+    *   **sleep**: 未提及。 -> `null`。
+    *   **urination**: 未提及。 -> `null`。
+    *   **defecation**: 未提及。 -> `null`。
+    *   **stoolFrequency**: 未提及。 -> `null`。
+
+4.  **审查与完善：**
+    *   *检查脉搏：* “六十八次” -> 68。
+    *   *检查血压：* “一百三、八十” -> 130/80。
+    *   *检查诊断：* “地高辛”和“氨氯地平”是药物。提示说“仅填写语音中提及的诊断……”。提及药物不是诊断。 -> `null`。
+    *   *检查时间：* “现在” -> 使用系统时间。
+
+5.  **构建 JSON：**
+    ```json
+    {
+      "assessmentTime": "2026-02-01 10:02:03",
+      "education": null,
+      "ethnicity": null,
+      "admissionTime": null,
+      "admissionMethod": null,
+      "diagnosis": null,
+      "allergyHistory": null,
+      "temperature": null,
+      "pulseRate": "68",
+      "heartRate": null,
+      "respiratoryRate": null,
+      "bloodPressure": "130/80",
+      "weight": null,
+      "height": null,
+      "bloodSugar": null,
+      "consciousness": null,
+      "skin": null,
+      "limbActivity": null,
+      "catheter": null,
+      "diet": null,
+      "sleep": null,
+      "urination": null,
+      "defecation": null,
+      "stoolFrequency": null
+    }
+    ```
+
+6.  **最终验证：**
+    *   我是否遗漏了什么？“稳心率” -> 不是诊断。“降压” -> 不是诊断。
+    *   “别吃混了” -> 指令，忽略。
+    *   “温开水送服” -> 指令，忽略。
+    *   输出格式：仅 JSON。
+
+    *关于诊断的自我修正：* 有时用户会宽泛地使用“诊断”。但严格来说，药物名称不是诊断。提示说“仅填写语音中提及的诊断……”。提及药物不是诊断。 -> `null`。
+
+    *关于脉搏的自我修正：* “六十八次” -> 68。
+
+    *关于血压的自我修正：* “一百三、八十” -> 130/80。
+
+    *关于时间的自我修正：* “现在” -> 2026-02-01 10:02:03。
+
+    看起来不错。
+--------------------

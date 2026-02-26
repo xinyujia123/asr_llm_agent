@@ -1,0 +1,231 @@
+=== Comparison Results ===
+Total Records: 20
+Perfect Matches: 18
+Mismatch Records: 2
+
+Record 12:
+  Key: skin (certain)
+    kimi: ['其他']
+    kimi: None
+
+  [Reasoning Output]
+  kimi (File 1) Reasoning:
+===Thinking===
+1. 时间：
+当前系统时间 2026-02-01 10:02:03。
+文本未提及具体评估时间，使用系统时间。
+
+2. 等价映射（ASR修正）：
+"十一点二" -> bloodSugar: "11.2"（餐后血糖）。
+"三十六度四" -> temperature: "36.4"。
+"脚踝这儿有点水肿" -> 根据规则，水肿映射到 skin: ["其他"]。
+
+3. 数值处理：
+血糖 11.2 mmol/L，在生理合理范围内。
+体温 36.4℃，正常范围。
+
+4. 逻辑推断检查：
+"下午记得别吃水果了" -> 这是针对未来的建议/指令（今天下午），非当前饮食状态，diet 保持 null。
+"早上的诺和锐打了十二个单位" -> 记录的是已完成的用药史，但无对应字段提取。
+水肿属于皮肤黏膜异常，根据规则映射为"其他"，且因存在异常，不选择"完整"。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "36.4",
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": "11.2",
+  "consciousness": null,
+  "skin": ["其他"],
+  "catheter": null,
+  "limbActivity": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  kimi (File 2) Reasoning:
+===Thinking===
+1. **时间分析**：
+   - 当前系统时间：2026-02-01 10:02:03。
+   - 语音中未明确提及评估时间点（如"刚才/现在"），仅提到"下午"为远期时间，故使用当前系统时间。
+
+2. **等价映射（ASR修正）**：
+   - "诺和锐"：正确识别为胰岛素药物名，无需修正。
+   - "三十六度四"：正确识别为体温36.4℃。
+   - "十一点二"：正确识别为血糖11.2 mmol/L。
+
+3. **数值处理**：
+   - 血糖："十一点二" → 具体数值 "11.2"。
+   - 体温："三十六度四" → "36.4"。
+   - 胰岛素"十二个单位"：属于用药记录，不在数据结构提取范围内。
+
+4. **逻辑推断检查**：
+   - **皮肤黏膜（skin）**：提及"脚踝这儿有点水肿"，但属于**局部**描述。根据"局部 != 整体"原则（如示例2中"手部皮肤正常"→null），未对全身皮肤状态进行评价，故填null。虽水肿可映射为"其他"，但仅限于全身评估场景。
+   - **饮食**："下午记得别吃水果了"属于**远期指令**（下午为未来时间）且为**建议性内容**，不作为当前饮食状态证据，diet填null。
+   - **神志**：未出现"神志/意识/脑子"等明确描述词，"体温正常"不等于神志清楚，consciousness填null。
+   - **导管**：未提及任何导管相关信息，catheter填null。
+   - **肢体活动**：仅提及"坐着的时候把腿抬高"（建议），未描述肢体活动状态，limbActivity填null。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 10:02:03",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": "36.4",
+  "pulseRate": null,
+  "heartRate": null,
+  "respiratoryRate": null,
+  "bloodPressure": null,
+  "weight": null,
+  "height": null,
+  "bloodSugar": "11.2",
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------
+Record 18:
+  Key: catheter (uncertain)
+    kimi: 静脉通路、气管插管
+    kimi: 静脉通路
+
+  [Reasoning Output]
+  kimi (File 1) Reasoning:
+===Thinking===
+1. **时间**：
+   - 当前系统时间：2026-02-01 10:02:03
+   - 语音明确提及："十四点一十分" -> assessmentTime: "2026-02-01 14:10:00"
+   - 未提及入院时间 -> admissionTime: null
+
+2. **等价映射（ASR修正）**：
+   - "双通路" -> 医疗术语为"静脉通路"（双条静脉通道）
+   - "准备气管插管" -> 属于即将建立的侵入式管道，计入 catheter: "气管插管"
+   - "心率" -> heartRate
+   - "血压" -> bloodPressure
+   - "七十、四十" -> 收缩压70，舒张压40
+
+3. **数值处理**：
+   - "心率掉到四十" -> heartRate: "40.0"
+   - "血压七十、四十" -> bloodPressure: "70/40"
+   - "一毫克"、"每小时十毫克" -> 为给药剂量，非生命体征数值，不提取
+
+4. **逻辑推断检查**：
+   - **导管**："建立双通路"推断存在"静脉通路"；"准备气管插管"属于即将执行的操作，按规则计入当前状态 -> catheter: "静脉通路、气管插管"
+   - **神志**：文本无明确"神志/意识/脑子"描述，正在进行心肺复苏不能推断具体意识状态（可能昏迷，也可能镇静）-> consciousness: null
+   - **其他**：文化程度、民族、诊断、过敏史等均未提及 -> null
+   - **生理极限检查**：心率40次/分、血压70/40mmHg虽属异常值，但均在人类生理极限范围内，符合抢救场景，予以保留。
+
+5. **排除项**：
+   - "血氧测不到"：无具体数值，填 null
+   - "推肾上腺素"、"挂多巴胺"：属治疗措施，非体征数据
+   - "心肺复苏"：操作描述，非体征状态描述
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 14:10:00",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": "40.0",
+  "respiratoryRate": null,
+  "bloodPressure": "70/40",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "limbActivity": null,
+  "catheter": "静脉通路、气管插管",
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+  kimi (File 2) Reasoning:
+===Thinking===
+1. **时间**：
+   - 当前系统时间：2026-02-01 10:02:03
+   - 语音明确提及"十四点一十分" -> assessmentTime: "2026-02-01 14:10:00"
+   - 入院时间未提及 -> null
+
+2. **等价映射（ASR修正）**：
+   - "建立双通路" -> catheter: "静脉通路"（明确建立静脉通路）
+   - "心率掉到四十" -> heartRate: "40.0"
+   - "血压七十、四十" -> bloodPressure: "70/40"（收缩压70，舒张压40）
+   - "准备气管插管" -> 属于准备动作，尚未完成，不计入当前状态
+   - "推一毫克肾上腺素"、"挂上多巴胺" -> 属于用药操作，不直接映射到字段，但可佐证静脉通路存在
+
+3. **数值处理**：
+   - 心率40.0次/分（生理范围内，有效）
+   - 血压70/40 mmHg（生理范围内，有效）
+
+4. **逻辑推断检查**：
+   - **神志**：正在进行心肺复苏且心率血压极低，医学上肯定昏迷，但文本无"神志/意识/昏迷"等明确描述词，按规则填null，禁止通过行为推断。
+   - **导管**："建立双通路"明确指示已建立静脉通路（双条）。
+   - **其他字段**：文化程度、民族、入院方式、诊断、过敏史、体温、脉率、呼吸、血糖、体重、身高、皮肤、肢体活动、饮食、睡眠、排尿、排便等均未提及，均为null。
+===End Thinking===
+
+===JSON===
+{
+  "assessmentTime": "2026-02-01 14:10:00",
+  "education": null,
+  "ethnicity": null,
+  "admissionTime": null,
+  "admissionMethod": null,
+  "diagnosis": null,
+  "allergyHistory": null,
+  "temperature": null,
+  "pulseRate": null,
+  "heartRate": "40.0",
+  "respiratoryRate": null,
+  "bloodPressure": "70/40",
+  "weight": null,
+  "height": null,
+  "bloodSugar": null,
+  "consciousness": null,
+  "skin": null,
+  "catheter": "静脉通路",
+  "limbActivity": null,
+  "diet": null,
+  "sleep": null,
+  "urination": null,
+  "defecation": null,
+  "stoolFrequency": null
+}
+===End JSON===
+--------------------

@@ -6,10 +6,10 @@ load_dotenv(dotenv_path)
 
 
 # 默认用于生成标准答案的模型
-GROUND_TRUTH_MODEL = "kimi"
-THINKING = True
+GROUND_TRUTH_MODEL = "qwen"
+THINKING = False                 
 INFERENCE = True
-EXP = 'gold_exp'
+EXP = 'gold_exp_2'
 
 # 数据路径
 DATA_DIR = "/workspace/dataset/asr_llm"

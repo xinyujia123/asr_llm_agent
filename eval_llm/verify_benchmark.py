@@ -70,8 +70,8 @@ Are they semantically equivalent? Reply with ONLY "YES" or "NO".
         return False
 
 def main():
-    model_1 = "qwen"
-    model_2 = "deepseek"
+    model_1 = "glm"
+    model_2 = "glm"
     exp = "exp2"
     think = True
     think_ex = "think" if think else "no_think"
@@ -83,11 +83,11 @@ def main():
 
     custom = True
     if custom:
-        model_1 = "gemini"
+        model_1 = "kimi"
         model_2 = "kimi"
-        exp = "gold_exp"
-        file1_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/gold_exp/gemini_think_infer_50.jsonl"
-        file2_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/gold_exp/kimi_think_infer_50.jsonl"
+        exp = "gold_exp_2"
+        file1_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/gold_exp/{model_1}_think_infer_20.jsonl"
+        file2_path = f"/workspace/audio_llm_agent/eval_llm/benchmark/gold_exp/{model_2}_think_infer_20_1.jsonl"
 
 
     if not os.path.exists(file1_path) or not os.path.exists(file2_path):
@@ -183,8 +183,8 @@ def main():
             results["mismatches"].append({
                 "index": i+1,
                 "diffs": mismatches_in_record,
-                f"reasoning_{model_1}": record1.get("reasoning_output"),
-                f"reasoning_{model_2}": record2.get("reasoning_output")
+                "reasoning_1": record1.get("raw_output"),
+                "reasoning_2": record2.get("raw_output"),
             })
 
     # Output results
@@ -219,8 +219,8 @@ def main():
                 
                 # Write reasoning output
                 f.write("\n  [Reasoning Output]\n")
-                f.write(f"  {model_1} Reasoning:\n{m.get(f'reasoning_{model_1}', 'N/A')}\n")
-                f.write(f"  {model_2} Reasoning:\n{m.get(f'reasoning_{model_2}', 'N/A')}\n")
+                f.write(f"  {model_1} (File 1) Reasoning:\n{m.get('reasoning_1', 'N/A')}\n")
+                f.write(f"  {model_2} (File 2) Reasoning:\n{m.get('reasoning_2', 'N/A')}\n")
                 
                 f.write("-" * 20 + "\n")
                 print("-" * 20)
