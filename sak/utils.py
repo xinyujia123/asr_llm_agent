@@ -1,6 +1,7 @@
 import subprocess
 import re
 import json
+import ast
 # ---------------- 格式转换工具 ----------------
 def convert_audio_to_wav_sync(source_path: str) -> str:
     """
@@ -14,7 +15,7 @@ def convert_audio_to_wav_sync(source_path: str) -> str:
         "-ar", "16000",
         "-c:a", "pcm_s16le",
         #"-af", "loudnorm=I=-16:TP=-1.5:LRA=11",
-        "-af", "volume=50dB",
+        "-af", "volume=30dB",
         output_path
     ]
     try:
@@ -34,9 +35,9 @@ def convert_audio_to_wav_sync(source_path: str) -> str:
 import subprocess
 import os
 
-def convert_audio_double_outputs(source_path: str, trimmed_time: int = 4):
+def convert_audio_double_outputs(source_path: str, trimmed_time: int = 6):
     """
-    一次性生成两个文件：全量转换文件 和 前4秒截取文件
+    一次性生成两个文件：全量转换文件 和 前6秒截取文件
     返回 (full_path, trimmed_path)
     """
     base_name = os.path.splitext(source_path)[0]
@@ -106,24 +107,79 @@ async def extract_medical_info_async(text: str, llm_client, llm_model_name: str,
 
 def extract_json(content, keys):
     # 1. 增加对 match 是否存在的判断
-    match = re.search(r'\{.*\}', content, re.DOTALL)
-    if not match:
+    json_match = re.search(r'\{.*\}', content, re.DOTALL)
+    if json_match:
+        raw_data = json_match.group()
+    else:
         print("警告：模型输出中未找到 JSON 格式数据")
         return {key: None for key in keys}
 
     try:
-        raw_data = json.loads(match.group())
+        json_data = json.loads(raw_data)
     except json.JSONDecodeError:
         print("错误：JSON 解析失败")
         return {key: None for key in keys}
 
-    cleaned_data = {}
+    cleaned_json_data = {}
     
     for key in keys:            
-        val = raw_data.get(key)
+        val = json_data.get(key)
         # 2. 更加精细的处理：过滤掉空值或无意义的字符串
+        if isinstance(val, str) and val.startswith('[') and val.endswith(']'):
+        # 使用 literal_eval 比 json.loads 更能处理单引号问题
+            val = ast.literal_eval(val)
+
         if val is None or str(val).lower() in ["none", "null", "n/a", "unknown", "未知"]:
-            cleaned_data[key] = None
+            cleaned_json_data[key] = None
+        elif isinstance(val, list):
+            cleaned_json_data[key] = val
+        # 3. 如果是字符串，则进行去空格处理
+        elif isinstance(val, str):
+            cleaned_json_data[key] = val.strip()
+        # 4. 其他类型（如数字）
         else:
-            cleaned_data[key] = str(val).strip() # 去掉多余空格
-    return cleaned_data
+            cleaned_json_data[key] = str(val)
+    return cleaned_json_data
+
+
+def extract_json_medical(content, keys):
+    # 1. 增加对 match 是否存在的判断
+    json_match = re.search(r'===JSON===\s*(\{.*?\})\s*===End JSON===', content, re.DOTALL)
+    if json_match:
+        #raw_data = json.loads(json_match.group(1))
+        raw_data = json_match.group(1)
+    else:
+        # 2. Fallback: 尝试查找第一个 { 和最后一个 } 之间的内容
+        json_match = re.search(r'\{.*\}', content, re.DOTALL)
+        if json_match:
+            raw_data = json_match.group()
+        else:
+            print("警告：模型输出中未找到 JSON 格式数据")
+            return {key: None for key in keys}
+
+    try:
+        json_data = json.loads(raw_data)
+    except json.JSONDecodeError:
+        print("错误：JSON 解析失败")
+        return {key: None for key in keys}
+
+    cleaned_json_data = {}
+    
+    for key in keys:            
+        val = json_data.get(key)
+        # 2. 更加精细的处理：过滤掉空值或无意义的字符串
+        if isinstance(val, str) and val.startswith('[') and val.endswith(']'):
+        # 使用 literal_eval 比 json.loads 更能处理单引号问题
+            val = ast.literal_eval(val)
+
+        if val is None or str(val).lower() in ["none", "null", "n/a", "unknown", "未知"]:
+            cleaned_json_data[key] = None
+        elif isinstance(val, list):
+            cleaned_json_data[key] = val
+        # 3. 如果是字符串，则进行去空格处理
+        elif isinstance(val, str):
+            cleaned_json_data[key] = val.strip()
+        # 4. 其他类型（如数字）
+        else:
+            cleaned_json_data[key] = str(val)
+    return cleaned_json_data

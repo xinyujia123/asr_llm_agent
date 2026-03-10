@@ -1,0 +1,48 @@
+ID: 3
+Ref: 打开体征采集界面。
+Hyp: 打开提真开机界面。
+Ref(eval): 打开体征采集界面
+Hyp(eval): 打开提真开机界面
+CER: 0.5000
+
+ID: 11
+Ref: 打开输液。
+Hyp: 打开书页。
+Ref(eval): 打开输液
+Hyp(eval): 打开书页
+CER: 0.5000
+
+ID: 12
+Ref: 打开皮试。
+Hyp: 打开提示。
+Ref(eval): 打开皮试
+Hyp(eval): 打开提示
+CER: 0.5000
+
+ID: 13
+Ref: 打开配液。
+Hyp: 打开配乐。
+Ref(eval): 打开配液
+Hyp(eval): 打开配乐
+CER: 0.2500
+
+ID: 27
+Ref: 查看输液。
+Hyp: 查看书页。
+Ref(eval): 查看输液
+Hyp(eval): 查看书页
+CER: 0.5000
+
+ID: 28
+Ref: 查看皮试。
+Hyp: 查看提示。
+Ref(eval): 查看皮试
+Hyp(eval): 查看提示
+CER: 0.5000
+
+ID: 29
+Ref: 查看配液。
+Hyp: 查看配页。
+Ref(eval): 查看配液
+Hyp(eval): 查看配页
+CER: 0.2500

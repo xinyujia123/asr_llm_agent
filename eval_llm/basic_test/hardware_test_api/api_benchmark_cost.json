@@ -1,0 +1,54 @@
+[
+  {
+    "concurrency": 1,
+    "total_time_s": 0.6831045150756836,
+    "avg_latency_s": 0.6830658912658691,
+    "throughput_tokens_per_s": 2902.9232807519893,
+    "total_input_tokens": 1955,
+    "total_output_tokens": 28,
+    "cost_rmb": 0.004078,
+    "cost_details": {
+      "input_cost": 0.00391,
+      "output_cost": 0.00016800000000000002
+    }
+  },
+  {
+    "concurrency": 3,
+    "total_time_s": 1.5223414897918701,
+    "avg_latency_s": 1.1053935686747234,
+    "throughput_tokens_per_s": 4003.7009047380625,
+    "total_input_tokens": 5895,
+    "total_output_tokens": 200,
+    "cost_rmb": 0.01299,
+    "cost_details": {
+      "input_cost": 0.01179,
+      "output_cost": 0.0012000000000000001
+    }
+  },
+  {
+    "concurrency": 5,
+    "total_time_s": 1.5387542247772217,
+    "avg_latency_s": 1.0914748668670655,
+    "throughput_tokens_per_s": 6609.892493697323,
+    "total_input_tokens": 9823,
+    "total_output_tokens": 348,
+    "cost_rmb": 0.021734,
+    "cost_details": {
+      "input_cost": 0.019646,
+      "output_cost": 0.002088
+    }
+  },
+  {
+    "concurrency": 10,
+    "total_time_s": 1.4068293571472168,
+    "avg_latency_s": 1.0866870164871216,
+    "throughput_tokens_per_s": 14413.261919070208,
+    "total_input_tokens": 19641,
+    "total_output_tokens": 636,
+    "cost_rmb": 0.043098,
+    "cost_details": {
+      "input_cost": 0.039282,
+      "output_cost": 0.003816
+    }
+  }
+]

@@ -1,0 +1,194 @@
+{
+  "admissionMethod": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 20,
+    "fp": 0,
+    "fn": 0
+  },
+  "admissionTime": {
+    "precision": 0.8461538461538461,
+    "recall": 0.6111111111111112,
+    "f1": 0.7096774193548387,
+    "tp": 11,
+    "fp": 2,
+    "fn": 7
+  },
+  "allergyHistory": {
+    "precision": 1.0,
+    "recall": 0.9411764705882353,
+    "f1": 0.9696969696969697,
+    "tp": 16,
+    "fp": 0,
+    "fn": 1
+  },
+  "assessmentTime": {
+    "precision": 0.8686868686868687,
+    "recall": 0.7166666666666667,
+    "f1": 0.7853881278538815,
+    "tp": 86,
+    "fp": 13,
+    "fn": 34
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 13,
+    "fp": 0,
+    "fn": 0
+  },
+  "catheter": {
+    "precision": 1.0,
+    "recall": 0.8333333333333334,
+    "f1": 0.9090909090909091,
+    "tp": 15,
+    "fp": 0,
+    "fn": 3
+  },
+  "consciousness": {
+    "precision": 0.95,
+    "recall": 1.0,
+    "f1": 0.9743589743589743,
+    "tp": 19,
+    "fp": 1,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 0.9090909090909091,
+    "recall": 1.0,
+    "f1": 0.9523809523809523,
+    "tp": 10,
+    "fp": 1,
+    "fn": 0
+  },
+  "diagnosis": {
+    "precision": 0.7647058823529411,
+    "recall": 0.8125,
+    "f1": 0.787878787878788,
+    "tp": 13,
+    "fp": 4,
+    "fn": 3
+  },
+  "diastolicPressure": {
+    "precision": 0.8888888888888888,
+    "recall": 0.9230769230769231,
+    "f1": 0.9056603773584906,
+    "tp": 24,
+    "fp": 3,
+    "fn": 2
+  },
+  "diet": {
+    "precision": 0.7272727272727273,
+    "recall": 1.0,
+    "f1": 0.8421052631578948,
+    "tp": 8,
+    "fp": 3,
+    "fn": 0
+  },
+  "education": {
+    "precision": 0.8235294117647058,
+    "recall": 0.8235294117647058,
+    "f1": 0.8235294117647058,
+    "tp": 14,
+    "fp": 3,
+    "fn": 3
+  },
+  "ethnicity": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0
+  },
+  "heartRate": {
+    "precision": 0.75,
+    "recall": 1.0,
+    "f1": 0.8571428571428571,
+    "tp": 15,
+    "fp": 5,
+    "fn": 0
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+  },
+  "pulseRate": {
+    "precision": 1.0,
+    "recall": 0.7894736842105263,
+    "f1": 0.8823529411764706,
+    "tp": 15,
+    "fp": 0,
+    "fn": 4
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 0.9444444444444444,
+    "f1": 0.9714285714285714,
+    "tp": 17,
+    "fp": 0,
+    "fn": 1
+  },
+  "skin": {
+    "precision": 0.7647058823529411,
+    "recall": 0.7647058823529411,
+    "f1": 0.7647058823529412,
+    "tp": 13,
+    "fp": 4,
+    "fn": 4
+  },
+  "sleep": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.888888888888889,
+    "tp": 8,
+    "fp": 2,
+    "fn": 0
+  },
+  "stoolFrequency": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 8,
+    "fp": 0,
+    "fn": 0
+  },
+  "systolicPressure": {
+    "precision": 0.8518518518518519,
+    "recall": 0.8846153846153846,
+    "f1": 0.8679245283018868,
+    "tp": 23,
+    "fp": 4,
+    "fn": 3
+  },
+  "temperature": {
+    "precision": 0.9375,
+    "recall": 1.0,
+    "f1": 0.967741935483871,
+    "tp": 15,
+    "fp": 1,
+    "fn": 0
+  },
+  "urination": {
+    "precision": 0.8181818181818182,
+    "recall": 1.0,
+    "f1": 0.9,
+    "tp": 9,
+    "fp": 2,
+    "fn": 0
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+  }
+}

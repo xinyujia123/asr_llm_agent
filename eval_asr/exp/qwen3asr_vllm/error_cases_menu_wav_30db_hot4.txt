@@ -1,0 +1,62 @@
+ID: 42
+Ref: 进入标本。
+Hyp: 进入标准。
+Ref(eval): 进入标本
+Hyp(eval): 进入标准
+CER: 0.2500
+
+ID: 43
+Ref: 进入输液。
+Hyp: 记录输液。
+Ref(eval): 进入输液
+Hyp(eval): 记录输液
+CER: 0.5000
+
+ID: 44
+Ref: 进入皮试。
+Hyp: 进入提示。
+Ref(eval): 进入皮试
+Hyp(eval): 进入提示
+CER: 0.5000
+
+ID: 62
+Ref: 口服药核对。
+Hyp: 口服药喝对。
+Ref(eval): 口服药核对
+Hyp(eval): 口服药喝对
+CER: 0.2000
+
+ID: 68
+Ref: 做健康宣教。
+Hyp: 坐垫，同学叫。
+Ref(eval): 做健康宣教
+Hyp(eval): 坐垫同学叫
+CER: 1.0000
+
+ID: 73
+Ref: 浏览通讯录。
+Hyp: 浏览通讯录，浏览通讯录。
+Ref(eval): 浏览通讯录
+Hyp(eval): 浏览通讯录浏览通讯录
+CER: 1.0000
+
+ID: 78
+Ref: 执行皮试。
+Hyp: 执行提示。
+Ref(eval): 执行皮试
+Hyp(eval): 执行提示
+CER: 0.5000
+
+ID: 79
+Ref: 记录皮试。
+Hyp: 记录提示。
+Ref(eval): 记录皮试
+Hyp(eval): 记录提示
+CER: 0.5000
+
+ID: 91
+Ref: 启动护理文件。
+Hyp: 启动护理文书。
+Ref(eval): 启动护理文件
+Hyp(eval): 启动护理文书
+CER: 0.1667

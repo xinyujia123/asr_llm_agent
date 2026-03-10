@@ -9,12 +9,12 @@ import cn2an
 import inspect
 
 # Configuration
-dataset_dir = Path(__file__).resolve().parent.parent.parent / "dataset"
+dataset_dir = Path("/workspace/audio_llm_agent/dataset/asr_llm")
 current_dir = Path(__file__).resolve().parent 
-AUDIO_DIR = dataset_dir / "nurse_audio_wav2"
+AUDIO_DIR = dataset_dir / "nurse_audio_wav_30db"
 SCRIPT_PATH = dataset_dir / "nurse_script_tn.txt"
-REPORT_PATH = current_dir / "benchmark_report_wav2_hot_itn.txt"
-ERROR_LOG_PATH = current_dir / "error_cases_wav2_hot_itn.txt"
+REPORT_PATH = current_dir / "benchmark_report_nurse_wav_30db.txt"
+ERROR_LOG_PATH = current_dir / "error_cases_nurse_wav_30db_hot.txt"
 
 # Hotwords from sak/prompts.py
 HOTWORDS = "脉搏 呼吸 心率 体温 血压 渗血 意识 诺和锐 地塞米松 地佐辛 宫缩"
@@ -195,7 +195,7 @@ def main():
                     language="中文",
                     itn=True,
                     batch_size=1,
-                    hotwords=HOTWORDS.split(),
+                    #hotwords=HOTWORDS_MENU.split(),
                     cache={}
                 )
             raw_text = res[0]['text'] if res else ""

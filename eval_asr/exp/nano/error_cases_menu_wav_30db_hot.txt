@@ -1,0 +1,6 @@
+ID: 28
+Ref: 查看皮试。
+Hyp: 查看提示
+Ref(eval): 查看皮试
+Hyp(eval): 查看提示
+CER: 0.5000

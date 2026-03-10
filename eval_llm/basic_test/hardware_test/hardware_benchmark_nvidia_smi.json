@@ -1,0 +1,42 @@
+[
+  {
+    "concurrency": 1,
+    "total_time_s": 0.6615781784057617,
+    "avg_latency_s": 0.6615781784057617,
+    "throughput_tokens_per_s": 90.6922295178856,
+    "max_gpu_memory_used_mb": 12112,
+    "gpu_memory_total_mb": 16376
+  },
+  {
+    "concurrency": 3,
+    "total_time_s": 1.4506175518035889,
+    "avg_latency_s": 0.4835391839345296,
+    "throughput_tokens_per_s": 160.62124693742007,
+    "max_gpu_memory_used_mb": 12112,
+    "gpu_memory_total_mb": 16376
+  },
+  {
+    "concurrency": 5,
+    "total_time_s": 1.4640722274780273,
+    "avg_latency_s": 0.2928144454956055,
+    "throughput_tokens_per_s": 270.47845903213346,
+    "max_gpu_memory_used_mb": 12112,
+    "gpu_memory_total_mb": 16376
+  },
+  {
+    "concurrency": 10,
+    "total_time_s": 2.8762927055358887,
+    "avg_latency_s": 0.2876292705535889,
+    "throughput_tokens_per_s": 333.06763187076706,
+    "max_gpu_memory_used_mb": 12112,
+    "gpu_memory_total_mb": 16376
+  },
+  {
+    "concurrency": 30,
+    "total_time_s": 5.588924169540405,
+    "avg_latency_s": 0.1862974723180135,
+    "throughput_tokens_per_s": 414.9277982046227,
+    "max_gpu_memory_used_mb": 12112,
+    "gpu_memory_total_mb": 16376
+  }
+]

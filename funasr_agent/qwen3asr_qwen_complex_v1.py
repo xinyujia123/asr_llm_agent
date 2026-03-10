@@ -160,7 +160,7 @@ async def analyze_audio_endpoint(file: UploadFile = File(...)):
         async with models.asr_lock:
             # 3. [异步非阻塞] ASR 推理
             asr_start_time = time.time()
-            trimmed_text = await run_in_threadpool(run_asr, trimmed_path, "注意以下词语：打开 开启")
+            trimmed_text = await run_in_threadpool(run_asr, trimmed_path, "注意以下词语：打开 查看 进入")
             asr_duration = time.time() - asr_start_time
             print(f"截断音频识别结果: {trimmed_text} (耗时: {asr_duration:.2f}s)")
 

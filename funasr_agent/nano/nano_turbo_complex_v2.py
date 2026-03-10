@@ -186,11 +186,11 @@ async def analyze_audio_endpoint(file: UploadFile = File(...)):
             print("智能病历表单填写")
             result_data = {}
             async with models.asr_lock:
-            asr_start_time = time.time()
-            full_text = await run_in_threadpool(run_asr, full_path, HOTWORDS_NURSE)
-            asr_duration = time.time() - asr_start_time
-            print(f"全音频识别结果: {full_text} (耗时: {asr_duration:.2f}s)")
-            intend = 'medical_info'
+                asr_start_time = time.time()
+                full_text = await run_in_threadpool(run_asr, full_path, HOTWORDS_NURSE)
+                asr_duration = time.time() - asr_start_time
+                print(f"全音频识别结果: {full_text} (耗时: {asr_duration:.2f}s)")
+                intend = 'medical_info'
 
         llm_start_time = time.time()
         if full_text:
