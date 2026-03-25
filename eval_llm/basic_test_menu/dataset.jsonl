@@ -1,0 +1,5 @@
+{"input_text": "打开书页监控", "expected_output": {"target": "输液"}}
+{"input_text": "我要去采血", "expected_output": {"target": "标本"}}
+{"input_text": "查看3床的病历文书", "expected_output": {"target": "护理文书"}}
+{"input_text": "看一下老王详情", "expected_output": {"target": "患者详情"}}
+{"input_text": "帮我开空调", "expected_output": {"target": null}}

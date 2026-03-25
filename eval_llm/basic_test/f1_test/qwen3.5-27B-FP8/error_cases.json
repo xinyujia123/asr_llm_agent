@@ -1,0 +1,260 @@
+[
+  {
+    "id": 39,
+    "input": "前天下午两点入院的，初步考虑是肺炎。",
+    "expected": {
+      "assessmentTime": "2026-05-10 08:00:00",
+      "admissionTime": "2026-05-08 14:00:00",
+      "diagnosis": "考虑肺炎"
+    },
+    "predicted": {
+      "assessmentTime": "2026-05-10 08:00:00",
+      "admissionTime": "2026-05-08 14:00:00",
+      "diagnosis": "初步考虑是肺炎"
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "考虑肺炎",
+        "predicted": "初步考虑是肺炎",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-10 08:00:00\",\n  \"admissionTime\": \"2026-05-08 14:00:00\",\n  \"diagnosis\": \"初步考虑是肺炎\"\n}",
+    "request_time_seconds": 3.235833464190364
+  },
+  {
+    "id": 58,
+    "input": "前天下午五点120送来的，确诊脑出血。意识昏迷，接了静脉通路，带有出血点。",
+    "expected": {
+      "assessmentTime": "2026-03-12 09:00:00",
+      "admissionTime": "2026-03-10 17:00:00",
+      "admissionMethod": "其他",
+      "diagnosis": "确诊脑出血",
+      "consciousness": "昏迷",
+      "catheter": [
+        "静脉通路"
+      ],
+      "skin": [
+        "出血点"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-12 09:00:00",
+      "admissionTime": "2026-03-10 17:00:00",
+      "admissionMethod": "其他",
+      "diagnosis": "脑出血",
+      "consciousness": "昏迷",
+      "skin": [
+        "出血点"
+      ],
+      "catheter": [
+        "静脉通路"
+      ]
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "确诊脑出血",
+        "predicted": "脑出血",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 09:00:00\",\n  \"admissionTime\": \"2026-03-10 17:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"脑出血\",\n  \"consciousness\": \"昏迷\",\n  \"skin\": [\"出血点\"],\n  \"catheter\": [\"静脉通路\"]\n}",
+    "request_time_seconds": 4.4083617851138115
+  },
+  {
+    "id": 86,
+    "input": "回族，考虑急性阑尾炎，今天排便一次，尿袋正常。",
+    "expected": {
+      "assessmentTime": "2026-03-08 11:00:00",
+      "ethnicity": "回族",
+      "diagnosis": "考虑急性阑尾炎",
+      "stoolFrequency": "1",
+      "catheter": [
+        "导尿管"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-08 11:00:00",
+      "ethnicity": "回族",
+      "diagnosis": "考虑急性阑尾炎",
+      "stoolFrequency": "1",
+      "urination": "正常",
+      "catheter": [
+        "导尿管"
+      ]
+    },
+    "error_details": {
+      "urination": {
+        "expected": null,
+        "predicted": "正常",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 11:00:00\",\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"stoolFrequency\": \"1\",\n  \"urination\": \"正常\",\n  \"catheter\": [\n    \"导尿管\"\n  ]\n}",
+    "request_time_seconds": 3.75871785543859
+  },
+  {
+    "id": 99,
+    "input": "皮肤有皮疹和出血点，正在打点滴，没有胃口不想吃饭。初中文化。",
+    "expected": {
+      "assessmentTime": "2026-03-14 15:00:00",
+      "skin": [
+        "皮疹",
+        "出血点"
+      ],
+      "catheter": [
+        "静脉通路"
+      ],
+      "education": "初中"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-14 15:00:00",
+      "education": "初中",
+      "skin": [
+        "皮疹",
+        "出血点"
+      ],
+      "catheter": [
+        "静脉通路"
+      ],
+      "diet": "异常"
+    },
+    "error_details": {
+      "diet": {
+        "expected": null,
+        "predicted": "异常",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 15:00:00\",\n  \"education\": \"初中\",\n  \"skin\": [\n    \"皮疹\",\n    \"出血点\"\n  ],\n  \"catheter\": [\n    \"静脉通路\"\n  ],\n  \"diet\": \"异常\"\n}",
+    "request_time_seconds": 3.6057209856808186
+  },
+  {
+    "id": 101,
+    "input": "壮族，平时爱抽烟，神志浅昏迷。",
+    "expected": {
+      "assessmentTime": "2026-03-15 10:00:00",
+      "ethnicity": "壮族",
+      "consciousness": "浅昏迷"
+    },
+    "predicted": {
+      "ethnicity": "壮族",
+      "consciousness": "浅昏迷"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-15 10:00:00",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"ethnicity\": \"壮族\",\n  \"consciousness\": \"浅昏迷\"\n}",
+    "request_time_seconds": 1.5013772416859865
+  },
+  {
+    "id": 115,
+    "input": "半夜三点，体温三十八度二，物理降温了。",
+    "expected": {
+      "assessmentTime": "2026-03-22 03:00:00",
+      "temperature": "38.2"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-21 03:00:00",
+      "temperature": "38.2"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-22 03:00:00",
+        "predicted": "2026-03-21 03:00:00",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-21 03:00:00\",\n  \"temperature\": \"38.2\"\n}",
+    "request_time_seconds": 2.151142120361328
+  },
+  {
+    "id": 119,
+    "input": "大学毕业，今天早上测的脉搏是七十八，能正常交流。",
+    "expected": {
+      "assessmentTime": "2026-03-24 14:00:00",
+      "education": "大专以上",
+      "pulseRate": "78"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-24 08:00:00",
+      "education": "大专以上",
+      "pulseRate": "78"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-24 14:00:00",
+        "predicted": "2026-03-24 08:00:00",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-24 08:00:00\",\n  \"education\": \"大专以上\",\n  \"pulseRate\": \"78\"\n}",
+    "request_time_seconds": 2.4215998239815235
+  },
+  {
+    "id": 117,
+    "input": "血压九十八十，心率一百一十。",
+    "expected": {
+      "assessmentTime": "2026-03-23 17:00:00",
+      "systolicPressure": "90",
+      "diastolicPressure": "80",
+      "heartRate": "110"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-23 17:00:00",
+      "systolicPressure": "98",
+      "diastolicPressure": "80",
+      "heartRate": "110"
+    },
+    "error_details": {
+      "systolicPressure": {
+        "expected": "90",
+        "predicted": "98",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-23 17:00:00\",\n  \"systolicPressure\": \"98\",\n  \"diastolicPressure\": \"80\",\n  \"heartRate\": \"110\"\n}",
+    "request_time_seconds": 2.9719345327466726
+  },
+  {
+    "id": 114,
+    "input": "对花粉过敏，肚子上有个造口，别的地方皮肤完整。",
+    "expected": {
+      "assessmentTime": "2026-03-22 10:30:00",
+      "allergyHistory": [
+        "花粉"
+      ],
+      "skin": [
+        "造口"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-22 10:30:00",
+      "allergyHistory": [
+        "花粉"
+      ],
+      "skin": [
+        "造口",
+        "完整"
+      ]
+    },
+    "error_details": {
+      "skin": {
+        "expected": [
+          "造口"
+        ],
+        "predicted": [
+          "造口",
+          "完整"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-22 10:30:00\",\n  \"allergyHistory\": [\n    \"花粉\"\n  ],\n  \"skin\": [\n    \"造口\",\n    \"完整\"\n  ]\n}",
+    "request_time_seconds": 3.0099651012569666
+  }
+]

@@ -1,0 +1,3 @@
+Summary metrics:
+Total Category Avg F1: 0.9598
+Total Sample Aggregate F1: 0.9466 (P=0.9406, R=0.9527, TP=443, FP=28, FN=22)
