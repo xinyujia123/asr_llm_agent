@@ -16,10 +16,11 @@ from hardware_benchmark_runtime import (
     save_json
 )
 
+INDEX = os.getenv("EXP_INDEX", "2")
+MODEL_NAME = os.getenv("VLLM_MODEL_NAME", "Qwen/Qwen3.5-27B-FP8")
+
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATASET_PATH = os.path.join(BASE_DIR, 'dataset.jsonl')
-INDEX = os.getenv("EXP_INDEX", "1")
-MODEL_NAME = os.getenv("VLLM_MODEL_NAME", "Qwen/Qwen3.5-35B-A3B-GPTQ-Int4")
 OUTPUT_MODEL_DIR = os.getenv("BENCHMARK_OUTPUT_MODEL_DIR", MODEL_NAME.split("/")[-1])
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), OUTPUT_MODEL_DIR, f'exp_{INDEX}')
 os.makedirs(OUTPUT_DIR, exist_ok=True)
