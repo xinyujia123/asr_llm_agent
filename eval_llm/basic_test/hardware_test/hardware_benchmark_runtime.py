@@ -42,6 +42,20 @@ GEN_TPUT_CANDIDATES = [
     "vllm:avg_generation_throughput_tokens_per_second",
     "vllm_avg_generation_throughput_tokens_per_second"
 ]
+PROMPT_TOKENS_CANDIDATES = [
+    "vllm:prompt_tokens_total",
+    "vllm_prompt_tokens_total"
+]
+PROMPT_TOKENS_CACHED_CANDIDATES = [
+    "vllm:prompt_tokens_cached_total",
+    "vllm_prompt_tokens_cached_total",
+    "vllm:prompt_tokens_cached",
+    "vllm_prompt_tokens_cached"
+]
+GENERATION_TOKENS_CANDIDATES = [
+    "vllm:generation_tokens_total",
+    "vllm_generation_tokens_total"
+]
 GPU_CACHE_CANDIDATES = [
     "vllm:gpu_cache_usage_perc",
     "vllm_gpu_cache_usage_perc",
@@ -186,11 +200,11 @@ def estimate_prompt_tokens(messages):
     return len(all_text.split())
 
 
-def pick_metric_value(metric_map, candidates):
+def pick_metric_value(metric_map, candidates, agg_func=sum):
     for name in candidates:
         values = metric_map.get(name)
         if values:
-            value = mean(values)
+            value = agg_func(values)
             if "perc" in name and value <= 1.0:
                 value = value * 100.0
             return float(value), name
@@ -394,7 +408,8 @@ def _monitor_process_main(metrics_url, interval_s, stop_event, result_queue):
     last_cpu_idle, last_cpu_total = read_system_cpu_stat()
     
     while not stop_event.is_set():
-        ts = time.time()
+        loop_start = time.time()
+        ts = loop_start
         metric_map = fetch_prometheus_metrics(metrics_url, timeout=2)
         process_rss_mb, process_vms_mb = read_process_memory_mb()
         
@@ -445,13 +460,16 @@ def _monitor_process_main(metrics_url, interval_s, stop_event, result_queue):
                 dcgmi_last_returncode = -1
                 dcgmi_last_stderr = "dcgmi sampling exception"
                 dcgmi_last_stdout = ""
-        ttft_sum, ttft_sum_name = pick_metric_value(metric_map, TTFT_SUM_CANDIDATES)
-        ttft_count, ttft_count_name = pick_metric_value(metric_map, TTFT_COUNT_CANDIDATES)
-        queue_sum, queue_sum_name = pick_metric_value(metric_map, QUEUE_SUM_CANDIDATES)
-        queue_count, queue_count_name = pick_metric_value(metric_map, QUEUE_COUNT_CANDIDATES)
-        gen_tput, gen_tput_name = pick_metric_value(metric_map, GEN_TPUT_CANDIDATES)
-        gpu_cache, gpu_cache_name = pick_metric_value(metric_map, GPU_CACHE_CANDIDATES)
-        cpu_cache, cpu_cache_name = pick_metric_value(metric_map, CPU_CACHE_CANDIDATES)
+        ttft_sum, ttft_sum_name = pick_metric_value(metric_map, TTFT_SUM_CANDIDATES, sum)
+        ttft_count, ttft_count_name = pick_metric_value(metric_map, TTFT_COUNT_CANDIDATES, sum)
+        queue_sum, queue_sum_name = pick_metric_value(metric_map, QUEUE_SUM_CANDIDATES, sum)
+        queue_count, queue_count_name = pick_metric_value(metric_map, QUEUE_COUNT_CANDIDATES, sum)
+        gen_tput, gen_tput_name = pick_metric_value(metric_map, GEN_TPUT_CANDIDATES, sum)
+        prompt_tokens_total, _ = pick_metric_value(metric_map, PROMPT_TOKENS_CANDIDATES, sum)
+        prompt_tokens_cached, _ = pick_metric_value(metric_map, PROMPT_TOKENS_CACHED_CANDIDATES, sum)
+        generation_tokens_total, _ = pick_metric_value(metric_map, GENERATION_TOKENS_CANDIDATES, sum)
+        gpu_cache, gpu_cache_name = pick_metric_value(metric_map, GPU_CACHE_CANDIDATES, mean)
+        cpu_cache, cpu_cache_name = pick_metric_value(metric_map, CPU_CACHE_CANDIDATES, mean)
         samples.append({
             "timestamp": ts,
             "monitor_process_rss_mb": process_rss_mb,
@@ -466,6 +484,9 @@ def _monitor_process_main(metrics_url, interval_s, stop_event, result_queue):
             "queue_sum": queue_sum,
             "queue_count": queue_count,
             "gen_tput": gen_tput,
+            "prompt_tokens_total": prompt_tokens_total,
+            "prompt_tokens_cached": prompt_tokens_cached,
+            "generation_tokens_total": generation_tokens_total,
             "gpu_cache_usage_pct": gpu_cache,
             "cpu_cache_usage_pct": cpu_cache,
             "ttft_sum_metric_name": ttft_sum_name,
@@ -477,7 +498,8 @@ def _monitor_process_main(metrics_url, interval_s, stop_event, result_queue):
             "cpu_cache_metric_name": cpu_cache_name,
             **dcgmi_metrics
         })
-        time.sleep(interval_s)
+        elapsed = time.time() - loop_start
+        time.sleep(max(0.0, interval_s - elapsed))
     if nvml_initialized:
         try:
             pynvml.nvmlShutdown()
@@ -513,16 +535,24 @@ def start_monitor_process(metrics_url, interval_s=0.2):
     return process, stop_event, result_queue
 
 
-def stop_monitor_process(process, stop_event, result_queue, timeout_s=8):
+def stop_monitor_process(process, stop_event, result_queue, timeout_s=15):
     stop_event.set()
-    try:
-        # 1. First try to get data to clear the pipe buffer so the child process can finish successfully
-        # Give a little buffer time for the child process to put the last data
-        payload = result_queue.get(timeout=timeout_s)
-    except Exception:
+    payload = None
+    start_wait = time.time()
+    
+    while True:
+        try:
+            payload = result_queue.get(timeout=1.0)
+            break
+        except Exception:
+            if not process.is_alive():
+                break
+            if time.time() - start_wait > timeout_s:
+                break
+                
+    if payload is None:
         payload = {"gpu_monitor_backend": "none", "samples": []}
     
-    # 2. Then join
     process.join(timeout=2)
     if process.is_alive():
         process.terminate()
@@ -531,8 +561,10 @@ def stop_monitor_process(process, stop_event, result_queue, timeout_s=8):
     return payload
 
 
-def summarize_monitor_payload(payload):
+def summarize_monitor_payload(payload, window_start=None, window_end=None):
     samples = payload.get("samples", [])
+    if window_start is not None and window_end is not None:
+        samples = [s for s in samples if window_start <= s.get("timestamp", 0) <= window_end]
     dcgmi_backend = payload.get("dcgmi_backend", "disabled")
     dcgmi_enabled = bool(payload.get("dcgmi_enabled", False))
     dcgmi_field_ids = payload.get("dcgmi_field_ids", "")
@@ -563,6 +595,9 @@ def summarize_monitor_payload(payload):
             "cpu_cache_usage_p95_pct": 0.0,
             "cpu_cache_usage_max_pct": 0.0,
             "prom_avg_generation_throughput_tokens_per_second": 0.0,
+            "prom_gross_input_tps": 0.0,
+            "prom_net_computed_input_tps": 0.0,
+            "prom_decode_tps": 0.0,
             "prom_ttft_avg_s": 0.0,
             "prom_queue_avg_s": 0.0,
             "prom_ttft_sum_metric_name": "",
@@ -636,6 +671,12 @@ def summarize_monitor_payload(payload):
     dcgmi_pcie_rx_values = [float(s.get("dcgmi_pcie_rx_bytes_per_s")) for s in samples if isinstance(s.get("dcgmi_pcie_rx_bytes_per_s"), (int, float))]
     dcgmi_pcie_tx_values = [float(s.get("dcgmi_pcie_tx_bytes_per_s")) for s in samples if isinstance(s.get("dcgmi_pcie_tx_bytes_per_s"), (int, float))]
     tput_values = [float(s.get("gen_tput")) for s in samples if isinstance(s.get("gen_tput"), (int, float))]
+    
+    pt_total_values = [float(s.get("prompt_tokens_total")) for s in samples if isinstance(s.get("prompt_tokens_total"), (int, float))]
+    pt_cached_values = [float(s.get("prompt_tokens_cached")) for s in samples if isinstance(s.get("prompt_tokens_cached"), (int, float))]
+    gt_total_values = [float(s.get("generation_tokens_total")) for s in samples if isinstance(s.get("generation_tokens_total"), (int, float))]
+    timestamp_values = [float(s.get("timestamp")) for s in samples if isinstance(s.get("timestamp"), (int, float))]
+    
     ttft_sum_values = [float(s.get("ttft_sum")) for s in samples if isinstance(s.get("ttft_sum"), (int, float))]
     ttft_count_values = [float(s.get("ttft_count")) for s in samples if isinstance(s.get("ttft_count"), (int, float))]
     queue_sum_values = [float(s.get("queue_sum")) for s in samples if isinstance(s.get("queue_sum"), (int, float))]
@@ -652,6 +693,26 @@ def summarize_monitor_payload(payload):
         delta_count = queue_count_values[-1] - queue_count_values[0]
         if delta_count > 0:
             queue_avg = max(0.0, delta_sum / delta_count)
+            
+    prom_gross_in_tps = 0.0
+    prom_net_in_tps = 0.0
+    prom_decode_tps = 0.0
+    
+    if len(timestamp_values) >= 2:
+        dt = timestamp_values[-1] - timestamp_values[0]
+        if dt > 0:
+            if len(pt_total_values) >= 2:
+                delta_pt = pt_total_values[-1] - pt_total_values[0]
+                prom_gross_in_tps = max(0.0, delta_pt / dt)
+                
+            if len(pt_total_values) >= 2 and len(pt_cached_values) >= 2:
+                delta_pt = pt_total_values[-1] - pt_total_values[0]
+                delta_cached = pt_cached_values[-1] - pt_cached_values[0]
+                prom_net_in_tps = max(0.0, (delta_pt - delta_cached) / dt)
+                
+            if len(gt_total_values) >= 2:
+                delta_gt = gt_total_values[-1] - gt_total_values[0]
+                prom_decode_tps = max(0.0, delta_gt / dt)
     ttft_sum_metric_name = next((s.get("ttft_sum_metric_name", "") for s in samples if s.get("ttft_sum_metric_name")), "")
     ttft_count_metric_name = next((s.get("ttft_count_metric_name", "") for s in samples if s.get("ttft_count_metric_name")), "")
     queue_sum_metric_name = next((s.get("queue_sum_metric_name", "") for s in samples if s.get("queue_sum_metric_name")), "")
@@ -676,6 +737,9 @@ def summarize_monitor_payload(payload):
         "cpu_cache_usage_p95_pct": percentile(cpu_values, 95),
         "cpu_cache_usage_max_pct": max(cpu_values) if cpu_values else 0.0,
         "prom_avg_generation_throughput_tokens_per_second": mean(tput_values) if tput_values else 0.0,
+        "prom_gross_input_tps": prom_gross_in_tps,
+        "prom_net_computed_input_tps": prom_net_in_tps,
+        "prom_decode_tps": prom_decode_tps,
         "prom_ttft_avg_s": ttft_avg,
         "prom_queue_avg_s": queue_avg,
         "prom_ttft_sum_metric_name": ttft_sum_metric_name,
@@ -757,19 +821,37 @@ class AsyncVLLMClient:
 
     async def __aexit__(self, exc_type, exc, tb):
         if self.client is not None:
-            await self.client.aclose()
+            try:
+                await asyncio.wait_for(self.client.aclose(), timeout=5.0)
+            except Exception:
+                pass
 
     async def request(self, messages, temperature=0.0, max_tokens=1024):
+        import uuid
+        import copy
+        
+        # Inject a nonce to prevent perfect cache hits for user input across rounds
+        _messages = copy.deepcopy(messages)
+        for m in _messages:
+            if m.get("role") == "user":
+                m["content"] = f"[{uuid.uuid4().hex[:8]}]\n" + str(m.get("content", ""))
+                break
+                
         payload = {
             "model": self.model_name,
-            "messages": messages,
+            "messages": _messages,
             "temperature": temperature,
             "max_tokens": max_tokens,
             "stream": self.enable_stream,
+            "stream_options": {"include_usage": True} if self.enable_stream else None,
             "chat_template_kwargs": {
                 "enable_thinking": False
             }
         }
+        
+        # In non-stream mode, older vLLM might not return `prompt_tokens_details` 
+        # unless `stream_options` is passed (or it's simply a version difference).
+        # We can also just send `stream_options` anyway or rely on newer vLLM standard.
         enqueued_at = time.perf_counter()
         started_at = None
         try:
@@ -794,7 +876,7 @@ class AsyncVLLMClient:
                             event = orjson.loads(data)
                         except Exception:
                             continue
-                        if isinstance(event.get("usage"), dict):
+                        if isinstance(event.get("usage"), dict) and event.get("usage"):
                             usage = event.get("usage", {})
                         choices = event.get("choices", [])
                         if not choices:
@@ -814,9 +896,13 @@ class AsyncVLLMClient:
                 text = "".join(text_parts)
                 prompt_tokens = usage.get("prompt_tokens")
                 completion_tokens = usage.get("completion_tokens")
+                pt_details = usage.get("prompt_tokens_details")
+                if not isinstance(pt_details, dict):
+                    pt_details = {}
+                cached_tokens = pt_details.get("cached_tokens", 0)
                 used_server_usage = isinstance(prompt_tokens, int) and isinstance(completion_tokens, int)
                 if not isinstance(prompt_tokens, int):
-                    prompt_tokens = estimate_prompt_tokens(messages)
+                    prompt_tokens = estimate_prompt_tokens(_messages)
                 if not isinstance(completion_tokens, int):
                     completion_tokens = len(text.split())
                 if first_token_at is not None:
@@ -838,9 +924,13 @@ class AsyncVLLMClient:
                 usage = result.get("usage", {})
                 prompt_tokens = usage.get("prompt_tokens")
                 completion_tokens = usage.get("completion_tokens")
+                pt_details = usage.get("prompt_tokens_details")
+                if not isinstance(pt_details, dict):
+                    pt_details = {}
+                cached_tokens = pt_details.get("cached_tokens", 0)
                 used_server_usage = isinstance(prompt_tokens, int) and isinstance(completion_tokens, int)
                 if not isinstance(prompt_tokens, int):
-                    prompt_tokens = estimate_prompt_tokens(messages)
+                    prompt_tokens = estimate_prompt_tokens(_messages)
                 if not isinstance(completion_tokens, int):
                     completion_tokens = len(text.split())
             queue_wait_s = max(0.0, (started_at - enqueued_at) if started_at is not None else 0.0)
@@ -849,6 +939,7 @@ class AsyncVLLMClient:
                 "latency_s": max(0.0, ended_at - enqueued_at),
                 "queue_wait_client_s": queue_wait_s,
                 "prompt_tokens": int(prompt_tokens),
+                "cached_tokens": int(cached_tokens) if cached_tokens else 0,
                 "completion_tokens": int(completion_tokens),
                 "total_tokens": int(prompt_tokens) + int(completion_tokens),
                 "used_server_usage": used_server_usage,
@@ -889,8 +980,19 @@ def summarize_round(round_results, total_time_s, monitor_summary, scenario_field
     error_count = len(round_results) - len(success_items)
     success_rate = (len(success_items) / len(round_results)) if round_results else 0.0
     total_prompt_tokens = sum(item["prompt_tokens"] for item in success_items)
+    total_cached_tokens = sum(item.get("cached_tokens", 0) for item in success_items)
     total_completion_tokens = sum(item["completion_tokens"] for item in success_items)
     total_tokens = total_prompt_tokens + total_completion_tokens
+    
+    net_prompt_tokens = max(0, total_prompt_tokens - total_cached_tokens)
+    
+    # We will use the prometheus-based TPS if available, falling back to client-side accumulated counts.
+    prom_gross = monitor_summary.get("prom_gross_input_tps", 0.0)
+    prom_decode = monitor_summary.get("prom_decode_tps", 0.0)
+    
+    gross_input_tps = float(prom_gross) if prom_gross > 0 else (total_prompt_tokens / total_time_s if total_time_s > 0 else 0.0)
+    decode_tps = float(prom_decode) if prom_decode > 0 else (total_completion_tokens / total_time_s if total_time_s > 0 else 0.0)
+    
     server_usage_count = sum(1 for item in success_items if item["used_server_usage"])
     usage_ratio = (server_usage_count / len(success_items)) if success_items else 0.0
     throughput_tokens_per_s = total_tokens / total_time_s if total_time_s > 0 else 0.0
@@ -907,9 +1009,12 @@ def summarize_round(round_results, total_time_s, monitor_summary, scenario_field
         "latency_p50_s": percentile(latencies, 50),
         "latency_p95_s": percentile(latencies, 95),
         "total_input_tokens": total_prompt_tokens,
+        "total_cached_tokens": total_cached_tokens,
         "total_output_tokens": total_completion_tokens,
         "total_tokens": total_tokens,
         "throughput_tokens_per_s": throughput_tokens_per_s,
+        "gross_input_tps": gross_input_tps,
+        "decode_tps": decode_tps,
         "usage_from_server_ratio": usage_ratio,
         **monitor_summary
     }
@@ -1022,7 +1127,14 @@ async def run_steady_round_async(messages_for_round, target_rps, monitor_metrics
     )
 
 
-async def run_burst_round_async(messages_for_round, concurrency, monitor_metrics_url, model_name, chat_completions_url, timeout_s=120, enable_stream=False):
+async def run_chromosome_round_async(messages_for_round, target_rps, monitor_metrics_url, model_name, chat_completions_url, timeout_s=120, enable_stream=False, phase1_duration_s=40, phase2_duration_s=20, phase3_drain_out_timeout_s=60.0):
+    interval_s = 1.0 / float(target_rps)
+    phase1_count = int(phase1_duration_s * target_rps)
+    phase2_count = int(phase2_duration_s * target_rps)
+    
+    def _get_msg(idx):
+        return messages_for_round[idx % len(messages_for_round)]
+        
     monitor_process, monitor_stop_event, monitor_queue = start_monitor_process(monitor_metrics_url)
     main_process_memory_samples = []
     main_memory_stop_event = asyncio.Event()
@@ -1030,29 +1142,268 @@ async def run_burst_round_async(messages_for_round, concurrency, monitor_metrics
         sample_main_process_memory(main_memory_stop_event, main_process_memory_samples, interval_s=0.2)
     )
     started_at = time.perf_counter()
+    started_at_time = time.time()
+    
     try:
         async with AsyncVLLMClient(
             chat_completions_url=chat_completions_url,
             model_name=model_name,
             timeout_s=timeout_s,
-            max_connections=max(64, concurrency * 20),
-            max_keepalive_connections=max(32, concurrency * 10),
+            max_connections=max(64, target_rps * 20),
+            max_keepalive_connections=max(32, target_rps * 10),
             enable_stream=enable_stream
         ) as client:
+            
+            phase2_tasks = []
+            bg_tasks = set()
+            phase2_done = asyncio.Event()
+            all_completed_times = []
+            
+            async def _send_once(m, send_at, is_phase2):
+                delay = send_at - time.perf_counter()
+                if delay > 0:
+                    await asyncio.sleep(delay)
+                res = await client.request(m)
+                if res.get("ok"):
+                    all_completed_times.append(time.perf_counter())
+                return res
+
+            async def _sender_loop():
+                idx = 0
+                while not phase2_done.is_set():
+                    target_at = started_at + idx * interval_s
+                    msg = _get_msg(idx)
+                    is_phase2 = phase1_count <= idx < (phase1_count + phase2_count)
+                    
+                    task = asyncio.create_task(_send_once(msg, target_at, is_phase2))
+                    if is_phase2:
+                        phase2_tasks.append(task)
+                    else:
+                        bg_tasks.add(task)
+                        task.add_done_callback(bg_tasks.discard)
+                        
+                    idx += 1
+                    sleep_time = (started_at + idx * interval_s) - time.perf_counter()
+                    if sleep_time > 0:
+                        try:
+                            await asyncio.wait_for(phase2_done.wait(), timeout=sleep_time)
+                        except asyncio.TimeoutError:
+                            pass
+                    else:
+                        await asyncio.sleep(0)
+
+            sender_task = asyncio.create_task(_sender_loop())
+            
+            while len(phase2_tasks) < phase2_count:
+                if sender_task.done():
+                    break
+                await asyncio.sleep(0.1)
+                
+            phase2_dispatch_end_time = time.perf_counter()
+            max_drain_out_time = float(phase3_drain_out_timeout_s)
+            
+            # Wait for all phase 2 tasks to complete, but with a hard timeout from dispatch end
+            done, pending = await asyncio.wait(
+                phase2_tasks, 
+                timeout=max_drain_out_time, 
+                return_when=asyncio.ALL_COMPLETED
+            )
+            
+            # Cancel any tasks that didn't finish within the drain out limit
+            for t in pending:
+                t.cancel()
+            if pending:
+                await asyncio.wait(pending, timeout=5.0)
+                
+            # Collect results for completed tasks, and mock error results for cancelled ones
+            round_results = []
+            for t in phase2_tasks:
+                if t in done and not t.cancelled() and t.exception() is None:
+                    round_results.append(t.result())
+                else:
+                    round_results.append({
+                        "ok": False,
+                        "latency_s": max_drain_out_time,
+                        "queue_wait_client_s": max_drain_out_time,
+                        "prompt_tokens": 0,
+                        "cached_tokens": 0,
+                        "completion_tokens": 0,
+                        "total_tokens": 0,
+                        "used_server_usage": False,
+                        "error": f"Timeout in drain out phase (>{max_drain_out_time}s)"
+                    })
+                    
+            phase2_end_time = time.perf_counter()
+            
+            phase2_done.set()
+            await sender_task
+            
+            for t in list(bg_tasks):
+                if not t.done():
+                    t.cancel()
+            if bg_tasks:
+                await asyncio.wait(bg_tasks, timeout=5.0)
+                    
+    finally:
+        main_memory_stop_event.set()
+        await main_memory_sampler
+        
+    monitor_payload = stop_monitor_process(monitor_process, monitor_stop_event, monitor_queue)
+    
+    phase2_start_time = started_at + phase1_count * interval_s
+    phase2_window_end = phase2_start_time + phase2_duration_s
+    
+    monitor_window_start = started_at_time + phase1_count * interval_s
+    monitor_window_end = monitor_window_start + phase2_duration_s
+    
+    monitor_summary = summarize_monitor_payload(
+        monitor_payload,
+        window_start=monitor_window_start,
+        window_end=monitor_window_end
+    )
+    monitor_summary.update(summarize_process_memory_samples(main_process_memory_samples, "main_process_memory"))
+    
+    chromosome_duration_time = max(0.001, phase2_end_time - phase2_start_time)
+    
+    # window_actual_rps: 20s test window period (any successful request within phase2_start_time to phase2_start_time + phase2_duration_s)
+    phase2_window_end = phase2_start_time + phase2_duration_s
+    window_success_count = sum(1 for t in all_completed_times if phase2_start_time <= t <= phase2_window_end)
+    window_actual_rps = window_success_count / float(phase2_duration_s) if phase2_duration_s > 0 else 0.0
+    
+    # batch_actual_rps: specifically marked phase 2 requests successful count / chromosome_duration_time
+    batch_success_count = sum(1 for item in round_results if item.get("ok"))
+    batch_actual_rps = batch_success_count / chromosome_duration_time
+    
+    total_time_s = chromosome_duration_time
+    return summarize_round(
+        round_results=round_results,
+        total_time_s=total_time_s,
+        monitor_summary=monitor_summary,
+        scenario_fields={
+            "target_rps": target_rps, 
+            "test_type": "chromosome",
+            "window_actual_rps": window_actual_rps,
+            "batch_actual_rps": batch_actual_rps,
+            "chromosome_duration_time": chromosome_duration_time
+        },
+        include_stream_metrics=enable_stream
+    )
+
+
+async def run_burst_round_async(
+    messages_for_round, 
+    concurrency, 
+    monitor_metrics_url, 
+    model_name, 
+    chat_completions_url, 
+    timeout_s=120, 
+    enable_stream=False,
+    steady_background_rps=0.0,
+    steady_background_duration_s=20,
+    base_messages=None
+):
+    monitor_process, monitor_stop_event, monitor_queue = start_monitor_process(monitor_metrics_url)
+    main_process_memory_samples = []
+    main_memory_stop_event = asyncio.Event()
+    main_memory_sampler = asyncio.create_task(
+        sample_main_process_memory(main_memory_stop_event, main_process_memory_samples, interval_s=0.2)
+    )
+    started_at = time.perf_counter()
+    burst_start_time = None
+    burst_end_time = None
+    burst_start_perf = None
+    burst_end_perf = None
+    
+    try:
+        async with AsyncVLLMClient(
+            chat_completions_url=chat_completions_url,
+            model_name=model_name,
+            timeout_s=timeout_s,
+            max_connections=max(64, concurrency * 5 + int(steady_background_rps) * 6),
+            max_keepalive_connections=max(32, concurrency * 2 + int(steady_background_rps) * 3),
+            enable_stream=enable_stream
+        ) as client:
+            bg_tasks = set()
+            bg_stop_event = asyncio.Event()
+            bg_sender_task = None
+            
+            async def _bg_sender_loop():
+                if not base_messages or steady_background_rps <= 0:
+                    return
+                interval_s = 1.0 / steady_background_rps
+                idx = 0
+                loop_start = time.perf_counter()
+                while not bg_stop_event.is_set():
+                    target_at = loop_start + idx * interval_s
+                    msg = base_messages[idx % len(base_messages)]
+                    
+                    async def _send_once_bg(m, send_at):
+                        delay = send_at - time.perf_counter()
+                        if delay > 0:
+                            await asyncio.sleep(delay)
+                        return await client.request(m)
+                        
+                    task = asyncio.create_task(_send_once_bg(msg, target_at))
+                    bg_tasks.add(task)
+                    task.add_done_callback(bg_tasks.discard)
+                    
+                    idx += 1
+                    sleep_time = (loop_start + idx * interval_s) - time.perf_counter()
+                    if sleep_time > 0:
+                        try:
+                            await asyncio.wait_for(bg_stop_event.wait(), timeout=sleep_time)
+                        except asyncio.TimeoutError:
+                            pass
+                    else:
+                        await asyncio.sleep(0)
+
+            if steady_background_rps > 0 and base_messages:
+                bg_sender_task = asyncio.create_task(_bg_sender_loop())
+                await asyncio.sleep(steady_background_duration_s)
+                
+            burst_start_time = time.time()
+            burst_start_perf = time.perf_counter()
+
             semaphore = asyncio.Semaphore(concurrency)
             async def _send_once(messages):
                 async with semaphore:
                     return await client.request(messages)
             tasks = [asyncio.create_task(_send_once(messages)) for messages in messages_for_round]
             round_results = await asyncio.gather(*tasks)
+            
+            burst_end_time = time.time()
+            burst_end_perf = time.perf_counter()
+
+            if bg_sender_task:
+                bg_stop_event.set()
+                await bg_sender_task
+                
+            for t in list(bg_tasks):
+                if not t.done():
+                    t.cancel()
+            if bg_tasks:
+                await asyncio.wait(bg_tasks, timeout=5.0)
+                
     finally:
         main_memory_stop_event.set()
         await main_memory_sampler
+        
     ended_at = time.perf_counter()
     monitor_payload = stop_monitor_process(monitor_process, monitor_stop_event, monitor_queue)
-    monitor_summary = summarize_monitor_payload(monitor_payload)
+    
+    if steady_background_rps > 0 and burst_start_time and burst_end_time:
+        monitor_summary = summarize_monitor_payload(
+            monitor_payload,
+            window_start=burst_start_time,
+            window_end=burst_end_time
+        )
+        total_time_s = burst_end_perf - burst_start_perf
+    else:
+        monitor_summary = summarize_monitor_payload(monitor_payload)
+        total_time_s = ended_at - started_at
+        
     monitor_summary.update(summarize_process_memory_samples(main_process_memory_samples, "main_process_memory"))
-    total_time_s = ended_at - started_at
+    
     return summarize_round(
         round_results=round_results,
         total_time_s=total_time_s,

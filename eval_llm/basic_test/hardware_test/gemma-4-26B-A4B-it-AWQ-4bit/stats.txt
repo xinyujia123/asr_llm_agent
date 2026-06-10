@@ -1,0 +1,7 @@
+=== vLLM 资源占用报告 (Mon Apr 20 14:49:55 CST 2026) ===
+模型名称: /root/autodl-tmp/models/models/cyankiwi/gemma-4-26B-A4B-it-AWQ-4bit
+模型短名: gemma-4-26B-A4B-it-AWQ-4bit
+权重实际占用: 16.48 GiB
+KV Cache 预分配: 36.45 GiB
+Graph Capturing 占用: 0.67 GiB
+日志文件: /root/asr_llm_agent-main/vllm.log

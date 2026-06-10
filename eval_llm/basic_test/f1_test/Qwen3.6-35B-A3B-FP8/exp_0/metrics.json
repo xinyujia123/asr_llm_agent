@@ -1,0 +1,217 @@
+{
+  "admissionMethod": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 20,
+    "fp": 0,
+    "fn": 0
+  },
+  "admissionTime": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+  },
+  "allergyHistory": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 17,
+    "fp": 0,
+    "fn": 0
+  },
+  "assessmentTime": {
+    "precision": 0.9833333333333333,
+    "recall": 0.9833333333333333,
+    "f1": 0.9833333333333333,
+    "tp": 118,
+    "fp": 2,
+    "fn": 2
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 13,
+    "fp": 0,
+    "fn": 0
+  },
+  "catheter": {
+    "precision": 1.0,
+    "recall": 0.9444444444444444,
+    "f1": 0.9714285714285714,
+    "tp": 17,
+    "fp": 0,
+    "fn": 1
+  },
+  "consciousness": {
+    "precision": 0.9047619047619048,
+    "recall": 1.0,
+    "f1": 0.9500000000000001,
+    "tp": 19,
+    "fp": 2,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 0.8333333333333334,
+    "recall": 1.0,
+    "f1": 0.9090909090909091,
+    "tp": 10,
+    "fp": 2,
+    "fn": 0
+  },
+  "diagnosis": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 16,
+    "fp": 0,
+    "fn": 0
+  },
+  "diastolicPressure": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 26,
+    "fp": 0,
+    "fn": 0
+  },
+  "diet": {
+    "precision": 0.6666666666666666,
+    "recall": 1.0,
+    "f1": 0.8,
+    "tp": 8,
+    "fp": 4,
+    "fn": 0
+  },
+  "education": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "ethnicity": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0
+  },
+  "heartRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+  },
+  "pulseRate": {
+    "precision": 1.0,
+    "recall": 0.9473684210526315,
+    "f1": 0.972972972972973,
+    "tp": 18,
+    "fp": 0,
+    "fn": 1
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+  },
+  "skin": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "sleep": {
+    "precision": 0.8888888888888888,
+    "recall": 1.0,
+    "f1": 0.9411764705882353,
+    "tp": 8,
+    "fp": 1,
+    "fn": 0
+  },
+  "stoolFrequency": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 8,
+    "fp": 0,
+    "fn": 0
+  },
+  "systolicPressure": {
+    "precision": 0.9230769230769231,
+    "recall": 0.9230769230769231,
+    "f1": 0.9230769230769231,
+    "tp": 24,
+    "fp": 2,
+    "fn": 2
+  },
+  "temperature": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "urination": {
+    "precision": 0.8181818181818182,
+    "recall": 1.0,
+    "f1": 0.9,
+    "tp": 9,
+    "fp": 2,
+    "fn": 0
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+  },
+  "summary": {
+    "total_category_avg_f1": 0.9680596717361424,
+    "total_sample_aggregate_f1": 0.9733759318423855,
+    "precision": 0.9641350210970464,
+    "recall": 0.9827956989247312,
+    "tp": 457,
+    "fp": 17,
+    "fn": 8,
+    "field_count": 24,
+    "request_count": 120,
+    "total_request_time_seconds": 104.38167725875974,
+    "avg_request_time_seconds": 0.8698473104896645,
+    "vllm_launch_args": "vllm serve /root/autodl-tmp/models/models/Qwen/Qwen3.6-35B-A3B-FP8 --port 8000 --max-model-len 8192 --reasoning-parser qwen3 --language-model-only --gpu-memory-utilization 0.65 --enable-prefix-caching",
+    "model_name": "/root/autodl-tmp/models/models/Qwen/Qwen3.6-35B-A3B-FP8",
+    "experiment_args": "",
+    "base_url": "http://127.0.0.1:8000",
+    "chat_completions_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "metrics_url": "http://127.0.0.1:8000/metrics",
+    "batch_size": 10,
+    "request_timeout_s": 120,
+    "enable_system_prompt_block_padding": true,
+    "block_size": 1056
+  }
+}

@@ -1,6 +1,7 @@
 import json
 import os
 import re
+import math
 import urllib.request
 
 MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_V1 = """
@@ -219,7 +220,7 @@ def adapt_system_prompt_to_kv_block(
     model_name=None,
     vllm_base_url=None,
     timeout_s=2,
-    padding_unit="。"
+    padding_unit="#"
 ):
     meta = {
         "enabled": bool(enable_padding),
@@ -253,7 +254,7 @@ def adapt_system_prompt_to_kv_block(
     if probe_count is not None:
         meta["token_count_source"] = "vllm_tokenize"
         per_unit = max((probe_count - token_count) / 32.0, 0.1)
-        padding_units = max(1, int(round(missing_tokens / per_unit)))
+        padding_units = max(1, int(math.ceil(missing_tokens / per_unit)))
     else:
         padding_units = int(missing_tokens)
     padded_prompt = system_prompt + (padding_unit * padding_units)

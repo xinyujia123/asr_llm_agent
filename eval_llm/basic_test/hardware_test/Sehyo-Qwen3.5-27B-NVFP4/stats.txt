@@ -1,0 +1,4 @@
+=== vLLM 资源占用报告 (Wed Apr  1 16:52:07 CST 2026) ===
+权重实际占用: 25.17 GiB
+KV Cache 预分配: 32.85 GiB
+Graph Capturing 占用: 0.92 GiB

@@ -1,0 +1,7 @@
+=== vLLM 资源占用报告 (Tue Apr  7 17:23:07 CST 2026) ===
+模型名称: cyankiwi/Qwen3.5-9B-AWQ-4bit
+模型短名: Qwen3.5-9B-AWQ-4bit
+权重实际占用: 7.55 GiB
+KV Cache 预分配: 50.49 GiB
+Graph Capturing 占用: 0.47 GiB
+日志文件: /root/asr_llm_agent-main/vllm.log

@@ -219,7 +219,7 @@ def adapt_system_prompt_to_kv_block(
     model_name=None,
     vllm_base_url=None,
     timeout_s=2,
-    padding_unit="#"
+    padding_unit=" "
 ):
     meta = {
         "enabled": bool(enable_padding),

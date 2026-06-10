@@ -1,0 +1,216 @@
+{
+  "admissionMethod": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 20,
+    "fp": 0,
+    "fn": 0
+  },
+  "admissionTime": {
+    "precision": 0.9473684210526315,
+    "recall": 1.0,
+    "f1": 0.972972972972973,
+    "tp": 18,
+    "fp": 1,
+    "fn": 0
+  },
+  "allergyHistory": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 17,
+    "fp": 0,
+    "fn": 0
+  },
+  "assessmentTime": {
+    "precision": 0.9583333333333334,
+    "recall": 0.9583333333333334,
+    "f1": 0.9583333333333334,
+    "tp": 115,
+    "fp": 5,
+    "fn": 5
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 13,
+    "fp": 0,
+    "fn": 0
+  },
+  "catheter": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+  },
+  "consciousness": {
+    "precision": 0.95,
+    "recall": 1.0,
+    "f1": 0.9743589743589743,
+    "tp": 19,
+    "fp": 1,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 0.8333333333333334,
+    "recall": 1.0,
+    "f1": 0.9090909090909091,
+    "tp": 10,
+    "fp": 2,
+    "fn": 0
+  },
+  "diagnosis": {
+    "precision": 0.8235294117647058,
+    "recall": 0.875,
+    "f1": 0.8484848484848485,
+    "tp": 14,
+    "fp": 3,
+    "fn": 2
+  },
+  "diastolicPressure": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 26,
+    "fp": 0,
+    "fn": 0
+  },
+  "diet": {
+    "precision": 0.6153846153846154,
+    "recall": 1.0,
+    "f1": 0.761904761904762,
+    "tp": 8,
+    "fp": 5,
+    "fn": 0
+  },
+  "education": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "ethnicity": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0
+  },
+  "heartRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+  },
+  "pulseRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 19,
+    "fp": 0,
+    "fn": 0
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+  },
+  "skin": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 17,
+    "fp": 0,
+    "fn": 0
+  },
+  "sleep": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.888888888888889,
+    "tp": 8,
+    "fp": 2,
+    "fn": 0
+  },
+  "stoolFrequency": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 8,
+    "fp": 0,
+    "fn": 0
+  },
+  "systolicPressure": {
+    "precision": 0.8461538461538461,
+    "recall": 0.8461538461538461,
+    "f1": 0.8461538461538461,
+    "tp": 22,
+    "fp": 4,
+    "fn": 4
+  },
+  "temperature": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "urination": {
+    "precision": 0.8181818181818182,
+    "recall": 1.0,
+    "f1": 0.9,
+    "tp": 9,
+    "fp": 2,
+    "fn": 0
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+  },
+  "summary": {
+    "total_category_avg_f1": 0.958390208574032,
+    "total_sample_aggregate_f1": 0.9597457627118644,
+    "precision": 0.9457202505219207,
+    "recall": 0.9741935483870968,
+    "tp": 453,
+    "fp": 26,
+    "fn": 12,
+    "field_count": 24,
+    "request_count": 120,
+    "total_request_time_seconds": 96.23076721839607,
+    "avg_request_time_seconds": 0.8019230601533006,
+    "vllm_launch_args": "vllm serve cyankiwi/Qwen3.5-35B-A3B-AWQ-4bit --port 8000 --max-model-len 8192 --reasoning-parser qwen3 --language-model-only --gpu-memory-utilization 0.7 --enable-prefix-caching",
+    "model_name": "cyankiwi/Qwen3.5-35B-A3B-AWQ-4bit",
+    "experiment_args": "",
+    "base_url": "http://127.0.0.1:8000",
+    "chat_completions_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "metrics_url": "http://127.0.0.1:8000/metrics",
+    "batch_size": 10,
+    "request_timeout_s": 120,
+    "enable_system_prompt_block_padding": false
+  }
+}

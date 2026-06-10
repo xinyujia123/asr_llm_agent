@@ -1,0 +1,217 @@
+{
+  "admissionMethod": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 20,
+    "fp": 0,
+    "fn": 0
+  },
+  "admissionTime": {
+    "precision": 0.7777777777777778,
+    "recall": 0.7777777777777778,
+    "f1": 0.7777777777777778,
+    "tp": 14,
+    "fp": 4,
+    "fn": 4
+  },
+  "allergyHistory": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "assessmentTime": {
+    "precision": 0.9444444444444444,
+    "recall": 0.7083333333333334,
+    "f1": 0.8095238095238096,
+    "tp": 85,
+    "fp": 5,
+    "fn": 35
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 0.9230769230769231,
+    "f1": 0.9600000000000001,
+    "tp": 12,
+    "fp": 0,
+    "fn": 1
+  },
+  "catheter": {
+    "precision": 1.0,
+    "recall": 0.7777777777777778,
+    "f1": 0.8750000000000001,
+    "tp": 14,
+    "fp": 0,
+    "fn": 4
+  },
+  "consciousness": {
+    "precision": 0.95,
+    "recall": 1.0,
+    "f1": 0.9743589743589743,
+    "tp": 19,
+    "fp": 1,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 1.0,
+    "recall": 0.6,
+    "f1": 0.7499999999999999,
+    "tp": 6,
+    "fp": 0,
+    "fn": 4
+  },
+  "diagnosis": {
+    "precision": 0.9375,
+    "recall": 0.9375,
+    "f1": 0.9375,
+    "tp": 15,
+    "fp": 1,
+    "fn": 1
+  },
+  "diastolicPressure": {
+    "precision": 0.5357142857142857,
+    "recall": 0.5769230769230769,
+    "f1": 0.5555555555555555,
+    "tp": 15,
+    "fp": 13,
+    "fn": 11
+  },
+  "diet": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.888888888888889,
+    "tp": 8,
+    "fp": 2,
+    "fn": 0
+  },
+  "education": {
+    "precision": 0.8333333333333334,
+    "recall": 0.8823529411764706,
+    "f1": 0.8571428571428571,
+    "tp": 15,
+    "fp": 3,
+    "fn": 2
+  },
+  "ethnicity": {
+    "precision": 0.8888888888888888,
+    "recall": 0.8888888888888888,
+    "f1": 0.8888888888888888,
+    "tp": 8,
+    "fp": 1,
+    "fn": 1
+  },
+  "heartRate": {
+    "precision": 0.7894736842105263,
+    "recall": 1.0,
+    "f1": 0.8823529411764706,
+    "tp": 15,
+    "fp": 4,
+    "fn": 0
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 0.7142857142857143,
+    "f1": 0.8333333333333333,
+    "tp": 5,
+    "fp": 0,
+    "fn": 2
+  },
+  "pulseRate": {
+    "precision": 0.9047619047619048,
+    "recall": 1.0,
+    "f1": 0.9500000000000001,
+    "tp": 19,
+    "fp": 2,
+    "fn": 0
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 0.3888888888888889,
+    "f1": 0.56,
+    "tp": 7,
+    "fp": 0,
+    "fn": 11
+  },
+  "skin": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 17,
+    "fp": 0,
+    "fn": 0
+  },
+  "sleep": {
+    "precision": 0.8888888888888888,
+    "recall": 1.0,
+    "f1": 0.9411764705882353,
+    "tp": 8,
+    "fp": 1,
+    "fn": 0
+  },
+  "stoolFrequency": {
+    "precision": 0.875,
+    "recall": 0.875,
+    "f1": 0.875,
+    "tp": 7,
+    "fp": 1,
+    "fn": 1
+  },
+  "systolicPressure": {
+    "precision": 0.39285714285714285,
+    "recall": 0.4230769230769231,
+    "f1": 0.4074074074074074,
+    "tp": 11,
+    "fp": 17,
+    "fn": 15
+  },
+  "temperature": {
+    "precision": 1.0,
+    "recall": 0.9333333333333333,
+    "f1": 0.9655172413793104,
+    "tp": 14,
+    "fp": 0,
+    "fn": 1
+  },
+  "urination": {
+    "precision": 0.875,
+    "recall": 0.7777777777777778,
+    "f1": 0.823529411764706,
+    "tp": 7,
+    "fp": 1,
+    "fn": 2
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+  },
+  "summary": {
+    "total_category_avg_f1": 0.8522554178489355,
+    "total_sample_aggregate_f1": 0.8282828282828284,
+    "precision": 0.8661971830985915,
+    "recall": 0.7935483870967742,
+    "tp": 369,
+    "fp": 57,
+    "fn": 96,
+    "field_count": 24,
+    "request_count": 120,
+    "total_request_time_seconds": 76.40924082323909,
+    "avg_request_time_seconds": 0.6367436735269923,
+    "vllm_launch_args": "vllm serve /root/autodl-tmp/models/models/google/gemma-4-E4B-it --host 0.0.0.0 --port 8000 --max-model-len 8192 --gpu-memory-utilization 0.5 --enable-prefix-caching --limit-mm-per-prompt {\"image\": 0, \"audio\": 0}",
+    "model_name": "/root/autodl-tmp/models/models/google/gemma-4-E4B-it",
+    "experiment_args": "",
+    "base_url": "http://127.0.0.1:8000",
+    "chat_completions_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "metrics_url": "http://127.0.0.1:8000/metrics",
+    "batch_size": 10,
+    "request_timeout_s": 120,
+    "enable_system_prompt_block_padding": false,
+    "block_size": 16
+  }
+}

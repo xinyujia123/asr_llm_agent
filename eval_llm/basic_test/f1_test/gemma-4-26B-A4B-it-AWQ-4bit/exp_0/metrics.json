@@ -1,0 +1,217 @@
+{
+  "admissionMethod": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 20,
+    "fp": 0,
+    "fn": 0
+  },
+  "admissionTime": {
+    "precision": 1.0,
+    "recall": 0.8888888888888888,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 0,
+    "fn": 2
+  },
+  "allergyHistory": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 17,
+    "fp": 0,
+    "fn": 0
+  },
+  "assessmentTime": {
+    "precision": 0.9743589743589743,
+    "recall": 0.95,
+    "f1": 0.9620253164556962,
+    "tp": 114,
+    "fp": 3,
+    "fn": 6
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 13,
+    "fp": 0,
+    "fn": 0
+  },
+  "catheter": {
+    "precision": 1.0,
+    "recall": 0.8888888888888888,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 0,
+    "fn": 2
+  },
+  "consciousness": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 19,
+    "fp": 0,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 10,
+    "fp": 0,
+    "fn": 0
+  },
+  "diagnosis": {
+    "precision": 0.8823529411764706,
+    "recall": 0.9375,
+    "f1": 0.9090909090909091,
+    "tp": 15,
+    "fp": 2,
+    "fn": 1
+  },
+  "diastolicPressure": {
+    "precision": 0.8461538461538461,
+    "recall": 0.8461538461538461,
+    "f1": 0.8461538461538461,
+    "tp": 22,
+    "fp": 4,
+    "fn": 4
+  },
+  "diet": {
+    "precision": 1.0,
+    "recall": 0.875,
+    "f1": 0.9333333333333333,
+    "tp": 7,
+    "fp": 0,
+    "fn": 1
+  },
+  "education": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "ethnicity": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0
+  },
+  "heartRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+  },
+  "pulseRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 19,
+    "fp": 0,
+    "fn": 0
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+  },
+  "skin": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 17,
+    "fp": 0,
+    "fn": 0
+  },
+  "sleep": {
+    "precision": 1.0,
+    "recall": 0.75,
+    "f1": 0.8571428571428571,
+    "tp": 6,
+    "fp": 0,
+    "fn": 2
+  },
+  "stoolFrequency": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 8,
+    "fp": 0,
+    "fn": 0
+  },
+  "systolicPressure": {
+    "precision": 0.8076923076923077,
+    "recall": 0.8076923076923077,
+    "f1": 0.8076923076923077,
+    "tp": 21,
+    "fp": 5,
+    "fn": 5
+  },
+  "temperature": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "urination": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+  },
+  "summary": {
+    "total_category_avg_f1": 0.9641236659014023,
+    "total_sample_aggregate_f1": 0.9576547231270358,
+    "precision": 0.9671052631578947,
+    "recall": 0.9483870967741935,
+    "tp": 441,
+    "fp": 15,
+    "fn": 24,
+    "field_count": 24,
+    "request_count": 120,
+    "total_request_time_seconds": 72.13862951658666,
+    "avg_request_time_seconds": 0.6011552459715556,
+    "vllm_launch_args": "vllm serve /root/autodl-tmp/models/models/cyankiwi/gemma-4-26B-A4B-it-AWQ-4bit --host 0.0.0.0 --port 8000 --max-model-len 8192 --gpu-memory-utilization 0.6 --enable-prefix-caching --limit-mm-per-prompt {\"image\": 0, \"audio\": 0}",
+    "model_name": "/root/autodl-tmp/models/models/cyankiwi/gemma-4-26B-A4B-it-AWQ-4bit",
+    "experiment_args": "",
+    "base_url": "http://127.0.0.1:8000",
+    "chat_completions_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "metrics_url": "http://127.0.0.1:8000/metrics",
+    "batch_size": 10,
+    "request_timeout_s": 120,
+    "enable_system_prompt_block_padding": false,
+    "block_size": 16
+  }
+}

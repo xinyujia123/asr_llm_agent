@@ -1,0 +1,7 @@
+=== vLLM 资源占用报告 (Mon Apr 20 13:56:41 CST 2026) ===
+模型名称: /root/autodl-tmp/models/models/google/gemma-4-E4B-it
+模型短名: gemma-4-E4B-it
+权重实际占用: 14.37 GiB
+KV Cache 预分配: 27.17 GiB
+Graph Capturing 占用: 0.53 GiB
+日志文件: /root/asr_llm_agent-main/vllm.log

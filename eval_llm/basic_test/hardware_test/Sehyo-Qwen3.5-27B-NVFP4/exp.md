@@ -1,0 +1,2 @@
+exp 0: vllm serve hf/Sehyo-Qwen3.5-27B-NVFP4 --port 8000 --max-model-len 8192 --reasoning-parser qwen3 --language-model-only --gpu-memory-utilization 0.7 --enable-prefix-caching
+exp 1: vllm serve hf/Sehyo-Qwen3.5-27B-NVFP4 --port 8000 --max-model-len 8192 --reasoning-parser qwen3 --language-model-only --gpu-memory-utilization 0.7 --enable-prefix-caching --max-num-seqs 64
