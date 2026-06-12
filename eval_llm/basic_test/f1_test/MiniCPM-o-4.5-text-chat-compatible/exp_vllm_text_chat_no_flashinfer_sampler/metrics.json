@@ -1,0 +1,225 @@
+{
+  "admissionMethod": {
+    "precision": 0.8636363636363636,
+    "recall": 0.95,
+    "f1": 0.9047619047619048,
+    "tp": 19,
+    "fp": 3,
+    "fn": 1
+  },
+  "admissionTime": {
+    "precision": 0.6666666666666666,
+    "recall": 0.6666666666666666,
+    "f1": 0.6666666666666666,
+    "tp": 12,
+    "fp": 6,
+    "fn": 6
+  },
+  "allergyHistory": {
+    "precision": 0.8571428571428571,
+    "recall": 0.7058823529411765,
+    "f1": 0.7741935483870968,
+    "tp": 12,
+    "fp": 2,
+    "fn": 5
+  },
+  "assessmentTime": {
+    "precision": 0.6744186046511628,
+    "recall": 0.24166666666666667,
+    "f1": 0.3558282208588957,
+    "tp": 29,
+    "fp": 14,
+    "fn": 91
+  },
+  "bloodPressure": {
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0,
+    "tp": 0,
+    "fp": 1,
+    "fn": 0
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 13,
+    "fp": 0,
+    "fn": 0
+  },
+  "catheter": {
+    "precision": 0.8181818181818182,
+    "recall": 0.5,
+    "f1": 0.6206896551724137,
+    "tp": 9,
+    "fp": 2,
+    "fn": 9
+  },
+  "consciousness": {
+    "precision": 0.9047619047619048,
+    "recall": 1.0,
+    "f1": 0.9500000000000001,
+    "tp": 19,
+    "fp": 2,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 0.9090909090909091,
+    "recall": 1.0,
+    "f1": 0.9523809523809523,
+    "tp": 10,
+    "fp": 1,
+    "fn": 0
+  },
+  "diagnosis": {
+    "precision": 0.9333333333333333,
+    "recall": 0.875,
+    "f1": 0.9032258064516129,
+    "tp": 14,
+    "fp": 1,
+    "fn": 2
+  },
+  "diastolicPressure": {
+    "precision": 0.9615384615384616,
+    "recall": 0.9615384615384616,
+    "f1": 0.9615384615384616,
+    "tp": 25,
+    "fp": 1,
+    "fn": 1
+  },
+  "diet": {
+    "precision": 0.875,
+    "recall": 0.875,
+    "f1": 0.875,
+    "tp": 7,
+    "fp": 1,
+    "fn": 1
+  },
+  "education": {
+    "precision": 0.8823529411764706,
+    "recall": 0.8823529411764706,
+    "f1": 0.8823529411764706,
+    "tp": 15,
+    "fp": 2,
+    "fn": 2
+  },
+  "ethnicity": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0
+  },
+  "heartRate": {
+    "precision": 0.75,
+    "recall": 0.6,
+    "f1": 0.6666666666666665,
+    "tp": 9,
+    "fp": 3,
+    "fn": 6
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+  },
+  "pulseRate": {
+    "precision": 0.64,
+    "recall": 0.8421052631578947,
+    "f1": 0.7272727272727272,
+    "tp": 16,
+    "fp": 9,
+    "fn": 3
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 0.8333333333333334,
+    "f1": 0.9090909090909091,
+    "tp": 15,
+    "fp": 0,
+    "fn": 3
+  },
+  "skin": {
+    "precision": 0.75,
+    "recall": 0.7058823529411765,
+    "f1": 0.7272727272727272,
+    "tp": 12,
+    "fp": 4,
+    "fn": 5
+  },
+  "sleep": {
+    "precision": 0.8571428571428571,
+    "recall": 0.75,
+    "f1": 0.7999999999999999,
+    "tp": 6,
+    "fp": 1,
+    "fn": 2
+  },
+  "stoolFrequency": {
+    "precision": 1.0,
+    "recall": 0.875,
+    "f1": 0.9333333333333333,
+    "tp": 7,
+    "fp": 0,
+    "fn": 1
+  },
+  "systolicPressure": {
+    "precision": 0.9259259259259259,
+    "recall": 0.9615384615384616,
+    "f1": 0.9433962264150944,
+    "tp": 25,
+    "fp": 2,
+    "fn": 1
+  },
+  "temperature": {
+    "precision": 0.7894736842105263,
+    "recall": 1.0,
+    "f1": 0.8823529411764706,
+    "tp": 15,
+    "fp": 4,
+    "fn": 0
+  },
+  "urination": {
+    "precision": 0.8888888888888888,
+    "recall": 0.8888888888888888,
+    "f1": 0.8888888888888888,
+    "tp": 8,
+    "fp": 1,
+    "fn": 1
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 0.9166666666666666,
+    "f1": 0.9565217391304348,
+    "tp": 11,
+    "fp": 0,
+    "fn": 1
+  },
+  "summary": {
+    "total_category_avg_f1": 0.811257372665669,
+    "total_sample_aggregate_f1": 0.7632508833922261,
+    "precision": 0.84375,
+    "recall": 0.6967741935483871,
+    "tp": 324,
+    "fp": 60,
+    "fn": 141,
+    "field_count": 25,
+    "request_count": 120,
+    "total_request_time_seconds": 69.03765251114964,
+    "avg_request_time_seconds": 0.575313770926247,
+    "vllm_launch_args": "",
+    "model_name": "MiniCPM-o-4.5",
+    "experiment_args": "VLLM_USE_FLASHINFER_SAMPLER=0 vllm serve MiniCPM-o-4.5 from ModelScope text chat compatible mode",
+    "base_url": "http://127.0.0.1:8000",
+    "chat_completions_url": "http://127.0.0.1:8000/v1/chat/completions",
+    "metrics_url": "http://127.0.0.1:8000/metrics",
+    "batch_size": 10,
+    "request_timeout_s": 240,
+    "enable_system_prompt_block_padding": true,
+    "block_size": 16
+  }
+}
