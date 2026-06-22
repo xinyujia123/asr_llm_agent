@@ -3,6 +3,8 @@ import os
 import json
 import re
 import time
+import base64
+import binascii
 import subprocess
 import urllib.parse
 import urllib.request
@@ -22,6 +24,10 @@ BATCH_SIZE = 10
 REQUEST_TIMEOUT_S = int(os.getenv("BENCHMARK_REQUEST_TIMEOUT_S", "120"))
 EXPERIMENT_ARGS = os.getenv("VLLM_EXPERIMENT_ARGS", "") 
 EXP_ID = os.getenv("VLLM_EXPERIMENT_ID", "0")
+REQUEST_AUDIO = os.getenv("BENCHMARK_REQUEST_AUDIO", "true").lower() in ("true", "1", "yes")
+AUDIO_FORMAT = os.getenv("BENCHMARK_AUDIO_FORMAT", "wav").lower()
+AUDIO_VOICE = os.getenv("BENCHMARK_AUDIO_VOICE", "alloy")
+AUDIO_DIR_NAME = os.getenv("BENCHMARK_AUDIO_DIR_NAME", "audio")
 
 MODEL_NAME = os.getenv("VLLM_MODEL_NAME", "/root/autodl-tmp/models/models/Qwen/Qwen3.6-35B-A3B-FP8")
 RESULT_MODEL_DIR = os.getenv("BENCHMARK_OUTPUT_MODEL_DIR", MODEL_NAME.split('/')[-1])
@@ -31,6 +37,9 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 DATASET_PATH = os.path.join(BASE_DIR, 'dataset.jsonl')
 OUTPUT_DIR = os.path.join(os.path.dirname(__file__), RESULT_MODEL_DIR, f'exp_{EXP_ID}')
 os.makedirs(OUTPUT_DIR, exist_ok=True)
+AUDIO_DIR = os.path.join(OUTPUT_DIR, AUDIO_DIR_NAME)
+if REQUEST_AUDIO:
+    os.makedirs(AUDIO_DIR, exist_ok=True)
 
 # Model
 VLLM_BASE_URL = os.getenv("VLLM_BASE_URL", "http://127.0.0.1:8000")
@@ -146,6 +155,97 @@ def construct_messages(record, system_padding_suffix):
         {"role": "user", "content": user_input}
     ]
 
+def extract_message_text(message):
+    content = message.get("content") if isinstance(message, dict) else None
+    if isinstance(content, list):
+        text_parts = []
+        for part in content:
+            if isinstance(part, dict):
+                text_parts.append(str(part.get("text") or part.get("transcript") or ""))
+            else:
+                text_parts.append(str(part))
+        text = "".join(text_parts)
+    elif content is None:
+        text = ""
+    else:
+        text = str(content)
+
+    audio = message.get("audio") if isinstance(message, dict) else None
+    if not text and isinstance(audio, dict) and audio.get("transcript"):
+        text = str(audio["transcript"])
+    return text
+
+def collect_audio_candidates(value):
+    candidates = []
+    if isinstance(value, str):
+        candidates.append(value)
+        return candidates
+    if isinstance(value, list):
+        for item in value:
+            candidates.extend(collect_audio_candidates(item))
+        return candidates
+    if not isinstance(value, dict):
+        return candidates
+
+    for key in ("data", "audio", "base64", "b64_json"):
+        nested_value = value.get(key)
+        if isinstance(nested_value, str):
+            candidates.append(nested_value)
+        elif isinstance(nested_value, (dict, list)):
+            candidates.extend(collect_audio_candidates(nested_value))
+
+    for key in ("content", "output"):
+        nested_value = value.get(key)
+        if isinstance(nested_value, list):
+            candidates.extend(collect_audio_candidates(nested_value))
+
+    return candidates
+
+def decode_audio_candidate(candidate):
+    raw = candidate.strip()
+    if not raw:
+        return None
+    if raw.startswith("data:") and "," in raw:
+        raw = raw.split(",", 1)[1]
+    try:
+        return base64.b64decode(raw, validate=True)
+    except (binascii.Error, ValueError):
+        return None
+
+def save_response_audio(message, audio_path):
+    audio_meta = {
+        "audio_path": None,
+        "audio_format": AUDIO_FORMAT,
+        "audio_bytes": 0,
+        "audio_error": None
+    }
+    if not REQUEST_AUDIO:
+        return audio_meta
+
+    candidates = []
+    if isinstance(message, dict):
+        candidates.extend(collect_audio_candidates(message.get("audio")))
+        candidates.extend(collect_audio_candidates(message.get("content")))
+
+    for candidate in candidates:
+        audio_bytes = decode_audio_candidate(candidate)
+        if not audio_bytes:
+            continue
+        try:
+            with open(audio_path, "wb") as f:
+                f.write(audio_bytes)
+            audio_meta.update({
+                "audio_path": audio_path,
+                "audio_bytes": len(audio_bytes)
+            })
+            return audio_meta
+        except OSError as e:
+            audio_meta["audio_error"] = str(e)
+            return audio_meta
+
+    audio_meta["audio_error"] = "audio_requested_but_not_returned"
+    return audio_meta
+
 def request_vllm(messages, temperature=0.0, max_tokens=1024, timeout=REQUEST_TIMEOUT_S):
     payload = {
         "model": MODEL_NAME,
@@ -157,6 +257,12 @@ def request_vllm(messages, temperature=0.0, max_tokens=1024, timeout=REQUEST_TIM
             "enable_thinking": False
         }
     }
+    if REQUEST_AUDIO:
+        payload["modalities"] = ["text", "audio"]
+        payload["audio"] = {
+            "voice": AUDIO_VOICE,
+            "format": AUDIO_FORMAT
+        }
     request = urllib.request.Request(
         CHAT_COMPLETIONS_URL,
         data=json.dumps(payload).encode("utf-8"),
@@ -166,16 +272,14 @@ def request_vllm(messages, temperature=0.0, max_tokens=1024, timeout=REQUEST_TIM
     try:
         with urllib.request.urlopen(request, timeout=timeout) as response:
             result = json.loads(response.read().decode("utf-8"))
-            content = result["choices"][0]["message"]["content"]
-            if isinstance(content, list):
-                return "".join(part.get("text", "") for part in content if isinstance(part, dict))
-            return str(content)
+            message = result["choices"][0]["message"]
+            return result, extract_message_text(message)
     except urllib.error.HTTPError as e:
         error_body = e.read().decode("utf-8", errors="ignore")
         print(f"HTTP Error when calling vLLM: {e.code} {error_body}")
     except Exception as e:
         print(f"Error when calling vLLM: {e}")
-    return ""
+    return None, ""
 
 def parse_json(text):
     # Try to find JSON block
@@ -242,9 +346,19 @@ def compare_record(expected, predicted):
 
 def process_record(i, record, system_padding_suffix):
     messages = construct_messages(record, system_padding_suffix)
+    audio_path = os.path.join(AUDIO_DIR, f"{i:05d}.{AUDIO_FORMAT}") if REQUEST_AUDIO else None
     start_time = time.perf_counter()
-    generated_text = request_vllm(messages)
+    response_json, generated_text = request_vllm(messages)
     request_time_seconds = time.perf_counter() - start_time
+    message = {}
+    if response_json and response_json.get("choices"):
+        message = response_json["choices"][0].get("message") or {}
+    audio_meta = save_response_audio(message, audio_path) if audio_path else {
+        "audio_path": None,
+        "audio_format": AUDIO_FORMAT,
+        "audio_bytes": 0,
+        "audio_error": None
+    }
     predicted_json = parse_json(generated_text)
     expected_json = record['expected_output']
     record_stats = compare_record(expected_json, predicted_json)
@@ -267,6 +381,8 @@ def process_record(i, record, system_padding_suffix):
             'predicted': predicted_json,
             'error_details': error_details,
             'generated_text': generated_text,
+            'audio_path': audio_meta['audio_path'],
+            'audio_error': audio_meta['audio_error'],
             'request_time_seconds': request_time_seconds
         }
     result_item = {
@@ -274,6 +390,10 @@ def process_record(i, record, system_padding_suffix):
         'expected': expected_json,
         'predicted': predicted_json,
         'generated_text': generated_text,
+        'audio_path': audio_meta['audio_path'],
+        'audio_format': audio_meta['audio_format'],
+        'audio_bytes': audio_meta['audio_bytes'],
+        'audio_error': audio_meta['audio_error'],
         'request_time_seconds': request_time_seconds,
         'metrics': record_stats
     }
@@ -286,6 +406,10 @@ def main():
     print(f"Batch size: {BATCH_SIZE}")
     print(f"Request timeout(s): {REQUEST_TIMEOUT_S}")
     print(f"Enable system prompt block padding: {ENABLE_SYSTEM_PROMPT_BLOCK_PADDING}")
+    print(f"Request audio output: {REQUEST_AUDIO}")
+    if REQUEST_AUDIO:
+        print(f"Audio output dir: {AUDIO_DIR}")
+        print(f"Audio request format: {AUDIO_FORMAT}, voice: {AUDIO_VOICE}")
     
     print(f"Loading data from {DATASET_PATH}...")
     data = load_data(DATASET_PATH)
@@ -385,6 +509,10 @@ def main():
         'batch_size': BATCH_SIZE,
         'request_timeout_s': REQUEST_TIMEOUT_S,
         'enable_system_prompt_block_padding': ENABLE_SYSTEM_PROMPT_BLOCK_PADDING,
+        'request_audio': REQUEST_AUDIO,
+        'audio_dir': AUDIO_DIR if REQUEST_AUDIO else None,
+        'audio_format': AUDIO_FORMAT,
+        'audio_voice': AUDIO_VOICE,
         'block_size': block_size
     })
 

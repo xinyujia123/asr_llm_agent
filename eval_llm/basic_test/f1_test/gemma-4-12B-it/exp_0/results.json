@@ -7,12 +7,12 @@
     "predicted": {
       "assessmentTime": "2026-03-05 10:00:00"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-05 10:00:00\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7735011242330074,
+    "audio_error": null,
+    "request_time_seconds": 2.0482632257044315,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -37,14 +37,24 @@
       "respiratoryRate": "20",
       "pulseRate": "75"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-06 09:00:00\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\",\"respiratoryRate\":\"20\",\"pulseRate\":\"75\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"75\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.1577458046376705,
+    "audio_error": null,
+    "request_time_seconds": 2.9768602326512337,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -55,16 +65,6 @@
         "fn": 0
       },
       "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -91,19 +91,24 @@
       "diagnosis": "考虑冠心病",
       "temperature": "36.0"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-01-10 15:30:00\",\"education\":\"小学\",\"ethnicity\":\"回族\",\"admissionTime\":\"2026-01-09 14:00:00\",\"admissionMethod\":\"步行\",\"diagnosis\":\"考虑冠心病\",\"temperature\":\"36.0\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-01-10 15:30:00\",\n  \"education\": \"小学\",\n  \"ethnicity\": \"回族\",\n  \"admissionTime\": \"2026-01-09 14:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"考虑冠心病\",\n  \"temperature\": \"36.0\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.6949431002140045,
+    "audio_error": null,
+    "request_time_seconds": 4.043032348155975,
     "metrics": {
-      "assessmentTime": {
+      "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "ethnicity": {
+      "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -113,7 +118,7 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -124,11 +129,6 @@
         "fn": 0
       },
       "temperature": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -150,39 +150,39 @@
       "consciousness": "清醒"
     },
     "predicted": {
-      "catheter": [
-        "导尿管",
-        "静脉通路"
-      ],
+      "assessmentTime": "2025-12-01 08:00:00",
+      "consciousness": "清醒",
       "skin": [
         "造口"
       ],
-      "pulseRate": "80",
-      "consciousness": "清醒"
+      "catheter": [
+        "静脉通路",
+        "导尿管"
+      ]
     },
-    "generated_text": "{\n  \"catheter\": [\"导尿管\", \"静脉通路\"],\n  \"skin\": [\"造口\"],\n  \"pulseRate\": \"80\",\n  \"consciousness\": \"清醒\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2025-12-01 08:00:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"造口\"],\n  \"catheter\": [\"静脉通路\", \"导尿管\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.0224448256194592,
+    "audio_error": null,
+    "request_time_seconds": 2.5825007930397987,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "pulseRate": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -207,22 +207,31 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-05-12 11:00:00",
+      "allergyHistory": [
+        "无"
+      ],
       "height": "170",
       "weight": "65.5",
       "systolicPressure": "110",
       "diastolicPressure": "70"
     },
-    "generated_text": "{\n  \"height\": \"170\",\n  \"weight\": \"65.5\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-12 11:00:00\",\n  \"allergyHistory\": [\"无\"],\n  \"height\": \"170\",\n  \"weight\": \"65.5\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.0326106548309326,
+    "audio_error": null,
+    "request_time_seconds": 3.315197754651308,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "systolicPressure": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "weight": {
         "tp": 1,
@@ -234,15 +243,10 @@
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "allergyHistory": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       },
       "diastolicPressure": {
         "tp": 1,
@@ -260,23 +264,19 @@
       "bloodSugar": "5.2"
     },
     "predicted": {
-      "sleep": "正常",
+      "assessmentTime": "2026-08-20 09:00:00",
+      "bloodSugar": "5.2",
       "diet": "正常",
-      "bloodSugar": "5.2"
+      "sleep": "正常"
     },
-    "generated_text": "{\n  \"sleep\": \"正常\",\n  \"diet\": \"正常\",\n  \"bloodSugar\": \"5.2\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-08-20 09:00:00\",\n  \"bloodSugar\": \"5.2\",\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.807001318782568,
+    "audio_error": null,
+    "request_time_seconds": 2.3339062742888927,
     "metrics": {
-      "bloodSugar": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "sleep": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -286,10 +286,15 @@
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 0,
+      "sleep": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "bloodSugar": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       }
     }
   },
@@ -303,24 +308,20 @@
       "heartRate": "70"
     },
     "predicted": {
+      "assessmentTime": "2026-02-28 16:00:00",
       "urination": "异常",
       "defecation": "正常",
       "stoolFrequency": "1",
       "heartRate": "70"
     },
-    "generated_text": "{\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"heartRate\": \"70\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-02-28 16:00:00\",\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"heartRate\": \"70\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.9458591155707836,
+    "audio_error": null,
+    "request_time_seconds": 2.7068240344524384,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "defecation": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -330,12 +331,17 @@
         "fp": 0,
         "fn": 0
       },
-      "urination": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "urination": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -352,38 +358,40 @@
       "admissionTime": "2026-09-15 08:00:00"
     },
     "predicted": {
-      "admissionTime": "2026-09-14 08:00:00",
+      "assessmentTime": "2026-09-15 10:20:00",
+      "education": "大专以上",
+      "admissionTime": "2026-09-15 08:00:00",
       "admissionMethod": "轮椅",
-      "education": "大专以上"
+      "diagnosis": "疑似胃溃疡"
     },
-    "generated_text": "{\"admissionTime\":\"2026-09-14 08:00:00\",\"admissionMethod\":\"轮椅\",\"education\":\"大专以上\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-09-15 10:20:00\",\n  \"education\": \"大专以上\",\n  \"admissionTime\": \"2026-09-15 08:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"疑似胃溃疡\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.9452436417341232,
+    "audio_error": null,
+    "request_time_seconds": 3.4150983281433582,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "education": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
-      },
-      "diagnosis": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 0,
         "fp": 1,
         "fn": 1
       },
       "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -404,41 +412,36 @@
       "systolicPressure": "130",
       "diastolicPressure": "90",
       "respiratoryRate": "25",
-      "temperature": "50.0"
+      "pulseRate": "90"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-11-11 20:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"90\",\n  \"respiratoryRate\": \"25\",\n  \"temperature\": \"50.0\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-11-11 20:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"90\",\n  \"respiratoryRate\": \"25\",\n  \"pulseRate\": \"90\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.3744280077517033,
+    "audio_error": null,
+    "request_time_seconds": 2.936680682003498,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
-        "tp": 0,
-        "fp": 1,
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       },
       "respiratoryRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -458,23 +461,31 @@
       "heartRate": "85"
     },
     "predicted": {
+      "assessmentTime": "2026-04-04 22:00:00",
       "allergyHistory": [
         "海鲜"
       ],
       "heartRate": "85",
-      "assessmentTime": "2026-04-05 10:00:00"
+      "catheter": [
+        "无"
+      ]
     },
-    "generated_text": "{\n  \"allergyHistory\": [\"海鲜\"],\n  \"heartRate\": \"85\",\n  \"assessmentTime\": \"2026-04-05 10:00:00\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-04 22:00:00\",\n  \"allergyHistory\": [\"海鲜\"],\n  \"heartRate\": \"85\",\n  \"catheter\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.0529635921120644,
+    "audio_error": null,
+    "request_time_seconds": 2.414903473109007,
     "metrics": {
+      "heartRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "allergyHistory": {
         "tp": 1,
@@ -482,11 +493,6 @@
         "fn": 0
       },
       "catheter": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -509,31 +515,34 @@
       "temperature": "37.2",
       "systolicPressure": "140",
       "diastolicPressure": "95",
-      "heartRate": "300"
+      "heartRate": "300",
+      "allergyHistory": [
+        "无"
+      ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-06-10 08:00:00\",\n  \"temperature\": \"37.2\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"95\",\n  \"heartRate\": \"300\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-06-10 08:00:00\",\n  \"temperature\": \"37.2\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"95\",\n  \"heartRate\": \"300\",\n  \"allergyHistory\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.9694570861756802,
+    "audio_error": null,
+    "request_time_seconds": 3.3219698034226894,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "allergyHistory": {
+      "heartRate": {
         "tp": 0,
-        "fp": 0,
-        "fn": 1
+        "fp": 1,
+        "fn": 0
       },
-      "temperature": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -543,9 +552,9 @@
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
-        "tp": 0,
-        "fp": 1,
+      "temperature": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       }
     }
@@ -562,26 +571,32 @@
       "consciousness": "模糊"
     },
     "predicted": {
-      "ethnicity": "汉族",
+      "assessmentTime": "2026-07-15 10:00:00",
       "education": "文盲",
-      "admissionTime": "2026-07-13 10:00:00",
-      "admissionMethod": "担架",
+      "ethnicity": "汉族",
+      "admissionTime": "2026-07-15 10:00:00",
+      "admissionMethod": "其他",
       "diagnosis": "急性阑尾炎",
       "consciousness": "模糊"
     },
-    "generated_text": "{\"ethnicity\":\"汉族\",\"education\":\"文盲\",\"admissionTime\":\"2026-07-13 10:00:00\",\"admissionMethod\":\"担架\",\"diagnosis\":\"急性阑尾炎\",\"consciousness\":\"模糊\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-07-15 10:00:00\",\n  \"education\": \"文盲\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2026-07-15 10:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"急性阑尾炎\",\n  \"consciousness\": \"模糊\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.8079140558838844,
+    "audio_error": null,
+    "request_time_seconds": 3.9456520453095436,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "ethnicity": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -591,22 +606,17 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "admissionTime": {
+      "assessmentTime": {
         "tp": 0,
         "fp": 1,
         "fn": 1
       },
       "admissionMethod": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
-      "education": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -626,32 +636,33 @@
       "sleep": "正常"
     },
     "predicted": {
-      "assessmentTime": "2026-08-01 00:00:00",
+      "assessmentTime": "2026-07-31 21:00:00",
       "skin": [
         "破损"
       ],
       "catheter": [
         "静脉通路"
-      ]
+      ],
+      "sleep": "正常"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-08-01 00:00:00\",\"skin\":[\"破损\"],\"catheter\":[\"静脉通路\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-07-31 21:00:00\",\n  \"skin\": [\"破损\"],\n  \"catheter\": [\"静脉通路\"],\n  \"sleep\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5733633786439896,
+    "audio_error": null,
+    "request_time_seconds": 2.340732391923666,
     "metrics": {
-      "sleep": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "skin": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -674,29 +685,29 @@
       "bloodSugar": "6.0"
     },
     "predicted": {
-      "assessmentTime": "2026-09-05 16:00:00",
+      "assessmentTime": "2026-09-05 15:00:00",
       "systolicPressure": "120",
       "diastolicPressure": "80",
       "weight": "60.0",
       "height": "165",
       "bloodSugar": "6.0"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-09-05 16:00:00\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\",\"weight\":\"60.0\",\"height\":\"165\",\"bloodSugar\":\"6.0\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-09-05 15:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"weight\": \"60.0\",\n  \"height\": \"165\",\n  \"bloodSugar\": \"6.0\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.8800581209361553,
+    "audio_error": null,
+    "request_time_seconds": 3.3097948394715786,
     "metrics": {
-      "bloodSugar": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "weight": {
         "tp": 1,
@@ -708,12 +719,12 @@
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "diastolicPressure": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -730,32 +741,33 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-10-12 11:00:00",
       "consciousness": "清醒",
       "skin": [
-        "淤斑"
+        "其他"
       ]
     },
-    "generated_text": "{\"consciousness\":\"清醒\",\"skin\":[\"淤斑\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-10-12 11:00:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"其他\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.2563960328698158,
+    "audio_error": null,
+    "request_time_seconds": 1.9470834136009216,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "skin": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "skin": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
       }
     }
   },
@@ -773,14 +785,19 @@
       "respiratoryRate": "19",
       "temperature": "36.5"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-11-20 20:00:00\",\"pulseRate\":\"88\",\"respiratoryRate\":\"19\",\"temperature\":\"36.5\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-11-20 20:00:00\",\n  \"pulseRate\": \"88\",\n  \"respiratoryRate\": \"19\",\n  \"temperature\": \"36.5\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6838535293936729,
+    "audio_error": null,
+    "request_time_seconds": 2.4643657207489014,
     "metrics": {
       "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -791,11 +808,6 @@
         "fn": 0
       },
       "temperature": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -810,12 +822,12 @@
     "predicted": {
       "assessmentTime": "2026-12-05 08:30:00"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-12-05 08:30:00\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-12-05 08:30:00\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4197862483561039,
+    "audio_error": null,
+    "request_time_seconds": 1.3608039990067482,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -844,14 +856,14 @@
       "diagnosis": "考虑是脑出血",
       "consciousness": "嗜睡"
     },
-    "generated_text": "{\"assessmentTime\":\"2027-01-08 14:00:00\",\"education\":\"初中\",\"ethnicity\":\"汉族\",\"admissionTime\":\"2027-01-08 12:00:00\",\"admissionMethod\":\"其他\",\"diagnosis\":\"考虑是脑出血\",\"consciousness\":\"嗜睡\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2027-01-08 14:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2027-01-08 12:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑是脑出血\",\n  \"consciousness\": \"嗜睡\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.0720932930707932,
+    "audio_error": null,
+    "request_time_seconds": 3.94742064550519,
     "metrics": {
-      "assessmentTime": {
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -861,17 +873,17 @@
         "fp": 0,
         "fn": 0
       },
+      "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diagnosis": {
         "tp": 0,
         "fp": 1,
         "fn": 1
       },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "admissionTime": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -881,7 +893,7 @@
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -899,30 +911,21 @@
       "heartRate": "75"
     },
     "predicted": {
+      "assessmentTime": "2027-02-14 09:00:00",
+      "bloodSugar": "5.8",
+      "heartRate": "75",
       "urination": "异常",
       "defecation": "正常",
-      "stoolFrequency": "1",
-      "bloodSugar": "5.8",
-      "pulseRate": "75"
+      "stoolFrequency": "1"
     },
-    "generated_text": "{\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"bloodSugar\": \"5.8\",\n  \"pulseRate\": \"75\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2027-02-14 09:00:00\",\n  \"bloodSugar\": \"5.8\",\n  \"heartRate\": \"75\",\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7073316909372807,
+    "audio_error": null,
+    "request_time_seconds": 3.065464425832033,
     "metrics": {
-      "bloodSugar": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "defecation": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -932,20 +935,25 @@
         "fp": 0,
         "fn": 0
       },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
+      "defecation": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "bloodSugar": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       },
       "urination": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "heartRate": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       }
     }
   },
@@ -964,6 +972,8 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2027-03-20 15:00:00",
+      "ethnicity": "无",
       "admissionTime": "2027-03-18 14:00:00",
       "admissionMethod": "其他",
       "allergyHistory": [
@@ -974,26 +984,16 @@
         "无"
       ]
     },
-    "generated_text": "{\"admissionTime\":\"2027-03-18 14:00:00\",\"admissionMethod\":\"其他\",\"allergyHistory\":[\"青霉素\",\"头孢\"],\"catheter\":[\"无\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2027-03-20 15:00:00\",\n  \"ethnicity\": \"无\",\n  \"admissionTime\": \"2027-03-18 14:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"catheter\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7060702741146088,
+    "audio_error": null,
+    "request_time_seconds": 3.7918143533170223,
     "metrics": {
-      "assessmentTime": {
+      "ethnicity": {
         "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "catheter": {
-        "tp": 1,
-        "fp": 0,
+        "fp": 1,
         "fn": 0
       },
       "admissionTime": {
@@ -1001,7 +1001,22 @@
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionMethod": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1018,34 +1033,29 @@
     "predicted": {
       "assessmentTime": "2026-04-10 08:00:00",
       "temperature": "36.5",
-      "pulseRate": "80"
+      "heartRate": "80"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-04-10 08:00:00\",\"temperature\":\"36.5\",\"pulseRate\":\"80\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-10 08:00:00\",\n  \"temperature\": \"36.5\",\n  \"heartRate\": \"80\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5412542149424553,
+    "audio_error": null,
+    "request_time_seconds": 2.0845669507980347,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
+      "heartRate": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       },
       "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "heartRate": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       }
     }
   },
@@ -1058,27 +1068,29 @@
       "pulseRate": "75"
     },
     "predicted": {
+      "assessmentTime": "2026-04-11 14:30:00",
+      "pulseRate": "75",
       "systolicPressure": "120",
       "diastolicPressure": "80"
     },
-    "generated_text": "{\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-11 14:30:00\",\n  \"pulseRate\": \"75\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3916799798607826,
+    "audio_error": null,
+    "request_time_seconds": 2.544271893799305,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "systolicPressure": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "pulseRate": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1100,32 +1112,33 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-04-12 10:15:00",
       "consciousness": "清醒",
       "skin": [
-        "压疮"
+        "其他"
       ]
     },
-    "generated_text": "{\"consciousness\":\"清醒\",\"skin\":[\"压疮\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-12 10:15:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"其他\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.2417752631008625,
+    "audio_error": null,
+    "request_time_seconds": 1.9571653306484222,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "skin": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "skin": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
       }
     }
   },
@@ -1137,27 +1150,28 @@
       "stoolFrequency": "1"
     },
     "predicted": {
+      "assessmentTime": "2026-04-13 16:00:00",
       "defecation": "正常",
       "stoolFrequency": "1"
     },
-    "generated_text": "{\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-13 16:00:00\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.35510117560625076,
+    "audio_error": null,
+    "request_time_seconds": 2.012778390198946,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "stoolFrequency": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1173,17 +1187,17 @@
     },
     "predicted": {
       "assessmentTime": "2026-04-14 07:30:00",
-      "diet": "正常",
-      "bloodSugar": "5.2"
+      "bloodSugar": "5.2",
+      "diet": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-04-14 07:30:00\",\n  \"diet\": \"正常\",\n  \"bloodSugar\": \"5.2\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-14 07:30:00\",\n  \"bloodSugar\": \"5.2\",\n  \"diet\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6580410078167915,
+    "audio_error": null,
+    "request_time_seconds": 2.0248838923871517,
     "metrics": {
-      "bloodSugar": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1193,7 +1207,7 @@
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1212,6 +1226,7 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-04-15 11:20:00",
       "allergyHistory": [
         "头孢"
       ],
@@ -1219,17 +1234,17 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"allergyHistory\": [\"头孢\"],\n  \"catheter\": [\"无\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-15 11:20:00\",\n  \"allergyHistory\": [\"头孢\"],\n  \"catheter\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3631621338427067,
+    "audio_error": null,
+    "request_time_seconds": 2.0480411425232887,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "allergyHistory": {
         "tp": 1,
@@ -1251,34 +1266,30 @@
       "weight": "60.5"
     },
     "predicted": {
-      "pulseRate": "20"
+      "assessmentTime": "2026-04-16 09:45:00",
+      "weight": "60.5"
     },
-    "generated_text": "{\"pulseRate\":\"20\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-16 09:45:00\",\n  \"weight\": \"60.5\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.1867799125611782,
+    "audio_error": null,
+    "request_time_seconds": 1.7384563125669956,
     "metrics": {
-      "weight": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
-      },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
         "fn": 0
       },
       "respiratoryRate": {
         "tp": 0,
         "fp": 0,
         "fn": 1
+      },
+      "weight": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       }
     }
   },
@@ -1290,22 +1301,23 @@
       "diagnosis": "疑似骨折"
     },
     "predicted": {
+      "assessmentTime": "2026-04-17 15:10:00",
       "admissionMethod": "平车",
       "diagnosis": "疑似骨折"
     },
-    "generated_text": "{\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"疑似骨折\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-17 15:10:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"疑似骨折\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.36211246997117996,
+    "audio_error": null,
+    "request_time_seconds": 2.061992436647415,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "diagnosis": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1325,25 +1337,26 @@
       "urination": "正常"
     },
     "predicted": {
+      "assessmentTime": "2026-04-18 08:25:00",
       "sleep": "异常",
       "urination": "正常"
     },
-    "generated_text": "{\n  \"sleep\": \"异常\",\n  \"urination\": \"正常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-18 08:25:00\",\n  \"sleep\": \"异常\",\n  \"urination\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3112061657011509,
+    "audio_error": null,
+    "request_time_seconds": 1.9620269872248173,
     "metrics": {
-      "sleep": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 0,
+      "sleep": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "urination": {
         "tp": 1,
@@ -1360,25 +1373,26 @@
       "pulseRate": "72"
     },
     "predicted": {
+      "assessmentTime": "2026-04-19 13:50:00",
       "height": "175",
       "pulseRate": "72"
     },
-    "generated_text": "{\n  \"height\": \"175\",\n  \"pulseRate\": \"72\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-19 13:50:00\",\n  \"height\": \"175\",\n  \"pulseRate\": \"72\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.35015443339943886,
+    "audio_error": null,
+    "request_time_seconds": 2.0474220700562,
     "metrics": {
-      "pulseRate": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 0,
+      "pulseRate": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "height": {
         "tp": 1,
@@ -1397,19 +1411,19 @@
       "assessmentTime": "2026-05-01 09:00:00",
       "temperature": "37.3"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-05-01 09:00:00\",\"temperature\":\"37.3\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-01 09:00:00\",\n  \"temperature\": \"37.3\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4673617593944073,
+    "audio_error": null,
+    "request_time_seconds": 1.7530512250959873,
     "metrics": {
-      "assessmentTime": {
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1425,28 +1439,29 @@
       "pulseRate": "80"
     },
     "predicted": {
+      "assessmentTime": "2026-05-02 10:00:00",
+      "pulseRate": "80",
       "systolicPressure": "130",
-      "diastolicPressure": "85",
-      "pulseRate": "80"
+      "diastolicPressure": "85"
     },
-    "generated_text": "{\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"pulseRate\": \"80\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-02 10:00:00\",\n  \"pulseRate\": \"80\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5019161514937878,
+    "audio_error": null,
+    "request_time_seconds": 2.5436560846865177,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "pulseRate": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1466,28 +1481,28 @@
       "diet": "正常"
     },
     "predicted": {
-      "assessmentTime": "2026-05-03 08:00:00",
+      "assessmentTime": "2026-05-03 05:00:00",
       "bloodSugar": "5.5",
       "diet": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-03 08:00:00\",\n  \"bloodSugar\": \"5.5\",\n  \"diet\": \"正常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-03 05:00:00\",\n  \"bloodSugar\": \"5.5\",\n  \"diet\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.635722890496254,
+    "audio_error": null,
+    "request_time_seconds": 2.0281234942376614,
     "metrics": {
-      "bloodSugar": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       },
       "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1503,23 +1518,24 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-05-04 14:00:00",
       "allergyHistory": [
         "青霉素"
       ]
     },
-    "generated_text": "{\n  \"allergyHistory\": [\"青霉素\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-04 14:00:00\",\n  \"allergyHistory\": [\"青霉素\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.2279898189008236,
+    "audio_error": null,
+    "request_time_seconds": 1.7722764275968075,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1539,37 +1555,41 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-05-05 16:30:00",
       "consciousness": "模糊",
       "skin": [
         "完整"
+      ],
+      "catheter": [
+        "无"
       ]
     },
-    "generated_text": "{\n  \"consciousness\": \"模糊\",\n  \"skin\": [\"完整\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-05 16:30:00\",\n  \"consciousness\": \"模糊\",\n  \"skin\": [\"完整\"],\n  \"catheter\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3140643239021301,
+    "audio_error": null,
+    "request_time_seconds": 2.2329493016004562,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
-        "tp": 0,
+      "assessmentTime": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "catheter": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       }
     }
   },
@@ -1581,22 +1601,23 @@
       "respiratoryRate": "22"
     },
     "predicted": {
+      "assessmentTime": "2026-05-06 11:15:00",
       "heartRate": "90",
       "respiratoryRate": "22"
     },
-    "generated_text": "{\n  \"heartRate\": \"90\",\n  \"respiratoryRate\": \"22\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-06 11:15:00\",\n  \"heartRate\": \"90\",\n  \"respiratoryRate\": \"22\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.37536125630140305,
+    "audio_error": null,
+    "request_time_seconds": 2.0948080644011497,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "respiratoryRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1615,21 +1636,22 @@
       "defecation": "异常"
     },
     "predicted": {
+      "assessmentTime": "2026-05-07 09:45:00",
       "defecation": "异常"
     },
-    "generated_text": "{\n  \"defecation\": \"异常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-07 09:45:00\",\n  \"defecation\": \"异常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.23652725666761398,
+    "audio_error": null,
+    "request_time_seconds": 1.7036486081779003,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "defecation": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1644,22 +1666,23 @@
       "weight": "55.0"
     },
     "predicted": {
+      "assessmentTime": "2026-05-08 15:20:00",
       "height": "168",
       "weight": "55.0"
     },
-    "generated_text": "{\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-08 15:20:00\",\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.36251192539930344,
+    "audio_error": null,
+    "request_time_seconds": 2.08038367703557,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "height": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1680,33 +1703,34 @@
       "admissionMethod": "轮椅"
     },
     "predicted": {
-      "ethnicity": "壮族",
+      "assessmentTime": "2026-05-09 10:30:00",
       "education": "高中或中专",
+      "ethnicity": "壮族",
       "admissionMethod": "轮椅"
     },
-    "generated_text": "{\n  \"ethnicity\": \"壮族\",\n  \"education\": \"高中或中专\",\n  \"admissionMethod\": \"轮椅\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-09 10:30:00\",\n  \"education\": \"高中或中专\",\n  \"ethnicity\": \"壮族\",\n  \"admissionMethod\": \"轮椅\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.48414722457528114,
+    "audio_error": null,
+    "request_time_seconds": 2.424635622650385,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "admissionMethod": {
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1721,28 +1745,29 @@
       "diagnosis": "考虑肺炎"
     },
     "predicted": {
+      "assessmentTime": "2026-05-10 08:00:00",
       "admissionTime": "2026-05-08 14:00:00",
-      "admissionMethod": "步行",
-      "diagnosis": "考虑肺炎"
+      "admissionMethod": "其他",
+      "diagnosis": "初步考虑是肺炎"
     },
-    "generated_text": "{\"admissionTime\":\"2026-05-08 14:00:00\",\"admissionMethod\":\"步行\",\"diagnosis\":\"考虑肺炎\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-10 08:00:00\",\n  \"admissionTime\": \"2026-05-08 14:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"初步考虑是肺炎\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5577724725008011,
+    "audio_error": null,
+    "request_time_seconds": 2.9780525639653206,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "diagnosis": {
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
+      "diagnosis": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1764,34 +1789,30 @@
       "diastolicPressure": "80"
     },
     "predicted": {
+      "assessmentTime": "2026-03-05 10:00:00",
       "temperature": "36.5",
-      "pulseRate": "80",
+      "heartRate": "80",
       "systolicPressure": "120",
       "diastolicPressure": "80"
     },
-    "generated_text": "{\"temperature\":\"36.5\",\"pulseRate\":\"80\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\",\n  \"temperature\": \"36.5\",\n  \"heartRate\": \"80\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4793468974530697,
+    "audio_error": null,
+    "request_time_seconds": 2.9244727455079556,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
+      "heartRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1801,10 +1822,10 @@
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
-        "tp": 0,
+      "temperature": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       }
     }
   },
@@ -1820,21 +1841,21 @@
       "assessmentTime": "2026-03-05 08:00:00",
       "weight": "65.0",
       "respiratoryRate": "20",
-      "bloodPressure": "75"
+      "pulseRate": "75"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-05 08:00:00\",\"weight\":\"65.0\",\"respiratoryRate\":\"20\",\"bloodPressure\":\"75\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 08:00:00\",\n  \"weight\": \"65.0\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"75\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6536850668489933,
+    "audio_error": null,
+    "request_time_seconds": 2.475456889718771,
     "metrics": {
-      "bloodPressure": {
-        "tp": 0,
-        "fp": 1,
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1845,11 +1866,6 @@
         "fn": 0
       },
       "pulseRate": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1870,33 +1886,34 @@
       ]
     },
     "predicted": {
-      "ethnicity": "汉族",
+      "assessmentTime": "2026-03-05 09:00:00",
       "education": "初中",
-      "admissionTime": "2026-03-02 14:00:00",
+      "ethnicity": "汉族",
+      "admissionTime": "2026-03-04 14:00:00",
       "admissionMethod": "轮椅",
       "diagnosis": "考虑阑尾炎",
       "allergyHistory": [
         "无"
       ]
     },
-    "generated_text": "{\n  \"ethnicity\": \"汉族\",\n  \"education\": \"初中\",\n  \"admissionTime\": \"2026-03-02 14:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"考虑阑尾炎\",\n  \"allergyHistory\": [\"无\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 09:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2026-03-04 14:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"考虑阑尾炎\",\n  \"allergyHistory\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.0111963003873825,
+    "audio_error": null,
+    "request_time_seconds": 4.020173475146294,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "allergyHistory": {
+      "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "ethnicity": {
+      "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1906,17 +1923,17 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
-      "admissionMethod": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1929,36 +1946,18 @@
       "assessmentTime": "2026-03-05 11:20:00"
     },
     "predicted": {
-      "consciousness": "清醒",
-      "diet": "正常",
-      "admissionMethod": "步行",
       "assessmentTime": "2026-03-05 11:20:00"
     },
-    "generated_text": "{\"consciousness\":\"清醒\",\"diet\":\"正常\",\"admissionMethod\":\"步行\",\"assessmentTime\":\"2026-03-05 11:20:00\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 11:20:00\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5797949247062206,
+    "audio_error": null,
+    "request_time_seconds": 1.360139511525631,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
-        "fn": 0
-      },
-      "diet": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
-      "consciousness": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
-      "admissionMethod": {
-        "tp": 0,
-        "fp": 1,
         "fn": 0
       }
     }
@@ -1977,39 +1976,42 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-05 15:00:00",
+      "assessmentTime": "2026-03-05 10:00:00",
       "bloodSugar": "5.8",
       "consciousness": "清醒",
       "skin": [
         "完整"
+      ],
+      "catheter": [
+        "无"
       ]
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-05 15:00:00\",\"bloodSugar\":\"5.8\",\"consciousness\":\"清醒\",\"skin\":[\"完整\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\",\n  \"bloodSugar\": \"5.8\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"完整\"],\n  \"catheter\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6143315583467484,
+    "audio_error": null,
+    "request_time_seconds": 2.6474835388362408,
     "metrics": {
-      "bloodSugar": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
       "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
-        "tp": 0,
+      "assessmentTime": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "bloodSugar": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "consciousness": {
         "tp": 1,
@@ -2030,8 +2032,7 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-06 08:00:00",
-      "admissionTime": "2026-03-04 01:00:00",
+      "assessmentTime": "2026-03-05 01:00:00",
       "systolicPressure": "150",
       "diastolicPressure": "90",
       "catheter": [
@@ -2039,34 +2040,29 @@
         "导尿管"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"admissionTime\": \"2026-03-04 01:00:00\",\n  \"systolicPressure\": \"150\",\n  \"diastolicPressure\": \"90\",\n  \"catheter\": [\"静脉通路\", \"导尿管\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 01:00:00\",\n  \"systolicPressure\": \"150\",\n  \"diastolicPressure\": \"90\",\n  \"catheter\": [\"静脉通路\", \"导尿管\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.2719218358397484,
+    "audio_error": null,
+    "request_time_seconds": 2.7585107311606407,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
-      "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "admissionTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2083,29 +2079,30 @@
       "stoolFrequency": "1"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 09:30:00",
       "height": "170",
       "urination": "正常",
       "defecation": "正常",
       "stoolFrequency": "1"
     },
-    "generated_text": "{\n  \"height\": \"170\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:30:00\",\n  \"height\": \"170\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5772951580584049,
+    "audio_error": null,
+    "request_time_seconds": 2.6830134354531765,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "stoolFrequency": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2133,45 +2130,51 @@
       "consciousness": "嗜睡"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 16:00:00",
       "pulseRate": "80",
-      "respiratoryRate": "22",
+      "heartRate": "22",
       "systolicPressure": "130",
       "diastolicPressure": "95",
       "consciousness": "嗜睡"
     },
-    "generated_text": "{\"pulseRate\":\"80\",\"respiratoryRate\":\"22\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"95\",\"consciousness\":\"嗜睡\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 16:00:00\",\n  \"pulseRate\": \"80\",\n  \"heartRate\": \"22\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"95\",\n  \"consciousness\": \"嗜睡\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.586450707167387,
+    "audio_error": null,
+    "request_time_seconds": 3.1999563612043858,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 0,
         "fp": 0,
         "fn": 1
+      },
+      "heartRate": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
       },
       "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2191,27 +2194,34 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-07 10:00:00",
+      "education": "大专以上",
+      "ethnicity": "未提及",
       "admissionTime": "2026-03-05 15:00:00",
       "admissionMethod": "其他",
-      "education": "大专以上",
+      "diagnosis": "考虑心梗",
       "allergyHistory": [
         "海鲜"
-      ],
-      "diagnosis": "考虑心梗"
+      ]
     },
-    "generated_text": "{\"admissionTime\":\"2026-03-05 15:00:00\",\"admissionMethod\":\"其他\",\"education\":\"大专以上\",\"allergyHistory\":[\"海鲜\"],\"diagnosis\":\"考虑心梗\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:00:00\",\n  \"education\": \"大专以上\",\n  \"ethnicity\": \"未提及\",\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑心梗\",\n  \"allergyHistory\": [\"海鲜\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7201232351362705,
+    "audio_error": null,
+    "request_time_seconds": 4.019436057657003,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "education": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
-      "allergyHistory": {
+      "ethnicity": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2221,17 +2231,17 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2246,21 +2256,21 @@
       "weight": "50.0"
     },
     "predicted": {
-      "assessmentTime": "2026-03-07 11:00:00",
+      "assessmentTime": "2026-03-07 06:00:00",
       "temperature": "37.0",
       "weight": "50.0"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-07 11:00:00\",\"temperature\":\"37.0\",\"weight\":\"50.0\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 06:00:00\",\n  \"temperature\": \"37.0\",\n  \"weight\": \"50.0\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5850496105849743,
+    "audio_error": null,
+    "request_time_seconds": 2.131337769329548,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "weight": {
         "tp": 1,
@@ -2288,43 +2298,44 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-08 08:30:00",
       "systolicPressure": "120",
       "diastolicPressure": "80",
       "pulseRate": "60",
       "heartRate": "60",
       "consciousness": "浅昏迷",
       "skin": [
-        "压疮"
+        "其他"
       ]
     },
-    "generated_text": "{\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"60\",\n  \"heartRate\": \"60\",\n  \"consciousness\": \"浅昏迷\",\n  \"skin\": [\"压疮\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 08:30:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"60\",\n  \"heartRate\": \"60\",\n  \"consciousness\": \"浅昏迷\",\n  \"skin\": [\"其他\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.851542592048645,
+    "audio_error": null,
+    "request_time_seconds": 3.49799258261919,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "systolicPressure": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "skin": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "heartRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "pulseRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2334,7 +2345,7 @@
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2351,24 +2362,20 @@
       "diagnosis": "急性胃肠炎"
     },
     "predicted": {
+      "assessmentTime": "2026-03-08 14:00:00",
       "education": "文盲",
       "admissionTime": "2026-03-07 23:00:00",
       "admissionMethod": "步行",
       "diagnosis": "急性胃肠炎"
     },
-    "generated_text": "{\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-03-07 23:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"急性胃肠炎\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 14:00:00\",\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-03-07 23:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"急性胃肠炎\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.8023082427680492,
+    "audio_error": null,
+    "request_time_seconds": 3.2940453588962555,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "diagnosis": {
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2378,12 +2385,17 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionMethod": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2400,20 +2412,25 @@
       "diet": "正常"
     },
     "predicted": {
-      "assessmentTime": "2026-03-09 09:00:00",
+      "assessmentTime": "2026-03-09 02:00:00",
       "respiratoryRate": "18",
       "bloodSugar": "6.0",
       "sleep": "正常",
       "diet": "正常"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-09 09:00:00\",\"respiratoryRate\":\"18\",\"bloodSugar\":\"6.0\",\"sleep\":\"正常\",\"diet\":\"正常\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 02:00:00\",\n  \"respiratoryRate\": \"18\",\n  \"bloodSugar\": \"6.0\",\n  \"sleep\": \"正常\",\n  \"diet\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6899737492203712,
+    "audio_error": null,
+    "request_time_seconds": 2.682278275489807,
     "metrics": {
-      "bloodSugar": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2423,17 +2440,12 @@
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
       "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2454,29 +2466,32 @@
       "temperature": "38.5"
     },
     "predicted": {
-      "assessmentTime": "2026-03-09 17:00:00",
+      "assessmentTime": "2026-03-09 16:00:00",
       "allergyHistory": [
         "青霉素",
         "头孢"
       ],
-      "temperature": "38.5"
+      "temperature": "38.5",
+      "skin": [
+        "皮疹"
+      ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 17:00:00\",\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"temperature\": \"38.5\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 16:00:00\",\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"temperature\": \"38.5\",\n  \"skin\": [\"皮疹\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7762079760432243,
+    "audio_error": null,
+    "request_time_seconds": 2.604235991835594,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
       "skin": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "allergyHistory": {
         "tp": 1,
@@ -2501,25 +2516,31 @@
       "diagnosis": "考虑骨折"
     },
     "predicted": {
+      "assessmentTime": "2026-03-10 10:30:00",
+      "education": "未入学",
       "ethnicity": "维吾尔族",
-      "education": "文盲",
-      "admissionTime": "2026-03-08 09:00:00",
+      "admissionTime": "2026-03-09 09:00:00",
       "admissionMethod": "背入",
       "diagnosis": "考虑骨折"
     },
-    "generated_text": "{\n  \"ethnicity\": \"维吾尔族\",\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-03-08 09:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"考虑骨折\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 10:30:00\",\n  \"education\": \"未入学\",\n  \"ethnicity\": \"维吾尔族\",\n  \"admissionTime\": \"2026-03-09 09:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"考虑骨折\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.9599174223840237,
+    "audio_error": null,
+    "request_time_seconds": 3.719512850046158,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "ethnicity": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2529,20 +2550,15 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "education": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
       }
     }
   },
@@ -2556,44 +2572,30 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-10 08:30:00",
-      "systolicPressure": "140",
-      "diastolicPressure": "90",
       "pulseRate": "90",
-      "respiratoryRate": "无",
-      "catheter": [
-        "吸氧面罩"
-      ]
+      "systolicPressure": "100",
+      "diastolicPressure": "90"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-10 08:30:00\",\"systolicPressure\":\"140\",\"diastolicPressure\":\"90\",\"pulseRate\":\"90\",\"respiratoryRate\":\"无\",\"catheter\":[\"吸氧面罩\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 08:30:00\",\n  \"pulseRate\": \"90\",\n  \"systolicPressure\": \"100\",\n  \"diastolicPressure\": \"90\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.9109378419816494,
+    "audio_error": null,
+    "request_time_seconds": 2.5314763374626637,
     "metrics": {
+      "systolicPressure": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
       "pulseRate": {
         "tp": 1,
         "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
-        "tp": 0,
-        "fp": 1,
         "fn": 0
       },
       "diastolicPressure": {
@@ -2613,38 +2615,40 @@
       "weight": "45.0"
     },
     "predicted": {
+      "assessmentTime": "2026-03-11 11:00:00",
+      "weight": "45.0",
+      "urination": "正常",
       "defecation": "异常",
-      "stoolFrequency": "3",
-      "weight": "45.0"
+      "stoolFrequency": "3"
     },
-    "generated_text": "{\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"3\",\n  \"weight\": \"45.0\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 11:00:00\",\n  \"weight\": \"45.0\",\n  \"urination\": \"正常\",\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"3\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.49476133659482,
+    "audio_error": null,
+    "request_time_seconds": 2.705918040126562,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "urination": {
-        "tp": 0,
+      "stoolFrequency": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "stoolFrequency": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "urination": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2661,39 +2665,40 @@
       "education": "高中或中专"
     },
     "predicted": {
-      "assessmentTime": "2026-03-11 16:30:00",
+      "assessmentTime": "2026-03-11 16:00:00",
       "education": "高中或中专",
+      "temperature": "37.2",
       "heartRate": "100",
-      "temperature": "37.2"
+      "sleep": "异常"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-11 16:30:00\",\"education\":\"高中或中专\",\"heartRate\":\"100\",\"temperature\":\"37.2\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 16:00:00\",\n  \"education\": \"高中或中专\",\n  \"temperature\": \"37.2\",\n  \"heartRate\": \"100\",\n  \"sleep\": \"异常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6861712858080864,
+    "audio_error": null,
+    "request_time_seconds": 2.777086190879345,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
-      "sleep": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "temperature": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "heartRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "sleep": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2716,30 +2721,54 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-12 09:00:00",
       "admissionTime": "2026-03-10 17:00:00",
       "admissionMethod": "其他",
-      "diagnosis": "脑出血",
-      "consciousness": "昏迷",
-      "catheter": [
-        "静脉通路"
+      "diagnosis": "确诊脑出血",
+      "allergyHistory": [
+        "无"
       ],
+      "consciousness": "昏迷",
       "skin": [
         "出血点"
+      ],
+      "catheter": [
+        "静脉通路"
       ]
     },
-    "generated_text": "{\"admissionTime\":\"2026-03-10 17:00:00\",\"admissionMethod\":\"其他\",\"diagnosis\":\"脑出血\",\"consciousness\":\"昏迷\",\"catheter\":[\"静脉通路\"],\"skin\":[\"出血点\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 09:00:00\",\n  \"admissionTime\": \"2026-03-10 17:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"确诊脑出血\",\n  \"allergyHistory\": [\"无\"],\n  \"consciousness\": \"昏迷\",\n  \"skin\": [\"出血点\"],\n  \"catheter\": [\"静脉通路\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.8077486418187618,
+    "audio_error": null,
+    "request_time_seconds": 4.348339278250933,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "skin": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2750,21 +2779,6 @@
         "fn": 0
       },
       "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "diagnosis": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
-      "admissionTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2784,54 +2798,51 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-11 11:30:00",
+      "assessmentTime": "2026-03-12 11:30:00",
       "systolicPressure": "130",
       "diastolicPressure": "85",
-      "pulseRate": "20",
+      "respiratoryRate": "20",
       "bloodSugar": "5.2",
-      "allergyHistory": []
+      "allergyHistory": [
+        "无"
+      ]
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-11 11:30:00\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"85\",\"pulseRate\":\"20\",\"bloodSugar\":\"5.2\",\"allergyHistory\":[]}\n**注意**：语音中“夫妻二十”应为“呼吸20”，已按字段映射规范处理为pulseRate。",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 11:30:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"respiratoryRate\": \"20\",\n  \"bloodSugar\": \"5.2\",\n  \"allergyHistory\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 1.2062374390661716,
+    "audio_error": null,
+    "request_time_seconds": 3.306375313550234,
     "metrics": {
-      "bloodSugar": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
-      "systolicPressure": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "allergyHistory": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
-      "respiratoryRate": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       }
     }
   },
@@ -2843,35 +2854,31 @@
       "heartRate": "78"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 08:00:00",
       "temperature": "36.5",
-      "pulseRate": "78"
+      "heartRate": "78"
     },
-    "generated_text": "{\n  \"temperature\": \"36.5\",\n  \"pulseRate\": \"78\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"temperature\": \"36.5\",\n  \"heartRate\": \"78\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.32914824038743973,
+    "audio_error": null,
+    "request_time_seconds": 2.0794068723917007,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
+      "heartRate": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       },
       "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "heartRate": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       }
     }
   },
@@ -2884,28 +2891,29 @@
       "pulseRate": "75"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 09:00:00",
+      "pulseRate": "75",
       "systolicPressure": "120",
-      "diastolicPressure": "80",
-      "pulseRate": "75"
+      "diastolicPressure": "80"
     },
-    "generated_text": "{\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"75\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:00:00\",\n  \"pulseRate\": \"75\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5236705765128136,
+    "audio_error": null,
+    "request_time_seconds": 2.543291326612234,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "pulseRate": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2925,22 +2933,23 @@
       "weight": "55.0"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 10:00:00",
       "height": "168",
       "weight": "55.0"
     },
-    "generated_text": "{\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 10:00:00\",\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3647899702191353,
+    "audio_error": null,
+    "request_time_seconds": 2.083005305379629,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "height": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2960,27 +2969,28 @@
       "bloodSugar": "5.8"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 11:00:00",
       "respiratoryRate": "18",
       "bloodSugar": "5.8"
     },
-    "generated_text": "{\"respiratoryRate\":\"18\",\"bloodSugar\":\"5.8\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 11:00:00\",\n  \"respiratoryRate\": \"18\",\n  \"bloodSugar\": \"5.8\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.30271773412823677,
+    "audio_error": null,
+    "request_time_seconds": 2.1169852428138256,
     "metrics": {
-      "bloodSugar": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
-      "respiratoryRate": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3003,24 +3013,24 @@
         "静脉通路"
       ]
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-06 14:00:00\",\"consciousness\":\"清醒\",\"catheter\":[\"静脉通路\"]}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 14:00:00\",\n  \"consciousness\": \"清醒\",\n  \"catheter\": [\"静脉通路\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5579903312027454,
+    "audio_error": null,
+    "request_time_seconds": 2.048704717308283,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3039,31 +3049,32 @@
       ]
     },
     "predicted": {
+      "allergyHistory": [
+        "头孢"
+      ],
       "skin": [
         "手术切口"
       ],
-      "allergyHistory": [
-        "头孢"
-      ]
+      "assessmentTime": "2026-03-06 15:00:00"
     },
-    "generated_text": "{\n  \"skin\": [\"手术切口\"],\n  \"allergyHistory\": [\"头孢\"]\n}",
+    "generated_text": "{\n  \"allergyHistory\": [\"头孢\"],\n  \"skin\": [\"手术切口\"],\n  \"assessmentTime\": \"2026-03-06 15:00:00\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.36222803965210915,
+    "audio_error": null,
+    "request_time_seconds": 2.0951661840081215,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "allergyHistory": {
+      "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3079,28 +3090,29 @@
       "diagnosis": "考虑胃炎"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 16:00:00",
       "admissionTime": "2026-03-05 15:00:00",
       "admissionMethod": "平车",
       "diagnosis": "考虑胃炎"
     },
-    "generated_text": "{\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"考虑胃炎\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 16:00:00\",\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"考虑胃炎\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6999125145375729,
+    "audio_error": null,
+    "request_time_seconds": 2.977909676730633,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "admissionTime": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3120,27 +3132,28 @@
       "education": "大专以上"
     },
     "predicted": {
-      "ethnicity": "满族",
-      "education": "大专以上"
+      "assessmentTime": "2026-03-07 08:30:00",
+      "education": "大专以上",
+      "ethnicity": "满族"
     },
-    "generated_text": "{\n  \"ethnicity\": \"满族\",\n  \"education\": \"大专以上\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 08:30:00\",\n  \"education\": \"大专以上\",\n  \"ethnicity\": \"满族\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3346984498202801,
+    "audio_error": null,
+    "request_time_seconds": 2.0472527891397476,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3155,16 +3168,22 @@
       "sleep": "正常"
     },
     "predicted": {
+      "assessmentTime": "2026-03-07 09:30:00",
       "diet": "正常",
       "sleep": "正常"
     },
-    "generated_text": "{\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 09:30:00\",\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.29842015355825424,
+    "audio_error": null,
+    "request_time_seconds": 1.9120368734002113,
     "metrics": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "sleep": {
         "tp": 1,
         "fp": 0,
@@ -3174,11 +3193,6 @@
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       }
     }
   },
@@ -3190,27 +3204,28 @@
       "stoolFrequency": "2"
     },
     "predicted": {
+      "assessmentTime": "2026-03-07 10:30:00",
       "defecation": "正常",
       "stoolFrequency": "2"
     },
-    "generated_text": "{\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"2\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:30:00\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"2\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3456939645111561,
+    "audio_error": null,
+    "request_time_seconds": 2.0128761492669582,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "stoolFrequency": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3229,19 +3244,19 @@
       "systolicPressure": "130",
       "diastolicPressure": "90"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-07 09:00:00\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"90\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 09:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"90\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6574486494064331,
+    "audio_error": null,
+    "request_time_seconds": 2.1994398906826973,
     "metrics": {
-      "assessmentTime": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3263,22 +3278,23 @@
       "urination": "正常"
     },
     "predicted": {
+      "assessmentTime": "2026-03-07 15:30:00",
       "catheter": [
         "导尿管"
       ],
       "urination": "正常"
     },
-    "generated_text": "{\n  \"catheter\": [\"导尿管\"],\n  \"urination\": \"正常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 15:30:00\",\n  \"catheter\": [\"导尿管\"],\n  \"urination\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.45207903534173965,
+    "audio_error": null,
+    "request_time_seconds": 2.059824861586094,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "urination": {
         "tp": 1,
@@ -3302,29 +3318,30 @@
       "consciousness": "昏迷"
     },
     "predicted": {
+      "assessmentTime": "2026-03-07 16:30:00",
       "allergyHistory": [
         "无"
       ],
       "consciousness": "昏迷"
     },
-    "generated_text": "{\n  \"allergyHistory\": [\"无\"],\n  \"consciousness\": \"昏迷\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 16:30:00\",\n  \"allergyHistory\": [\"无\"],\n  \"consciousness\": \"昏迷\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.42592670395970345,
+    "audio_error": null,
+    "request_time_seconds": 2.012563843280077,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3339,20 +3356,21 @@
       "pulseRate": "82"
     },
     "predicted": {
+      "assessmentTime": "2026-03-08 09:00:00",
       "weight": "70.0",
       "pulseRate": "82"
     },
-    "generated_text": "{\n  \"weight\": \"70.0\",\n  \"pulseRate\": \"82\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 09:00:00\",\n  \"weight\": \"70.0\",\n  \"pulseRate\": \"82\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.45103035867214203,
+    "audio_error": null,
+    "request_time_seconds": 2.0942005328834057,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "pulseRate": {
         "tp": 1,
@@ -3378,24 +3396,24 @@
       "temperature": "37.0",
       "respiratoryRate": "20"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-08 14:00:00\",\"temperature\":\"37.0\",\"respiratoryRate\":\"20\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 14:00:00\",\n  \"temperature\": \"37.0\",\n  \"respiratoryRate\": \"20\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6646227017045021,
+    "audio_error": null,
+    "request_time_seconds": 2.1300718002021313,
     "metrics": {
+      "respiratoryRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "temperature": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3410,35 +3428,31 @@
       "heartRate": "90"
     },
     "predicted": {
+      "assessmentTime": "2026-03-08 16:00:00",
       "bloodSugar": "6.1",
-      "pulseRate": "90"
+      "heartRate": "90"
     },
-    "generated_text": "{\n  \"bloodSugar\": \"6.1\",\n  \"pulseRate\": \"90\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 16:00:00\",\n  \"bloodSugar\": \"6.1\",\n  \"heartRate\": \"90\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4491362012922764,
+    "audio_error": null,
+    "request_time_seconds": 2.0875111669301987,
     "metrics": {
-      "bloodSugar": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
-      },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
         "fn": 0
       },
-      "heartRate": {
-        "tp": 0,
+      "bloodSugar": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       }
     }
   },
@@ -3452,29 +3466,30 @@
       "consciousness": "嗜睡"
     },
     "predicted": {
+      "assessmentTime": "2026-03-09 09:30:00",
       "consciousness": "嗜睡",
       "skin": [
         "皮疹"
       ]
     },
-    "generated_text": "{\n  \"consciousness\": \"嗜睡\",\n  \"skin\": [\"皮疹\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 09:30:00\",\n  \"consciousness\": \"嗜睡\",\n  \"skin\": [\"皮疹\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.422699186950922,
+    "audio_error": null,
+    "request_time_seconds": 1.980121809989214,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "consciousness": {
+      "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3490,33 +3505,34 @@
       "education": "初中"
     },
     "predicted": {
+      "assessmentTime": "2026-03-09 11:30:00",
+      "education": "初中",
       "admissionTime": "2026-03-09 10:00:00",
-      "admissionMethod": "步行",
-      "education": "初中"
+      "admissionMethod": "步行"
     },
-    "generated_text": "{\n  \"admissionTime\": \"2026-03-09 10:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"education\": \"初中\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 11:30:00\",\n  \"education\": \"初中\",\n  \"admissionTime\": \"2026-03-09 10:00:00\",\n  \"admissionMethod\": \"步行\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7350997738540173,
+    "audio_error": null,
+    "request_time_seconds": 2.907785978168249,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "education": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "admissionMethod": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3531,16 +3547,22 @@
       "sleep": "异常"
     },
     "predicted": {
+      "assessmentTime": "2026-03-09 14:00:00",
       "diet": "异常",
       "sleep": "异常"
     },
-    "generated_text": "{\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 14:00:00\",\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3809869922697544,
+    "audio_error": null,
+    "request_time_seconds": 1.9103826619684696,
     "metrics": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "sleep": {
         "tp": 1,
         "fp": 0,
@@ -3550,11 +3572,6 @@
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       }
     }
   },
@@ -3569,32 +3586,36 @@
       "diastolicPressure": "75"
     },
     "predicted": {
+      "assessmentTime": "2026-03-09 16:30:00",
       "systolicPressure": "110",
-      "diastolicPressure": "75"
+      "diastolicPressure": "75",
+      "catheter": [
+        "无"
+      ]
     },
-    "generated_text": "{\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"75\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 16:30:00\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"75\",\n  \"catheter\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4912109188735485,
+    "audio_error": null,
+    "request_time_seconds": 2.4936654940247536,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
-        "tp": 0,
+      "assessmentTime": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3617,13 +3638,23 @@
       "diastolicPressure": "80",
       "respiratoryRate": "20"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-05 09:00:00\",\"temperature\":\"36.5\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\",\"respiratoryRate\":\"20\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 09:00:00\",\n  \"temperature\": \"36.5\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"respiratoryRate\": \"20\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.757380984723568,
+    "audio_error": null,
+    "request_time_seconds": 2.961714431643486,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
@@ -3634,17 +3665,7 @@
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "temperature": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3660,33 +3681,34 @@
       "heartRate": "75"
     },
     "predicted": {
-      "consciousness": "清醒",
+      "assessmentTime": "2026-03-05 15:30:00",
       "education": "高中或中专",
-      "heartRate": "75"
+      "heartRate": "75",
+      "consciousness": "清醒"
     },
-    "generated_text": "{\n  \"consciousness\": \"清醒\",\n  \"education\": \"高中或中专\",\n  \"heartRate\": \"75\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 15:30:00\",\n  \"education\": \"高中或中专\",\n  \"heartRate\": \"75\",\n  \"consciousness\": \"清醒\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4478765204548836,
+    "audio_error": null,
+    "request_time_seconds": 2.4068285524845123,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "heartRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3705,28 +3727,32 @@
       "pulseRate": "80"
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 08:00:00",
       "admissionTime": "2026-03-04 22:00:00",
       "admissionMethod": "轮椅",
+      "catheter": [
+        "静脉通路"
+      ],
       "pulseRate": "80"
     },
-    "generated_text": "{\n  \"admissionTime\": \"2026-03-04 22:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"pulseRate\": \"80\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"admissionTime\": \"2026-03-04 22:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"catheter\": [\"静脉通路\"],\n  \"pulseRate\": \"80\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6818664073944092,
+    "audio_error": null,
+    "request_time_seconds": 3.3623958863317966,
     "metrics": {
       "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3737,9 +3763,9 @@
         "fn": 0
       },
       "catheter": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       }
     }
   },
@@ -3756,22 +3782,31 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-06 14:00:00",
       "height": "170",
       "weight": "65.0",
       "systolicPressure": "110",
-      "diastolicPressure": "80"
+      "diastolicPressure": "80",
+      "allergyHistory": [
+        "无"
+      ]
     },
-    "generated_text": "{\n  \"height\": \"170\",\n  \"weight\": \"65.0\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"80\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 14:00:00\",\n  \"height\": \"170\",\n  \"weight\": \"65.0\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"80\",\n  \"allergyHistory\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6329144984483719,
+    "audio_error": null,
+    "request_time_seconds": 3.2582903504371643,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "systolicPressure": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "weight": {
         "tp": 1,
@@ -3783,15 +3818,10 @@
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "allergyHistory": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
       },
       "diastolicPressure": {
         "tp": 1,
@@ -3818,34 +3848,35 @@
         "青霉素",
         "头孢"
       ],
+      "bloodSugar": "5.6",
       "skin": [
         "破损"
       ],
-      "bloodSugar": "5.6"
+      "assessmentTime": "2026-03-07 09:00:00"
     },
-    "generated_text": "{\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"skin\": [\"破损\"],\n  \"bloodSugar\": \"5.6\"\n}",
+    "generated_text": "{\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"bloodSugar\": \"5.6\",\n  \"skin\": [\"破损\"],\n  \"assessmentTime\": \"2026-03-07 09:00:00\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4952794462442398,
+    "audio_error": null,
+    "request_time_seconds": 2.5991383008658886,
     "metrics": {
-      "bloodSugar": {
+      "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3860,12 +3891,12 @@
     "predicted": {
       "assessmentTime": "2026-03-07 10:00:00"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-07 10:00:00\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:00:00\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.382973525673151,
+    "audio_error": null,
+    "request_time_seconds": 1.3627011701464653,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -3888,23 +3919,27 @@
     "predicted": {
       "ethnicity": "回族",
       "diagnosis": "考虑急性阑尾炎",
-      "defecation": "异常",
+      "urination": "正常",
+      "defecation": "正常",
       "stoolFrequency": "1",
-      "urination": "正常"
+      "assessmentTime": "2026-03-08 11:00:00",
+      "catheter": [
+        "导尿管"
+      ]
     },
-    "generated_text": "{\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"1\",\n  \"urination\": \"正常\"\n}",
+    "generated_text": "{\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"assessmentTime\": \"2026-03-08 11:00:00\",\n  \"catheter\": [\"导尿管\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6898050233721733,
+    "audio_error": null,
+    "request_time_seconds": 3.4757793694734573,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "ethnicity": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "stoolFrequency": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3914,17 +3949,12 @@
         "fp": 1,
         "fn": 0
       },
-      "catheter": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "stoolFrequency": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "diagnosis": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3932,6 +3962,11 @@
       "urination": {
         "tp": 0,
         "fp": 1,
+        "fn": 0
+      },
+      "catheter": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       }
     }
@@ -3946,23 +3981,33 @@
       "respiratoryRate": "22"
     },
     "predicted": {
-      "assessmentTime": "2026-03-08 16:20:00",
+      "assessmentTime": "2026-03-08 16:00:00",
       "systolicPressure": "130",
       "diastolicPressure": "80",
       "pulseRate": "70",
       "respiratoryRate": "22"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-08 16:20:00\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"80\",\"pulseRate\":\"70\",\"respiratoryRate\":\"22\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 16:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"70\",\n  \"respiratoryRate\": \"22\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7745048031210899,
+    "audio_error": null,
+    "request_time_seconds": 2.911082439124584,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "pulseRate": {
         "tp": 1,
@@ -3970,16 +4015,6 @@
         "fn": 0
       },
       "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3997,33 +4032,34 @@
       "sleep": "异常"
     },
     "predicted": {
+      "assessmentTime": "2026-03-09 08:30:00",
       "temperature": "37.0",
       "skin": [
-        "压疮"
+        "其他"
       ],
       "sleep": "异常"
     },
-    "generated_text": "{\n  \"temperature\": \"37.0\",\n  \"skin\": [\"压疮\"],\n  \"sleep\": \"异常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 08:30:00\",\n  \"temperature\": \"37.0\",\n  \"skin\": [\"其他\"],\n  \"sleep\": \"异常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.430028036236763,
+    "audio_error": null,
+    "request_time_seconds": 2.301739025861025,
     "metrics": {
-      "sleep": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "skin": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "sleep": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "temperature": {
         "tp": 1,
@@ -4047,26 +4083,30 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-09 11:15:00",
       "allergyHistory": [
         "海鲜"
       ],
       "skin": [
         "完整"
+      ],
+      "catheter": [
+        "导尿管"
       ]
     },
-    "generated_text": "{\n  \"allergyHistory\": [\"海鲜\"],\n  \"skin\": [\"完整\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 11:15:00\",\n  \"allergyHistory\": [\"海鲜\"],\n  \"skin\": [\"完整\"],\n  \"catheter\": [\"导尿管\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.31544334441423416,
+    "audio_error": null,
+    "request_time_seconds": 2.3917429447174072,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "skin": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4077,9 +4117,9 @@
         "fn": 0
       },
       "catheter": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       }
     }
   },
@@ -4093,24 +4133,20 @@
       "consciousness": "嗜睡"
     },
     "predicted": {
-      "admissionTime": "2026-03-08 08:00:00",
+      "assessmentTime": "2026-03-10 08:00:00",
+      "admissionTime": "2026-03-10 08:00:00",
       "admissionMethod": "其他",
       "diagnosis": "高血压",
       "consciousness": "嗜睡"
     },
-    "generated_text": "{\n  \"admissionTime\": \"2026-03-08 08:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"高血压\",\n  \"consciousness\": \"嗜睡\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 08:00:00\",\n  \"admissionTime\": \"2026-03-10 08:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"高血压\",\n  \"consciousness\": \"嗜睡\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7637520954012871,
+    "audio_error": null,
+    "request_time_seconds": 3.2272793389856815,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "consciousness": {
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4120,12 +4156,17 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "admissionMethod": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4141,17 +4182,17 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-10 14:00:00",
-      "pulseRate": "80",
+      "heartRate": "80",
       "bloodSugar": "6.0"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-10 14:00:00\",\"pulseRate\":\"80\",\"bloodSugar\":\"6.0\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 14:00:00\",\n  \"heartRate\": \"80\",\n  \"bloodSugar\": \"6.0\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5515621192753315,
+    "audio_error": null,
+    "request_time_seconds": 2.099101696163416,
     "metrics": {
-      "bloodSugar": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4161,15 +4202,10 @@
         "fp": 0,
         "fn": 0
       },
-      "pulseRate": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
-      "heartRate": {
-        "tp": 0,
+      "bloodSugar": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       }
     }
   },
@@ -4182,33 +4218,34 @@
       "weight": "50.0"
     },
     "predicted": {
+      "assessmentTime": "2026-03-11 10:00:00",
       "education": "文盲",
       "temperature": "36.5",
       "weight": "50.0"
     },
-    "generated_text": "{\n  \"education\": \"文盲\",\n  \"temperature\": \"36.5\",\n  \"weight\": \"50.0\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 10:00:00\",\n  \"education\": \"文盲\",\n  \"temperature\": \"36.5\",\n  \"weight\": \"50.0\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4898543208837509,
+    "audio_error": null,
+    "request_time_seconds": 2.440609432756901,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "education": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4222,35 +4259,24 @@
       "urination": "异常"
     },
     "predicted": {
-      "temperature": "37.5",
-      "systolicPressure": "90",
+      "assessmentTime": "2026-03-11 16:00:00",
       "urination": "异常"
     },
-    "generated_text": "{\n  \"temperature\": \"37.5\",\n  \"systolicPressure\": \"90\",\n  \"urination\": \"异常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 16:00:00\",\n  \"urination\": \"异常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5002264641225338,
+    "audio_error": null,
+    "request_time_seconds": 1.6834637969732285,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "systolicPressure": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
       "urination": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
-        "tp": 0,
-        "fp": 1,
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
         "fn": 0
       }
     }
@@ -4260,32 +4286,18 @@
     "expected": {
       "assessmentTime": "2026-03-12 07:00:00"
     },
-    "predicted": {
-      "assessmentTime": "2026-03-12 07:00:00",
-      "heartRate": "300",
-      "temperature": "50.0"
-    },
-    "generated_text": "{\"assessmentTime\":\"2026-03-12 07:00:00\",\"heartRate\":\"300\",\"temperature\":\"50.0\"}",
+    "predicted": {},
+    "generated_text": "{}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5874666199088097,
+    "audio_error": null,
+    "request_time_seconds": 0.3633964769542217,
     "metrics": {
       "assessmentTime": {
-        "tp": 1,
+        "tp": 0,
         "fp": 0,
-        "fn": 0
-      },
-      "temperature": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
-      },
-      "heartRate": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 0
+        "fn": 1
       }
     }
   },
@@ -4298,28 +4310,29 @@
       "diastolicPressure": "70"
     },
     "predicted": {
-      "pulseRate": "70",
+      "assessmentTime": "2026-03-12 11:00:00",
+      "pulseRate": "75",
       "systolicPressure": "120",
       "diastolicPressure": "70"
     },
-    "generated_text": "{\n  \"pulseRate\": \"70\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"70\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 11:00:00\",\n  \"pulseRate\": \"75\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"70\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5363821275532246,
+    "audio_error": null,
+    "request_time_seconds": 2.5437308847904205,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "systolicPressure": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "pulseRate": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4341,39 +4354,40 @@
       "admissionMethod": "步行"
     },
     "predicted": {
-      "defecation": "正常",
+      "assessmentTime": "2026-03-13 14:30:00",
+      "admissionTime": "2026-03-12 21:00:00",
+      "admissionMethod": "步行",
       "urination": "正常",
-      "admissionTime": "2026-03-11 21:00:00",
-      "admissionMethod": "步行"
+      "defecation": "正常"
     },
-    "generated_text": "{\n  \"defecation\": \"正常\",\n  \"urination\": \"正常\",\n  \"admissionTime\": \"2026-03-11 21:00:00\",\n  \"admissionMethod\": \"步行\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-13 14:30:00\",\n  \"admissionTime\": \"2026-03-12 21:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7950880564749241,
+    "audio_error": null,
+    "request_time_seconds": 3.256750863045454,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
-      "urination": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionMethod": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "urination": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4394,29 +4408,29 @@
       "systolicPressure": "110",
       "diastolicPressure": "70"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-13 20:00:00\",\"heartRate\":\"75\",\"systolicPressure\":\"110\",\"diastolicPressure\":\"70\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-13 20:00:00\",\n  \"heartRate\": \"75\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.6962481327354908,
+    "audio_error": null,
+    "request_time_seconds": 2.5308566093444824,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "diastolicPressure": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4439,13 +4453,23 @@
       "respiratoryRate": "18",
       "consciousness": "昏睡"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-14 08:30:00\",\"systolicPressure\":\"140\",\"diastolicPressure\":\"90\",\"respiratoryRate\":\"18\",\"consciousness\":\"昏睡\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 08:30:00\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"90\",\n  \"respiratoryRate\": \"18\",\n  \"consciousness\": \"昏睡\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.7938798293471336,
+    "audio_error": null,
+    "request_time_seconds": 2.87545757368207,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
@@ -4457,16 +4481,6 @@
         "fn": 0
       },
       "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4487,6 +4501,8 @@
       "education": "初中或中专"
     },
     "predicted": {
+      "assessmentTime": "2026-03-14 15:00:00",
+      "education": "初中",
       "skin": [
         "皮疹",
         "出血点"
@@ -4494,16 +4510,30 @@
       "catheter": [
         "静脉通路"
       ],
-      "education": "初中",
-      "assessmentTime": "2026-03-14 15:00:00"
+      "diet": "异常"
     },
-    "generated_text": "{\n  \"skin\": [\"皮疹\", \"出血点\"],\n  \"catheter\": [\"静脉通路\"],\n  \"education\": \"初中\",\n  \"assessmentTime\": \"2026-03-14 15:00:00\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 15:00:00\",\n  \"education\": \"初中\",\n  \"skin\": [\"皮疹\", \"出血点\"],\n  \"catheter\": [\"静脉通路\"],\n  \"diet\": \"异常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.8278121426701546,
+    "audio_error": null,
+    "request_time_seconds": 2.7760651782155037,
     "metrics": {
+      "education": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "skin": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diet": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
@@ -4513,16 +4543,6 @@
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "skin": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "education": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
       }
     }
   },
@@ -4536,28 +4556,33 @@
     "predicted": {
       "assessmentTime": "2026-03-15 14:00:00",
       "pulseRate": "80",
-      "respiratoryRate": "19"
+      "heartRate": "19"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-15 14:00:00\",\"pulseRate\":\"80\",\"respiratoryRate\":\"19\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-15 14:00:00\",\n  \"pulseRate\": \"80\",\n  \"heartRate\": \"19\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5510202199220657,
+    "audio_error": null,
+    "request_time_seconds": 2.047045961022377,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
+      "respiratoryRate": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
       "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
+      "heartRate": {
+        "tp": 0,
+        "fp": 1,
         "fn": 0
       }
     }
@@ -4570,27 +4595,28 @@
       "consciousness": "浅昏迷"
     },
     "predicted": {
+      "assessmentTime": "2026-03-15 10:00:00",
       "ethnicity": "壮族",
       "consciousness": "浅昏迷"
     },
-    "generated_text": "{\n  \"ethnicity\": \"壮族\",\n  \"consciousness\": \"浅昏迷\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-15 10:00:00\",\n  \"ethnicity\": \"壮族\",\n  \"consciousness\": \"浅昏迷\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.32893645390868187,
+    "audio_error": null,
+    "request_time_seconds": 2.06127005815506,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "consciousness": {
+      "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "ethnicity": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4609,38 +4635,42 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-16 09:00:00",
       "bloodSugar": "6.7",
       "systolicPressure": "130",
-      "diastolicPressure": "85"
+      "diastolicPressure": "85",
+      "allergyHistory": [
+        "无"
+      ]
     },
-    "generated_text": "{\n  \"bloodSugar\": \"6.7\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-16 09:00:00\",\n  \"bloodSugar\": \"6.7\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"allergyHistory\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5367765165865421,
+    "audio_error": null,
+    "request_time_seconds": 2.912213198840618,
     "metrics": {
-      "bloodSugar": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "allergyHistory": {
-        "tp": 0,
+      "assessmentTime": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4657,24 +4687,20 @@
       "diagnosis": "考虑心力衰竭"
     },
     "predicted": {
+      "assessmentTime": "2026-03-16 11:00:00",
+      "education": "小学",
       "admissionTime": "2026-03-15 20:00:00",
       "admissionMethod": "背入",
-      "education": "小学",
       "diagnosis": "考虑心力衰竭"
     },
-    "generated_text": "{\n  \"admissionTime\": \"2026-03-15 20:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"education\": \"小学\",\n  \"diagnosis\": \"考虑心力衰竭\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-16 11:00:00\",\n  \"education\": \"小学\",\n  \"admissionTime\": \"2026-03-15 20:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"考虑心力衰竭\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.8143120110034943,
+    "audio_error": null,
+    "request_time_seconds": 3.3390309251844883,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "diagnosis": {
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4684,12 +4710,17 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionMethod": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4709,35 +4740,36 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-17 14:00:00",
       "skin": [
         "钉道",
         "溃疡"
       ],
       "catheter": [
-        "吸氧面罩"
+        "无"
       ]
     },
-    "generated_text": "{\n  \"skin\": [\"钉道\", \"溃疡\"],\n  \"catheter\": [\"吸氧面罩\"]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-17 14:00:00\",\n  \"skin\": [\"钉道\", \"溃疡\"],\n  \"catheter\": [\"无\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.412467323243618,
+    "audio_error": null,
+    "request_time_seconds": 2.116837974637747,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "catheter": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       }
     }
   },
@@ -4748,27 +4780,22 @@
       "heartRate": "65"
     },
     "predicted": {
-      "temperature": "80.0",
+      "assessmentTime": "2026-03-17 08:30:00",
       "heartRate": "65"
     },
-    "generated_text": "{\"temperature\":\"80.0\",\"heartRate\":\"65\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-17 08:30:00\",\n  \"heartRate\": \"65\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.2741409242153168,
+    "audio_error": null,
+    "request_time_seconds": 1.7157897613942623,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "heartRate": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
-      },
-      "temperature": {
-        "tp": 0,
-        "fp": 1,
         "fn": 0
       },
-      "heartRate": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4784,30 +4811,30 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-18 09:00:00",
-      "systolicPressure": "120",
-      "diastolicPressure": "80"
+      "systolicPressure": "110",
+      "diastolicPressure": "70"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-18 09:00:00\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-18 09:00:00\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.607374981045723,
+    "audio_error": null,
+    "request_time_seconds": 2.1869967095553875,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
       "diastolicPressure": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       }
     }
   },
@@ -4819,27 +4846,28 @@
       "defecation": "正常"
     },
     "predicted": {
+      "assessmentTime": "2026-03-18 15:00:00",
       "respiratoryRate": "19",
       "defecation": "正常"
     },
-    "generated_text": "{\n  \"respiratoryRate\": \"19\",\n  \"defecation\": \"正常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-18 15:00:00\",\n  \"respiratoryRate\": \"19\",\n  \"defecation\": \"正常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3734814450144768,
+    "audio_error": null,
+    "request_time_seconds": 2.084309868514538,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "defecation": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4854,12 +4882,12 @@
     "predicted": {
       "assessmentTime": "2026-03-19 10:00:00"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-19 10:00:00\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-19 10:00:00\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.3972742296755314,
+    "audio_error": null,
+    "request_time_seconds": 1.360213652253151,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -4879,22 +4907,26 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-19 14:00:00",
       "admissionTime": "2026-03-17 10:00:00",
-      "admissionMethod": "平车"
+      "admissionMethod": "平车",
+      "catheter": [
+        "静脉通路"
+      ]
     },
-    "generated_text": "{\"admissionTime\":\"2026-03-17 10:00:00\",\"admissionMethod\":\"平车\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-19 14:00:00\",\n  \"admissionTime\": \"2026-03-17 10:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"catheter\": [\"静脉通路\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4943952262401581,
+    "audio_error": null,
+    "request_time_seconds": 3.028348933905363,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4905,9 +4937,9 @@
         "fn": 0
       },
       "catheter": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       }
     }
   },
@@ -4918,14 +4950,15 @@
       "weight": "70.5"
     },
     "predicted": {
+      "assessmentTime": "2026-03-20 08:00:00",
       "weight": "70.5"
     },
-    "generated_text": "{\n  \"weight\": \"70.5\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-20 08:00:00\",\n  \"weight\": \"70.5\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.22220808267593384,
+    "audio_error": null,
+    "request_time_seconds": 1.750971544533968,
     "metrics": {
       "weight": {
         "tp": 1,
@@ -4933,9 +4966,9 @@
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       }
     }
   },
@@ -4946,30 +4979,31 @@
       "diet": "异常"
     },
     "predicted": {
+      "assessmentTime": "2026-03-20 16:30:00",
       "diet": "异常",
       "sleep": "异常"
     },
-    "generated_text": "{\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-20 16:30:00\",\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.30966924875974655,
+    "audio_error": null,
+    "request_time_seconds": 1.9218271262943745,
     "metrics": {
-      "diet": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "sleep": {
         "tp": 0,
         "fp": 1,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "diet": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       }
     }
   },
@@ -4983,22 +5017,33 @@
       "pulseRate": "90"
     },
     "predicted": {
+      "assessmentTime": "2026-03-21 09:15:00",
       "systolicPressure": "140",
       "diastolicPressure": "100",
       "respiratoryRate": "20",
       "pulseRate": "90"
     },
-    "generated_text": "{\"systolicPressure\":\"140\",\"diastolicPressure\":\"100\",\"respiratoryRate\":\"20\",\"pulseRate\":\"90\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-21 09:15:00\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"100\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"90\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5217434875667095,
+    "audio_error": null,
+    "request_time_seconds": 2.9463667310774326,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
+      "systolicPressure": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "pulseRate": {
         "tp": 1,
@@ -5006,16 +5051,6 @@
         "fn": 0
       },
       "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -5031,33 +5066,34 @@
       "consciousness": "药物镇静状"
     },
     "predicted": {
+      "assessmentTime": "2026-03-21 11:00:00",
       "admissionMethod": "其他",
       "diagnosis": "考虑脑梗死",
       "consciousness": "药物镇静状"
     },
-    "generated_text": "{\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑脑梗死\",\n  \"consciousness\": \"药物镇静状\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-21 11:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑脑梗死\",\n  \"consciousness\": \"药物镇静状\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5204329043626785,
+    "audio_error": null,
+    "request_time_seconds": 2.440722044557333,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "admissionMethod": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -5076,33 +5112,43 @@
       ]
     },
     "predicted": {
+      "assessmentTime": "2026-03-22 10:30:00",
       "allergyHistory": [
         "花粉"
       ],
       "skin": [
+        "造口",
+        "完整"
+      ],
+      "catheter": [
         "造口"
       ]
     },
-    "generated_text": "{\n  \"allergyHistory\": [\n    \"花粉\"\n  ],\n  \"skin\": [\n    \"造口\"\n  ]\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-22 10:30:00\",\n  \"allergyHistory\": [\"花粉\"],\n  \"skin\": [\"造口\", \"完整\"],\n  \"catheter\": [\"造口\"]\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.4563724398612976,
+    "audio_error": null,
+    "request_time_seconds": 2.4981196336448193,
     "metrics": {
-      "assessmentTime": {
+      "skin": {
         "tp": 0,
-        "fp": 0,
+        "fp": 1,
         "fn": 1
+      },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
-        "tp": 1,
-        "fp": 0,
+      "catheter": {
+        "tp": 0,
+        "fp": 1,
         "fn": 0
       }
     }
@@ -5114,22 +5160,22 @@
       "temperature": "38.2"
     },
     "predicted": {
-      "assessmentTime": "2026-03-22 08:00:00",
+      "assessmentTime": "2026-03-22 03:00:00",
       "temperature": "38.2"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-22 08:00:00\",\"temperature\":\"38.2\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-22 03:00:00\",\n  \"temperature\": \"38.2\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.49284524843096733,
+    "audio_error": null,
+    "request_time_seconds": 1.7395385839045048,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
       "temperature": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -5146,34 +5192,41 @@
       "stoolFrequency": "1"
     },
     "predicted": {
+      "assessmentTime": "2026-03-23 15:00:00",
+      "diet": "正常",
+      "sleep": "正常",
       "urination": "正常",
       "defecation": "正常",
-      "diet": "正常",
       "stoolFrequency": "1"
     },
-    "generated_text": "{\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"diet\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-23 15:00:00\",\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5408346205949783,
+    "audio_error": null,
+    "request_time_seconds": 2.886560618877411,
     "metrics": {
       "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 0,
+      "stoolFrequency": {
+        "tp": 1,
         "fp": 0,
-        "fn": 1
+        "fn": 0
       },
       "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "stoolFrequency": {
+      "sleep": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -5194,33 +5247,34 @@
       "heartRate": "110"
     },
     "predicted": {
+      "assessmentTime": "2026-03-23 17:00:00",
       "systolicPressure": "90",
       "diastolicPressure": "80",
       "heartRate": "110"
     },
-    "generated_text": "{\n  \"systolicPressure\": \"90\",\n  \"diastolicPressure\": \"80\",\n  \"heartRate\": \"110\"\n}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-23 17:00:00\",\n  \"systolicPressure\": \"90\",\n  \"diastolicPressure\": \"80\",\n  \"heartRate\": \"110\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5274231694638729,
+    "audio_error": null,
+    "request_time_seconds": 2.5313725024461746,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 0,
-        "fn": 1
-      },
       "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "diastolicPressure": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -5235,28 +5289,28 @@
       "consciousness": "模糊"
     },
     "predicted": {
-      "assessmentTime": "2026-03-24 09:00:00",
+      "assessmentTime": "2026-03-24 06:30:00",
       "respiratoryRate": "16",
       "consciousness": "模糊"
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-24 09:00:00\",\"respiratoryRate\":\"16\",\"consciousness\":\"模糊\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-24 06:30:00\",\n  \"respiratoryRate\": \"16\",\n  \"consciousness\": \"模糊\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5632692091166973,
+    "audio_error": null,
+    "request_time_seconds": 2.0142635107040405,
     "metrics": {
-      "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
-      },
-      "consciousness": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -5271,28 +5325,28 @@
       "pulseRate": "78"
     },
     "predicted": {
+      "assessmentTime": "2026-03-24 08:00:00",
       "education": "大专以上",
-      "assessmentTime": "2026-03-24 00:00:00",
       "pulseRate": "78"
     },
-    "generated_text": "{\"education\":\"大专以上\",\"assessmentTime\":\"2026-03-24 00:00:00\",\"pulseRate\":\"78\"}",
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-24 08:00:00\",\n  \"education\": \"大专以上\",\n  \"pulseRate\": \"78\"\n}",
     "audio_path": null,
     "audio_format": "wav",
     "audio_bytes": 0,
-    "audio_error": "audio_requested_but_not_returned",
-    "request_time_seconds": 0.5383271835744381,
+    "audio_error": null,
+    "request_time_seconds": 2.0487453676760197,
     "metrics": {
+      "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 0,
         "fp": 1,
         "fn": 1
       },
       "pulseRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0

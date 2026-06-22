@@ -1,0 +1,685 @@
+ID: 1
+Ref: 打开标本功能。
+Hyp: 大凯表本宫。
+Ref(eval): 打开标本功能
+Hyp(eval): 大凯表本宫
+CER: 0.8333
+
+ID: 2
+Ref: 打开输液功能。
+Hyp: 达凯诉约克郡。
+Ref(eval): 打开输液功能
+Hyp(eval): 达凯诉约克郡
+CER: 1.0000
+
+ID: 5
+Ref: 打开标本。
+Hyp: 达凯表本
+Ref(eval): 打开标本
+Hyp(eval): 达凯表本
+CER: 0.7500
+
+ID: 6
+Ref: 打开治疗。
+Hyp: 达凯治疗
+Ref(eval): 打开治疗
+Hyp(eval): 达凯治疗
+CER: 0.5000
+
+ID: 7
+Ref: 打开通讯录。
+Hyp: 达凯东水路
+Ref(eval): 打开通讯录
+Hyp(eval): 达凯东水路
+CER: 1.0000
+
+ID: 8
+Ref: 打开患者。
+Hyp: 达凯权证
+Ref(eval): 打开患者
+Hyp(eval): 达凯权证
+CER: 1.0000
+
+ID: 9
+Ref: 打开推送通知。
+Hyp: 大凯 催促通知
+Ref(eval): 打开推送通知
+Hyp(eval): 大凯催促通知
+CER: 0.6667
+
+ID: 10
+Ref: 打开标本。
+Hyp: 达凯表白
+Ref(eval): 打开标本
+Hyp(eval): 达凯表白
+CER: 1.0000
+
+ID: 11
+Ref: 打开输液。
+Hyp: 大台數域
+Ref(eval): 打开输液
+Hyp(eval): 大台數域
+CER: 1.0000
+
+ID: 12
+Ref: 打开皮试。
+Hyp: 大开脾摄
+Ref(eval): 打开皮试
+Hyp(eval): 大开脾摄
+CER: 0.7500
+
+ID: 13
+Ref: 打开配液。
+Hyp: 大開脾意。
+Ref(eval): 打开配液
+Hyp(eval): 大開脾意
+CER: 1.0000
+
+ID: 14
+Ref: 打开口服。
+Hyp: 巴克特福。
+Ref(eval): 打开口服
+Hyp(eval): 巴克特福
+CER: 1.0000
+
+ID: 15
+Ref: 打开治疗。
+Hyp: 大开治疗。
+Ref(eval): 打开治疗
+Hyp(eval): 大开治疗
+CER: 0.2500
+
+ID: 16
+Ref: 打开体征采集。
+Hyp: 达泰特征裁决
+Ref(eval): 打开体征采集
+Hyp(eval): 达泰特征裁决
+CER: 0.8333
+
+ID: 17
+Ref: 打开护理记录。
+Hyp: 打太酷令地图。
+Ref(eval): 打开护理记录
+Hyp(eval): 打太酷令地图
+CER: 0.8333
+
+ID: 18
+Ref: 打开护理文书。
+Hyp: 达卡口令闻诉
+Ref(eval): 打开护理文书
+Hyp(eval): 达卡口令闻诉
+CER: 1.0000
+
+ID: 19
+Ref: 打开患者巡视。
+Hyp: 下开馆制星期四
+Ref(eval): 打开患者巡视
+Hyp(eval): 下开馆制星期四
+CER: 1.0000
+
+ID: 20
+Ref: 打开健康宣教。
+Hyp: 把开建工程项目
+Ref(eval): 打开健康宣教
+Hyp(eval): 把开建工程项目
+CER: 1.0000
+
+ID: 21
+Ref: 打开不良事件。
+Hyp: 大开部分世界
+Ref(eval): 打开不良事件
+Hyp(eval): 大开部分世界
+CER: 0.8333
+
+ID: 22
+Ref: 打开推送通知。
+Hyp: 下开推送通知
+Ref(eval): 打开推送通知
+Hyp(eval): 下开推送通知
+CER: 0.1667
+
+ID: 23
+Ref: 打开患者。
+Hyp: 打太宽则
+Ref(eval): 打开患者
+Hyp(eval): 打太宽则
+CER: 0.7500
+
+ID: 24
+Ref: 打开消息。
+Hyp: 达卡交易所
+Ref(eval): 打开消息
+Hyp(eval): 达卡交易所
+CER: 1.2500
+
+ID: 25
+Ref: 打开通讯录。
+Hyp: 达泰通讯路
+Ref(eval): 打开通讯录
+Hyp(eval): 达泰通讯路
+CER: 0.6000
+
+ID: 26
+Ref: 查看标本。
+Hyp: 查卡标本
+Ref(eval): 查看标本
+Hyp(eval): 查卡标本
+CER: 0.2500
+
+ID: 27
+Ref: 查看输液。
+Hyp: 查卡斯维特
+Ref(eval): 查看输液
+Hyp(eval): 查卡斯维特
+CER: 1.0000
+
+ID: 28
+Ref: 查看皮试。
+Hyp: 打卡批设
+Ref(eval): 查看皮试
+Hyp(eval): 打卡批设
+CER: 1.0000
+
+ID: 29
+Ref: 查看配液。
+Hyp: 下關平易
+Ref(eval): 查看配液
+Hyp(eval): 下關平易
+CER: 1.0000
+
+ID: 30
+Ref: 查看口服。
+Hyp: 打看可否
+Ref(eval): 查看口服
+Hyp(eval): 打看可否
+CER: 0.7500
+
+ID: 31
+Ref: 查看治疗。
+Hyp: 打看资料
+Ref(eval): 查看治疗
+Hyp(eval): 打看资料
+CER: 0.7500
+
+ID: 32
+Ref: 查看体征采集。
+Hyp: 打卡基地
+Ref(eval): 查看体征采集
+Hyp(eval): 打卡基地
+CER: 1.0000
+
+ID: 33
+Ref: 查看护理记录。
+Hyp: 下卡后力记录
+Ref(eval): 查看护理记录
+Hyp(eval): 下卡后力记录
+CER: 0.6667
+
+ID: 34
+Ref: 查看护理文书。
+Hyp: 查卡胡林温授
+Ref(eval): 查看护理文书
+Hyp(eval): 查卡胡林温授
+CER: 0.8333
+
+ID: 35
+Ref: 查看患者巡视。
+Hyp: 查康旺的城市。
+Ref(eval): 查看患者巡视
+Hyp(eval): 查康旺的城市
+CER: 0.8333
+
+ID: 36
+Ref: 查看健康宣教。
+Hyp: 他开点空线叫。
+Ref(eval): 查看健康宣教
+Hyp(eval): 他开点空线叫
+CER: 1.0000
+
+ID: 37
+Ref: 查看不良事件。
+Hyp: 下坎部份事件
+Ref(eval): 查看不良事件
+Hyp(eval): 下坎部份事件
+CER: 0.6667
+
+ID: 38
+Ref: 查看推送通知。
+Hyp: 查探推送通知
+Ref(eval): 查看推送通知
+Hyp(eval): 查探推送通知
+CER: 0.1667
+
+ID: 39
+Ref: 查看患者。
+Hyp: 打卡完成。
+Ref(eval): 查看患者
+Hyp(eval): 打卡完成
+CER: 1.0000
+
+ID: 40
+Ref: 查看消息。
+Hyp: 查产消息
+Ref(eval): 查看消息
+Hyp(eval): 查产消息
+CER: 0.2500
+
+ID: 41
+Ref: 查看通讯录。
+Hyp: 塔坎通新道
+Ref(eval): 查看通讯录
+Hyp(eval): 塔坎通新道
+CER: 0.8000
+
+ID: 42
+Ref: 进入标本。
+Hyp: 
+Ref(eval): 进入标本
+Hyp(eval): 
+CER: 1.0000
+
+ID: 43
+Ref: 进入输液。
+Hyp: 
+Ref(eval): 进入输液
+Hyp(eval): 
+CER: 1.0000
+
+ID: 44
+Ref: 进入皮试。
+Hyp: 经济预测
+Ref(eval): 进入皮试
+Hyp(eval): 经济预测
+CER: 1.0000
+
+ID: 45
+Ref: 进入配液。
+Hyp: 金屋北駅
+Ref(eval): 进入配液
+Hyp(eval): 金屋北駅
+CER: 1.0000
+
+ID: 46
+Ref: 进入口服。
+Hyp: 金路考夫
+Ref(eval): 进入口服
+Hyp(eval): 金路考夫
+CER: 1.0000
+
+ID: 47
+Ref: 进入治疗。
+Hyp: 
+Ref(eval): 进入治疗
+Hyp(eval): 
+CER: 1.0000
+
+ID: 48
+Ref: 进入体征采集。
+Hyp: 金银财气
+Ref(eval): 进入体征采集
+Hyp(eval): 金银财气
+CER: 1.0000
+
+ID: 49
+Ref: 进入护理记录。
+Hyp: 
+Ref(eval): 进入护理记录
+Hyp(eval): 
+CER: 1.0000
+
+ID: 50
+Ref: 进入护理文书。
+Hyp: 金文孔里王首。
+Ref(eval): 进入护理文书
+Hyp(eval): 金文孔里王首
+CER: 1.0000
+
+ID: 51
+Ref: 进入患者巡视。
+Hyp: 
+Ref(eval): 进入患者巡视
+Hyp(eval): 
+CER: 1.0000
+
+ID: 52
+Ref: 进入健康宣教。
+Hyp: チームの権限上
+Ref(eval): 进入健康宣教
+Hyp(eval): チームの権限上
+CER: 1.1667
+
+ID: 53
+Ref: 进入不良事件。
+Hyp: 中国朝鲜船
+Ref(eval): 进入不良事件
+Hyp(eval): 中国朝鲜船
+CER: 1.0000
+
+ID: 55
+Ref: 进入患者。
+Hyp: 进入环境。
+Ref(eval): 进入患者
+Hyp(eval): 进入环境
+CER: 0.5000
+
+ID: 57
+Ref: 进入通讯录。
+Hyp: 金通隧道
+Ref(eval): 进入通讯录
+Hyp(eval): 金通隧道
+CER: 0.8000
+
+ID: 58
+Ref: 打开标本。
+Hyp: だから、勉強。
+Ref(eval): 打开标本
+Hyp(eval): だから勉強
+CER: 1.2500
+
+ID: 60
+Ref: 做皮试。
+Hyp: 
+Ref(eval): 做皮试
+Hyp(eval): 
+CER: 1.0000
+
+ID: 61
+Ref: 核对配液。
+Hyp: हाथों पे नीले
+Ref(eval): 核对配液
+Hyp(eval): हथपनल
+CER: 1.2500
+
+ID: 62
+Ref: 口服药核对。
+Hyp: 可服务合同。
+Ref(eval): 口服药核对
+Hyp(eval): 可服务合同
+CER: 0.8000
+
+ID: 63
+Ref: 开始治疗。
+Hyp: 可以写成“可以写成
+Ref(eval): 开始治疗
+Hyp(eval): 可以写成可以写成
+CER: 2.0000
+
+ID: 64
+Ref: 采集体征。
+Hyp: 在基地期间
+Ref(eval): 采集体征
+Hyp(eval): 在基地期间
+CER: 1.2500
+
+ID: 65
+Ref: 填写护理记录。
+Hyp: 城市福利地图
+Ref(eval): 填写护理记录
+Hyp(eval): 城市福利地图
+CER: 1.0000
+
+ID: 66
+Ref: 录入护理文书。
+Hyp: 不要忽略了。
+Ref(eval): 录入护理文书
+Hyp(eval): 不要忽略了
+CER: 1.0000
+
+ID: 67
+Ref: 进行患者巡视。
+Hyp: 精神状况似乎
+Ref(eval): 进行患者巡视
+Hyp(eval): 精神状况似乎
+CER: 1.0000
+
+ID: 68
+Ref: 做健康宣教。
+Hyp: 周建忠主席
+Ref(eval): 做健康宣教
+Hyp(eval): 周建忠主席
+CER: 1.0000
+
+ID: 69
+Ref: 不良事件上报。
+Hyp: 九两四钱上报。
+Ref(eval): 不良事件上报
+Hyp(eval): 九两四钱上报
+CER: 0.6667
+
+ID: 70
+Ref: 发推送通知。
+Hyp: 法特水上运动
+Ref(eval): 发推送通知
+Hyp(eval): 法特水上运动
+CER: 1.2000
+
+ID: 71
+Ref: 进入患者列表。
+Hyp: 
+Ref(eval): 进入患者列表
+Hyp(eval): 
+CER: 1.0000
+
+ID: 72
+Ref: 查看消息。
+Hyp: 查肯上式
+Ref(eval): 查看消息
+Hyp(eval): 查肯上式
+CER: 0.7500
+
+ID: 73
+Ref: 浏览通讯录。
+Hyp: 有路兰通新路
+Ref(eval): 浏览通讯录
+Hyp(eval): 有路兰通新路
+CER: 1.0000
+
+ID: 74
+Ref: 启动标本。
+Hyp: 市动标本
+Ref(eval): 启动标本
+Hyp(eval): 市动标本
+CER: 0.2500
+
+ID: 75
+Ref: 我想核对标本。
+Hyp: 我上科队表演。
+Ref(eval): 我想核对标本
+Hyp(eval): 我上科队表演
+CER: 0.8333
+
+ID: 76
+Ref: 开启输液。
+Hyp: 开治数业
+Ref(eval): 开启输液
+Hyp(eval): 开治数业
+CER: 0.7500
+
+ID: 77
+Ref: 进入输液。
+Hyp: 继续手术。
+Ref(eval): 进入输液
+Hyp(eval): 继续手术
+CER: 1.0000
+
+ID: 78
+Ref: 执行皮试。
+Hyp: 其形似是
+Ref(eval): 执行皮试
+Hyp(eval): 其形似是
+CER: 1.0000
+
+ID: 79
+Ref: 记录皮试。
+Hyp: 纪律措施
+Ref(eval): 记录皮试
+Hyp(eval): 纪律措施
+CER: 1.0000
+
+ID: 80
+Ref: 启动配液。
+Hyp: 食動配頁
+Ref(eval): 启动配液
+Hyp(eval): 食動配頁
+CER: 0.7500
+
+ID: 81
+Ref: 核对配液。
+Hyp: 
+Ref(eval): 核对配液
+Hyp(eval): 
+CER: 1.0000
+
+ID: 82
+Ref: 记录口服。
+Hyp: 
+Ref(eval): 记录口服
+Hyp(eval): 
+CER: 1.0000
+
+ID: 83
+Ref: 我要核对口服。
+Hyp: 我呀好低苦福。
+Ref(eval): 我要核对口服
+Hyp(eval): 我好低苦福
+CER: 0.8333
+
+ID: 84
+Ref: 启动治疗。
+Hyp: 行动资料
+Ref(eval): 启动治疗
+Hyp(eval): 行动资料
+CER: 0.7500
+
+ID: 85
+Ref: 打开治疗。
+Hyp: 但可以著略。
+Ref(eval): 打开治疗
+Hyp(eval): 但可以著略
+CER: 1.2500
+
+ID: 86
+Ref: 录入体征。
+Hyp: 路路地长
+Ref(eval): 录入体征
+Hyp(eval): 路路地长
+CER: 1.0000
+
+ID: 87
+Ref: 体征采集。
+Hyp: 持证载机
+Ref(eval): 体征采集
+Hyp(eval): 持证载机
+CER: 1.0000
+
+ID: 88
+Ref: 打开护理记录。
+Hyp: 但它后离记录。
+Ref(eval): 打开护理记录
+Hyp(eval): 但它后离记录
+CER: 0.6667
+
+ID: 90
+Ref: 我要进入护理文书。
+Hyp: 皇家金融控股有限公司
+Ref(eval): 我要进入护理文书
+Hyp(eval): 皇家金融控股有限公司
+CER: 1.2500
+
+ID: 91
+Ref: 启动护理文件。
+Hyp: 时动句律文数
+Ref(eval): 启动护理文件
+Hyp(eval): 时动句律文数
+CER: 0.6667
+
+ID: 92
+Ref: 记录患者巡视。
+Hyp: 记录权证数。
+Ref(eval): 记录患者巡视
+Hyp(eval): 记录权证数
+CER: 0.6667
+
+ID: 93
+Ref: 我要开始患者巡视。
+Hyp: 为了快速完成任务，
+Ref(eval): 我要开始患者巡视
+Hyp(eval): 为了快速完成任务
+CER: 1.0000
+
+ID: 94
+Ref: 我要进入健康宣教。
+Hyp: 我呀进入情感现状。
+Ref(eval): 我要进入健康宣教
+Hyp(eval): 我进入情感现状
+CER: 0.6250
+
+ID: 95
+Ref: 记录健康宣教内容。
+Hyp: 记录健康状况内容
+Ref(eval): 记录健康宣教内容
+Hyp(eval): 记录健康状况内容
+CER: 0.2500
+
+ID: 97
+Ref: 录入不良事件。
+Hyp: 从路过北亮事件
+Ref(eval): 录入不良事件
+Hyp(eval): 从路过北亮事件
+CER: 0.8333
+
+ID: 98
+Ref: 发送推送通知。
+Hyp: 法送推送通知
+Ref(eval): 发送推送通知
+Hyp(eval): 法送推送通知
+CER: 0.1667
+
+ID: 99
+Ref: 我要查看推送通知。
+Hyp: 为了查看推送通知
+Ref(eval): 我要查看推送通知
+Hyp(eval): 为了查看推送通知
+CER: 0.2500
+
+ID: 100
+Ref: 查看消息。
+Hyp: 车开上式
+Ref(eval): 查看消息
+Hyp(eval): 车开上式
+CER: 1.0000
+
+ID: 101
+Ref: 我要打开消息。
+Hyp: 为了加快消息
+Ref(eval): 我要打开消息
+Hyp(eval): 为了加快消息
+CER: 0.6667
+
+ID: 102
+Ref: 打开患者。
+Hyp: 但他們權責
+Ref(eval): 打开患者
+Hyp(eval): 但他們權責
+CER: 1.2500
+
+ID: 103
+Ref: 进入患者。
+Hyp: 继续反折
+Ref(eval): 进入患者
+Hyp(eval): 继续反折
+CER: 1.0000
+
+ID: 104
+Ref: 查找通讯录。
+Hyp: 车座通讯路
+Ref(eval): 查找通讯录
+Hyp(eval): 车座通讯路
+CER: 0.6000
+
+ID: 105
+Ref: 进入通讯录。
+Hyp: 继续通讯路
+Ref(eval): 进入通讯录
+Hyp(eval): 继续通讯路
+CER: 0.6000

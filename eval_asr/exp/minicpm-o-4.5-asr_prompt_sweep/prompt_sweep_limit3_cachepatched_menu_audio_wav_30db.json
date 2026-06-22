@@ -1,0 +1,60 @@
+{
+  "model_path": "/root/autodl-tmp/models/models/OpenBMB/MiniCPM-o-4.5",
+  "dataset_dir": "/workspace/audio_llm_agent/dataset/asr_llm",
+  "audio_subdir": "menu_audio_wav_30db",
+  "script_path": "/workspace/audio_llm_agent/dataset/asr_llm/menu_script.txt",
+  "limit": 3,
+  "summary": [
+    {
+      "prompt_mode": "minicpm_zh_official",
+      "total_files": 3,
+      "overall_cer": 1.0,
+      "overall_accuracy": 0.0,
+      "total_duration": 13.200000000000001,
+      "total_inference_time": 1.8104958534240723,
+      "overall_rtf": 0.1371587767745509,
+      "avg_latency": 0.603498617808024,
+      "prompt": "请仔细听这段音频片段，并将其内容逐字记录。"
+    }
+  ],
+  "results": {
+    "minicpm_zh_official": [
+      {
+        "id": "1",
+        "ref": "打开标本功能。",
+        "hyp": "",
+        "ref_eval": "打开标本功能",
+        "hyp_eval": "",
+        "cer": 1.0,
+        "duration": 4.5,
+        "inference_time": 1.7701842784881592,
+        "rtf": 0.3933742841084798,
+        "error": "'NoneType' object is not subscriptable"
+      },
+      {
+        "id": "2",
+        "ref": "打开输液功能。",
+        "hyp": "",
+        "ref_eval": "打开输液功能",
+        "hyp_eval": "",
+        "cer": 1.0,
+        "duration": 4.8,
+        "inference_time": 0.023798227310180664,
+        "rtf": 0.004957964022954306,
+        "error": "'NoneType' object is not subscriptable"
+      },
+      {
+        "id": "5",
+        "ref": "打开标本。",
+        "hyp": "",
+        "ref_eval": "打开标本",
+        "hyp_eval": "",
+        "cer": 1.0,
+        "duration": 3.9,
+        "inference_time": 0.016513347625732422,
+        "rtf": 0.004234191698905749,
+        "error": "'NoneType' object is not subscriptable"
+      }
+    ]
+  }
+}

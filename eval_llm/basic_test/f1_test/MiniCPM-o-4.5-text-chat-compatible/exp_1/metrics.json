@@ -8,28 +8,28 @@
     "fn": 1
   },
   "admissionTime": {
-    "precision": 0.5789473684210527,
-    "recall": 0.6111111111111112,
-    "f1": 0.5945945945945946,
-    "tp": 11,
-    "fp": 8,
-    "fn": 7
+    "precision": 0.631578947368421,
+    "recall": 0.6666666666666666,
+    "f1": 0.6486486486486486,
+    "tp": 12,
+    "fp": 7,
+    "fn": 6
   },
   "allergyHistory": {
-    "precision": 0.8571428571428571,
+    "precision": 0.9230769230769231,
     "recall": 0.7058823529411765,
-    "f1": 0.7741935483870968,
+    "f1": 0.8000000000000002,
     "tp": 12,
-    "fp": 2,
+    "fp": 1,
     "fn": 5
   },
   "assessmentTime": {
-    "precision": 0.65,
-    "recall": 0.21666666666666667,
-    "f1": 0.325,
-    "tp": 26,
+    "precision": 0.6666666666666666,
+    "recall": 0.23333333333333334,
+    "f1": 0.34567901234567905,
+    "tp": 28,
     "fp": 14,
-    "fn": 94
+    "fn": 92
   },
   "bloodPressure": {
     "precision": 0.0,
@@ -48,19 +48,19 @@
     "fn": 0
   },
   "catheter": {
-    "precision": 0.9090909090909091,
-    "recall": 0.5555555555555556,
-    "f1": 0.6896551724137931,
-    "tp": 10,
-    "fp": 1,
-    "fn": 8
+    "precision": 0.8181818181818182,
+    "recall": 0.5,
+    "f1": 0.6206896551724137,
+    "tp": 9,
+    "fp": 2,
+    "fn": 9
   },
   "consciousness": {
-    "precision": 0.9047619047619048,
+    "precision": 0.95,
     "recall": 1.0,
-    "f1": 0.9500000000000001,
+    "f1": 0.9743589743589743,
     "tp": 19,
-    "fp": 2,
+    "fp": 1,
     "fn": 0
   },
   "defecation": {
@@ -72,20 +72,20 @@
     "fn": 0
   },
   "diagnosis": {
-    "precision": 0.8,
-    "recall": 0.75,
-    "f1": 0.7741935483870969,
-    "tp": 12,
-    "fp": 3,
-    "fn": 4
+    "precision": 0.8666666666666667,
+    "recall": 0.8125,
+    "f1": 0.8387096774193549,
+    "tp": 13,
+    "fp": 2,
+    "fn": 3
   },
   "diastolicPressure": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 26,
-    "fp": 0,
-    "fn": 0
+    "precision": 0.9615384615384616,
+    "recall": 0.9615384615384616,
+    "f1": 0.9615384615384616,
+    "tp": 25,
+    "fp": 1,
+    "fn": 1
   },
   "diet": {
     "precision": 0.8888888888888888,
@@ -112,12 +112,12 @@
     "fn": 0
   },
   "heartRate": {
-    "precision": 0.7272727272727273,
-    "recall": 0.5333333333333333,
-    "f1": 0.6153846153846153,
-    "tp": 8,
-    "fp": 3,
-    "fn": 7
+    "precision": 0.8181818181818182,
+    "recall": 0.6,
+    "f1": 0.6923076923076923,
+    "tp": 9,
+    "fp": 2,
+    "fn": 6
   },
   "height": {
     "precision": 1.0,
@@ -128,20 +128,20 @@
     "fn": 0
   },
   "pulseRate": {
-    "precision": 0.5769230769230769,
+    "precision": 0.625,
     "recall": 0.7894736842105263,
-    "f1": 0.6666666666666666,
+    "f1": 0.6976744186046512,
     "tp": 15,
-    "fp": 11,
+    "fp": 9,
     "fn": 4
   },
   "respiratoryRate": {
-    "precision": 1.0,
-    "recall": 0.7777777777777778,
-    "f1": 0.8750000000000001,
-    "tp": 14,
-    "fp": 0,
-    "fn": 4
+    "precision": 0.9411764705882353,
+    "recall": 0.8888888888888888,
+    "f1": 0.9142857142857143,
+    "tp": 16,
+    "fp": 1,
+    "fn": 2
   },
   "skin": {
     "precision": 0.75,
@@ -152,12 +152,12 @@
     "fn": 5
   },
   "sleep": {
-    "precision": 0.875,
-    "recall": 0.875,
-    "f1": 0.875,
-    "tp": 7,
+    "precision": 0.8571428571428571,
+    "recall": 0.75,
+    "f1": 0.7999999999999999,
+    "tp": 6,
     "fp": 1,
-    "fn": 1
+    "fn": 2
   },
   "stoolFrequency": {
     "precision": 1.0,
@@ -168,12 +168,12 @@
     "fn": 0
   },
   "systolicPressure": {
-    "precision": 0.9629629629629629,
-    "recall": 1.0,
-    "f1": 0.9811320754716981,
-    "tp": 26,
-    "fp": 1,
-    "fn": 0
+    "precision": 0.9259259259259259,
+    "recall": 0.9615384615384616,
+    "f1": 0.9433962264150944,
+    "tp": 25,
+    "fp": 2,
+    "fn": 1
   },
   "temperature": {
     "precision": 0.7894736842105263,
@@ -200,17 +200,17 @@
     "fn": 1
   },
   "summary": {
-    "total_category_avg_f1": 0.8102611514672658,
-    "total_sample_aggregate_f1": 0.7561837455830388,
-    "precision": 0.8359375,
-    "recall": 0.6903225806451613,
-    "tp": 321,
-    "fp": 63,
-    "fn": 144,
+    "total_category_avg_f1": 0.8149198818589107,
+    "total_sample_aggregate_f1": 0.7632508833922261,
+    "precision": 0.84375,
+    "recall": 0.6967741935483871,
+    "tp": 324,
+    "fp": 60,
+    "fn": 141,
     "field_count": 25,
     "request_count": 120,
-    "total_request_time_seconds": 64.46348584443331,
-    "avg_request_time_seconds": 0.5371957153702775,
+    "total_request_time_seconds": 71.95586847513914,
+    "avg_request_time_seconds": 0.5996322372928262,
     "vllm_launch_args": "",
     "model_name": "MiniCPM-o-4.5",
     "experiment_args": "VLLM_USE_FLASHINFER_SAMPLER=0 vllm serve MiniCPM-o-4.5 from ModelScope text chat compatible mode",
@@ -220,6 +220,10 @@
     "batch_size": 10,
     "request_timeout_s": 240,
     "enable_system_prompt_block_padding": true,
+    "request_audio": true,
+    "audio_dir": "/root/projects/asr_llm_agent/eval_llm/basic_test/f1_test/MiniCPM-o-4.5-text-chat-compatible/exp_1/audio",
+    "audio_format": "wav",
+    "audio_voice": "alloy",
     "block_size": 16
   }
 }

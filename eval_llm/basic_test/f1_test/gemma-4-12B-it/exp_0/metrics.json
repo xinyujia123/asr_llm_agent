@@ -1,0 +1,221 @@
+{
+  "admissionMethod": {
+    "precision": 0.9523809523809523,
+    "recall": 1.0,
+    "f1": 0.975609756097561,
+    "tp": 20,
+    "fp": 1,
+    "fn": 0
+  },
+  "admissionTime": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+  },
+  "allergyHistory": {
+    "precision": 0.9444444444444444,
+    "recall": 1.0,
+    "f1": 0.9714285714285714,
+    "tp": 17,
+    "fp": 1,
+    "fn": 0
+  },
+  "assessmentTime": {
+    "precision": 0.9663865546218487,
+    "recall": 0.9583333333333334,
+    "f1": 0.9623430962343097,
+    "tp": 115,
+    "fp": 4,
+    "fn": 5
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 13,
+    "fp": 0,
+    "fn": 0
+  },
+  "catheter": {
+    "precision": 0.9473684210526315,
+    "recall": 1.0,
+    "f1": 0.972972972972973,
+    "tp": 18,
+    "fp": 1,
+    "fn": 0
+  },
+  "consciousness": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 19,
+    "fp": 0,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 0.9090909090909091,
+    "recall": 1.0,
+    "f1": 0.9523809523809523,
+    "tp": 10,
+    "fp": 1,
+    "fn": 0
+  },
+  "diagnosis": {
+    "precision": 0.875,
+    "recall": 0.875,
+    "f1": 0.875,
+    "tp": 14,
+    "fp": 2,
+    "fn": 2
+  },
+  "diastolicPressure": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 26,
+    "fp": 0,
+    "fn": 0
+  },
+  "diet": {
+    "precision": 0.8888888888888888,
+    "recall": 1.0,
+    "f1": 0.9411764705882353,
+    "tp": 8,
+    "fp": 1,
+    "fn": 0
+  },
+  "education": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "ethnicity": {
+    "precision": 0.8181818181818182,
+    "recall": 1.0,
+    "f1": 0.9,
+    "tp": 9,
+    "fp": 2,
+    "fn": 0
+  },
+  "heartRate": {
+    "precision": 0.8333333333333334,
+    "recall": 1.0,
+    "f1": 0.9090909090909091,
+    "tp": 15,
+    "fp": 3,
+    "fn": 0
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+  },
+  "pulseRate": {
+    "precision": 1.0,
+    "recall": 0.9473684210526315,
+    "f1": 0.972972972972973,
+    "tp": 18,
+    "fp": 0,
+    "fn": 1
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 0.8333333333333334,
+    "f1": 0.9090909090909091,
+    "tp": 15,
+    "fp": 0,
+    "fn": 3
+  },
+  "skin": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "sleep": {
+    "precision": 0.8,
+    "recall": 1.0,
+    "f1": 0.888888888888889,
+    "tp": 8,
+    "fp": 2,
+    "fn": 0
+  },
+  "stoolFrequency": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 8,
+    "fp": 0,
+    "fn": 0
+  },
+  "systolicPressure": {
+    "precision": 0.9615384615384616,
+    "recall": 0.9615384615384616,
+    "f1": 0.9615384615384616,
+    "tp": 25,
+    "fp": 1,
+    "fn": 1
+  },
+  "temperature": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "urination": {
+    "precision": 0.9,
+    "recall": 1.0,
+    "f1": 0.9473684210526316,
+    "tp": 9,
+    "fp": 1,
+    "fn": 0
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+  },
+  "summary": {
+    "total_category_avg_f1": 0.959258971813077,
+    "total_sample_aggregate_f1": 0.9616204690831557,
+    "precision": 0.9534883720930233,
+    "recall": 0.9698924731182795,
+    "tp": 451,
+    "fp": 22,
+    "fn": 14,
+    "field_count": 24,
+    "request_count": 120,
+    "total_request_time_seconds": 300.2996722012758,
+    "avg_request_time_seconds": 2.5024972683439652,
+    "model_name": "gemma-4-12B-it",
+    "model_path": "/root/autodl-tmp/models/models/google/gemma-4-12B-it",
+    "backend": "transformers",
+    "experiment_args": "transformers_backend;attn_implementation=eager;audio=false;padding=false",
+    "batch_size": 1,
+    "request_timeout_s": 240,
+    "enable_system_prompt_block_padding": false,
+    "request_audio": false,
+    "audio_dir": null,
+    "audio_format": "wav",
+    "audio_voice": "alloy",
+    "block_size": null,
+    "max_new_tokens": 1024,
+    "attn_implementation": "eager"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "model_path": "/root/autodl-tmp/models/models/OpenBMB/MiniCPM-o-4_5",
+  "dataset_dir": "/workspace/audio_llm_agent/dataset/asr_llm",
+  "audio_subdir": "menu_audio_wav_30db",
+  "script_path": "/workspace/audio_llm_agent/dataset/asr_llm/menu_script.txt",
+  "limit": 3,
+  "summary": [
+    {
+      "prompt_mode": "minicpm_zh_official",
+      "total_files": 3,
+      "overall_cer": 0.0,
+      "overall_accuracy": 1.0,
+      "total_duration": 13.200000000000001,
+      "total_inference_time": 3.567540168762207,
+      "overall_rtf": 0.27026819460319745,
+      "avg_latency": 1.189180056254069,
+      "prompt": "请仔细听这段音频片段，并将其内容逐字记录。"
+    }
+  ],
+  "results": {
+    "minicpm_zh_official": [
+      {
+        "id": "1",
+        "ref": "打开标本功能。",
+        "hyp": "打开标本功能",
+        "ref_eval": "打开标本功能",
+        "hyp_eval": "打开标本功能",
+        "cer": 0.0,
+        "duration": 4.5,
+        "inference_time": 2.4138522148132324,
+        "rtf": 0.5364116032918295,
+        "error": null
+      },
+      {
+        "id": "2",
+        "ref": "打开输液功能。",
+        "hyp": "打开输液功能",
+        "ref_eval": "打开输液功能",
+        "hyp_eval": "打开输液功能",
+        "cer": 0.0,
+        "duration": 4.8,
+        "inference_time": 0.14716887474060059,
+        "rtf": 0.030660182237625122,
+        "error": null
+      },
+      {
+        "id": "5",
+        "ref": "打开标本。",
+        "hyp": "打开标本",
+        "ref_eval": "打开标本",
+        "hyp_eval": "打开标本",
+        "cer": 0.0,
+        "duration": 3.9,
+        "inference_time": 1.006519079208374,
+        "rtf": 0.25808181518163437,
+        "error": null
+      }
+    ]
+  }
+}

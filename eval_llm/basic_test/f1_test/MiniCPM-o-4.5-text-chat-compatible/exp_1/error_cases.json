@@ -21,7 +21,9 @@
       }
     },
     "generated_text": "{\n  \"sleep\": \"正常\",\n  \"diet\": \"正常\",\n  \"bloodSugar\": \"5.2\"\n}",
-    "request_time_seconds": 0.40374061837792397
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.807001318782568
   },
   {
     "id": 6,
@@ -47,7 +49,9 @@
       }
     },
     "generated_text": "{\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"heartRate\": \"70\"\n}",
-    "request_time_seconds": 0.5402674823999405
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.9458591155707836
   },
   {
     "id": 7,
@@ -65,24 +69,26 @@
       "education": "大专以上"
     },
     "error_details": {
-      "admissionTime": {
+      "assessmentTime": {
         "expected": "2026-09-15 08:00:00",
-        "predicted": "2026-09-14 08:00:00",
-        "type": "Mismatch"
+        "predicted": null,
+        "type": "FN"
       },
       "diagnosis": {
         "expected": "疑似胃溃疡",
         "predicted": null,
         "type": "FN"
       },
-      "assessmentTime": {
+      "admissionTime": {
         "expected": "2026-09-15 08:00:00",
-        "predicted": null,
-        "type": "FN"
+        "predicted": "2026-09-14 08:00:00",
+        "type": "Mismatch"
       }
     },
     "generated_text": "{\"admissionTime\":\"2026-09-14 08:00:00\",\"admissionMethod\":\"轮椅\",\"education\":\"大专以上\"}",
-    "request_time_seconds": 0.5400949604809284
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.9452436417341232
   },
   {
     "id": 3,
@@ -118,7 +124,9 @@
       }
     },
     "generated_text": "{\n  \"catheter\": [\"导尿管\", \"静脉通路\"],\n  \"skin\": [\"造口\"],\n  \"pulseRate\": \"80\",\n  \"consciousness\": \"清醒\"\n}",
-    "request_time_seconds": 0.6062794141471386
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.0224448256194592
   },
   {
     "id": 4,
@@ -154,7 +162,9 @@
       }
     },
     "generated_text": "{\n  \"height\": \"170\",\n  \"weight\": \"65.5\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
-    "request_time_seconds": 0.617241594940424
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.0326106548309326
   },
   {
     "id": 9,
@@ -177,21 +187,23 @@
       "assessmentTime": "2026-04-05 10:00:00"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-04-04 22:00:00",
+        "predicted": "2026-04-05 10:00:00",
+        "type": "Mismatch"
+      },
       "catheter": {
         "expected": [
           "无"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-04-04 22:00:00",
-        "predicted": "2026-04-05 10:00:00",
-        "type": "Mismatch"
       }
     },
     "generated_text": "{\n  \"allergyHistory\": [\"海鲜\"],\n  \"heartRate\": \"85\",\n  \"assessmentTime\": \"2026-04-05 10:00:00\"\n}",
-    "request_time_seconds": 0.6463894583284855
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.0529635921120644
   },
   {
     "id": 8,
@@ -211,54 +223,21 @@
       "temperature": "50.0"
     },
     "error_details": {
-      "temperature": {
-        "expected": null,
-        "predicted": "50.0",
-        "type": "FP"
-      },
       "pulseRate": {
         "expected": "90",
         "predicted": null,
         "type": "FN"
+      },
+      "temperature": {
+        "expected": null,
+        "predicted": "50.0",
+        "type": "FP"
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-11-11 20:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"90\",\n  \"respiratoryRate\": \"25\",\n  \"temperature\": \"50.0\"\n}",
-    "request_time_seconds": 0.9662882126867771
-  },
-  {
-    "id": 2,
-    "input": "患者回族，说小学没毕业，就记个小学文化吧。昨天下午两点步行入院的，考虑冠心病。现在的体温是36度。",
-    "expected": {
-      "assessmentTime": "2026-01-10 15:30:00",
-      "ethnicity": "回族",
-      "education": "小学",
-      "admissionTime": "2026-01-09 14:00:00",
-      "admissionMethod": "步行",
-      "diagnosis": "考虑冠心病",
-      "temperature": "36.0"
-    },
-    "predicted": {
-      "ethnicity": "回族",
-      "education": "小学",
-      "admissionTime": "2026-01-08 14:00:00",
-      "admissionMethod": "步行",
-      "diagnosis": "考虑冠心病",
-      "temperature": "36.0"
-    },
-    "error_details": {
-      "assessmentTime": {
-        "expected": "2026-01-10 15:30:00",
-        "predicted": null,
-        "type": "FN"
-      },
-      "admissionTime": {
-        "expected": "2026-01-09 14:00:00",
-        "predicted": "2026-01-08 14:00:00",
-        "type": "Mismatch"
-      }
-    },
-    "generated_text": "{\n  \"ethnicity\": \"回族\",\n  \"education\": \"小学\",\n  \"admissionTime\": \"2026-01-08 14:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"考虑冠心病\",\n  \"temperature\": \"36.0\"\n}",
-    "request_time_seconds": 0.9995654746890068
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.3744280077517033
   },
   {
     "id": 14,
@@ -277,6 +256,11 @@
       ]
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-10-12 11:00:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "skin": {
         "expected": [
           "其他"
@@ -285,15 +269,12 @@
           "淤斑"
         ],
         "type": "Mismatch"
-      },
-      "assessmentTime": {
-        "expected": "2026-10-12 11:00:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\"consciousness\":\"清醒\",\"skin\":[\"淤斑\"]}",
-    "request_time_seconds": 0.2149127870798111
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.2563960328698158
   },
   {
     "id": 12,
@@ -309,7 +290,7 @@
       "sleep": "正常"
     },
     "predicted": {
-      "assessmentTime": "2026-08-01 09:00:00",
+      "assessmentTime": "2026-08-01 00:00:00",
       "skin": [
         "破损"
       ],
@@ -325,12 +306,52 @@
       },
       "assessmentTime": {
         "expected": "2026-07-31 21:00:00",
-        "predicted": "2026-08-01 09:00:00",
+        "predicted": "2026-08-01 00:00:00",
         "type": "Mismatch"
       }
     },
-    "generated_text": "{\"assessmentTime\":\"2026-08-01 09:00:00\",\"skin\":[\"破损\"],\"catheter\":[\"静脉通路\"]}",
-    "request_time_seconds": 0.532222606241703
+    "generated_text": "{\"assessmentTime\":\"2026-08-01 00:00:00\",\"skin\":[\"破损\"],\"catheter\":[\"静脉通路\"]}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5733633786439896
+  },
+  {
+    "id": 19,
+    "input": "前天下午两点钟，患者因为车祸被救护车送入院。对青霉素和头孢过敏。目前戴着吸氧面罩，没有接其他管子。",
+    "expected": {
+      "assessmentTime": "2027-03-20 15:00:00",
+      "admissionTime": "2027-03-18 14:00:00",
+      "admissionMethod": "其他",
+      "allergyHistory": [
+        "青霉素",
+        "头孢"
+      ],
+      "catheter": [
+        "无"
+      ]
+    },
+    "predicted": {
+      "admissionTime": "2027-03-18 14:00:00",
+      "admissionMethod": "其他",
+      "allergyHistory": [
+        "青霉素",
+        "头孢"
+      ],
+      "catheter": [
+        "无"
+      ]
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2027-03-20 15:00:00",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\"admissionTime\":\"2027-03-18 14:00:00\",\"admissionMethod\":\"其他\",\"allergyHistory\":[\"青霉素\",\"头孢\"],\"catheter\":[\"无\"]}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7060702741146088
   },
   {
     "id": 18,
@@ -368,43 +389,9 @@
       }
     },
     "generated_text": "{\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"bloodSugar\": \"5.8\",\n  \"pulseRate\": \"75\"\n}",
-    "request_time_seconds": 0.6609431989490986
-  },
-  {
-    "id": 19,
-    "input": "前天下午两点钟，患者因为车祸被救护车送入院。对青霉素和头孢过敏。目前戴着吸氧面罩，没有接其他管子。",
-    "expected": {
-      "assessmentTime": "2027-03-20 15:00:00",
-      "admissionTime": "2027-03-18 14:00:00",
-      "admissionMethod": "其他",
-      "allergyHistory": [
-        "青霉素",
-        "头孢"
-      ],
-      "catheter": [
-        "无"
-      ]
-    },
-    "predicted": {
-      "admissionTime": "2027-03-18 14:00:00",
-      "admissionMethod": "其他",
-      "allergyHistory": [
-        "青霉素",
-        "头孢"
-      ],
-      "catheter": [
-        "无"
-      ]
-    },
-    "error_details": {
-      "assessmentTime": {
-        "expected": "2027-03-20 15:00:00",
-        "predicted": null,
-        "type": "FN"
-      }
-    },
-    "generated_text": "{\"admissionTime\":\"2027-03-18 14:00:00\",\"admissionMethod\":\"其他\",\"allergyHistory\":[\"青霉素\",\"头孢\"],\"catheter\":[\"无\"]}",
-    "request_time_seconds": 0.6604535169899464
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7073316909372807
   },
   {
     "id": 11,
@@ -427,11 +414,6 @@
       "consciousness": "模糊"
     },
     "error_details": {
-      "admissionMethod": {
-        "expected": "其他",
-        "predicted": "担架",
-        "type": "Mismatch"
-      },
       "assessmentTime": {
         "expected": "2026-07-15 14:30:00",
         "predicted": null,
@@ -441,10 +423,17 @@
         "expected": "2026-07-15 10:00:00",
         "predicted": "2026-07-13 10:00:00",
         "type": "Mismatch"
+      },
+      "admissionMethod": {
+        "expected": "其他",
+        "predicted": "担架",
+        "type": "Mismatch"
       }
     },
     "generated_text": "{\"ethnicity\":\"汉族\",\"education\":\"文盲\",\"admissionTime\":\"2026-07-13 10:00:00\",\"admissionMethod\":\"担架\",\"diagnosis\":\"急性阑尾炎\",\"consciousness\":\"模糊\"}",
-    "request_time_seconds": 0.7670389041304588
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.8079140558838844
   },
   {
     "id": 13,
@@ -473,7 +462,9 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-09-05 16:00:00\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\",\"weight\":\"60.0\",\"height\":\"165\",\"bloodSugar\":\"6.0\"}",
-    "request_time_seconds": 0.8363530933856964
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.8800581209361553
   },
   {
     "id": 10,
@@ -509,7 +500,9 @@
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-06-10 08:00:00\",\n  \"temperature\": \"37.2\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"95\",\n  \"heartRate\": \"300\"\n}",
-    "request_time_seconds": 0.9269488826394081
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.9694570861756802
   },
   {
     "id": 17,
@@ -540,7 +533,9 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2027-01-08 14:00:00\",\"education\":\"初中\",\"ethnicity\":\"汉族\",\"admissionTime\":\"2027-01-08 12:00:00\",\"admissionMethod\":\"其他\",\"diagnosis\":\"考虑是脑出血\",\"consciousness\":\"嗜睡\"}",
-    "request_time_seconds": 1.025679811835289
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.0720932930707932
   },
   {
     "id": 26,
@@ -559,11 +554,6 @@
         "predicted": null,
         "type": "FN"
       },
-      "respiratoryRate": {
-        "expected": "20",
-        "predicted": null,
-        "type": "FN"
-      },
       "assessmentTime": {
         "expected": "2026-04-16 09:45:00",
         "predicted": null,
@@ -573,10 +563,17 @@
         "expected": null,
         "predicted": "20",
         "type": "FP"
+      },
+      "respiratoryRate": {
+        "expected": "20",
+        "predicted": null,
+        "type": "FN"
       }
     },
     "generated_text": "{\"pulseRate\":\"20\"}",
-    "request_time_seconds": 0.16816160455346107
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.1867799125611782
   },
   {
     "id": 22,
@@ -595,6 +592,11 @@
       ]
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-04-12 10:15:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "skin": {
         "expected": [
           "其他"
@@ -603,15 +605,12 @@
           "压疮"
         ],
         "type": "Mismatch"
-      },
-      "assessmentTime": {
-        "expected": "2026-04-12 10:15:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\"consciousness\":\"清醒\",\"skin\":[\"压疮\"]}",
-    "request_time_seconds": 0.21065642684698105
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.2417752631008625
   },
   {
     "id": 28,
@@ -633,7 +632,9 @@
       }
     },
     "generated_text": "{\n  \"sleep\": \"异常\",\n  \"urination\": \"正常\"\n}",
-    "request_time_seconds": 0.2893678769469261
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3112061657011509
   },
   {
     "id": 23,
@@ -655,7 +656,9 @@
       }
     },
     "generated_text": "{\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_time_seconds": 0.32160038873553276
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.35510117560625076
   },
   {
     "id": 29,
@@ -677,29 +680,9 @@
       }
     },
     "generated_text": "{\n  \"height\": \"175\",\n  \"pulseRate\": \"72\"\n}",
-    "request_time_seconds": 0.3246392570436001
-  },
-  {
-    "id": 27,
-    "input": "用平车推过来的，疑似骨折。",
-    "expected": {
-      "assessmentTime": "2026-04-17 15:10:00",
-      "admissionMethod": "平车",
-      "diagnosis": "疑似骨折"
-    },
-    "predicted": {
-      "admissionMethod": "平车",
-      "diagnosis": "疑似骨折"
-    },
-    "error_details": {
-      "assessmentTime": {
-        "expected": "2026-04-17 15:10:00",
-        "predicted": null,
-        "type": "FN"
-      }
-    },
-    "generated_text": "{\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"疑似骨折\"\n}",
-    "request_time_seconds": 0.34115705639123917
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.35015443339943886
   },
   {
     "id": 25,
@@ -729,7 +712,33 @@
       }
     },
     "generated_text": "{\n  \"allergyHistory\": [\"头孢\"],\n  \"catheter\": [\"无\"]\n}",
-    "request_time_seconds": 0.3454880379140377
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3631621338427067
+  },
+  {
+    "id": 27,
+    "input": "用平车推过来的，疑似骨折。",
+    "expected": {
+      "assessmentTime": "2026-04-17 15:10:00",
+      "admissionMethod": "平车",
+      "diagnosis": "疑似骨折"
+    },
+    "predicted": {
+      "admissionMethod": "平车",
+      "diagnosis": "疑似骨折"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-04-17 15:10:00",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"疑似骨折\"\n}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.36211246997117996
   },
   {
     "id": 21,
@@ -745,19 +754,21 @@
       "diastolicPressure": "80"
     },
     "error_details": {
-      "pulseRate": {
-        "expected": "75",
+      "assessmentTime": {
+        "expected": "2026-04-11 14:30:00",
         "predicted": null,
         "type": "FN"
       },
-      "assessmentTime": {
-        "expected": "2026-04-11 14:30:00",
+      "pulseRate": {
+        "expected": "75",
         "predicted": null,
         "type": "FN"
       }
     },
     "generated_text": "{\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}",
-    "request_time_seconds": 0.36157137528061867
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3916799798607826
   },
   {
     "id": 20,
@@ -785,27 +796,9 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-04-10 08:00:00\",\"temperature\":\"36.5\",\"pulseRate\":\"80\"}",
-    "request_time_seconds": 0.5109981335699558
-  },
-  {
-    "id": 36,
-    "input": "昨天一直没大便，今天排便异常。",
-    "expected": {
-      "assessmentTime": "2026-05-07 09:45:00",
-      "defecation": "异常"
-    },
-    "predicted": {
-      "defecation": "异常"
-    },
-    "error_details": {
-      "assessmentTime": {
-        "expected": "2026-05-07 09:45:00",
-        "predicted": null,
-        "type": "FN"
-      }
-    },
-    "generated_text": "{\n  \"defecation\": \"异常\"\n}",
-    "request_time_seconds": 0.21540184691548347
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5412542149424553
   },
   {
     "id": 33,
@@ -829,7 +822,31 @@
       }
     },
     "generated_text": "{\n  \"allergyHistory\": [\"青霉素\"]\n}",
-    "request_time_seconds": 0.2327641174197197
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.2279898189008236
+  },
+  {
+    "id": 36,
+    "input": "昨天一直没大便，今天排便异常。",
+    "expected": {
+      "assessmentTime": "2026-05-07 09:45:00",
+      "defecation": "异常"
+    },
+    "predicted": {
+      "defecation": "异常"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-05-07 09:45:00",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"defecation\": \"异常\"\n}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.23652725666761398
   },
   {
     "id": 34,
@@ -851,21 +868,23 @@
       ]
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-05-05 16:30:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "catheter": {
         "expected": [
           "无"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-05-05 16:30:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\n  \"consciousness\": \"模糊\",\n  \"skin\": [\"完整\"]\n}",
-    "request_time_seconds": 0.2931942008435726
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3140643239021301
   },
   {
     "id": 37,
@@ -887,7 +906,9 @@
       }
     },
     "generated_text": "{\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
-    "request_time_seconds": 0.3386748544871807
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.36251192539930344
   },
   {
     "id": 35,
@@ -909,7 +930,9 @@
       }
     },
     "generated_text": "{\n  \"heartRate\": \"90\",\n  \"respiratoryRate\": \"22\"\n}",
-    "request_time_seconds": 0.35334861651062965
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.37536125630140305
   },
   {
     "id": 38,
@@ -933,7 +956,9 @@
       }
     },
     "generated_text": "{\n  \"ethnicity\": \"壮族\",\n  \"education\": \"高中或中专\",\n  \"admissionMethod\": \"轮椅\"\n}",
-    "request_time_seconds": 0.46180328726768494
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.48414722457528114
   },
   {
     "id": 31,
@@ -957,7 +982,9 @@
       }
     },
     "generated_text": "{\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"pulseRate\": \"80\"\n}",
-    "request_time_seconds": 0.4732024222612381
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5019161514937878
   },
   {
     "id": 39,
@@ -970,27 +997,24 @@
     "predicted": {
       "admissionTime": "2026-05-08 14:00:00",
       "admissionMethod": "步行",
-      "diagnosis": "肺炎"
+      "diagnosis": "考虑肺炎"
     },
     "error_details": {
-      "admissionMethod": {
-        "expected": null,
-        "predicted": "步行",
-        "type": "FP"
-      },
-      "diagnosis": {
-        "expected": "考虑肺炎",
-        "predicted": "肺炎",
-        "type": "Mismatch"
-      },
       "assessmentTime": {
         "expected": "2026-05-10 08:00:00",
         "predicted": null,
         "type": "FN"
+      },
+      "admissionMethod": {
+        "expected": null,
+        "predicted": "步行",
+        "type": "FP"
       }
     },
-    "generated_text": "{\"admissionTime\":\"2026-05-08 14:00:00\",\"admissionMethod\":\"步行\",\"diagnosis\":\"肺炎\"}",
-    "request_time_seconds": 0.5210325233638287
+    "generated_text": "{\"admissionTime\":\"2026-05-08 14:00:00\",\"admissionMethod\":\"步行\",\"diagnosis\":\"考虑肺炎\"}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5577724725008011
   },
   {
     "id": 40,
@@ -1026,7 +1050,43 @@
       }
     },
     "generated_text": "{\"temperature\":\"36.5\",\"pulseRate\":\"80\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\"}",
-    "request_time_seconds": 0.443119116127491
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4793468974530697
+  },
+  {
+    "id": 43,
+    "input": "患者说今天中午想吃点饺子，精神挺好，能自己下床走动。",
+    "expected": {
+      "assessmentTime": "2026-03-05 11:20:00"
+    },
+    "predicted": {
+      "consciousness": "清醒",
+      "diet": "正常",
+      "admissionMethod": "步行",
+      "assessmentTime": "2026-03-05 11:20:00"
+    },
+    "error_details": {
+      "diet": {
+        "expected": null,
+        "predicted": "正常",
+        "type": "FP"
+      },
+      "consciousness": {
+        "expected": null,
+        "predicted": "清醒",
+        "type": "FP"
+      },
+      "admissionMethod": {
+        "expected": null,
+        "predicted": "步行",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\"consciousness\":\"清醒\",\"diet\":\"正常\",\"admissionMethod\":\"步行\",\"assessmentTime\":\"2026-03-05 11:20:00\"}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5797949247062206
   },
   {
     "id": 46,
@@ -1052,30 +1112,9 @@
       }
     },
     "generated_text": "{\n  \"height\": \"170\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_time_seconds": 0.547377198934555
-  },
-  {
-    "id": 49,
-    "input": "早上六点量个性命体征，体温三十七度，体重五十公斤，平时喜欢喝茶。",
-    "expected": {
-      "assessmentTime": "2026-03-07 06:00:00",
-      "temperature": "37.0",
-      "weight": "50.0"
-    },
-    "predicted": {
-      "assessmentTime": "2026-03-07 11:00:00",
-      "temperature": "37.0",
-      "weight": "50.0"
-    },
-    "error_details": {
-      "assessmentTime": {
-        "expected": "2026-03-07 06:00:00",
-        "predicted": "2026-03-07 11:00:00",
-        "type": "Mismatch"
-      }
-    },
-    "generated_text": "{\"assessmentTime\":\"2026-03-07 11:00:00\",\"temperature\":\"37.0\",\"weight\":\"50.0\"}",
-    "request_time_seconds": 0.556761983782053
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5772951580584049
   },
   {
     "id": 47,
@@ -1103,39 +1142,34 @@
       }
     },
     "generated_text": "{\"pulseRate\":\"80\",\"respiratoryRate\":\"22\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"95\",\"consciousness\":\"嗜睡\"}",
-    "request_time_seconds": 0.5600897446274757
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.586450707167387
   },
   {
-    "id": 43,
-    "input": "患者说今天中午想吃点饺子，精神挺好，能自己下床走动。",
+    "id": 49,
+    "input": "早上六点量个性命体征，体温三十七度，体重五十公斤，平时喜欢喝茶。",
     "expected": {
-      "assessmentTime": "2026-03-05 11:20:00"
+      "assessmentTime": "2026-03-07 06:00:00",
+      "temperature": "37.0",
+      "weight": "50.0"
     },
     "predicted": {
-      "consciousness": "清醒",
-      "diet": "正常",
-      "admissionMethod": "步行",
-      "assessmentTime": "2026-03-05 11:20:00"
+      "assessmentTime": "2026-03-07 11:00:00",
+      "temperature": "37.0",
+      "weight": "50.0"
     },
     "error_details": {
-      "admissionMethod": {
-        "expected": null,
-        "predicted": "步行",
-        "type": "FP"
-      },
-      "diet": {
-        "expected": null,
-        "predicted": "正常",
-        "type": "FP"
-      },
-      "consciousness": {
-        "expected": null,
-        "predicted": "清醒",
-        "type": "FP"
+      "assessmentTime": {
+        "expected": "2026-03-07 06:00:00",
+        "predicted": "2026-03-07 11:00:00",
+        "type": "Mismatch"
       }
     },
-    "generated_text": "{\"consciousness\":\"清醒\",\"diet\":\"正常\",\"admissionMethod\":\"步行\",\"assessmentTime\":\"2026-03-05 11:20:00\"}",
-    "request_time_seconds": 0.578201025724411
+    "generated_text": "{\"assessmentTime\":\"2026-03-07 11:00:00\",\"temperature\":\"37.0\",\"weight\":\"50.0\"}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5850496105849743
   },
   {
     "id": 44,
@@ -1174,7 +1208,9 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-03-05 15:00:00\",\"bloodSugar\":\"5.8\",\"consciousness\":\"清醒\",\"skin\":[\"完整\"]}",
-    "request_time_seconds": 0.5884293466806412
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6143315583467484
   },
   {
     "id": 41,
@@ -1204,7 +1240,9 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-03-05 08:00:00\",\"weight\":\"65.0\",\"respiratoryRate\":\"20\",\"bloodPressure\":\"75\"}",
-    "request_time_seconds": 0.6536835394799709
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6536850668489933
   },
   {
     "id": 48,
@@ -1236,7 +1274,9 @@
       }
     },
     "generated_text": "{\"admissionTime\":\"2026-03-05 15:00:00\",\"admissionMethod\":\"其他\",\"education\":\"大专以上\",\"allergyHistory\":[\"海鲜\"],\"diagnosis\":\"考虑心梗\"}",
-    "request_time_seconds": 0.69044279307127
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7201232351362705
   },
   {
     "id": 42,
@@ -1275,7 +1315,9 @@
       }
     },
     "generated_text": "{\n  \"ethnicity\": \"汉族\",\n  \"education\": \"初中\",\n  \"admissionTime\": \"2026-03-02 14:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"考虑阑尾炎\",\n  \"allergyHistory\": [\"无\"]\n}",
-    "request_time_seconds": 1.0098973400890827
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.0111963003873825
   },
   {
     "id": 45,
@@ -1312,7 +1354,9 @@
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"admissionTime\": \"2026-03-04 01:00:00\",\n  \"systolicPressure\": \"150\",\n  \"diastolicPressure\": \"90\",\n  \"catheter\": [\"静脉通路\", \"导尿管\"]\n}",
-    "request_time_seconds": 1.2442602962255478
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.2719218358397484
   },
   {
     "id": 56,
@@ -1330,19 +1374,21 @@
       "weight": "45.0"
     },
     "error_details": {
-      "urination": {
-        "expected": "正常",
+      "assessmentTime": {
+        "expected": "2026-03-11 11:00:00",
         "predicted": null,
         "type": "FN"
       },
-      "assessmentTime": {
-        "expected": "2026-03-11 11:00:00",
+      "urination": {
+        "expected": "正常",
         "predicted": null,
         "type": "FN"
       }
     },
     "generated_text": "{\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"3\",\n  \"weight\": \"45.0\"\n}",
-    "request_time_seconds": 0.45960650593042374
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.49476133659482
   },
   {
     "id": 52,
@@ -1356,7 +1402,7 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-09 09:00:00",
-      "pulseRate": "18",
+      "respiratoryRate": "18",
       "bloodSugar": "6.0",
       "sleep": "正常",
       "diet": "正常"
@@ -1366,20 +1412,45 @@
         "expected": "2026-03-09 02:00:00",
         "predicted": "2026-03-09 09:00:00",
         "type": "Mismatch"
-      },
-      "respiratoryRate": {
-        "expected": "18",
-        "predicted": null,
-        "type": "FN"
-      },
-      "pulseRate": {
-        "expected": null,
-        "predicted": "18",
-        "type": "FP"
       }
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-09 09:00:00\",\"pulseRate\":\"18\",\"bloodSugar\":\"6.0\",\"sleep\":\"正常\",\"diet\":\"正常\"}",
-    "request_time_seconds": 0.6273766607046127
+    "generated_text": "{\"assessmentTime\":\"2026-03-09 09:00:00\",\"respiratoryRate\":\"18\",\"bloodSugar\":\"6.0\",\"sleep\":\"正常\",\"diet\":\"正常\"}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6899737492203712
+  },
+  {
+    "id": 57,
+    "input": "患者明确说自己睡眠异常。现在是下午四点，心率一百，体温三十七度二。高中学历。",
+    "expected": {
+      "assessmentTime": "2026-03-11 16:00:00",
+      "sleep": "异常",
+      "heartRate": "100",
+      "temperature": "37.2",
+      "education": "高中或中专"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-11 16:30:00",
+      "education": "高中或中专",
+      "heartRate": "100",
+      "temperature": "37.2"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-11 16:00:00",
+        "predicted": "2026-03-11 16:30:00",
+        "type": "Mismatch"
+      },
+      "sleep": {
+        "expected": "异常",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\"assessmentTime\":\"2026-03-11 16:30:00\",\"education\":\"高中或中专\",\"heartRate\":\"100\",\"temperature\":\"37.2\"}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6861712858080864
   },
   {
     "id": 53,
@@ -1404,21 +1475,23 @@
       "temperature": "38.5"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-09 16:00:00",
+        "predicted": "2026-03-09 17:00:00",
+        "type": "Mismatch"
+      },
       "skin": {
         "expected": [
           "皮疹"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-09 16:00:00",
-        "predicted": "2026-03-09 17:00:00",
-        "type": "Mismatch"
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 17:00:00\",\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"temperature\": \"38.5\"\n}",
-    "request_time_seconds": 0.7255357392132282
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7762079760432243
   },
   {
     "id": 51,
@@ -1444,7 +1517,9 @@
       }
     },
     "generated_text": "{\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-03-07 23:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"急性胃肠炎\"\n}",
-    "request_time_seconds": 0.7647377923130989
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.8023082427680492
   },
   {
     "id": 58,
@@ -1475,19 +1550,21 @@
       ]
     },
     "error_details": {
-      "diagnosis": {
-        "expected": "确诊脑出血",
-        "predicted": "脑出血",
-        "type": "Mismatch"
-      },
       "assessmentTime": {
         "expected": "2026-03-12 09:00:00",
         "predicted": null,
         "type": "FN"
+      },
+      "diagnosis": {
+        "expected": "确诊脑出血",
+        "predicted": "脑出血",
+        "type": "Mismatch"
       }
     },
     "generated_text": "{\"admissionTime\":\"2026-03-10 17:00:00\",\"admissionMethod\":\"其他\",\"diagnosis\":\"脑出血\",\"consciousness\":\"昏迷\",\"catheter\":[\"静脉通路\"],\"skin\":[\"出血点\"]}",
-    "request_time_seconds": 0.7701522745192051
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.8077486418187618
   },
   {
     "id": 50,
@@ -1530,44 +1607,47 @@
       }
     },
     "generated_text": "{\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"60\",\n  \"heartRate\": \"60\",\n  \"consciousness\": \"浅昏迷\",\n  \"skin\": [\"压疮\"]\n}",
-    "request_time_seconds": 0.814597062766552
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.851542592048645
   },
   {
-    "id": 57,
-    "input": "患者明确说自己睡眠异常。现在是下午四点，心率一百，体温三十七度二。高中学历。",
+    "id": 55,
+    "input": "今天八点半，学压九十一百四，麦博九十，身上带着吸氧面罩，没有插胃管。",
     "expected": {
-      "assessmentTime": "2026-03-11 16:00:00",
-      "sleep": "异常",
-      "heartRate": "100",
-      "temperature": "37.2",
-      "education": "高中或中专"
+      "assessmentTime": "2026-03-10 08:30:00",
+      "systolicPressure": "140",
+      "diastolicPressure": "90",
+      "pulseRate": "90"
     },
     "predicted": {
-      "assessmentTime": "2026-03-11 16:30:00",
-      "education": "高中或中专",
-      "pulseRate": "100",
-      "temperature": "37.2",
-      "sleep": "异常"
+      "assessmentTime": "2026-03-10 08:30:00",
+      "systolicPressure": "140",
+      "diastolicPressure": "90",
+      "pulseRate": "90",
+      "respiratoryRate": "无",
+      "catheter": [
+        "吸氧面罩"
+      ]
     },
     "error_details": {
-      "assessmentTime": {
-        "expected": "2026-03-11 16:00:00",
-        "predicted": "2026-03-11 16:30:00",
-        "type": "Mismatch"
-      },
-      "pulseRate": {
+      "catheter": {
         "expected": null,
-        "predicted": "100",
+        "predicted": [
+          "吸氧面罩"
+        ],
         "type": "FP"
       },
-      "heartRate": {
-        "expected": "100",
-        "predicted": null,
-        "type": "FN"
+      "respiratoryRate": {
+        "expected": null,
+        "predicted": "无",
+        "type": "FP"
       }
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 16:30:00\",\n  \"education\": \"高中或中专\",\n  \"pulseRate\": \"100\",\n  \"temperature\": \"37.2\",\n  \"sleep\": \"异常\"\n}",
-    "request_time_seconds": 0.8935748785734177
+    "generated_text": "{\"assessmentTime\":\"2026-03-10 08:30:00\",\"systolicPressure\":\"140\",\"diastolicPressure\":\"90\",\"pulseRate\":\"90\",\"respiratoryRate\":\"无\",\"catheter\":[\"吸氧面罩\"]}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.9109378419816494
   },
   {
     "id": 54,
@@ -1605,53 +1685,9 @@
       }
     },
     "generated_text": "{\n  \"ethnicity\": \"维吾尔族\",\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-03-08 09:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"考虑骨折\"\n}",
-    "request_time_seconds": 0.9075528271496296
-  },
-  {
-    "id": 55,
-    "input": "今天八点半，学压九十一百四，麦博九十，身上带着吸氧面罩，没有插胃管。",
-    "expected": {
-      "assessmentTime": "2026-03-10 08:30:00",
-      "systolicPressure": "140",
-      "diastolicPressure": "90",
-      "pulseRate": "90"
-    },
-    "predicted": {
-      "assessmentTime": "2026-03-10 08:30:00",
-      "systolicPressure": "140",
-      "diastolicPressure": "90",
-      "pulseRate": "90",
-      "consciousness": "清醒",
-      "catheter": [
-        "吸氧面罩"
-      ],
-      "allergyHistory": [
-        "无"
-      ]
-    },
-    "error_details": {
-      "consciousness": {
-        "expected": null,
-        "predicted": "清醒",
-        "type": "FP"
-      },
-      "allergyHistory": {
-        "expected": null,
-        "predicted": [
-          "无"
-        ],
-        "type": "FP"
-      },
-      "catheter": {
-        "expected": null,
-        "predicted": [
-          "吸氧面罩"
-        ],
-        "type": "FP"
-      }
-    },
-    "generated_text": "{\"assessmentTime\":\"2026-03-10 08:30:00\",\"systolicPressure\":\"140\",\"diastolicPressure\":\"90\",\"pulseRate\":\"90\",\"consciousness\":\"清醒\",\"catheter\":[\"吸氧面罩\"],\"allergyHistory\":[\"无\"]}",
-    "request_time_seconds": 0.9187326543033123
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.9599174223840237
   },
   {
     "id": 59,
@@ -1680,6 +1716,11 @@
         "predicted": "2026-03-11 11:30:00",
         "type": "Mismatch"
       },
+      "pulseRate": {
+        "expected": null,
+        "predicted": "20",
+        "type": "FP"
+      },
       "allergyHistory": {
         "expected": [
           "无"
@@ -1691,15 +1732,12 @@
         "expected": "20",
         "predicted": null,
         "type": "FN"
-      },
-      "pulseRate": {
-        "expected": null,
-        "predicted": "20",
-        "type": "FP"
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-03-11 11:30:00\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"85\",\"pulseRate\":\"20\",\"bloodSugar\":\"5.2\",\"allergyHistory\":[]}\n**注意**：语音中“夫妻二十”应为“呼吸20”，已按字段映射规范处理为pulseRate。",
-    "request_time_seconds": 1.1676979660987854
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 1.2062374390661716
   },
   {
     "id": 63,
@@ -1721,7 +1759,9 @@
       }
     },
     "generated_text": "{\"respiratoryRate\":\"18\",\"bloodSugar\":\"5.8\"}",
-    "request_time_seconds": 0.2757452689111233
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.30271773412823677
   },
   {
     "id": 68,
@@ -1743,7 +1783,9 @@
       }
     },
     "generated_text": "{\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}",
-    "request_time_seconds": 0.27187835052609444
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.29842015355825424
   },
   {
     "id": 60,
@@ -1758,15 +1800,15 @@
       "pulseRate": "78"
     },
     "error_details": {
-      "pulseRate": {
-        "expected": null,
-        "predicted": "78",
-        "type": "FP"
-      },
       "assessmentTime": {
         "expected": "2026-03-06 08:00:00",
         "predicted": null,
         "type": "FN"
+      },
+      "pulseRate": {
+        "expected": null,
+        "predicted": "78",
+        "type": "FP"
       },
       "heartRate": {
         "expected": "78",
@@ -1775,7 +1817,9 @@
       }
     },
     "generated_text": "{\n  \"temperature\": \"36.5\",\n  \"pulseRate\": \"78\"\n}",
-    "request_time_seconds": 0.30227141454815865
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.32914824038743973
   },
   {
     "id": 67,
@@ -1797,7 +1841,9 @@
       }
     },
     "generated_text": "{\n  \"ethnicity\": \"满族\",\n  \"education\": \"大专以上\"\n}",
-    "request_time_seconds": 0.307994332164526
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3346984498202801
   },
   {
     "id": 69,
@@ -1819,7 +1865,9 @@
       }
     },
     "generated_text": "{\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"2\"\n}",
-    "request_time_seconds": 0.3188033141195774
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3456939645111561
   },
   {
     "id": 62,
@@ -1841,7 +1889,9 @@
       }
     },
     "generated_text": "{\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
-    "request_time_seconds": 0.3376759774982929
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3647899702191353
   },
   {
     "id": 65,
@@ -1871,7 +1921,9 @@
       }
     },
     "generated_text": "{\n  \"skin\": [\"手术切口\"],\n  \"allergyHistory\": [\"头孢\"]\n}",
-    "request_time_seconds": 0.3353157676756382
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.36222803965210915
   },
   {
     "id": 61,
@@ -1895,7 +1947,9 @@
       }
     },
     "generated_text": "{\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"75\"\n}",
-    "request_time_seconds": 0.49601316824555397
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5236705765128136
   },
   {
     "id": 66,
@@ -1919,7 +1973,9 @@
       }
     },
     "generated_text": "{\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"考虑胃炎\"\n}",
-    "request_time_seconds": 0.6719966642558575
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6999125145375729
   },
   {
     "id": 78,
@@ -1941,33 +1997,9 @@
       }
     },
     "generated_text": "{\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
-    "request_time_seconds": 0.2661767341196537
-  },
-  {
-    "id": 76,
-    "input": "皮肤上有皮疹，现在是嗜睡状态。",
-    "expected": {
-      "assessmentTime": "2026-03-09 09:30:00",
-      "skin": [
-        "皮疹"
-      ],
-      "consciousness": "嗜睡"
-    },
-    "predicted": {
-      "consciousness": "嗜睡",
-      "skin": [
-        "皮疹"
-      ]
-    },
-    "error_details": {
-      "assessmentTime": {
-        "expected": "2026-03-09 09:30:00",
-        "predicted": null,
-        "type": "FN"
-      }
-    },
-    "generated_text": "{\n  \"consciousness\": \"嗜睡\",\n  \"skin\": [\"皮疹\"]\n}",
-    "request_time_seconds": 0.3078154884278774
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3809869922697544
   },
   {
     "id": 72,
@@ -1993,7 +2025,37 @@
       }
     },
     "generated_text": "{\n  \"allergyHistory\": [\"无\"],\n  \"consciousness\": \"昏迷\"\n}",
-    "request_time_seconds": 0.31232231855392456
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.42592670395970345
+  },
+  {
+    "id": 76,
+    "input": "皮肤上有皮疹，现在是嗜睡状态。",
+    "expected": {
+      "assessmentTime": "2026-03-09 09:30:00",
+      "skin": [
+        "皮疹"
+      ],
+      "consciousness": "嗜睡"
+    },
+    "predicted": {
+      "consciousness": "嗜睡",
+      "skin": [
+        "皮疹"
+      ]
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-09 09:30:00",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"consciousness\": \"嗜睡\",\n  \"skin\": [\"皮疹\"]\n}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.422699186950922
   },
   {
     "id": 71,
@@ -2019,7 +2081,43 @@
       }
     },
     "generated_text": "{\n  \"catheter\": [\"导尿管\"],\n  \"urination\": \"正常\"\n}",
-    "request_time_seconds": 0.31355366483330727
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.45207903534173965
+  },
+  {
+    "id": 75,
+    "input": "血糖六点一，心率九十次。",
+    "expected": {
+      "assessmentTime": "2026-03-08 16:00:00",
+      "bloodSugar": "6.1",
+      "heartRate": "90"
+    },
+    "predicted": {
+      "bloodSugar": "6.1",
+      "pulseRate": "90"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-08 16:00:00",
+        "predicted": null,
+        "type": "FN"
+      },
+      "pulseRate": {
+        "expected": null,
+        "predicted": "90",
+        "type": "FP"
+      },
+      "heartRate": {
+        "expected": "90",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"bloodSugar\": \"6.1\",\n  \"pulseRate\": \"90\"\n}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4491362012922764
   },
   {
     "id": 73,
@@ -2041,39 +2139,9 @@
       }
     },
     "generated_text": "{\n  \"weight\": \"70.0\",\n  \"pulseRate\": \"82\"\n}",
-    "request_time_seconds": 0.33396022766828537
-  },
-  {
-    "id": 75,
-    "input": "血糖六点一，心率九十次。",
-    "expected": {
-      "assessmentTime": "2026-03-08 16:00:00",
-      "bloodSugar": "6.1",
-      "heartRate": "90"
-    },
-    "predicted": {
-      "bloodSugar": "6.1",
-      "pulseRate": "90"
-    },
-    "error_details": {
-      "pulseRate": {
-        "expected": null,
-        "predicted": "90",
-        "type": "FP"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-08 16:00:00",
-        "predicted": null,
-        "type": "FN"
-      },
-      "heartRate": {
-        "expected": "90",
-        "predicted": null,
-        "type": "FN"
-      }
-    },
-    "generated_text": "{\n  \"bloodSugar\": \"6.1\",\n  \"pulseRate\": \"90\"\n}",
-    "request_time_seconds": 0.33271150290966034
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.45103035867214203
   },
   {
     "id": 79,
@@ -2091,21 +2159,23 @@
       "diastolicPressure": "75"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-09 16:30:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "catheter": {
         "expected": [
           "无"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-09 16:30:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"75\"\n}",
-    "request_time_seconds": 0.3750743716955185
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4912109188735485
   },
   {
     "id": 77,
@@ -2129,7 +2199,9 @@
       }
     },
     "generated_text": "{\n  \"admissionTime\": \"2026-03-09 10:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"education\": \"初中\"\n}",
-    "request_time_seconds": 0.6188537627458572
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7350997738540173
   },
   {
     "id": 89,
@@ -2155,21 +2227,23 @@
       ]
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-09 11:15:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "catheter": {
         "expected": [
           "导尿管"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-09 11:15:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\n  \"allergyHistory\": [\"海鲜\"],\n  \"skin\": [\"完整\"]\n}",
-    "request_time_seconds": 0.3068649433553219
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.31544334441423416
   },
   {
     "id": 88,
@@ -2190,6 +2264,11 @@
       "sleep": "异常"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-09 08:30:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "skin": {
         "expected": [
           "其他"
@@ -2198,15 +2277,12 @@
           "压疮"
         ],
         "type": "Mismatch"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-09 08:30:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\n  \"temperature\": \"37.0\",\n  \"skin\": [\"压疮\"],\n  \"sleep\": \"异常\"\n}",
-    "request_time_seconds": 0.4223306179046631
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.430028036236763
   },
   {
     "id": 81,
@@ -2230,7 +2306,9 @@
       }
     },
     "generated_text": "{\n  \"consciousness\": \"清醒\",\n  \"education\": \"高中或中专\",\n  \"heartRate\": \"75\"\n}",
-    "request_time_seconds": 0.42864780873060226
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4478765204548836
   },
   {
     "id": 84,
@@ -2263,8 +2341,10 @@
         "type": "FN"
       }
     },
-    "generated_text": "{\n  \"allergyHistory\": [\n    \"青霉素\",\n    \"头孢\"\n  ],\n  \"skin\": [\n    \"破损\"\n  ],\n  \"bloodSugar\": \"5.6\"\n}",
-    "request_time_seconds": 0.5987801030278206
+    "generated_text": "{\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"skin\": [\"破损\"],\n  \"bloodSugar\": \"5.6\"\n}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4952794462442398
   },
   {
     "id": 83,
@@ -2300,7 +2380,9 @@
       }
     },
     "generated_text": "{\n  \"height\": \"170\",\n  \"weight\": \"65.0\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"80\"\n}",
-    "request_time_seconds": 0.6240658536553383
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6329144984483719
   },
   {
     "id": 82,
@@ -2320,21 +2402,23 @@
       "pulseRate": "80"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-06 08:00:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "catheter": {
         "expected": [
           "静脉通路"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-06 08:00:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\n  \"admissionTime\": \"2026-03-04 22:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"pulseRate\": \"80\"\n}",
-    "request_time_seconds": 0.6738041304051876
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6818664073944092
   },
   {
     "id": 86,
@@ -2356,20 +2440,15 @@
       "urination": "正常"
     },
     "error_details": {
-      "urination": {
-        "expected": null,
-        "predicted": "正常",
-        "type": "FP"
+      "assessmentTime": {
+        "expected": "2026-03-08 11:00:00",
+        "predicted": null,
+        "type": "FN"
       },
       "defecation": {
         "expected": null,
         "predicted": "异常",
         "type": "FP"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-08 11:00:00",
-        "predicted": null,
-        "type": "FN"
       },
       "catheter": {
         "expected": [
@@ -2377,10 +2456,17 @@
         ],
         "predicted": null,
         "type": "FN"
+      },
+      "urination": {
+        "expected": null,
+        "predicted": "正常",
+        "type": "FP"
       }
     },
     "generated_text": "{\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"1\",\n  \"urination\": \"正常\"\n}",
-    "request_time_seconds": 0.6937636137008667
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.6898050233721733
   },
   {
     "id": 87,
@@ -2397,27 +2483,19 @@
       "systolicPressure": "130",
       "diastolicPressure": "80",
       "pulseRate": "70",
-      "heartRate": "22"
+      "respiratoryRate": "22"
     },
     "error_details": {
       "assessmentTime": {
         "expected": "2026-03-08 16:00:00",
         "predicted": "2026-03-08 16:20:00",
         "type": "Mismatch"
-      },
-      "respiratoryRate": {
-        "expected": "22",
-        "predicted": null,
-        "type": "FN"
-      },
-      "heartRate": {
-        "expected": null,
-        "predicted": "22",
-        "type": "FP"
       }
     },
-    "generated_text": "{\"assessmentTime\":\"2026-03-08 16:20:00\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"80\",\"pulseRate\":\"70\",\"heartRate\":\"22\"}",
-    "request_time_seconds": 0.742474302649498
+    "generated_text": "{\"assessmentTime\":\"2026-03-08 16:20:00\",\"systolicPressure\":\"130\",\"diastolicPressure\":\"80\",\"pulseRate\":\"70\",\"respiratoryRate\":\"22\"}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7745048031210899
   },
   {
     "id": 92,
@@ -2441,7 +2519,9 @@
       }
     },
     "generated_text": "{\n  \"education\": \"文盲\",\n  \"temperature\": \"36.5\",\n  \"weight\": \"50.0\"\n}",
-    "request_time_seconds": 0.45226146280765533
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4898543208837509
   },
   {
     "id": 93,
@@ -2456,6 +2536,11 @@
       "urination": "异常"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-11 16:00:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "systolicPressure": {
         "expected": null,
         "predicted": "90",
@@ -2465,15 +2550,12 @@
         "expected": null,
         "predicted": "37.5",
         "type": "FP"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-11 16:00:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\n  \"temperature\": \"37.5\",\n  \"systolicPressure\": \"90\",\n  \"urination\": \"异常\"\n}",
-    "request_time_seconds": 0.46269387751817703
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5002264641225338
   },
   {
     "id": 95,
@@ -2490,19 +2572,21 @@
       "diastolicPressure": "70"
     },
     "error_details": {
-      "pulseRate": {
-        "expected": "75",
-        "predicted": "70",
-        "type": "Mismatch"
-      },
       "assessmentTime": {
         "expected": "2026-03-12 11:00:00",
         "predicted": null,
         "type": "FN"
+      },
+      "pulseRate": {
+        "expected": "75",
+        "predicted": "70",
+        "type": "Mismatch"
       }
     },
     "generated_text": "{\n  \"pulseRate\": \"70\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"70\"\n}",
-    "request_time_seconds": 0.4997652843594551
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5363821275532246
   },
   {
     "id": 91,
@@ -2530,7 +2614,9 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-03-10 14:00:00\",\"pulseRate\":\"80\",\"bloodSugar\":\"6.0\"}",
-    "request_time_seconds": 0.5399812720716
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5515621192753315
   },
   {
     "id": 94,
@@ -2556,7 +2642,9 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-03-12 07:00:00\",\"heartRate\":\"300\",\"temperature\":\"50.0\"}",
-    "request_time_seconds": 0.5487705953419209
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5874666199088097
   },
   {
     "id": 90,
@@ -2587,7 +2675,9 @@
       }
     },
     "generated_text": "{\n  \"admissionTime\": \"2026-03-08 08:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"高血压\",\n  \"consciousness\": \"嗜睡\"\n}",
-    "request_time_seconds": 0.7250761054456234
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7637520954012871
   },
   {
     "id": 96,
@@ -2618,7 +2708,9 @@
       }
     },
     "generated_text": "{\n  \"defecation\": \"正常\",\n  \"urination\": \"正常\",\n  \"admissionTime\": \"2026-03-11 21:00:00\",\n  \"admissionMethod\": \"步行\"\n}",
-    "request_time_seconds": 0.7553399242460728
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.7950880564749241
   },
   {
     "id": 99,
@@ -2653,7 +2745,9 @@
       }
     },
     "generated_text": "{\n  \"skin\": [\"皮疹\", \"出血点\"],\n  \"catheter\": [\"静脉通路\"],\n  \"education\": \"初中\",\n  \"assessmentTime\": \"2026-03-14 15:00:00\"\n}",
-    "request_time_seconds": 0.7898803725838661
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.8278121426701546
   },
   {
     "id": 105,
@@ -2667,19 +2761,21 @@
       "heartRate": "65"
     },
     "error_details": {
-      "temperature": {
-        "expected": null,
-        "predicted": "80.0",
-        "type": "FP"
-      },
       "assessmentTime": {
         "expected": "2026-03-17 08:30:00",
         "predicted": null,
         "type": "FN"
+      },
+      "temperature": {
+        "expected": null,
+        "predicted": "80.0",
+        "type": "FP"
       }
     },
     "generated_text": "{\"temperature\":\"80.0\",\"heartRate\":\"65\"}",
-    "request_time_seconds": 0.25194649398326874
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.2741409242153168
   },
   {
     "id": 101,
@@ -2701,7 +2797,9 @@
       }
     },
     "generated_text": "{\n  \"ethnicity\": \"壮族\",\n  \"consciousness\": \"浅昏迷\"\n}",
-    "request_time_seconds": 0.3055264614522457
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.32893645390868187
   },
   {
     "id": 107,
@@ -2723,7 +2821,9 @@
       }
     },
     "generated_text": "{\n  \"respiratoryRate\": \"19\",\n  \"defecation\": \"正常\"\n}",
-    "request_time_seconds": 0.3505166843533516
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.3734814450144768
   },
   {
     "id": 104,
@@ -2744,7 +2844,7 @@
         "溃疡"
       ],
       "catheter": [
-        "无"
+        "吸氧面罩"
       ]
     },
     "error_details": {
@@ -2752,10 +2852,21 @@
         "expected": "2026-03-17 14:00:00",
         "predicted": null,
         "type": "FN"
+      },
+      "catheter": {
+        "expected": [
+          "无"
+        ],
+        "predicted": [
+          "吸氧面罩"
+        ],
+        "type": "Mismatch"
       }
     },
-    "generated_text": "{\n  \"skin\": [\"钉道\", \"溃疡\"],\n  \"catheter\": [\"无\"]\n}",
-    "request_time_seconds": 0.35365577787160873
+    "generated_text": "{\n  \"skin\": [\"钉道\", \"溃疡\"],\n  \"catheter\": [\"吸氧面罩\"]\n}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.412467323243618
   },
   {
     "id": 109,
@@ -2773,21 +2884,23 @@
       "admissionMethod": "平车"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-19 14:00:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "catheter": {
         "expected": [
           "静脉通路"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-19 14:00:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\"admissionTime\":\"2026-03-17 10:00:00\",\"admissionMethod\":\"平车\"}",
-    "request_time_seconds": 0.4709276184439659
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4943952262401581
   },
   {
     "id": 102,
@@ -2807,21 +2920,23 @@
       "diastolicPressure": "85"
     },
     "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-16 09:00:00",
+        "predicted": null,
+        "type": "FN"
+      },
       "allergyHistory": {
         "expected": [
           "无"
         ],
         "predicted": null,
         "type": "FN"
-      },
-      "assessmentTime": {
-        "expected": "2026-03-16 09:00:00",
-        "predicted": null,
-        "type": "FN"
       }
     },
     "generated_text": "{\n  \"bloodSugar\": \"6.7\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\"\n}",
-    "request_time_seconds": 0.48765668645501137
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5367765165865421
   },
   {
     "id": 106,
@@ -2832,18 +2947,26 @@
       "diastolicPressure": "70"
     },
     "predicted": {
-      "systolicPressure": "110",
-      "diastolicPressure": "70"
+      "assessmentTime": "2026-03-18 09:00:00",
+      "systolicPressure": "120",
+      "diastolicPressure": "80"
     },
     "error_details": {
-      "assessmentTime": {
-        "expected": "2026-03-18 09:00:00",
-        "predicted": null,
-        "type": "FN"
+      "systolicPressure": {
+        "expected": "110",
+        "predicted": "120",
+        "type": "Mismatch"
+      },
+      "diastolicPressure": {
+        "expected": "70",
+        "predicted": "80",
+        "type": "Mismatch"
       }
     },
-    "generated_text": "{\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
-    "request_time_seconds": 0.6700777933001518
+    "generated_text": "{\"assessmentTime\":\"2026-03-18 09:00:00\",\"systolicPressure\":\"120\",\"diastolicPressure\":\"80\"}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.607374981045723
   },
   {
     "id": 103,
@@ -2869,7 +2992,9 @@
       }
     },
     "generated_text": "{\n  \"admissionTime\": \"2026-03-15 20:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"education\": \"小学\",\n  \"diagnosis\": \"考虑心力衰竭\"\n}",
-    "request_time_seconds": 0.7920089326798916
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.8143120110034943
   },
   {
     "id": 110,
@@ -2889,7 +3014,9 @@
       }
     },
     "generated_text": "{\n  \"weight\": \"70.5\"\n}",
-    "request_time_seconds": 0.19334156811237335
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.22220808267593384
   },
   {
     "id": 111,
@@ -2915,7 +3042,9 @@
       }
     },
     "generated_text": "{\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
-    "request_time_seconds": 0.28085191920399666
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.30966924875974655
   },
   {
     "id": 114,
@@ -2945,7 +3074,9 @@
       }
     },
     "generated_text": "{\n  \"allergyHistory\": [\n    \"花粉\"\n  ],\n  \"skin\": [\n    \"造口\"\n  ]\n}",
-    "request_time_seconds": 0.4272034615278244
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.4563724398612976
   },
   {
     "id": 115,
@@ -2966,7 +3097,35 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-03-22 08:00:00\",\"temperature\":\"38.2\"}",
-    "request_time_seconds": 0.46332037076354027
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.49284524843096733
+  },
+  {
+    "id": 113,
+    "input": "120担架抬进来的，诊断考虑脑梗死，神志药物镇静状。",
+    "expected": {
+      "assessmentTime": "2026-03-21 11:00:00",
+      "admissionMethod": "其他",
+      "diagnosis": "考虑脑梗死",
+      "consciousness": "药物镇静状"
+    },
+    "predicted": {
+      "admissionMethod": "其他",
+      "diagnosis": "考虑脑梗死",
+      "consciousness": "药物镇静状"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-03-21 11:00:00",
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑脑梗死\",\n  \"consciousness\": \"药物镇静状\"\n}",
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5204329043626785
   },
   {
     "id": 112,
@@ -2992,31 +3151,9 @@
       }
     },
     "generated_text": "{\"systolicPressure\":\"140\",\"diastolicPressure\":\"100\",\"respiratoryRate\":\"20\",\"pulseRate\":\"90\"}",
-    "request_time_seconds": 0.4913692735135555
-  },
-  {
-    "id": 113,
-    "input": "120担架抬进来的，诊断考虑脑梗死，神志药物镇静状。",
-    "expected": {
-      "assessmentTime": "2026-03-21 11:00:00",
-      "admissionMethod": "其他",
-      "diagnosis": "考虑脑梗死",
-      "consciousness": "药物镇静状"
-    },
-    "predicted": {
-      "admissionMethod": "其他",
-      "diagnosis": "考虑脑梗死",
-      "consciousness": "药物镇静状"
-    },
-    "error_details": {
-      "assessmentTime": {
-        "expected": "2026-03-21 11:00:00",
-        "predicted": null,
-        "type": "FN"
-      }
-    },
-    "generated_text": "{\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑脑梗死\",\n  \"consciousness\": \"药物镇静状\"\n}",
-    "request_time_seconds": 0.4908663257956505
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5217434875667095
   },
   {
     "id": 117,
@@ -3040,7 +3177,9 @@
       }
     },
     "generated_text": "{\n  \"systolicPressure\": \"90\",\n  \"diastolicPressure\": \"80\",\n  \"heartRate\": \"110\"\n}",
-    "request_time_seconds": 0.4971149191260338
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5274231694638729
   },
   {
     "id": 116,
@@ -3066,7 +3205,9 @@
       }
     },
     "generated_text": "{\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"diet\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_time_seconds": 0.5108637437224388
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5408346205949783
   },
   {
     "id": 119,
@@ -3089,7 +3230,9 @@
       }
     },
     "generated_text": "{\"education\":\"大专以上\",\"assessmentTime\":\"2026-03-24 00:00:00\",\"pulseRate\":\"78\"}",
-    "request_time_seconds": 0.5080673210322857
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5383271835744381
   },
   {
     "id": 118,
@@ -3112,6 +3255,8 @@
       }
     },
     "generated_text": "{\"assessmentTime\":\"2026-03-24 09:00:00\",\"respiratoryRate\":\"16\",\"consciousness\":\"模糊\"}",
-    "request_time_seconds": 0.5328748822212219
+    "audio_path": null,
+    "audio_error": "audio_requested_but_not_returned",
+    "request_time_seconds": 0.5632692091166973
   }
 ]

@@ -8,5 +8,4 @@ VLLM_USE_FLASHINFER_SAMPLER=0 vllm serve "$MODEL_NAME" \
   --port 8000 \
   --trust-remote-code \
   --served-model-name MiniCPM-o-4.5 \
-  --language-model-only \
-  --default-chat-template-kwargs '{"enable_thinking": false}' \
+  --default-chat-template-kwargs '{"enable_thinking": false}'

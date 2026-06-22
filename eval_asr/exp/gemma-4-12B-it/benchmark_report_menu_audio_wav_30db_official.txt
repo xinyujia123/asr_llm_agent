@@ -1,0 +1,17 @@
+
+Benchmark Report
+================
+Model: /root/autodl-tmp/models/models/google/gemma-4-12B-it
+Dataset: /workspace/audio_llm_agent/dataset/asr_llm
+Audio Subdir: menu_audio_wav_30db
+Script: /workspace/audio_llm_agent/dataset/asr_llm/menu_script.txt
+Prompt Mode: official
+Total Files: 103
+Overall CER: 0.8085
+Overall Accuracy: 0.1915
+Total Duration: 485.72 s
+Total Inference Time: 19.83 s
+Overall RTF: 0.0408
+Average Latency: 0.1926 s/file
+Results JSONL: /root/projects/asr_llm_agent/eval_asr/exp/gemma-4-12B-it/results_menu_audio_wav_30db_official.jsonl
+Error Cases: /root/projects/asr_llm_agent/eval_asr/exp/gemma-4-12B-it/error_cases_menu_audio_wav_30db_official.txt
