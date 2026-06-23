@@ -33,7 +33,7 @@ if DEBUG_MODE and not os.path.exists(DEBUG_SAVE_DIR):
 # --- 配置项 ---
 LLM_API_KEY = os.getenv("QWEN_API_KEY")
 LLM_BASE_URL = os.getenv("LLM_BASE_URL")
-LLM_MODEL_NAME = "qwen-flash"
+LLM_MODEL_NAME = "qwen3.5-flash"
 # 指向我们刚刚拆分出来的独立 ASR 服务地址 (VAD增强版)
 ASR_SERVICE_URL = "http://127.0.0.1:8002/vad_and_transcribe" 
 
@@ -92,7 +92,7 @@ async def extract_menu_info_async(text: str):
                 {"role": "user", "content": f"分析文本：{text}"}
             ],
             temperature=0.1,
-            response_format={"type": "json_object"} 
+            extra_body={"enable_thinking": False}
         )
         content = response.choices[0].message.content
         json_match = re.search(r'\{.*\}', content, re.DOTALL)
@@ -116,6 +116,7 @@ async def extract_medical_info_async(text: str):
                 {"role": "user", "content": f"分析文本：{text}"}
             ],
             temperature=0.1,
+            extra_body={"enable_thinking": False}
             #response_format={"type": "json_object"} 
         )
         content = response.choices[0].message.content

@@ -1,0 +1,58 @@
+[
+  {
+    "concurrency": 1,
+    "total_time_s": 0.7177748680114746,
+    "avg_latency_s": 0.7177383899688721,
+    "throughput_tokens_per_s": 2803.107338620047,
+    "total_input_tokens": 1974,
+    "total_output_tokens": 38,
+    "cost_rmb": 0.00035309999999999996,
+    "avg_cost_per_sentence": 0.00035309999999999996,
+    "cost_details": {
+      "input_cost": 0.0002961,
+      "output_cost": 5.7e-05
+    }
+  },
+  {
+    "concurrency": 3,
+    "total_time_s": 1.7984650135040283,
+    "avg_latency_s": 0.8636669317881266,
+    "throughput_tokens_per_s": 3381.2167344596382,
+    "total_input_tokens": 5918,
+    "total_output_tokens": 163,
+    "cost_rmb": 0.0011321999999999999,
+    "avg_cost_per_sentence": 0.00037739999999999996,
+    "cost_details": {
+      "input_cost": 0.0008877,
+      "output_cost": 0.00024450000000000003
+    }
+  },
+  {
+    "concurrency": 5,
+    "total_time_s": 1.75699782371521,
+    "avg_latency_s": 0.8930476665496826,
+    "throughput_tokens_per_s": 5755.271784354267,
+    "total_input_tokens": 9865,
+    "total_output_tokens": 247,
+    "cost_rmb": 0.00185025,
+    "avg_cost_per_sentence": 0.00037004999999999997,
+    "cost_details": {
+      "input_cost": 0.00147975,
+      "output_cost": 0.0003705
+    }
+  },
+  {
+    "concurrency": 10,
+    "total_time_s": 1.8902344703674316,
+    "avg_latency_s": 0.8640891551971436,
+    "throughput_tokens_per_s": 10699.201774724157,
+    "total_input_tokens": 19730,
+    "total_output_tokens": 494,
+    "cost_rmb": 0.0037005,
+    "avg_cost_per_sentence": 0.00037004999999999997,
+    "cost_details": {
+      "input_cost": 0.0029595,
+      "output_cost": 0.000741
+    }
+  }
+]

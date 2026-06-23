@@ -1,0 +1,157 @@
+Benchmark Report - 2026-03-10 18:15:19
+
+==================================================
+
+Scenario: 5s audio, 1 concurrent requests
+Total Wall Time: 0.0530 s
+Successful Requests: 1/1
+Average Latency: 0.0526 s
+Max Latency: 0.0526 s
+P95 Latency: 0.0526 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 5s audio, 5 concurrent requests
+Total Wall Time: 0.1941 s
+Successful Requests: 5/5
+Average Latency: 0.1166 s
+Max Latency: 0.1932 s
+P95 Latency: 0.1932 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 5s audio, 10 concurrent requests
+Total Wall Time: 0.3799 s
+Successful Requests: 10/10
+Average Latency: 0.2151 s
+Max Latency: 0.3786 s
+P95 Latency: 0.3786 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 5s audio, 50 concurrent requests
+Total Wall Time: 1.9769 s
+Successful Requests: 50/50
+Average Latency: 0.9939 s
+Max Latency: 1.9734 s
+P95 Latency: 1.9073 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 20s audio, 1 concurrent requests
+Total Wall Time: 0.2245 s
+Successful Requests: 1/1
+Average Latency: 0.2242 s
+Max Latency: 0.2242 s
+P95 Latency: 0.2242 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 20s audio, 3 concurrent requests
+Total Wall Time: 0.9223 s
+Successful Requests: 3/3
+Average Latency: 0.5790 s
+Max Latency: 0.9216 s
+P95 Latency: 0.9216 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 20s audio, 5 concurrent requests
+Total Wall Time: 1.4748 s
+Successful Requests: 5/5
+Average Latency: 0.8803 s
+Max Latency: 1.4738 s
+P95 Latency: 1.4738 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 20s audio, 20 concurrent requests
+Total Wall Time: 6.2180 s
+Successful Requests: 20/20
+Average Latency: 3.3113 s
+Max Latency: 6.2157 s
+P95 Latency: 6.2021 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 1min audio, 1 concurrent requests
+Total Wall Time: 0.8747 s
+Successful Requests: 1/1
+Average Latency: 0.8743 s
+Max Latency: 0.8743 s
+P95 Latency: 0.8743 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 1min audio, 3 concurrent requests
+Total Wall Time: 2.7932 s
+Successful Requests: 3/3
+Average Latency: 1.8262 s
+Max Latency: 2.7925 s
+P95 Latency: 2.7925 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 1min audio, 10 concurrent requests
+Total Wall Time: 9.3180 s
+Successful Requests: 10/10
+Average Latency: 5.1006 s
+Max Latency: 9.3151 s
+P95 Latency: 9.3151 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 5min audio, 1 concurrent requests
+Total Wall Time: 3.5947 s
+Successful Requests: 1/1
+Average Latency: 3.5943 s
+Max Latency: 3.5943 s
+P95 Latency: 3.5943 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 5min audio, 3 concurrent requests
+Total Wall Time: 10.7738 s
+Successful Requests: 3/3
+Average Latency: 7.1830 s
+Max Latency: 10.7732 s
+P95 Latency: 10.7732 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
+
+Scenario: 5min audio, 10 concurrent requests
+Total Wall Time: 37.9874 s
+Successful Requests: 10/10
+Average Latency: 20.7428 s
+Max Latency: 37.9851 s
+P95 Latency: 37.9851 s
+Max GPU Memory: 14400 MiB
+Avg GPU Memory: 14400.0 MiB
+
+------------------------------
