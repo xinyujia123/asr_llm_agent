@@ -56,8 +56,17 @@ from pydantic import BaseModel
 #   apt-get install ffmpeg
 
 HERE = Path(__file__).resolve().parent
-CODE_DIR = HERE if (HERE / "sak").exists() else HERE.parent
-PROJECT_DIR = CODE_DIR.parent
+
+
+def find_project_dir(start: Path) -> Path:
+    for candidate in (start, *start.parents):
+        if (candidate / "sak").is_dir():
+            return candidate
+    return start
+
+
+PROJECT_DIR = find_project_dir(HERE)
+CODE_DIR = PROJECT_DIR
 if str(CODE_DIR) not in sys.path:
     sys.path.insert(0, str(CODE_DIR))
 
@@ -93,14 +102,28 @@ def env_int(name: str, default: int) -> int:
         return default
 
 
+def project_path(value: Any) -> Path:
+    path = Path(value).expanduser()
+    if path.is_absolute():
+        return path
+    return PROJECT_DIR / path
+
+
+def display_path(path: Path) -> str:
+    try:
+        return path.relative_to(PROJECT_DIR).as_posix()
+    except ValueError:
+        return str(path)
+
+
 DEBUG_MODE = env_bool("SMART_NURSING_DEBUG", False)
-UPLOAD_DIR = Path(os.getenv("SMART_NURSING_UPLOAD_DIR", str(HERE / "debug_uploads"))).expanduser()
-DATASET_DIR = Path(
+UPLOAD_DIR = project_path(os.getenv("SMART_NURSING_UPLOAD_DIR", "debug_uploads"))
+DATASET_DIR = project_path(
     os.getenv(
         "NURSE_AUDIO_DATASET_DIR",
-        str(PROJECT_DIR / "dataset" / "asr_llm" / "nurse_audio_wav"),
+        str(Path("dataset") / "asr_nurse_agent" / "nurse_audio_wav"),
     )
-).expanduser()
+)
 
 LLM_API_KEY = (
     os.getenv("DASHSCOPE_API_KEY")
@@ -169,7 +192,7 @@ TTS_WEBSOCKET_URL = os.getenv(
     "DASHSCOPE_TTS_WEBSOCKET_URL",
     "wss://dashscope.aliyuncs.com/api-ws/v1/realtime",
 )
-TTS_OUTPUT_DIR = Path(os.getenv("SMART_NURSING_TTS_DIR", str(HERE / "tts_outputs"))).expanduser()
+TTS_OUTPUT_DIR = project_path(os.getenv("SMART_NURSING_TTS_DIR", "tts_outputs"))
 TTS_SAMPLE_RATE = env_int("SMART_NURSING_TTS_SAMPLE_RATE", 24000)
 TTS_TIMEOUT_SECONDS = env_int("SMART_NURSING_TTS_TIMEOUT_SECONDS", 90)
 
@@ -1164,10 +1187,10 @@ async def health():
     return {
         "status": "ok",
         "code_dir": str(CODE_DIR),
-        "dataset_dir": str(DATASET_DIR),
+        "dataset_dir": display_path(DATASET_DIR),
         "dataset_exists": DATASET_DIR.exists(),
-        "upload_dir": str(UPLOAD_DIR),
-        "tts_dir": str(TTS_OUTPUT_DIR),
+        "upload_dir": display_path(UPLOAD_DIR),
+        "tts_dir": display_path(TTS_OUTPUT_DIR),
         "llm": {
             "model": normalize_llm_model(),
             "default_model": normalize_llm_model(),
@@ -1219,7 +1242,10 @@ async def analyze_audio_endpoint(
             model_name=model,
             asr_model_name=asr_model,
         )
-        result["file"] = {"name": file.filename, "server_path": str(upload_path) if DEBUG_MODE else None}
+        result["file"] = {
+            "name": file.filename,
+            "server_path": display_path(upload_path) if DEBUG_MODE else None,
+        }
         return result
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc)) from exc
@@ -1252,15 +1278,15 @@ async def analyze_path_endpoint(request: AnalyzePathRequest):
 @app.get("/api/dataset")
 async def list_dataset():
     if not DATASET_DIR.exists():
-        return {"dataset_dir": str(DATASET_DIR), "count": 0, "files": []}
+        return {"dataset_dir": display_path(DATASET_DIR), "count": 0, "files": []}
     files = sorted(DATASET_DIR.glob("*.wav"), key=numeric_sort_key)
     return {
-        "dataset_dir": str(DATASET_DIR),
+        "dataset_dir": display_path(DATASET_DIR),
         "count": len(files),
         "files": [
             {
                 "name": item.name,
-                "path": str(item),
+                "path": display_path(item),
                 "audio_url": f"/api/dataset/audio/{item.name}",
             }
             for item in files
@@ -1368,7 +1394,7 @@ async def run_dataset(request: DatasetRunRequest):
             )
 
     return {
-        "dataset_dir": str(DATASET_DIR),
+        "dataset_dir": display_path(DATASET_DIR),
         "count": len(results),
         "results": results,
     }
@@ -1972,5 +1998,5 @@ HTML_PAGE = r"""
 if __name__ == "__main__":
     import uvicorn
 
-    port = env_int("PORT", 8001)
+    port = env_int("PORT", 8002)
     uvicorn.run(app, host="0.0.0.0", port=port)
