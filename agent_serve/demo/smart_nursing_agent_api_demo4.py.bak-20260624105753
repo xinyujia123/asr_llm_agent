@@ -4,7 +4,6 @@ import json
 import os
 import re
 import shutil
-import socket
 import subprocess
 import sys
 import tempfile
@@ -49,10 +48,6 @@ except ImportError:  # pragma: no cover - handled at runtime
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse, HTMLResponse
 from pydantic import BaseModel
-import urllib3.util.connection as urllib3_connection
-
-# Avoid 15s DNS/IPv6 fallback stalls when DashScope uploads local audio to OSS.
-urllib3_connection.allowed_gai_family = lambda: socket.AF_INET
 
 
 # Recommended runtime dependencies:
