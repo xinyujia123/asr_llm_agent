@@ -12,7 +12,7 @@ from datetime import datetime
 from http import HTTPStatus
 from dotenv import load_dotenv, find_dotenv
 from contextlib import asynccontextmanager
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from openai import AsyncOpenAI
 from pathlib import Path
 
@@ -196,6 +196,8 @@ FORM_ROUTER_PROMPT = """
 
 FORM_FIELDS = {
     "admission_assessment_form": [
+            "patientName",
+            "bedNumber",
             "admissionMethod",
             "admissionMethodOther",
             "temperature",
@@ -219,6 +221,8 @@ FORM_FIELDS = {
             "assessmentTime",
     ],
     "nursing_record_form": [
+            "patientName",
+            "bedNumber",
             "recordDate",
             "recordTime",
             "temperature",
@@ -250,6 +254,8 @@ FORM_FIELDS = {
             "nurseSignature",
     ],
     "temperature_sheet_form": [
+            "patientName",
+            "bedNumber",
             "recordDate",
             "intakeAmount",
             "outputUrine",
@@ -274,7 +280,7 @@ FORM_PROMPTS = {
 
 硬性规则：
 1. 只输出一个合法 JSON 对象，不要 Markdown，不要解释。
-2. 不要提取患者基础信息，包括 patientId、deptId、wardId、科室、床号、病案号、姓名、性别、出生日期、年龄、入院日期、入院诊断、民族、过敏史、文化程度。
+2. 只按“必须按以下字段输出”中的字段输出；不要额外提取表单“基础信息/一般资料”栏中未定义的字段。
 3. 文本没有明确说到的字段填 null，不要推断。
 4. 数值字段只保留数值字符串，不要带单位。
 5. admissionMethod 输出编码字符串：步行=1，轮椅=2，平车=3，推床=4，背入=5，其他=99。
@@ -285,6 +291,8 @@ FORM_PROMPTS = {
 
 必须按以下字段输出：
 {
+  "patientName": null,
+  "bedNumber": null,
   "admissionMethod": null,
   "admissionMethodOther": null,
   "temperature": null,
@@ -313,7 +321,7 @@ FORM_PROMPTS = {
 
 硬性规则：
 1. 只输出一个合法 JSON 对象，不要 Markdown，不要解释。
-2. 不要提取患者基础信息，包括 patientId、科室、床号、病案号、姓名、性别、出生日期、年龄、入院日期、入院诊断、民族、过敏史。
+2. 只按“必须按以下字段输出”中的字段输出；不要额外提取表单“基础信息/一般资料”栏中未定义的字段。
 3. 文本没有明确说到的字段填 null，不要推断。
 4. 数值字段只保留数值字符串，不要带单位。
 5. 血压如果说“一百二十/八十”或“一百二十八十”，收缩压填 bloodPressureSystolic，舒张压填 bloodPressureDiastolic。
@@ -322,6 +330,8 @@ FORM_PROMPTS = {
 
 必须按以下字段输出：
 {
+  "patientName": null,
+  "bedNumber": null,
   "recordDate": null,
   "recordTime": null,
   "temperature": null,
@@ -358,7 +368,7 @@ FORM_PROMPTS = {
 
 硬性规则：
 1. 只输出一个合法 JSON 对象，不要 Markdown，不要解释。
-2. 不要提取患者基础信息，包括 patientId、科室、床号、病案号、姓名、性别、出生日期、年龄、入院日期、入院诊断、民族、过敏史。
+2. 只按“必须按以下字段输出”中的字段输出；不要额外提取表单“基础信息/一般资料”栏中未定义的字段。
 3. 文本没有明确说到的字段填 null，不要推断。
 4. 数值字段只保留数值字符串，不要带单位。
 5. bedStatus 只能输出：卧床、轮椅、平车、拒测、外出；没说则 null。
@@ -368,6 +378,8 @@ FORM_PROMPTS = {
 
 必须按以下字段输出：
 {
+  "patientName": null,
+  "bedNumber": null,
   "recordDate": null,
   "intakeAmount": null,
   "outputUrine": null,
@@ -438,6 +450,35 @@ def normalize_form_ids(raw_form_ids):
     return form_ids
 
 
+def normalize_patient_candidates(patients: str):
+    if not patients:
+        return []
+    try:
+        raw_patients = json.loads(patients)
+    except Exception:
+        return []
+    if not isinstance(raw_patients, list):
+        return []
+
+    candidates = []
+    for item in raw_patients:
+        if not isinstance(item, dict):
+            continue
+        name = str(item.get("name") or item.get("patientName") or "").strip()
+        bed_number = str(item.get("bedNumber") or item.get("bedNo") or "").strip()
+        patient_id = item.get("patientId") or item.get("id")
+        if not name and not bed_number:
+            continue
+        candidates.append(
+            {
+                "patientId": patient_id,
+                "name": name,
+                "bedNumber": bed_number,
+            }
+        )
+    return candidates
+
+
 async def route_forms_async(text: str):
     try:
         response = await models.llm_client.chat.completions.create(
@@ -457,18 +498,46 @@ async def route_forms_async(text: str):
         return []
 
 
-def prompt_with_current_time(prompt: str):
+def patient_context_prompt(patient_candidates):
+    if not patient_candidates:
+        return """
+
+患者候选列表：未提供。
+请从 ASR 文本中如实提取 patientName 和 bedNumber；如果无法明确判断，填 null。
+"""
+
+    lines = []
+    for patient in patient_candidates:
+        label = f"- 姓名：{patient.get('name') or '未知'}，床号：{patient.get('bedNumber') or '未知'}"
+        if patient.get("patientId") is not None:
+            label += f"，patientId：{patient.get('patientId')}"
+        lines.append(label)
+    return """
+
+患者候选列表如下，只能从候选列表中选择患者：
+{patients}
+
+患者判断规则：
+1. 根据 ASR 文本中的姓名、床号、称呼或上下文判断对应患者。
+2. 输出 JSON 必须包含 patientName 和 bedNumber。
+3. patientName 必须使用候选列表中的姓名，bedNumber 必须使用候选列表中的床号。
+4. 如果 ASR 文本没有明确指向某个候选患者，patientName 和 bedNumber 都填 null。
+5. 不要凭空编造候选列表之外的患者姓名或床号。
+""".format(patients="\n".join(lines))
+
+
+def prompt_with_current_time(prompt: str, patient_candidates=None):
     formatted_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    return prompt + f"\n当前系统时间：{formatted_time}\n"
+    return prompt + patient_context_prompt(patient_candidates or []) + f"\n当前系统时间：{formatted_time}\n"
 
 
-async def extract_form_info_async(text: str, form_id: str):
+async def extract_form_info_async(text: str, form_id: str, patient_candidates=None):
     form = FORM_ROUTES[form_id]
     try:
         response = await models.llm_client.chat.completions.create(
             model=LLM_MODEL_NAME,
             messages=[
-                {"role": "system", "content": prompt_with_current_time(FORM_PROMPTS[form_id])},
+                {"role": "system", "content": prompt_with_current_time(FORM_PROMPTS[form_id], patient_candidates)},
                 {"role": "user", "content": f"ASR文本：{text}"},
             ],
             temperature=0.1,
@@ -491,7 +560,7 @@ async def extract_form_info_async(text: str, form_id: str):
         }
 
 
-async def extract_forms_async(text: str):
+async def extract_forms_async(text: str, patients: str = ""):
     form_ids = await route_forms_async(text)
     if not form_ids:
         return {
@@ -502,7 +571,10 @@ async def extract_forms_async(text: str):
             "message": "未明确提到入院评估单、护理记录单或体温单，未执行表单转写",
         }
 
-    forms = await asyncio.gather(*(extract_form_info_async(text, form_id) for form_id in form_ids))
+    patient_candidates = normalize_patient_candidates(patients)
+    forms = await asyncio.gather(
+        *(extract_form_info_async(text, form_id, patient_candidates) for form_id in form_ids)
+    )
     return {
         "intend": "form_route",
         "forms": forms,
@@ -531,7 +603,8 @@ def build_android_demo_response(agent_result, patient_id: int):
         form_id = form.get("id")
         dto_info = ANDROID_FORM_DTOS.get(form_id, {})
         form_data = dict(form.get("data") or {})
-        form_data["patientId"] = patient_id
+        if patient_id:
+            form_data["patientId"] = patient_id
         android_forms.append(
             {
                 "id": form_id,
@@ -575,7 +648,7 @@ def build_android_demo_response(agent_result, patient_id: int):
 app = FastAPI(title="Medical Agent (Decoupled Version)", lifespan=lifespan)
 
 @app.post("/api/agent")
-async def analyze_audio_endpoint(file: UploadFile = File(...)):
+async def analyze_audio_endpoint(file: UploadFile = File(...), patients: str = Form("")):
     temp_files = []
     
     try:
@@ -636,7 +709,7 @@ async def analyze_audio_endpoint(file: UploadFile = File(...)):
         llm_start_time = time.time()
         result_data = {}
         if full_text:
-            result_data = await extract_forms_async(full_text)
+            result_data = await extract_forms_async(full_text, patients)
         print(f"LLM 提取耗时: {time.time() - llm_start_time:.2f}s")
 
         return {
@@ -658,9 +731,15 @@ async def analyze_audio_endpoint(file: UploadFile = File(...)):
 
 
 @app.post("/agent/asr2txt/{patient_id}")
-async def android_asr2txt_endpoint(patient_id: int, file: UploadFile = File(...)):
-    agent_result = await analyze_audio_endpoint(file)
+async def android_asr2txt_endpoint(patient_id: int, file: UploadFile = File(...), patients: str = Form("")):
+    agent_result = await analyze_audio_endpoint(file, patients)
     return build_android_demo_response(agent_result, patient_id)
 
+
+@app.post("/agent/asr2txt")
+async def android_asr2txt_demo_endpoint(file: UploadFile = File(...), patients: str = Form("")):
+    agent_result = await analyze_audio_endpoint(file, patients)
+    return build_android_demo_response(agent_result, 0)
+
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8001)
+    uvicorn.run(app, host="0.0.0.0", port=8003)
