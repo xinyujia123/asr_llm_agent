@@ -4,6 +4,7 @@ import json
 import re
 import time
 import sys
+import socket
 import tempfile 
 import uvicorn
 import shutil
@@ -15,11 +16,15 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, UploadFile, File, Form, HTTPException
 from openai import AsyncOpenAI
 from pathlib import Path
+import urllib3.util.connection as urllib3_connection
 
 try:
     import dashscope
 except ImportError:  # pragma: no cover - runtime dependency hint
     dashscope = None
+
+# 避免 DashScope 上传本地音频时出现 DNS/IPv6 fallback 卡顿。
+urllib3_connection.allowed_gai_family = lambda: socket.AF_INET
 
 # 环境与路径配置
 parent_dir = str(Path(__file__).resolve().parent.parent)
