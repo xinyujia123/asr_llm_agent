@@ -3,6 +3,7 @@ import json
 import time
 import sys
 import asyncio
+import socket
 import tempfile 
 import uvicorn
 import shutil
@@ -14,11 +15,15 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, UploadFile, File, HTTPException
 from openai import AsyncOpenAI
 from pathlib import Path
+import urllib3.util.connection as urllib3_connection
 
 try:
     import dashscope
 except ImportError:
     dashscope = None
+
+# 避免 DashScope 上传本地音频时出现 DNS/IPv6 fallback 卡顿。
+urllib3_connection.allowed_gai_family = lambda: socket.AF_INET
 
 # 环境与路径配置
 parent_dir = str(Path(__file__).resolve().parent.parent)
@@ -39,7 +44,7 @@ if DEBUG_MODE and not os.path.exists(DEBUG_SAVE_DIR):
 # --- 配置项 ---
 LLM_API_KEY = os.getenv("QWEN_API_KEY")
 LLM_BASE_URL = os.getenv("LLM_BASE_URL")
-LLM_MODEL_NAME = "qwen3.5-flash"
+LLM_MODEL_NAME = "qwen3.6-flash"
 ASR_API_KEY = os.getenv("DASHSCOPE_API_KEY") or os.getenv("QWEN_API_KEY") or os.getenv("LLM_API_KEY")
 ASR_MODEL_NAME = os.getenv("DASHSCOPE_QWEN_ASR_MODEL", "qwen3-asr-flash")
 ASR_HTTP_BASE_URL = os.getenv("DASHSCOPE_HTTP_BASE_URL", "https://dashscope.aliyuncs.com/api/v1")
