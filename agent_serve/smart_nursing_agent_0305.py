@@ -309,15 +309,15 @@ FORM_PROMPTS = {
 * weight：体重，kg，只输出数值字符串，保留一位小数。
 * height：身高，cm，只输出整数数字字符串。
 * randomBloodGlucose：随机血糖，mmol/L，只输出数值字符串，保留一位小数。
-* skinMucosaIntact：皮肤黏膜编码字符串。完整="1"；皮疹="2"；出血点="3"；脓疱="4"；破损="5"；溃疡="6"；压力性损伤/压疮="7"；造口="8"；钉道="9"；其他异常="99"。有异常时严禁输出完整。
-* limbActivity：肢体活动编码字符串。正常="0"；异常="1"。局部异常即为异常。
-* hasCatheter：导管编码字符串。明确无导管="0"；明确有导管="1"。局部否定不代表全局无，如“没插胃管”不能输出"0"。
+* skinMucosaIntact：皮肤黏膜编码整数。完整=1；皮疹=2；出血点=3；脓疱=4；破损=5；溃疡=6；压力性损伤/压疮=7；造口=8；钉道=9；其他异常=99。有异常时严禁输出完整。
+* limbActivity：肢体活动编码整数。正常=0；异常=1。局部异常即为异常。
+* hasCatheter：导管编码整数。明确无导管=0；明确有导管=1。局部否定不代表全局无，如“没插胃管”不能输出0。
 * catheterInfo：有导管时输出具体导管名称/说明；打点滴映射为静脉通路，尿袋映射为导尿管；吸氧面罩不算导管。
-* dietStatus：饮食编码字符串。正常="0"；异常="1"。单纯“食欲不振”等日常情况不能判定异常。
-* sleepStatus：睡眠编码字符串。正常="0"；异常="1"。单纯“睡得晚”等日常情况不能判定异常。
-* urinationStatus：排尿编码字符串。正常="0"；异常="1"。
-* defecationStatus：排便编码字符串。正常="0"；异常="1"。
-* notifyDoctor：通知医生编码字符串。明确无需/未通知="0"；明确已通知/通知医生="1"。
+* dietStatus：饮食编码整数。正常=0；异常=1。单纯“食欲不振”等日常情况不能判定异常。
+* sleepStatus：睡眠编码整数。正常=0；异常=1。单纯“睡得晚”等日常情况不能判定异常。
+* urinationStatus：排尿编码整数。正常=0；异常=1。
+* defecationStatus：排便编码整数。正常=0；异常=1。
+* notifyDoctor：通知医生文本。明确无需/未通知输出"未通知"；明确已通知/通知医生输出"已通知"。
 * assessmentTime：评估时间，格式 "YYYY-MM-DD HH:MM:SS"。若只提及时刻，默认日期为当前系统时间日期；若有昨天/今天等相对词，结合当前系统时间推算。
 
 ### 【兜底规则】
@@ -326,7 +326,7 @@ FORM_PROMPTS = {
 3. 如果一段 ASR 同时包含多张表单，只提取【入院评估单】表名附近或表名后的内容；不要提取护理记录单、体温单片段。
 4. 同一字段多次出现时取最后一次；区间值取平均值。
 5. 明显违背生理极限的离谱数值视为 ASR 错误，不输出该 key。
-6. 所有编码和数值均输出字符串，不输出数字类型。
+6. admissionMethod、consciousness 输出字符串编码；skinMucosaIntact、limbActivity、hasCatheter、dietStatus、sleepStatus、urinationStatus、defecationStatus 输出整数编码；其余数值字段输出字符串。
 
 ### 【核心处理原则】
 1. 允许做医疗语境 ASR 纠错，如“学压”->“血压”，“麦博”->“脉搏”。
@@ -352,8 +352,8 @@ FORM_PROMPTS = {
   "bloodPressureSys": "118",
   "bloodPressureDia": "76",
   "consciousness": "1",
-  "skinMucosaIntact": "1",
-  "hasCatheter": "0",
+  "skinMucosaIntact": 1,
+  "hasCatheter": 0,
   "assessmentTime": "2026-02-01 08:00:00"
 }
 
@@ -364,8 +364,8 @@ FORM_PROMPTS = {
 {
   "bedNumber": "2床",
   "admissionMethod": "4",
-  "skinMucosaIntact": "7",
-  "hasCatheter": "1",
+  "skinMucosaIntact": 7,
+  "hasCatheter": 1,
   "catheterInfo": "导尿管、静脉通路",
   "assessmentTime": "2026-02-01 10:00:00"
 }
@@ -490,8 +490,8 @@ FORM_PROMPTS = {
 * temperatureTimeList：体温时点数组。仅记录明确提到的体温/脉搏时点；可包含 02:00、06:00、10:00、14:00、18:00、22:00 或其他明确时间。
   - recordTime：格式必须为 "HH:MM"，不要输出秒；如果只说体温/脉搏但没有时点，可输出 null。
   - temperature：体温，单位℃，保留一位小数。
-  - temperatureType：体温类型编码字符串。腋温="1"；肛温="2"；口温="3"；不升="4"；外出="5"；请假="6"；特殊值="7"；耳温="8"。未说明体温类型则不输出。
-  - pulse：脉搏/脉率，次/分，只输出整数数字字符串。
+  - temperatureType：体温类型编码。腋温=1；肛温=2；口温=3；不升=4；外出=5；请假=6；特殊值=7；耳温=8。未说明体温类型必须输出 null。
+  - pulse：脉搏/脉率，次/分，只输出整数数字字符串；未提及必须输出 null。
 
 ### 【兜底规则】
 1. ASR 未提及则不输出该 key；recordDate 除外，必须输出。
@@ -500,7 +500,8 @@ FORM_PROMPTS = {
 4. 没有任何体温或脉搏时点信息时，不输出 temperatureTimeList。
 5. 同一字段多次出现时取最后一次；区间值取平均值。
 6. 明显违背生理极限的离谱数值视为 ASR 错误，不输出该 key。
-7. 所有编码和数值均输出字符串；temperatureTimeList 是数组。
+7. temperatureTimeList 是数组；每条记录必须固定包含 recordTime、temperature、temperatureType、pulse 四个 key，未提及的值输出 null。
+8. temperatureType 输出整数或 null；其余编码和数值均输出字符串。
 
 ### 【核心处理原则】
 1. 允许做医疗语境 ASR 纠错，如“学压”->“血压”，“麦博”->“脉搏”。
@@ -528,7 +529,7 @@ FORM_PROMPTS = {
     {
       "recordTime": "10:00",
       "temperature": "36.7",
-      "temperatureType": "1",
+      "temperatureType": 1,
       "pulse": "80"
     }
   ]
@@ -568,6 +569,84 @@ def extract_first_json_object(content: str):
         return {}
 
 
+ADMISSION_INT_FIELDS = {
+    "skinMucosaIntact",
+    "limbActivity",
+    "hasCatheter",
+    "dietStatus",
+    "sleepStatus",
+    "urinationStatus",
+    "defecationStatus",
+}
+
+
+def normalize_int_value(value):
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return int(value)
+    if isinstance(value, int):
+        return value
+    if isinstance(value, float) and value.is_integer():
+        return int(value)
+    if isinstance(value, str):
+        stripped = value.strip()
+        if not stripped or stripped.lower() in {"none", "null", "undefined", "未知"}:
+            return None
+        if re.fullmatch(r"-?\d+", stripped):
+            return int(stripped)
+    return value
+
+
+def normalize_catheter_bool(key, value):
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, (int, float)):
+        return bool(value)
+    if isinstance(value, str):
+        stripped = value.strip().lower()
+        if not stripped or stripped in {"none", "null", "undefined", "未知"}:
+            return None
+        if stripped in {"true", "1", "yes", "y", "是", "有"}:
+            return True
+        if stripped in {"false", "0", "no", "n", "否", "无"}:
+            return False
+        if key == "catheterNormal":
+            if stripped in {"正常", "通畅", "固定好", "无异常"}:
+                return True
+            if stripped in {"异常", "不通畅", "堵塞", "脱出", "渗漏"}:
+                return False
+        if key == "catheterAbnormal":
+            if stripped in {"异常", "不通畅", "堵塞", "脱出", "渗漏"}:
+                return True
+            if stripped in {"正常", "通畅", "固定好", "无异常"}:
+                return False
+    return value
+
+
+def normalize_notify_doctor(value):
+    if not isinstance(value, str):
+        return value
+    stripped = value.strip()
+    if stripped in {"1", "是", "已通知", "通知", "通知医生", "已通知医生"}:
+        return "已通知"
+    if stripped in {"0", "否", "未通知", "无需通知", "不用通知", "未通知医生"}:
+        return "未通知"
+    return stripped
+
+
+def has_meaningful_value(value):
+    if value is None:
+        return False
+    if isinstance(value, str):
+        return bool(value.strip()) and value.strip().lower() not in {"none", "null", "undefined", "未知"}
+    if isinstance(value, list):
+        return bool(value)
+    return True
+
+
 def normalize_temperature_time_list(value):
     if not isinstance(value, list):
         return value
@@ -575,7 +654,12 @@ def normalize_temperature_time_list(value):
     for item in value:
         if not isinstance(item, dict):
             continue
-        normalized_item = dict(item)
+        normalized_item = {
+            "recordTime": item.get("recordTime"),
+            "temperature": item.get("temperature"),
+            "temperatureType": item.get("temperatureType"),
+            "pulse": item.get("pulse"),
+        }
         record_time = normalized_item.get("recordTime")
         if isinstance(record_time, str):
             stripped = record_time.strip()
@@ -586,6 +670,15 @@ def normalize_temperature_time_list(value):
                 normalized_item["recordTime"] = None
             else:
                 normalized_item["recordTime"] = stripped
+        temperature_type = normalized_item.get("temperatureType")
+        if isinstance(temperature_type, str):
+            stripped = temperature_type.strip()
+            if stripped.lower() in {"", "none", "null", "undefined", "未知"}:
+                normalized_item["temperatureType"] = None
+            elif stripped.isdigit():
+                normalized_item["temperatureType"] = int(stripped)
+            else:
+                normalized_item["temperatureType"] = stripped
         normalized.append(normalized_item)
     return normalized
 
@@ -599,12 +692,30 @@ def clean_form_json(data, keys):
         if key == "temperatureTimeList":
             cleaned[key] = normalize_temperature_time_list(value)
             continue
+        if key in ADMISSION_INT_FIELDS:
+            cleaned[key] = normalize_int_value(value)
+            continue
+        if key in {"catheterNormal", "catheterAbnormal"}:
+            cleaned[key] = normalize_catheter_bool(key, value)
+            continue
+        if key == "notifyDoctor":
+            cleaned[key] = normalize_notify_doctor(value)
+            continue
         if isinstance(value, str):
             stripped = value.strip()
             cleaned[key] = stripped if stripped and stripped.lower() not in {"none", "null", "undefined", "未知"} else None
         else:
             cleaned[key] = value
-    return cleaned
+    if "catheterNormal" in cleaned and "catheterAbnormal" in cleaned:
+        if cleaned.get("catheterNormal") is True and cleaned.get("catheterAbnormal") is None:
+            cleaned["catheterAbnormal"] = False
+        if cleaned.get("catheterAbnormal") is True and cleaned.get("catheterNormal") is None:
+            cleaned["catheterNormal"] = False
+    return {
+        key: value
+        for key, value in cleaned.items()
+        if has_meaningful_value(value)
+    }
 
 
 def normalize_form_ids(raw_form_ids):
