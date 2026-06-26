@@ -292,11 +292,16 @@ FORM_PROMPTS = {
 2. 只按“必须按以下字段输出”中的字段输出；不要额外提取表单“基础信息/一般资料”栏中未定义的字段。
 3. 文本没有明确说到的字段填 null，不要推断。
 4. 数值字段只保留数值字符串，不要带单位。
-5. admissionMethod 输出编码字符串：步行=1，轮椅=2，平车=3，推床=4，背入=5，其他=99。
-6. consciousness 输出编码字符串：清醒/清楚=1，嗜睡=2，模糊=3，昏睡=4，昏迷=5，浅昏迷=6，中昏迷=7，深昏迷=8，药物镇静状=9，麻醉未醒=10。
-7. skinMucosaIntact 输出整数：完整=1，皮疹=2，出血点=3，脓疱=4，破损=5，溃疡=6，压力性损伤=7，造口=8，钉道=9，其他=99。
-8. limbActivity、hasCatheter、dietStatus、sleepStatus、urinationStatus、defecationStatus 输出整数：正常/无=0，异常/有=1。
-9. 如果提到“有导管”，将 hasCatheter 设为 1，并把导管名称/说明填入 catheterInfo。
+5. 中文数字要转换成阿拉伯数字，例如三十九=39，八十五=85，七十=70，一百二十=120。
+6. admissionMethod 输出编码字符串：步行=1，轮椅=2，平车=3，推床=4，背入=5，其他=99。
+7. consciousness 输出编码字符串：清醒/清楚=1，嗜睡=2，模糊=3，昏睡=4，昏迷=5，浅昏迷=6，中昏迷=7，深昏迷=8，药物镇静状=9，麻醉未醒=10。
+8. skinMucosaIntact 输出整数：完整=1，皮疹=2，出血点=3，脓疱=4，破损=5，溃疡=6，压力性损伤=7，造口=8，钉道=9，其他=99。
+9. limbActivity、hasCatheter、dietStatus、sleepStatus、urinationStatus、defecationStatus 输出整数：正常/无=0，异常/有=1。
+10. 如果提到“有导管”，将 hasCatheter 设为 1，并把导管名称/说明填入 catheterInfo。
+11. 如果同一段 ASR 文本里包含多张表单，仍然只提取属于入院评估单的字段，不要因为出现其他表单就全部填 null。
+12. 入院评估单表名附近或表名后明确提到的字段都应提取，例如“入院评估单：一床，体温三十九度”应提取 bedNumber 和 temperature。
+13. “血氧/血氧饱和度”不是入院评估单字段，不要输出。
+14. 示例：ASR 文本“入院评估单：一床，体温三十九度，血氧八十五。护理记录单：二床，血氧饱和度七十，意识状态清醒。”，入院评估单应提取一床对应患者、temperature="39"；血氧忽略；护理记录单部分不要提取到入院评估单。
 
 必须按以下字段输出：
 {
@@ -333,9 +338,15 @@ FORM_PROMPTS = {
 2. 只按“必须按以下字段输出”中的字段输出；不要额外提取表单“基础信息/一般资料”栏中未定义的字段。
 3. 文本没有明确说到的字段填 null，不要推断。
 4. 数值字段只保留数值字符串，不要带单位。
-5. 血压如果说“一百二十/八十”或“一百二十八十”，收缩压填 bloodPressureSystolic，舒张压填 bloodPressureDiastolic。
-6. 管道状态：正常则 catheterNormal=true、catheterAbnormal=false；异常则 catheterNormal=false、catheterAbnormal=true；没说则都为 null。
-7. recordDate/recordTime 只在文本明确提到护理时间时填写。
+5. 中文数字要转换成阿拉伯数字，例如三十九=39，八十五=85，七十=70，一百二十=120。
+6. 血压如果说“一百二十/八十”或“一百二十八十”，收缩压填 bloodPressureSystolic，舒张压填 bloodPressureDiastolic；如果只说“血压”但没有数值，血压字段填 null。
+7. “血氧/血氧饱和度”填 bloodOxygen，例如“血氧饱和度七十”填 "70"。
+8. consciousness 是文本字段，例如“意识状态清醒”填 "清醒"。
+9. 管道状态：正常则 catheterNormal=true、catheterAbnormal=false；异常则 catheterNormal=false、catheterAbnormal=true；没说则都为 null。
+10. recordDate/recordTime 只在文本明确提到护理时间时填写。
+11. 如果同一段 ASR 文本里包含多张表单，仍然只提取属于护理记录单的字段，不要因为出现其他表单就全部填 null。
+12. 护理记录单表名附近或表名后明确提到的字段都应提取，例如“护理记录单：二床，血氧饱和度七十，意识状态清醒”应提取 bedNumber、bloodOxygen、consciousness。
+13. 示例：ASR 文本“入院评估单：一床，体温三十九度，血氧八十五。护理记录单：二床，血压，血氧饱和度七十，意识状态清醒。”，护理记录单应提取二床对应患者、bloodOxygen="70"、consciousness="清醒"；“血压”没有具体数值时血压字段为 null；入院评估单部分不要提取到护理记录单。
 
 必须按以下字段输出：
 {
@@ -380,10 +391,11 @@ FORM_PROMPTS = {
 2. 只按“必须按以下字段输出”中的字段输出；不要额外提取表单“基础信息/一般资料”栏中未定义的字段。
 3. 文本没有明确说到的字段填 null，不要推断。
 4. 数值字段只保留数值字符串，不要带单位。
-5. bedStatus 只能输出：卧床、轮椅、平车、拒测、外出；没说则 null。
-6. temperatureTimeList 是数组。只记录文本明确提到的 02:00、06:00、10:00、14:00、18:00、22:00 或其他明确时间点的体温/脉搏。
-7. temperatureType 输出整数：腋温=1，肛温=2，口温=3，不升=4，外出=5，请假=6，特殊值=7，耳温=8。没有说明体温类型时填 null。
-8. 如果只说“体温三十七度二、脉搏八十”，但没有时间点，可以生成一条 recordTime=null 的 temperatureTimeList 记录。
+5. 中文数字要转换成阿拉伯数字，例如三十九=39，八十五=85，七十=70，一百二十=120。
+6. bedStatus 只能输出：卧床、轮椅、平车、拒测、外出；没说则 null。
+7. temperatureTimeList 是数组。只记录文本明确提到的 02:00、06:00、10:00、14:00、18:00、22:00 或其他明确时间点的体温/脉搏。
+8. temperatureType 输出整数：腋温=1，肛温=2，口温=3，不升=4，外出=5，请假=6，特殊值=7，耳温=8。没有说明体温类型时填 null。
+9. 如果只说“体温三十七度二、脉搏八十”，但没有时间点，可以生成一条 recordTime=null 的 temperatureTimeList 记录。
 
 必须按以下字段输出：
 {
@@ -507,6 +519,7 @@ async def route_forms_async(text: str):
         return []
 
 
+
 def patient_context_prompt(patient_candidates):
     if not patient_candidates:
         return """
@@ -532,6 +545,8 @@ def patient_context_prompt(patient_candidates):
 3. patientName 必须使用候选列表中的姓名，bedNumber 必须使用候选列表中的床号。
 4. 如果 ASR 文本没有明确指向某个候选患者，patientName 和 bedNumber 都填 null。
 5. 不要凭空编造候选列表之外的患者姓名或床号。
+6. 中文数字床号和候选床号要等价匹配：一床=1床/01床，二床=2床/02床，三床=3床/03床，以此类推。
+7. 如果当前表单名附近或表名后出现“X床”，视为当前表单对应患者。
 """.format(patients="\n".join(lines))
 
 
