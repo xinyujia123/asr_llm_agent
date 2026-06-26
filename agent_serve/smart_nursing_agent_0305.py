@@ -487,8 +487,8 @@ FORM_PROMPTS = {
 * bedStatus：床位/测量状态，仅限 "卧床" | "轮椅" | "平车" | "拒测" | "外出"。
 * skinTestResult：皮试结果文本，如青霉素阴性/阳性。未明确药物或结果时不输出。
 * notes：备注，只提取 ASR 明确要求写入备注的内容。
-* temperatureTimeList：体温时点数组。仅记录明确提到的体温/脉搏时点；可包含 02:00:00、06:00:00、10:00:00、14:00:00、18:00:00、22:00:00 或其他明确时间。
-  - recordTime：格式 "HH:MM:SS"；如果只说体温/脉搏但没有时点，可输出 null。
+* temperatureTimeList：体温时点数组。仅记录明确提到的体温/脉搏时点；可包含 02:00、06:00、10:00、14:00、18:00、22:00 或其他明确时间。
+  - recordTime：格式必须为 "HH:MM"，不要输出秒；如果只说体温/脉搏但没有时点，可输出 null。
   - temperature：体温，单位℃，保留一位小数。
   - temperatureType：体温类型编码字符串。腋温="1"；肛温="2"；口温="3"；不升="4"；外出="5"；请假="6"；特殊值="7"；耳温="8"。未说明体温类型则不输出。
   - pulse：脉搏/脉率，次/分，只输出整数数字字符串。
@@ -505,7 +505,7 @@ FORM_PROMPTS = {
 ### 【核心处理原则】
 1. 允许做医疗语境 ASR 纠错，如“学压”->“血压”，“麦博”->“脉搏”。
 2. 禁止自行根据医疗常识推断，只能按 ASR 明确信息和字段映射提取。
-3. 时间口语需转 24 小时制，如“下午两点”->"14:00:00"。
+3. 时间口语需转 24 小时制且不带秒，如“下午两点”->"14:00"。
 
 ### 【输出要求】
 仅输出纯 JSON 对象，严禁包含解释性文字、Markdown 或代码块。
@@ -526,7 +526,7 @@ FORM_PROMPTS = {
   "bodyWeight": "60.0",
   "temperatureTimeList": [
     {
-      "recordTime": "10:00:00",
+      "recordTime": "10:00",
       "temperature": "36.7",
       "temperatureType": "1",
       "pulse": "80"
@@ -545,7 +545,7 @@ FORM_PROMPTS = {
   "outputTotal": "600",
   "temperatureTimeList": [
     {
-      "recordTime": "14:00:00",
+      "recordTime": "14:00",
       "temperature": "37.2",
       "pulse": "82"
     }
@@ -568,12 +568,37 @@ def extract_first_json_object(content: str):
         return {}
 
 
+def normalize_temperature_time_list(value):
+    if not isinstance(value, list):
+        return value
+    normalized = []
+    for item in value:
+        if not isinstance(item, dict):
+            continue
+        normalized_item = dict(item)
+        record_time = normalized_item.get("recordTime")
+        if isinstance(record_time, str):
+            stripped = record_time.strip()
+            match = re.fullmatch(r"(\d{1,2}):(\d{2})(?::\d{2})?", stripped)
+            if match:
+                normalized_item["recordTime"] = f"{int(match.group(1)):02d}:{match.group(2)}"
+            elif stripped.lower() in {"none", "null", "undefined", "未知"}:
+                normalized_item["recordTime"] = None
+            else:
+                normalized_item["recordTime"] = stripped
+        normalized.append(normalized_item)
+    return normalized
+
+
 def clean_form_json(data, keys):
     if not isinstance(data, dict):
         data = {}
     cleaned = {}
     for key in keys:
         value = data.get(key)
+        if key == "temperatureTimeList":
+            cleaned[key] = normalize_temperature_time_list(value)
+            continue
         if isinstance(value, str):
             stripped = value.strip()
             cleaned[key] = stripped if stripped and stripped.lower() not in {"none", "null", "undefined", "未知"} else None
