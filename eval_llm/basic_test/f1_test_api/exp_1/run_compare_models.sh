@@ -2,21 +2,23 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "${SCRIPT_DIR}"
+PARENT_DIR="$(cd "${SCRIPT_DIR}/.." && pwd)"
+cd "${PARENT_DIR}"
 
-export BENCHMARK_EXP_DIR="${BENCHMARK_EXP_DIR:-exp_1}"
+export BENCHMARK_OUTPUT_ROOT="${BENCHMARK_OUTPUT_ROOT:-${PARENT_DIR}}"
+export BENCHMARK_EXP_DIR="${BENCHMARK_EXP_DIR:-$(basename "${SCRIPT_DIR}")}"
 export BENCHMARK_WRITE_LEGACY_OUTPUTS="${BENCHMARK_WRITE_LEGACY_OUTPUTS:-false}"
 export BENCHMARK_PREFLIGHT="${BENCHMARK_PREFLIGHT:-true}"
 export BENCHMARK_LOG_REQUESTS="${BENCHMARK_LOG_REQUESTS:-true}"
 export BENCHMARK_CONCURRENCY="${BENCHMARK_CONCURRENCY:-20}"
 export LLM_MAX_TOKENS="${LLM_MAX_TOKENS:-8192}"
 export LLM_REQUEST_TIMEOUT_S="${LLM_REQUEST_TIMEOUT_S:-300}"
-BENCHMARK_RUNNER="${BENCHMARK_RUNNER:-run_benchmark_api_concurrent.py}"
+BENCHMARK_RUNNER="${BENCHMARK_RUNNER:-${PARENT_DIR}/run_benchmark_api_concurrent.py}"
 
-LOG_DIR="${SCRIPT_DIR}/${BENCHMARK_EXP_DIR}/logs"
+OUTPUT_DIR="${BENCHMARK_OUTPUT_ROOT}/${BENCHMARK_EXP_DIR}"
+LOG_DIR="${OUTPUT_DIR}/logs"
 mkdir -p "${LOG_DIR}"
 
-BAICHUAN_M3_MODEL="${BAICHUAN_M3_MODEL:-Baichuan-M3}"
 BAICHUAN_M3_PLUS_MODEL="${BAICHUAN_M3_PLUS_MODEL:-Baichuan-M3-Plus}"
 QWEN36_FLASH_MODEL="${QWEN36_FLASH_MODEL:-qwen3.6-flash}"
 QWEN37_PLUS_MODEL="${QWEN37_PLUS_MODEL:-qwen3.7-plus}"
@@ -55,9 +57,8 @@ run_case() {
   python "${BENCHMARK_RUNNER}" 2>&1 | tee "${LOG_DIR}/${prefix}.log"
 }
 
-run_case "baichuan" "${BAICHUAN_M3_MODEL}" "baichuan-m3"
 run_case "baichuan" "${BAICHUAN_M3_PLUS_MODEL}" "baichuan-m3-plus"
 run_case "qwen" "${QWEN36_FLASH_MODEL}" "qwen3.6-flash"
 run_case "qwen" "${QWEN37_PLUS_MODEL}" "qwen3.7-plus"
 
-echo "All compare benchmarks completed. Results: ${SCRIPT_DIR}/${BENCHMARK_EXP_DIR}"
+echo "All compare benchmarks completed. Results: ${OUTPUT_DIR}"
