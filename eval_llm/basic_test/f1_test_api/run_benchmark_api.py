@@ -3,6 +3,7 @@ import os
 import json
 import re
 import asyncio
+import time
 
 try:
     from openai import AsyncOpenAI
@@ -81,6 +82,12 @@ def normalize_openai_base_url(base_url):
     return normalized.rstrip("/") + "/"
 
 
+def safe_filename(value):
+    name = str(value or "").strip().lower()
+    name = re.sub(r"[^a-z0-9._-]+", "-", name)
+    return name.strip("-._") or "model"
+
+
 LLM_PROVIDER = infer_provider()
 if LLM_PROVIDER == "baichuan":
     LLM_API_KEY = first_env("BAICHUAN_API_KEY", "LLM_API_KEY")
@@ -99,6 +106,7 @@ LLM_MAX_TOKENS = parse_int_env("LLM_MAX_TOKENS")
 LLM_REQUEST_TIMEOUT_S = parse_float_env("LLM_REQUEST_TIMEOUT_S", 120.0)
 DEFAULT_CONCURRENCY = 2 if LLM_PROVIDER == "baichuan" else 10
 BENCHMARK_CONCURRENCY = parse_int_env("BENCHMARK_CONCURRENCY", DEFAULT_CONCURRENCY)
+BENCHMARK_PREFLIGHT = parse_bool_env("BENCHMARK_PREFLIGHT", True)
 
 BAICHUAN_THINKING_BUDGET_TOKENS = parse_int_env("BAICHUAN_THINKING_BUDGET_TOKENS")
 BAICHUAN_TOP_K = parse_int_env("BAICHUAN_TOP_K")
@@ -107,7 +115,8 @@ BAICHUAN_OUTPUT_STYLE = os.getenv("BAICHUAN_OUTPUT_STYLE")
 BAICHUAN_DISABLE_FOLLOWUP = os.getenv("BAICHUAN_DISABLE_FOLLOWUP")
 
 # Add prompt path
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+sys.path.append(os.path.join(SCRIPT_DIR, '..'))
 try:
     from prompts import MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_V1
 except ImportError:
@@ -116,9 +125,11 @@ except ImportError:
     from prompts import MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_V1
 
 # Paths
-BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, '..'))
 DATASET_PATH = os.getenv("BENCHMARK_DATASET_PATH", os.path.join(BASE_DIR, 'dataset.jsonl'))
-OUTPUT_DIR = os.getenv("BENCHMARK_OUTPUT_DIR", os.path.dirname(__file__))
+OUTPUT_DIR = os.getenv("BENCHMARK_OUTPUT_DIR", SCRIPT_DIR)
+OUTPUT_PREFIX = os.getenv("BENCHMARK_OUTPUT_PREFIX") or safe_filename(LLM_MODEL_NAME)
+WRITE_LEGACY_OUTPUTS = parse_bool_env("BENCHMARK_WRITE_LEGACY_OUTPUTS", True)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
@@ -230,6 +241,62 @@ def extract_response_text(response):
         return message_content_to_text(content)
     return str(content)
 
+
+class FatalAPIError(RuntimeError):
+    pass
+
+
+def extract_api_error_info(exc):
+    body = getattr(exc, "body", None)
+    status_code = getattr(exc, "status_code", None)
+    error_obj = body.get("error") if isinstance(body, dict) else None
+    if not isinstance(error_obj, dict):
+        error_obj = body if isinstance(body, dict) else {}
+
+    code = error_obj.get("code") or getattr(exc, "code", None)
+    error_type = error_obj.get("type")
+    message = error_obj.get("message") or str(exc)
+    return {
+        "status_code": status_code,
+        "code": code,
+        "type": error_type,
+        "message": message,
+    }
+
+
+def is_fatal_api_error(exc):
+    info = extract_api_error_info(exc)
+    text = json.dumps(info, ensure_ascii=False).lower()
+    fatal_codes = (
+        "invalid_api_key",
+        "insufficient_quota",
+        "billing_not_active",
+        "account_deactivated",
+        "permission_denied",
+    )
+    return (
+        info["status_code"] in (401, 403)
+        or any(code in text for code in fatal_codes)
+    )
+
+
+def format_api_error(exc):
+    info = extract_api_error_info(exc)
+    parts = []
+    if info["status_code"]:
+        parts.append(f"status={info['status_code']}")
+    if info["code"]:
+        parts.append(f"code={info['code']}")
+    if info["type"]:
+        parts.append(f"type={info['type']}")
+    parts.append(f"message={info['message']}")
+    return ", ".join(parts)
+
+
+def write_json(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
 def load_data(path):
     data = []
     with open(path, 'r', encoding='utf-8') as f:
@@ -324,13 +391,18 @@ def compare_record(expected, predicted):
 async def process_record(client, record, semaphore):
     async with semaphore:
         messages = construct_messages(record)
+        start_time = time.perf_counter()
         try:
             response = await client.chat.completions.create(**build_chat_request(messages))
             generated_text = extract_response_text(response)
-            return generated_text
+            request_duration_seconds = time.perf_counter() - start_time
+            return generated_text, request_duration_seconds
         except Exception as e:
+            request_duration_seconds = time.perf_counter() - start_time
+            if is_fatal_api_error(e):
+                raise FatalAPIError(format_api_error(e)) from e
             print(f"Error processing record: {e}")
-            return ""
+            return "", request_duration_seconds
 
 async def main():
     if AsyncOpenAI is None:
@@ -343,6 +415,7 @@ async def main():
     print(f"Initializing API client: provider={LLM_PROVIDER}, model={LLM_MODEL_NAME}")
     print(f"Base URL: {LLM_BASE_URL}")
     print(f"Concurrency: {BENCHMARK_CONCURRENCY}")
+    print(f"Preflight: {BENCHMARK_PREFLIGHT}")
     client = AsyncOpenAI(api_key=LLM_API_KEY, base_url=LLM_BASE_URL, timeout=LLM_REQUEST_TIMEOUT_S)
     
     print(f"Loading data from {DATASET_PATH}...")
@@ -353,14 +426,24 @@ async def main():
     semaphore = asyncio.Semaphore(BENCHMARK_CONCURRENCY)
     
     print("Generating responses...")
-    tasks = [process_record(client, record, semaphore) for record in data]
-    generated_texts = await asyncio.gather(*tasks)
+    record_outputs = []
+    records_to_process = data
+    if BENCHMARK_PREFLIGHT and data:
+        print("Running preflight request on the first record...")
+        record_outputs.append(await process_record(client, data[0], semaphore))
+        records_to_process = data[1:]
+
+    tasks = [process_record(client, record, semaphore) for record in records_to_process]
+    if tasks:
+        record_outputs.extend(await asyncio.gather(*tasks))
     
     results = []
     error_cases = []
     global_stats = {} # {field: {'tp': 0, 'fp': 0, 'fn': 0}}
+    total_request_duration_seconds = 0.0
     
-    for i, generated_text in enumerate(generated_texts):
+    for i, (generated_text, request_duration_seconds) in enumerate(record_outputs):
+        total_request_duration_seconds += request_duration_seconds
         predicted_json = parse_json(generated_text)
         expected_json = data[i]['expected_output']
         
@@ -385,7 +468,8 @@ async def main():
                 'expected': expected_json,
                 'predicted': predicted_json,
                 'error_details': error_details,
-                'generated_text': generated_text
+                'generated_text': generated_text,
+                'request_duration_seconds': request_duration_seconds
             })
 
         # Aggregate global stats
@@ -401,6 +485,7 @@ async def main():
             'expected': expected_json,
             'predicted': predicted_json,
             'generated_text': generated_text,
+            'request_duration_seconds': request_duration_seconds,
             'metrics': record_stats
         })
         
@@ -430,22 +515,67 @@ async def main():
             'fn': fn
         }
         print(f"{key}: P={precision:.2f}, R={recall:.2f}, F1={f1:.2f} (TP={tp}, FP={fp}, FN={fn})")
+
+    total_fields = len(sorted_keys)
+    category_avg_f1 = (
+        sum(final_metrics[key]['f1'] for key in sorted_keys) / total_fields
+        if total_fields > 0 else 0.0
+    )
+    total_tp = sum(global_stats[key]['tp'] for key in sorted_keys)
+    total_fp = sum(global_stats[key]['fp'] for key in sorted_keys)
+    total_fn = sum(global_stats[key]['fn'] for key in sorted_keys)
+    total_precision = total_tp / (total_tp + total_fp) if (total_tp + total_fp) > 0 else 0.0
+    total_recall = total_tp / (total_tp + total_fn) if (total_tp + total_fn) > 0 else 0.0
+    sample_aggregate_f1 = (
+        2 * total_precision * total_recall / (total_precision + total_recall)
+        if (total_precision + total_recall) > 0 else 0.0
+    )
+    request_count = len(record_outputs)
+    avg_request_duration_seconds = (
+        total_request_duration_seconds / request_count if request_count > 0 else 0.0
+    )
+
+    final_metrics['summary'] = {
+        'total_category_avg_f1': category_avg_f1,
+        'total_sample_aggregate_f1': sample_aggregate_f1,
+        'avg_request_duration_seconds': avg_request_duration_seconds,
+        'precision': total_precision,
+        'recall': total_recall,
+        'tp': total_tp,
+        'fp': total_fp,
+        'fn': total_fn,
+        'field_count': total_fields,
+        'request_count': request_count,
+        'total_request_duration_seconds': total_request_duration_seconds,
+        'provider': LLM_PROVIDER,
+        'model_name': LLM_MODEL_NAME,
+        'base_url': LLM_BASE_URL,
+        'output_prefix': OUTPUT_PREFIX
+    }
+
+    print("\nSummary metrics:")
+    print(f"Total Category Avg F1: {category_avg_f1:.4f}")
+    print(f"Total Sample Aggregate F1: {sample_aggregate_f1:.4f} (P={total_precision:.4f}, R={total_recall:.4f}, TP={total_tp}, FP={total_fp}, FN={total_fn})")
+    print(f"Average Request Duration: {avg_request_duration_seconds:.4f}s ({request_count} requests)")
         
     # Save results
-    results_path = os.path.join(OUTPUT_DIR, 'results.json')
-    metrics_path = os.path.join(OUTPUT_DIR, 'metrics.json')
-    error_cases_path = os.path.join(OUTPUT_DIR, 'error_cases.json')
-    
-    with open(results_path, 'w', encoding='utf-8') as f:
-        json.dump(results, f, ensure_ascii=False, indent=2)
-        
-    with open(metrics_path, 'w', encoding='utf-8') as f:
-        json.dump(final_metrics, f, ensure_ascii=False, indent=2)
+    results_path = os.path.join(OUTPUT_DIR, f'{OUTPUT_PREFIX}_results.json')
+    metrics_path = os.path.join(OUTPUT_DIR, f'{OUTPUT_PREFIX}_metrics.json')
+    error_cases_path = os.path.join(OUTPUT_DIR, f'{OUTPUT_PREFIX}_error_cases.json')
 
-    with open(error_cases_path, 'w', encoding='utf-8') as f:
-        json.dump(error_cases, f, ensure_ascii=False, indent=2)
+    write_json(results_path, results)
+    write_json(metrics_path, final_metrics)
+    write_json(error_cases_path, error_cases)
+
+    if WRITE_LEGACY_OUTPUTS:
+        write_json(os.path.join(OUTPUT_DIR, 'results.json'), results)
+        write_json(os.path.join(OUTPUT_DIR, 'metrics.json'), final_metrics)
+        write_json(os.path.join(OUTPUT_DIR, 'error_cases.json'), error_cases)
         
     print(f"\nResults saved to {OUTPUT_DIR}")
+    print(f"Results file: {results_path}")
+    print(f"Metrics file: {metrics_path}")
+    print(f"Error cases file: {error_cases_path}")
     print(f"Found {len(error_cases)} error cases.")
 
 if __name__ == "__main__":
