@@ -8,9 +8,10 @@ export BENCHMARK_EXP_DIR="${BENCHMARK_EXP_DIR:-exp_1}"
 export BENCHMARK_WRITE_LEGACY_OUTPUTS="${BENCHMARK_WRITE_LEGACY_OUTPUTS:-false}"
 export BENCHMARK_PREFLIGHT="${BENCHMARK_PREFLIGHT:-true}"
 export BENCHMARK_LOG_REQUESTS="${BENCHMARK_LOG_REQUESTS:-true}"
-export BENCHMARK_CONCURRENCY=1
+export BENCHMARK_CONCURRENCY="${BENCHMARK_CONCURRENCY:-20}"
 export LLM_MAX_TOKENS="${LLM_MAX_TOKENS:-8192}"
 export LLM_REQUEST_TIMEOUT_S="${LLM_REQUEST_TIMEOUT_S:-300}"
+BENCHMARK_RUNNER="${BENCHMARK_RUNNER:-run_benchmark_api_concurrent.py}"
 
 LOG_DIR="${SCRIPT_DIR}/${BENCHMARK_EXP_DIR}/logs"
 mkdir -p "${LOG_DIR}"
@@ -46,10 +47,12 @@ run_case() {
   echo "========== ${prefix} (${model}) =========="
   echo "provider=${provider}"
   echo "exp_dir=${BENCHMARK_EXP_DIR}"
+  echo "runner=${BENCHMARK_RUNNER}"
+  echo "concurrency=${BENCHMARK_CONCURRENCY}"
   echo "max_tokens=${LLM_MAX_TOKENS}"
   echo "timeout=${LLM_REQUEST_TIMEOUT_S}s"
 
-  python run_benchmark_api.py 2>&1 | tee "${LOG_DIR}/${prefix}.log"
+  python "${BENCHMARK_RUNNER}" 2>&1 | tee "${LOG_DIR}/${prefix}.log"
 }
 
 run_case "baichuan" "${BAICHUAN_M3_MODEL}" "baichuan-m3"
