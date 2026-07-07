@@ -83,9 +83,9 @@ def normalize_openai_base_url(base_url):
 
 LLM_PROVIDER = infer_provider()
 if LLM_PROVIDER == "baichuan":
-    LLM_API_KEY = first_env("BAICHUAN_API_KEY", "LLM_API_KEY", "QWEN_API_KEY")
+    LLM_API_KEY = first_env("BAICHUAN_API_KEY", "LLM_API_KEY")
     LLM_BASE_URL = normalize_openai_base_url(
-        first_env("BAICHUAN_BASE_URL", "LLM_BASE_URL") or BAICHUAN_DEFAULT_BASE_URL
+        os.getenv("BAICHUAN_BASE_URL") or BAICHUAN_DEFAULT_BASE_URL
     )
     LLM_MODEL_NAME = first_env("BAICHUAN_MODEL_NAME", "LLM_MODEL_NAME") or "Baichuan-M3"
 else:
@@ -336,9 +336,9 @@ async def main():
     if AsyncOpenAI is None:
         raise RuntimeError("Missing dependency 'openai'. Install it with: pip install openai")
     if not LLM_API_KEY:
-        raise RuntimeError(
-            "Missing API key. Set BAICHUAN_API_KEY for Baichuan, or LLM_API_KEY/QWEN_API_KEY."
-        )
+        if LLM_PROVIDER == "baichuan":
+            raise RuntimeError("Missing API key. Set BAICHUAN_API_KEY for Baichuan.")
+        raise RuntimeError("Missing API key. Set LLM_API_KEY or QWEN_API_KEY.")
 
     print(f"Initializing API client: provider={LLM_PROVIDER}, model={LLM_MODEL_NAME}")
     print(f"Base URL: {LLM_BASE_URL}")
