@@ -103,10 +103,10 @@ else:
 LLM_TEMPERATURE = parse_float_env("LLM_TEMPERATURE", 0.1)
 LLM_TOP_P = parse_float_env("LLM_TOP_P")
 LLM_REQUEST_TIMEOUT_S = parse_float_env("LLM_REQUEST_TIMEOUT_S", 120.0)
-DEFAULT_CONCURRENCY = 2 if LLM_PROVIDER == "baichuan" else 10
-BENCHMARK_CONCURRENCY = parse_int_env("BENCHMARK_CONCURRENCY", DEFAULT_CONCURRENCY)
+BENCHMARK_CONCURRENCY = parse_int_env("BENCHMARK_CONCURRENCY", 1)
 BENCHMARK_PREFLIGHT = parse_bool_env("BENCHMARK_PREFLIGHT", True)
 BENCHMARK_LOG_REQUESTS = parse_bool_env("BENCHMARK_LOG_REQUESTS", True)
+BENCHMARK_ABORT_ON_TIMEOUT = parse_bool_env("BENCHMARK_ABORT_ON_TIMEOUT", False)
 DEFAULT_MAX_TOKENS = 8192 if LLM_PROVIDER == "baichuan" else None
 LLM_MAX_TOKENS = parse_int_env("LLM_MAX_TOKENS", DEFAULT_MAX_TOKENS)
 
@@ -129,9 +129,11 @@ except ImportError:
 # Paths
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, '..'))
 DATASET_PATH = os.getenv("BENCHMARK_DATASET_PATH", os.path.join(BASE_DIR, 'dataset.jsonl'))
-OUTPUT_DIR = os.getenv("BENCHMARK_OUTPUT_DIR", SCRIPT_DIR)
+OUTPUT_ROOT = os.getenv("BENCHMARK_OUTPUT_ROOT", SCRIPT_DIR)
+BENCHMARK_EXP_DIR = os.getenv("BENCHMARK_EXP_DIR", "exp_1")
+OUTPUT_DIR = os.getenv("BENCHMARK_OUTPUT_DIR", os.path.join(OUTPUT_ROOT, BENCHMARK_EXP_DIR))
 OUTPUT_PREFIX = os.getenv("BENCHMARK_OUTPUT_PREFIX") or safe_filename(LLM_MODEL_NAME)
-WRITE_LEGACY_OUTPUTS = parse_bool_env("BENCHMARK_WRITE_LEGACY_OUTPUTS", True)
+WRITE_LEGACY_OUTPUTS = parse_bool_env("BENCHMARK_WRITE_LEGACY_OUTPUTS", False)
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 
@@ -410,19 +412,24 @@ async def process_record(client, record, semaphore, record_id=None):
                     f"({len(generated_text)} chars).",
                     flush=True
                 )
-            return generated_text, request_duration_seconds
+            return generated_text, request_duration_seconds, None
         except asyncio.TimeoutError as e:
             request_duration_seconds = time.perf_counter() - start_time
-            raise FatalAPIError(
+            error_message = (
                 f"Request timeout after {request_duration_seconds:.2f}s. "
                 f"Increase LLM_REQUEST_TIMEOUT_S or reduce LLM_MAX_TOKENS."
-            ) from e
+            )
+            if BENCHMARK_ABORT_ON_TIMEOUT:
+                raise FatalAPIError(error_message) from e
+            print(f"Timeout processing {label}: {error_message}", flush=True)
+            return "", request_duration_seconds, error_message
         except Exception as e:
             request_duration_seconds = time.perf_counter() - start_time
             if is_fatal_api_error(e):
                 raise FatalAPIError(format_api_error(e)) from e
-            print(f"Error processing record: {e}")
-            return "", request_duration_seconds
+            error_message = str(e)
+            print(f"Error processing {label}: {error_message}", flush=True)
+            return "", request_duration_seconds, error_message
 
 async def main():
     if AsyncOpenAI is None:
@@ -434,18 +441,20 @@ async def main():
 
     print(f"Initializing API client: provider={LLM_PROVIDER}, model={LLM_MODEL_NAME}")
     print(f"Base URL: {LLM_BASE_URL}")
-    print(f"Concurrency: {BENCHMARK_CONCURRENCY}")
+    print("Execution mode: sequential")
     print(f"Preflight: {BENCHMARK_PREFLIGHT}")
     print(f"Max tokens: {LLM_MAX_TOKENS}")
     print(f"Request timeout: {LLM_REQUEST_TIMEOUT_S}s")
+    print(f"Abort on timeout: {BENCHMARK_ABORT_ON_TIMEOUT}")
+    print(f"Output dir: {OUTPUT_DIR}")
     client = AsyncOpenAI(api_key=LLM_API_KEY, base_url=LLM_BASE_URL, timeout=LLM_REQUEST_TIMEOUT_S)
     
     print(f"Loading data from {DATASET_PATH}...")
     data = load_data(DATASET_PATH)
     print(f"Loaded {len(data)} records.")
     
-    # Limit concurrency to avoid rate limits
-    semaphore = asyncio.Semaphore(BENCHMARK_CONCURRENCY)
+    # Keep requests sequential so per-record duration is the actual single-request duration.
+    semaphore = asyncio.Semaphore(1)
     
     print("Generating responses...")
     record_outputs = []
@@ -456,19 +465,17 @@ async def main():
         records_to_process = data[1:]
 
     start_index = len(record_outputs)
-    tasks = [
-        process_record(client, record, semaphore, record_id=start_index + idx)
-        for idx, record in enumerate(records_to_process)
-    ]
-    if tasks:
-        record_outputs.extend(await asyncio.gather(*tasks))
+    for idx, record in enumerate(records_to_process):
+        record_outputs.append(
+            await process_record(client, record, semaphore, record_id=start_index + idx)
+        )
     
     results = []
     error_cases = []
     global_stats = {} # {field: {'tp': 0, 'fp': 0, 'fn': 0}}
     total_request_duration_seconds = 0.0
     
-    for i, (generated_text, request_duration_seconds) in enumerate(record_outputs):
+    for i, (generated_text, request_duration_seconds, request_error) in enumerate(record_outputs):
         total_request_duration_seconds += request_duration_seconds
         predicted_json = parse_json(generated_text)
         expected_json = data[i]['expected_output']
@@ -478,6 +485,13 @@ async def main():
         # Check for errors
         has_error = False
         error_details = {}
+        if request_error:
+            has_error = True
+            error_details["_request_error"] = {
+                "expected": None,
+                "predicted": request_error,
+                "type": "RequestError"
+            }
         for key, stats in record_stats.items():
             if stats['fp'] > 0 or stats['fn'] > 0:
                 has_error = True
@@ -495,7 +509,8 @@ async def main():
                 'predicted': predicted_json,
                 'error_details': error_details,
                 'generated_text': generated_text,
-                'request_duration_seconds': request_duration_seconds
+                'request_duration_seconds': request_duration_seconds,
+                'request_error': request_error
             })
 
         # Aggregate global stats
@@ -512,6 +527,7 @@ async def main():
             'predicted': predicted_json,
             'generated_text': generated_text,
             'request_duration_seconds': request_duration_seconds,
+            'request_error': request_error,
             'metrics': record_stats
         })
         
@@ -576,7 +592,9 @@ async def main():
         'provider': LLM_PROVIDER,
         'model_name': LLM_MODEL_NAME,
         'base_url': LLM_BASE_URL,
-        'output_prefix': OUTPUT_PREFIX
+        'output_prefix': OUTPUT_PREFIX,
+        'output_dir': OUTPUT_DIR,
+        'execution_mode': 'sequential'
     }
 
     print("\nSummary metrics:")
