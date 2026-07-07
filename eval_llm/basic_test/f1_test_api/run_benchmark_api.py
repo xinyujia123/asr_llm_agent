@@ -102,11 +102,13 @@ else:
 
 LLM_TEMPERATURE = parse_float_env("LLM_TEMPERATURE", 0.1)
 LLM_TOP_P = parse_float_env("LLM_TOP_P")
-LLM_MAX_TOKENS = parse_int_env("LLM_MAX_TOKENS")
 LLM_REQUEST_TIMEOUT_S = parse_float_env("LLM_REQUEST_TIMEOUT_S", 120.0)
 DEFAULT_CONCURRENCY = 2 if LLM_PROVIDER == "baichuan" else 10
 BENCHMARK_CONCURRENCY = parse_int_env("BENCHMARK_CONCURRENCY", DEFAULT_CONCURRENCY)
 BENCHMARK_PREFLIGHT = parse_bool_env("BENCHMARK_PREFLIGHT", True)
+BENCHMARK_LOG_REQUESTS = parse_bool_env("BENCHMARK_LOG_REQUESTS", True)
+DEFAULT_MAX_TOKENS = 8192 if LLM_PROVIDER == "baichuan" else None
+LLM_MAX_TOKENS = parse_int_env("LLM_MAX_TOKENS", DEFAULT_MAX_TOKENS)
 
 BAICHUAN_THINKING_BUDGET_TOKENS = parse_int_env("BAICHUAN_THINKING_BUDGET_TOKENS")
 BAICHUAN_TOP_K = parse_int_env("BAICHUAN_TOP_K")
@@ -388,15 +390,33 @@ def compare_record(expected, predicted):
             
     return field_stats
 
-async def process_record(client, record, semaphore):
+async def process_record(client, record, semaphore, record_id=None):
     async with semaphore:
         messages = construct_messages(record)
         start_time = time.perf_counter()
+        label = f"record {record_id}" if record_id is not None else "record"
+        if BENCHMARK_LOG_REQUESTS:
+            print(f"Starting request for {label}...", flush=True)
         try:
-            response = await client.chat.completions.create(**build_chat_request(messages))
+            response = await asyncio.wait_for(
+                client.chat.completions.create(**build_chat_request(messages)),
+                timeout=LLM_REQUEST_TIMEOUT_S
+            )
             generated_text = extract_response_text(response)
             request_duration_seconds = time.perf_counter() - start_time
+            if BENCHMARK_LOG_REQUESTS:
+                print(
+                    f"Finished request for {label} in {request_duration_seconds:.2f}s "
+                    f"({len(generated_text)} chars).",
+                    flush=True
+                )
             return generated_text, request_duration_seconds
+        except asyncio.TimeoutError as e:
+            request_duration_seconds = time.perf_counter() - start_time
+            raise FatalAPIError(
+                f"Request timeout after {request_duration_seconds:.2f}s. "
+                f"Increase LLM_REQUEST_TIMEOUT_S or reduce LLM_MAX_TOKENS."
+            ) from e
         except Exception as e:
             request_duration_seconds = time.perf_counter() - start_time
             if is_fatal_api_error(e):
@@ -416,6 +436,8 @@ async def main():
     print(f"Base URL: {LLM_BASE_URL}")
     print(f"Concurrency: {BENCHMARK_CONCURRENCY}")
     print(f"Preflight: {BENCHMARK_PREFLIGHT}")
+    print(f"Max tokens: {LLM_MAX_TOKENS}")
+    print(f"Request timeout: {LLM_REQUEST_TIMEOUT_S}s")
     client = AsyncOpenAI(api_key=LLM_API_KEY, base_url=LLM_BASE_URL, timeout=LLM_REQUEST_TIMEOUT_S)
     
     print(f"Loading data from {DATASET_PATH}...")
@@ -430,10 +452,14 @@ async def main():
     records_to_process = data
     if BENCHMARK_PREFLIGHT and data:
         print("Running preflight request on the first record...")
-        record_outputs.append(await process_record(client, data[0], semaphore))
+        record_outputs.append(await process_record(client, data[0], semaphore, record_id=0))
         records_to_process = data[1:]
 
-    tasks = [process_record(client, record, semaphore) for record in records_to_process]
+    start_index = len(record_outputs)
+    tasks = [
+        process_record(client, record, semaphore, record_id=start_index + idx)
+        for idx, record in enumerate(records_to_process)
+    ]
     if tasks:
         record_outputs.extend(await asyncio.gather(*tasks))
     
