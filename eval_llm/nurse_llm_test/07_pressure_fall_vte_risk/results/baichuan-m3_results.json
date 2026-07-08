@@ -1,0 +1,2382 @@
+{
+  "summary": {
+    "scenario_dir": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/07_pressure_fall_vte_risk",
+    "dataset": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/07_pressure_fall_vte_risk/dataset.jsonl",
+    "prompt": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/07_pressure_fall_vte_risk/prompt.md",
+    "provider": "baichuan",
+    "model_name": "Baichuan-M3",
+    "base_url": "https://api.baichuan-ai.com/v1/",
+    "output_prefix": "baichuan-m3",
+    "request_count": 12,
+    "error_count": 0,
+    "parsed_json_count": 12,
+    "avg_request_duration_seconds": 38.13109911964663,
+    "total_request_duration_seconds": 457.57318943575956,
+    "usage_total": {
+      "completion_tokens": 35440,
+      "prompt_tokens": 11060,
+      "total_tokens": 46500,
+      "search_count": 0
+    },
+    "concurrency": 10,
+    "max_tokens": 4096,
+    "baichuan_with_search_enhance": "false"
+  },
+  "records": [
+    {
+      "id": "pressure_fall_vte_001",
+      "input": "82岁男性，因重症肺炎入住ICU第3天，气管插管镇静，RASS -4，去甲肾上腺素小剂量维持。Braden评分9分：感觉受限、卧床、潮湿、营养差。白蛋白28g/L，双下肢轻度水肿，骶尾部皮肤完整但受压后发红可褪色。留置尿管和胃管，家属不在床旁。下肢肌力无法配合评估，D-二聚体未回。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "极高危",
+            "evidence": [
+              "Braden评分9分",
+              "镇静气管插管，感觉和活动严重受限",
+              "潮湿、营养差，白蛋白28g/L",
+              "血管活性药物提示低灌注风险",
+              "双下肢水肿，骶尾部受压发红"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "中危",
+            "evidence": [
+              "镇静卧床，本人主动跌倒概率低",
+              "气管插管、尿管、胃管等管路多，转运或躁动时有坠床和拔管风险",
+              "家属不在床旁"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "ICU重症感染",
+              "持续卧床和镇静制动",
+              "高龄、水肿、下肢肌力无法评估",
+              "D-二聚体未回，需结合医嘱评估"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "立即启用气垫床或高规格减压支撑面",
+            "至少每2小时翻身或微翻身减压，血流动力学不稳定时采用小角度减压并记录耐受情况",
+            "骶尾、足跟、耳廓、管路受压处每班检查，保持皮肤清洁干燥",
+            "足跟悬空，骨隆突处使用合适减压敷料",
+            "评估营养摄入，配合营养支持医嘱"
+          ],
+          "fall": [
+            "床栏按制度使用，管路固定并留足活动余量",
+            "镇静减量、转运或翻身操作时至少两人协助，防坠床和非计划拔管",
+            "床旁环境清理，呼叫和报警装置保持可用"
+          ],
+          "vte": [
+            "在医生评估禁忌后落实间歇充气泵或弹力袜等机械预防",
+            "观察双下肢肿胀、皮温、颜色、周径差和疼痛反应",
+            "配合医嘱评估药物预防，关注血小板、凝血功能和出血表现",
+            "每日评估能否进行床上被动/主动活动"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "极高危每班至少复评皮肤，体位改变或血流动力学变化时随时复评，Braden至少每日复评",
+          "fall": "每班复评镇静、管路和转运风险，镇静调整或转出ICU前复评",
+          "vte": "每班观察下肢体征，活动能力、凝血结果或预防医嘱变化时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "骶尾红斑不褪色、出现水疱、破溃、黑痂或医疗器械压痕持续存在",
+            "notify": "伤口造口护士/护士长/医生",
+            "urgency": "尽快"
+          },
+          {
+            "condition": "单侧下肢突然肿胀、皮温升高、周径差增大，或出现不明原因低氧、胸痛、呼吸急促",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "翻身减压因低血压、氧合下降无法执行",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "血流动力学不稳定时避免大幅度翻身导致管路牵拉或血压下降",
+          "减压敷料不能替代翻身和皮肤检查",
+          "未排除DVT时不要按摩或热敷下肢",
+          "药物抗凝必须由医生结合出血风险和凝血指标决定"
+        ],
+        "missing_information": [
+          "血小板和凝血功能",
+          "D-二聚体结果",
+          "是否有抗凝禁忌",
+          "既往VTE史",
+          "具体营养摄入量"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Braden评分9分（感觉受限、卧床、潮湿、营养差）\", \"白蛋白28g/L（营养不良）\", \"双下肢水肿\", \"骶尾部皮肤受压后发红可褪色（早期压疮迹象）\", \"镇静状态（RASS -4）\", \"留置尿管和胃管\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"低危\",\n      \"evidence\": [\"RASS -4（深度镇静）\", \"卧床无法活动\", \"无跌倒史\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"卧床制动（ICU第3天）\", \"重症肺炎（感染）\", \"双下肢水肿\", \"白蛋白28g/L（可能脱水）\", \"年龄82岁\"]\n    }\n  ],\n  \"overall_priority\": \"本班重点\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"每2小时定时翻身减压（避免骶尾部持续受压）\", \"使用气垫床或减压垫\", \"保持皮肤清洁干燥（及时处理潮湿）\", \"加强营养支持（如静脉补充白蛋白）\", \"每日检查骶尾部皮肤并记录\"],\n    \"fall\": [\"床栏使用并固定\", \"环境安全评估（无杂物、电线）\", \"但患者深度镇静，跌倒风险低，重点在基础安全\"],\n    \"vte\": [\"下肢弹力袜或间歇充气加压装置应用\", \"评估药物抗凝指征（需医生医嘱）\", \"监测下肢肿胀疼痛及D-二聚体结果\", \"床上踝泵运动（如患者情况允许）\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"常规\",\n    \"vte\": \"每班\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"骶尾部皮肤出现水疱、破溃或感染迹象\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"立即处理\"\n    },\n    {\n      \"condition\": \"下肢突发肿胀、疼痛、皮温升高或D-二聚体显著升高\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即处理\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时避免按摩患肢或热敷\", \"出血高危时（如抗凝治疗）需医生评估\", \"镇静患者注意呼吸循环监测\"],\n  \"missing_information\": [\"D-二聚体结果\", \"Morse跌倒评分\", \"下肢肌力详细评估\"],\n  \"confidence\": \"中\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "高危",
+            "evidence": [
+              "Braden评分9分（感觉受限、卧床、潮湿、营养差）",
+              "白蛋白28g/L（营养不良）",
+              "双下肢水肿",
+              "骶尾部皮肤受压后发红可褪色（早期压疮迹象）",
+              "镇静状态（RASS -4）",
+              "留置尿管和胃管"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "低危",
+            "evidence": [
+              "RASS -4（深度镇静）",
+              "卧床无法活动",
+              "无跌倒史"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "卧床制动（ICU第3天）",
+              "重症肺炎（感染）",
+              "双下肢水肿",
+              "白蛋白28g/L（可能脱水）",
+              "年龄82岁"
+            ]
+          }
+        ],
+        "overall_priority": "本班重点",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时定时翻身减压（避免骶尾部持续受压）",
+            "使用气垫床或减压垫",
+            "保持皮肤清洁干燥（及时处理潮湿）",
+            "加强营养支持（如静脉补充白蛋白）",
+            "每日检查骶尾部皮肤并记录"
+          ],
+          "fall": [
+            "床栏使用并固定",
+            "环境安全评估（无杂物、电线）",
+            "但患者深度镇静，跌倒风险低，重点在基础安全"
+          ],
+          "vte": [
+            "下肢弹力袜或间歇充气加压装置应用",
+            "评估药物抗凝指征（需医生医嘱）",
+            "监测下肢肿胀疼痛及D-二聚体结果",
+            "床上踝泵运动（如患者情况允许）"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "常规",
+          "vte": "每班"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "骶尾部皮肤出现水疱、破溃或感染迹象",
+            "notify": "伤口造口护士",
+            "urgency": "立即处理"
+          },
+          {
+            "condition": "下肢突发肿胀、疼痛、皮温升高或D-二聚体显著升高",
+            "notify": "医生",
+            "urgency": "立即处理"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时避免按摩患肢或热敷",
+          "出血高危时（如抗凝治疗）需医生评估",
+          "镇静患者注意呼吸循环监测"
+        ],
+        "missing_information": [
+          "D-二聚体结果",
+          "Morse跌倒评分",
+          "下肢肌力详细评估"
+        ],
+        "confidence": "中"
+      },
+      "request_duration_seconds": 31.887961676809937,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2302,
+        "prompt_tokens": 927,
+        "total_tokens": 3229,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_002",
+      "input": "76岁女性，右全髋关节置换术后第1天。术前因股骨颈骨折卧床4天，BMI 29。Morse评分75分，夜间曾想自行下床小便；当前硬膜外镇痛泵在位，诉头晕，BP 96/60mmHg。骶尾皮肤完整，Braden 15分。医生已开具低分子肝素预防，切口敷料少量渗血。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "极高危",
+            "evidence": [
+              "Morse评分75分",
+              "术后第1天、头晕、血压96/60mmHg",
+              "髋关节置换后活动受限",
+              "夜间曾想自行下床小便",
+              "镇痛泵在位增加步态和管路风险"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "极高危",
+            "evidence": [
+              "髋部骨折及全髋关节置换术后",
+              "术前卧床4天",
+              "高龄、BMI 29、术后活动受限",
+              "已开具低分子肝素预防提示需重点落实"
+            ]
+          },
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden 15分",
+              "术后活动受限和疼痛影响翻身",
+              "骶尾皮肤暂完整"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "保持床单位平整干燥，协助轴线翻身，避免患髋过度内收内旋",
+            "每班检查骶尾、足跟和切口周围皮肤",
+            "鼓励在疼痛可控和医嘱允许下进行床上活动"
+          ],
+          "fall": [
+            "落实高危跌倒标识，床栏、床低位、呼叫铃和助行器可及",
+            "夜间主动巡视，提供便器或陪同如厕，禁止自行下床",
+            "首次下床必须由护士/康复治疗师评估并两人协助",
+            "评估头晕和低血压，起坐站立分步骤进行"
+          ],
+          "vte": [
+            "按医嘱正确使用低分子肝素并观察切口渗血、皮下瘀斑、牙龈/尿便出血",
+            "使用踝泵、股四头肌等床上运动，按医嘱逐步早期下床",
+            "落实间歇充气泵或弹力袜，检查皮肤受压和尺码",
+            "每日观察双下肢周径、疼痛、皮温和颜色"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "中危每日复评，活动能力或皮肤状态变化时复评",
+          "fall": "极高危每班复评，夜间、镇痛调整、首次下床前必须复评",
+          "vte": "术后每日复评，抗凝用药、出血表现或下肢症状变化时随时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "头晕加重、收缩压持续低于90mmHg、站立不稳或发生近跌倒/跌倒",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "切口渗血增多、血肿、黑便、血尿或血红蛋白下降，影响抗凝安全",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "单侧小腿肿胀疼痛、皮温升高或突发胸闷气促",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "髋关节置换术后活动和翻身需遵守体位限制，避免患肢内收、内旋和屈髋过度",
+          "抗凝期间避免自行加用活血药或NSAIDs，注射后不揉搓针眼",
+          "疑似DVT时禁止按摩患肢和擅自热敷",
+          "未评估体位性低血压前不得独自下床"
+        ],
+        "missing_information": [
+          "术式入路和具体髋关节体位限制",
+          "血红蛋白和凝血功能",
+          "既往跌倒史",
+          "疼痛评分",
+          "排尿方式和夜尿原因"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Braden评分15分（低于18分提示风险）\", \"术后卧床制动\", \"BMI 29（肥胖增加局部压力）\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Morse评分75分（≥45分高风险）\", \"夜间自行下床小便史\", \"头晕主诉\", \"低血压96/60mmHg（体位性低血压风险）\", \"硬膜外镇痛影响下肢感觉/运动\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"髋关节置换大手术术后第1天\", \"术前卧床4天\", \"BMI 29（肥胖）\", \"年龄>60岁\", \"医生已开具低分子肝素预防\"]\n    }\n  ],\n  \"overall_priority\": \"本班重点\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"每2小时协助翻身并检查骶尾部皮肤\", \"使用减压床垫/坐垫\", \"保持皮肤清洁干燥（尤其会阴部）\", \"评估营养状况并补充蛋白质\"],\n    \"fall\": [\"提供床旁便器/尿壶\", \"教育患者使用呼叫铃勿自行下床\", \"监测血压（尤其体位改变时）\", \"确保床栏使用及环境无障碍\"],\n    \"vte\": [\"按时执行低分子肝素注射\", \"指导踝泵运动及早期下床活动（根据医嘱）\", \"每日观察下肢肿胀/疼痛/皮温变化\", \"监测切口渗血及出血征象\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每日\",\n    \"fall\": \"每班\",\n    \"vte\": \"每日\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"发生跌倒或坠床事件\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"出现单侧下肢肿胀、疼痛、呼吸困难或胸痛\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"骶尾部皮肤出现红斑、水疱或破溃\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"尽快\"\n    }\n  ],\n  \"contraindications_precautions\": [\"VTE预防期间切口渗血需监测出血量，避免热敷/按摩下肢\", \"低血压时避免突然坐起/站立\", \"意识清醒但活动受限患者慎用约束并遵守制度\"],\n  \"missing_information\": [],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分15分（低于18分提示风险）",
+              "术后卧床制动",
+              "BMI 29（肥胖增加局部压力）"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分75分（≥45分高风险）",
+              "夜间自行下床小便史",
+              "头晕主诉",
+              "低血压96/60mmHg（体位性低血压风险）",
+              "硬膜外镇痛影响下肢感觉/运动"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "髋关节置换大手术术后第1天",
+              "术前卧床4天",
+              "BMI 29（肥胖）",
+              "年龄>60岁",
+              "医生已开具低分子肝素预防"
+            ]
+          }
+        ],
+        "overall_priority": "本班重点",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时协助翻身并检查骶尾部皮肤",
+            "使用减压床垫/坐垫",
+            "保持皮肤清洁干燥（尤其会阴部）",
+            "评估营养状况并补充蛋白质"
+          ],
+          "fall": [
+            "提供床旁便器/尿壶",
+            "教育患者使用呼叫铃勿自行下床",
+            "监测血压（尤其体位改变时）",
+            "确保床栏使用及环境无障碍"
+          ],
+          "vte": [
+            "按时执行低分子肝素注射",
+            "指导踝泵运动及早期下床活动（根据医嘱）",
+            "每日观察下肢肿胀/疼痛/皮温变化",
+            "监测切口渗血及出血征象"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每日",
+          "fall": "每班",
+          "vte": "每日"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "发生跌倒或坠床事件",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现单侧下肢肿胀、疼痛、呼吸困难或胸痛",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "骶尾部皮肤出现红斑、水疱或破溃",
+            "notify": "伤口造口护士",
+            "urgency": "尽快"
+          }
+        ],
+        "contraindications_precautions": [
+          "VTE预防期间切口渗血需监测出血量，避免热敷/按摩下肢",
+          "低血压时避免突然坐起/站立",
+          "意识清醒但活动受限患者慎用约束并遵守制度"
+        ],
+        "missing_information": [],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 24.199608014896512,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2739,
+        "prompt_tokens": 916,
+        "total_tokens": 3655,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_003",
+      "input": "68岁男性，急性脑梗死后第2天，左侧偏瘫，左上肢肌力1级、左下肢2级，吞咽困难，留置鼻胃管。Morse评分65分，Braden评分13分。患者白天嗜睡，夜间烦躁，曾试图自行翻越床栏。右小腿周径较左侧大2.5cm，皮温稍高，诉胀痛但表达不清。既往房颤，入院前服用华法林，INR待回。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "极高危",
+            "evidence": [
+              "Morse评分65分",
+              "偏瘫、嗜睡与夜间烦躁交替",
+              "曾试图自行翻越床栏",
+              "鼻胃管等管路存在牵绊和拔管风险"
+            ]
+          },
+          {
+            "risk_category": "压疮",
+            "risk_level": "高危",
+            "evidence": [
+              "Braden评分13分",
+              "偏瘫导致活动和感觉受限",
+              "吞咽困难、鼻胃管提示营养风险",
+              "意识状态波动影响主动变换体位"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "疑似事件",
+            "evidence": [
+              "急性脑卒中后偏瘫制动",
+              "右小腿较左侧周径大2.5cm、皮温高、胀痛",
+              "既往房颤和华法林使用史，INR待回"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "偏瘫侧肢体良肢位摆放，避免肩、髋、足跟持续受压",
+            "至少每2小时协助翻身减压，检查骶尾、足跟、耳廓和管路固定处",
+            "保持皮肤清洁干燥，处理出汗或失禁潮湿",
+            "评估肠内营养耐受和蛋白摄入"
+          ],
+          "fall": [
+            "实施坠床高危管理，床低位、床栏、呼叫铃和陪护/加强巡视",
+            "躁动时优先采取陪伴、定向、减少刺激和管路隐藏固定等非约束措施",
+            "转运、如厕和康复训练时多人协助，防止偏瘫侧跌倒",
+            "记录试图翻越床栏事件并交班"
+          ],
+          "vte": [
+            "立即停止对右下肢按摩、挤压和被动剧烈活动",
+            "抬高患肢以舒适为度，观察周径、皮温、颜色、疼痛和足背动脉",
+            "通知医生评估下肢静脉超声、D-二聚体、凝血和抗凝方案",
+            "未明确前避免在疑似患肢进行间歇充气泵"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "高危每班复评皮肤，Braden每日或病情变化时复评",
+          "fall": "极高危每班及夜间重点复评，意识变化、镇静用药或康复训练前复评",
+          "vte": "疑似DVT需立即评估，之后按医嘱严密观察，至少每班记录下肢体征"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "单侧下肢周径差、皮温升高和胀痛提示疑似DVT",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生翻越床栏、近跌倒、跌倒或非计划拔管",
+            "notify": "护士长/医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现骶尾不褪色红斑、水疱或破溃",
+            "notify": "伤口造口护士/护士长",
+            "urgency": "尽快"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT患肢禁按摩、禁热敷、禁强力被动活动，机械预防需先咨询医生",
+          "华法林史和INR未回时，抗凝或溶栓相关处理需严格核对医嘱和出血风险",
+          "床栏不能替代巡视和陪护，躁动患者使用约束需符合制度并动态评估",
+          "吞咽困难患者防误吸，体位摆放需兼顾压疮预防和气道安全"
+        ],
+        "missing_information": [
+          "INR和凝血功能",
+          "D-二聚体和下肢超声结果",
+          "NIHSS评分",
+          "营养评估结果",
+          "是否有出血或脑出血转化风险"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Braden评分13分（低于18分提示风险）\", \"左侧偏瘫（左上肢肌力1级、左下肢2级，活动受限）\", \"吞咽困难及留置鼻胃管（营养不良和医疗器械压迫风险）\", \"急性脑梗后（感觉障碍可能）\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Morse评分65分（≥45分提示高风险）\", \"左侧偏瘫（步态不稳）\", \"夜间烦躁并试图自行翻越床栏（不配合安全措施）\", \"急性脑梗后第2天（意识改变可能）\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"疑似事件\",\n      \"evidence\": [\"右小腿周径较左侧大2.5cm、皮温稍高、胀痛（提示下肢深静脉血栓可能）\", \"急性脑梗后（制动和高凝状态）\", \"房颤病史（高凝风险）\", \"华法林抗凝中（INR待回，抗凝效果不确定）\"]\n    }\n  ],\n  \"overall_priority\": \"立即处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"每2小时协助翻身并检查骨突处皮肤\", \"使用气垫床或减压垫\", \"保持皮肤清洁干燥，及时处理汗液/分泌物\", \"鼻饲高蛋白饮食支持营养\", \"避免鼻胃管压迫同一部位\"],\n    \"fall\": [\"床栏全程使用并固定\", \"安排陪护或家属24小时看护\", \"评估当前用药（如镇静/降压药）并记录\", \"移除床旁障碍物，确保环境安全\", \"进行跌倒风险再教育，强调勿自行下床\"],\n    \"vte\": [\"立即通知医生进行DVT超声检查\", \"监测INR结果并遵医嘱调整抗凝\", \"双下肢测量周径并记录，观察症状变化\", \"在医生指导下使用抗凝药物和梯度压力袜\", \"进行安全的下肢被动运动（每2小时）\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"每班\",\n    \"vte\": \"动态观察（症状出现后立即评估）\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"右小腿症状（周径差、皮温、胀痛）持续或加重\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"发生跌倒或坠床事件\",\n      \"notify\": \"护士长\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"皮肤出现红斑、水疱或破溃\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"本班内\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时避免按摩患肢、热敷或剧烈被动活动\", \"抗凝治疗期间监测出血征象（如牙龈出血、瘀斑）\", \"意识障碍患者使用约束需医嘱并记录\", \"医疗器械减压不得影响鼻胃管功能\"],\n  \"missing_information\": [\"INR具体结果\", \"当前抗凝药物剂量及给药时间\", \"是否有尿失禁/大便失禁\", \"基础血压和心率数据\"],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分13分（低于18分提示风险）",
+              "左侧偏瘫（左上肢肌力1级、左下肢2级，活动受限）",
+              "吞咽困难及留置鼻胃管（营养不良和医疗器械压迫风险）",
+              "急性脑梗后（感觉障碍可能）"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分65分（≥45分提示高风险）",
+              "左侧偏瘫（步态不稳）",
+              "夜间烦躁并试图自行翻越床栏（不配合安全措施）",
+              "急性脑梗后第2天（意识改变可能）"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "疑似事件",
+            "evidence": [
+              "右小腿周径较左侧大2.5cm、皮温稍高、胀痛（提示下肢深静脉血栓可能）",
+              "急性脑梗后（制动和高凝状态）",
+              "房颤病史（高凝风险）",
+              "华法林抗凝中（INR待回，抗凝效果不确定）"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时协助翻身并检查骨突处皮肤",
+            "使用气垫床或减压垫",
+            "保持皮肤清洁干燥，及时处理汗液/分泌物",
+            "鼻饲高蛋白饮食支持营养",
+            "避免鼻胃管压迫同一部位"
+          ],
+          "fall": [
+            "床栏全程使用并固定",
+            "安排陪护或家属24小时看护",
+            "评估当前用药（如镇静/降压药）并记录",
+            "移除床旁障碍物，确保环境安全",
+            "进行跌倒风险再教育，强调勿自行下床"
+          ],
+          "vte": [
+            "立即通知医生进行DVT超声检查",
+            "监测INR结果并遵医嘱调整抗凝",
+            "双下肢测量周径并记录，观察症状变化",
+            "在医生指导下使用抗凝药物和梯度压力袜",
+            "进行安全的下肢被动运动（每2小时）"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "每班",
+          "vte": "动态观察（症状出现后立即评估）"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "右小腿症状（周径差、皮温、胀痛）持续或加重",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生跌倒或坠床事件",
+            "notify": "护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "皮肤出现红斑、水疱或破溃",
+            "notify": "伤口造口护士",
+            "urgency": "本班内"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时避免按摩患肢、热敷或剧烈被动活动",
+          "抗凝治疗期间监测出血征象（如牙龈出血、瘀斑）",
+          "意识障碍患者使用约束需医嘱并记录",
+          "医疗器械减压不得影响鼻胃管功能"
+        ],
+        "missing_information": [
+          "INR具体结果",
+          "当前抗凝药物剂量及给药时间",
+          "是否有尿失禁/大便失禁",
+          "基础血压和心率数据"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 34.38455412304029,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2885,
+        "prompt_tokens": 928,
+        "total_tokens": 3813,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_004",
+      "input": "58岁女性，卵巢癌术后化疗期间，因肠梗阻入住外科。禁食、胃肠减压，PICC在右上臂，近1周基本卧床，BMI 31。Caprini评分8分。今天诉右上臂PICC侧胀痛，臂围较对侧粗2cm，局部皮温高。血小板88×10^9/L，医生暂未开抗凝。Morse评分35分，Braden评分16分。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "VTE",
+            "risk_level": "疑似事件",
+            "evidence": [
+              "恶性肿瘤、术后化疗、肠梗阻卧床、BMI 31",
+              "Caprini评分8分为高危/极高危",
+              "PICC侧上臂胀痛、臂围较对侧粗2cm、皮温高，提示导管相关血栓可能",
+              "血小板88×10^9/L影响抗凝决策"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "中危",
+            "evidence": [
+              "Morse评分35分",
+              "胃肠减压和PICC管路牵绊",
+              "禁食和肠梗阻可能导致虚弱"
+            ]
+          },
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分16分",
+              "近1周基本卧床",
+              "禁食营养不足风险",
+              "目前未描述皮肤破损"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "保持床单位清洁平整，协助定时翻身和坐起减压",
+            "每日检查骶尾、足跟、肩胛和PICC固定处皮肤",
+            "关注禁食期间营养支持医嘱和水电解质状态"
+          ],
+          "fall": [
+            "整理胃肠减压管和输液管路，固定妥当并留足活动余量",
+            "下床检查或如厕需陪同，禁食虚弱时评估体位性低血压",
+            "床旁放置呼叫铃，夜间加强巡视"
+          ],
+          "vte": [
+            "立即通知医生评估PICC相关血栓，记录双上臂臂围、皮温、颜色、疼痛",
+            "疑似血栓肢体避免按摩、热敷和用力活动，避免在患侧测血压、静脉穿刺或负重",
+            "保持PICC固定通畅，观察导管外露长度和输液阻力，不擅自拔管",
+            "根据医嘱配合血管超声、凝血、D-二聚体及抗凝/导管处理决策"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "中危每日复评，卧床时间延长或营养状态变化时复评",
+          "fall": "中危每班复评，管路增减、镇痛镇静或下床前复评",
+          "vte": "疑似导管相关血栓立即评估，之后每班记录患肢症状和导管情况，按医嘱复查"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "PICC侧肢体肿胀疼痛、臂围差增大、皮温升高或输液阻力增加",
+            "notify": "医生/PICC专科护士",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现胸痛、气促、咯血、SpO2下降等肺栓塞警示表现",
+            "notify": "医生/抢救团队",
+            "urgency": "立即"
+          },
+          {
+            "condition": "血小板继续下降、皮肤黏膜出血或黑便血尿",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似导管相关血栓时不要按摩、热敷或强行冲管，不擅自拔除PICC",
+          "血小板偏低时抗凝需医生权衡出血和血栓风险，护理端不得自行建议加量",
+          "机械预防需避开疑似血栓肢体并遵医嘱",
+          "禁食患者活动时注意低血糖、低血压和管路牵拉"
+        ],
+        "missing_information": [
+          "凝血功能和D-二聚体",
+          "PICC置管时间和尖端位置",
+          "是否有既往VTE史",
+          "皮肤完整性详细检查",
+          "当前镇痛或镇静药物"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Braden评分16分（<18分提示风险）\", \"BMI 31（肥胖增加压力）\", \"近1周基本卧床（活动受限）\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Morse评分35分（25-44分中危）\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"极高危/疑似事件\",\n      \"evidence\": [\"Caprini评分8分（≥5分高危）\", \"卵巢癌术后化疗（恶性肿瘤）\", \"近1周基本卧床（制动）\", \"BMI 31（肥胖）\", \"PICC置管（中心静脉导管）\", \"右上臂胀痛、臂围较对侧粗2cm、局部皮温高（疑似DVT症状）\"]\n    }\n  ],\n  \"overall_priority\": \"立即处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"每2小时翻身并检查骨突处皮肤（如骶尾、足跟）\", \"使用减压垫或气垫床\", \"保持皮肤清洁干燥，及时处理失禁或潮湿\", \"评估营养状况并补充高蛋白饮食\"],\n    \"fall\": [\"使用床栏并确保其固定\", \"呼叫铃置于患者易取处\", \"提供防滑鞋和助行器（如适用）\", \"评估步态和平衡能力，安排陪护\", \"教育患者及家属勿擅自下床\"],\n    \"vte\": [\"立即报告医生疑似DVT\", \"抬高患肢（避免压迫）\", \"不要按摩或热敷患肢\", \"监测生命体征、症状变化及出血征象\", \"在医嘱下评估抗凝治疗（注意血小板88×10^9/L需谨慎）\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"每班\",\n    \"vte\": \"立即并动态观察\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"右上臂肿胀、疼痛、皮温高持续或加重（疑似DVT进展）\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时严禁按摩患肢\", \"血小板低（88×10^9/L）时抗凝治疗需医生评估出血风险\", \"卧床患者早期活动需在安全监护下进行\"],\n  \"missing_information\": [\"皮肤详细检查结果（如红斑/水疱）\", \"具体活动能力描述（如能否坐起）\", \"完整用药列表（如化疗药、止吐药）\", \"下肢静脉超声检查结果\"],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分16分（<18分提示风险）",
+              "BMI 31（肥胖增加压力）",
+              "近1周基本卧床（活动受限）"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "中危",
+            "evidence": [
+              "Morse评分35分（25-44分中危）"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "极高危/疑似事件",
+            "evidence": [
+              "Caprini评分8分（≥5分高危）",
+              "卵巢癌术后化疗（恶性肿瘤）",
+              "近1周基本卧床（制动）",
+              "BMI 31（肥胖）",
+              "PICC置管（中心静脉导管）",
+              "右上臂胀痛、臂围较对侧粗2cm、局部皮温高（疑似DVT症状）"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时翻身并检查骨突处皮肤（如骶尾、足跟）",
+            "使用减压垫或气垫床",
+            "保持皮肤清洁干燥，及时处理失禁或潮湿",
+            "评估营养状况并补充高蛋白饮食"
+          ],
+          "fall": [
+            "使用床栏并确保其固定",
+            "呼叫铃置于患者易取处",
+            "提供防滑鞋和助行器（如适用）",
+            "评估步态和平衡能力，安排陪护",
+            "教育患者及家属勿擅自下床"
+          ],
+          "vte": [
+            "立即报告医生疑似DVT",
+            "抬高患肢（避免压迫）",
+            "不要按摩或热敷患肢",
+            "监测生命体征、症状变化及出血征象",
+            "在医嘱下评估抗凝治疗（注意血小板88×10^9/L需谨慎）"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "每班",
+          "vte": "立即并动态观察"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "右上臂肿胀、疼痛、皮温高持续或加重（疑似DVT进展）",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时严禁按摩患肢",
+          "血小板低（88×10^9/L）时抗凝治疗需医生评估出血风险",
+          "卧床患者早期活动需在安全监护下进行"
+        ],
+        "missing_information": [
+          "皮肤详细检查结果（如红斑/水疱）",
+          "具体活动能力描述（如能否坐起）",
+          "完整用药列表（如化疗药、止吐药）",
+          "下肢静脉超声检查结果"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 40.93833442311734,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2897,
+        "prompt_tokens": 924,
+        "total_tokens": 3821,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_005",
+      "input": "31岁产妇，剖宫产术后18小时，BMI 34，妊娠期糖尿病，产程前卧床保胎2周。现留置尿管已拔除，切口疼痛5分，不愿下床。双下肢轻度水肿，无单侧疼痛。Caprini产科风险评估提示高危。夜间抱婴儿喂奶时曾头晕，Morse评分45分。Braden 18分，皮肤完整。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "剖宫产术后18小时",
+              "BMI 34",
+              "产前卧床保胎2周",
+              "妊娠期糖尿病和术后不愿下床",
+              "产科风险评估提示高危"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分45分",
+              "术后疼痛、夜间抱婴儿喂奶时头晕",
+              "尿管拔除后如厕需求增加",
+              "产后疲劳和睡眠不足"
+            ]
+          },
+          {
+            "risk_category": "压疮",
+            "risk_level": "低危",
+            "evidence": [
+              "Braden 18分",
+              "皮肤完整",
+              "虽术后活动减少，但年龄较轻且可配合活动"
+            ]
+          }
+        ],
+        "overall_priority": "本班重点",
+        "nursing_measures": {
+          "pressure_injury": [
+            "鼓励变换体位，保持切口和会阴部清洁干燥",
+            "每班观察骶尾、足跟及切口周围皮肤",
+            "疼痛控制后协助早期活动，减少持续受压"
+          ],
+          "fall": [
+            "首次下床和夜间如厕需护士或家属陪同，先坐起再站立",
+            "指导喂奶时坐稳，婴儿转运或抱起前先评估头晕",
+            "床旁放置呼叫铃和婴儿床，地面保持干燥",
+            "评估疼痛、低血压、低血糖等头晕原因"
+          ],
+          "vte": [
+            "按医嘱尽早下床活动，不能下床时进行踝泵和小腿肌肉收缩训练",
+            "使用弹力袜或间歇充气泵需确认尺码、皮肤和医嘱",
+            "观察单侧下肢肿胀疼痛、皮温升高、胸闷气促等表现",
+            "结合切口出血和恶露情况，配合医生评估药物预防"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "低危每日复评，活动减少或皮肤潮湿时复评",
+          "fall": "高危每班复评，夜间喂奶、首次下床和镇痛用药后重点观察",
+          "vte": "高危每日复评，术后活动量、出血情况或下肢症状变化时随时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "出现单侧下肢疼痛肿胀、皮温升高，或突发胸闷、气促、咯血",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "头晕伴血压下降、低血糖、近跌倒或跌倒",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "切口渗血增多、恶露异常增多，影响抗凝预防安全",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "产后首次下床不得独自进行，抱婴儿时先确保自身坐稳或有人协助",
+          "药物抗凝需结合产后出血、切口渗血和麻醉方式由医生决定",
+          "疑似DVT时禁按摩下肢，不用热敷缓解肿痛",
+          "弹力袜不应卷边压迫皮肤，需定时检查足背循环"
+        ],
+        "missing_information": [
+          "血红蛋白和凝血功能",
+          "当前恶露量和切口渗血情况",
+          "麻醉方式及拔管时间",
+          "是否有既往VTE或血栓家族史",
+          "血糖监测结果"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Braden评分18分\", \"活动受限（不愿下床）\", \"BMI 34（肥胖）\", \"双下肢轻度水肿\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Morse评分45分\", \"夜间抱婴儿喂奶时头晕（提示体位性低血压）\", \"剖宫产术后18小时活动受限\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Caprini产科风险评估高危\", \"剖宫产术后\", \"BMI 34（肥胖）\", \"产程前卧床保胎2周\", \"妊娠期糖尿病\"]\n    }\n  ],\n  \"overall_priority\": \"尽快处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"每2小时协助翻身并检查皮肤（重点骨突处）\", \"使用气垫床或减压垫\", \"保持皮肤清洁干燥，及时处理汗液\", \"加强营养支持（糖尿病饮食）\"],\n    \"fall\": [\"床栏使用并教育患者勿自行下床\", \"首次下床活动需护士陪同评估\", \"教育避免夜间独自抱婴儿喂奶，使用床旁椅\", \"监测体位性低血压症状（如头晕）\"],\n    \"vte\": [\"穿戴梯度压力弹力袜\", \"指导踝泵运动每小时10次\", \"在疼痛控制下鼓励早期下床活动\", \"评估抗凝药物使用（需医嘱）\", \"监测下肢肿胀、疼痛及出血征象\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"每班\",\n    \"vte\": \"每班\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"下肢单侧肿胀疼痛或呼吸困难/胸痛\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"发生跌倒事件\",\n      \"notify\": \"护士长\",\n      \"urgency\": \"本班内\"\n    },\n    {\n      \"condition\": \"皮肤出现红斑/水疱/破溃\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"尽快\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时勿按摩患肢或热敷\", \"抗凝治疗期间监测出血风险（如牙龈出血、瘀斑）\", \"疼痛控制不佳时暂缓下床活动\"],\n  \"missing_information\": [\"具体止痛药物及剂量\", \"出血史或抗凝史\", \"饮食摄入情况\"],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分18分",
+              "活动受限（不愿下床）",
+              "BMI 34（肥胖）",
+              "双下肢轻度水肿"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "中危",
+            "evidence": [
+              "Morse评分45分",
+              "夜间抱婴儿喂奶时头晕（提示体位性低血压）",
+              "剖宫产术后18小时活动受限"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "Caprini产科风险评估高危",
+              "剖宫产术后",
+              "BMI 34（肥胖）",
+              "产程前卧床保胎2周",
+              "妊娠期糖尿病"
+            ]
+          }
+        ],
+        "overall_priority": "尽快处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时协助翻身并检查皮肤（重点骨突处）",
+            "使用气垫床或减压垫",
+            "保持皮肤清洁干燥，及时处理汗液",
+            "加强营养支持（糖尿病饮食）"
+          ],
+          "fall": [
+            "床栏使用并教育患者勿自行下床",
+            "首次下床活动需护士陪同评估",
+            "教育避免夜间独自抱婴儿喂奶，使用床旁椅",
+            "监测体位性低血压症状（如头晕）"
+          ],
+          "vte": [
+            "穿戴梯度压力弹力袜",
+            "指导踝泵运动每小时10次",
+            "在疼痛控制下鼓励早期下床活动",
+            "评估抗凝药物使用（需医嘱）",
+            "监测下肢肿胀、疼痛及出血征象"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "每班",
+          "vte": "每班"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "下肢单侧肿胀疼痛或呼吸困难/胸痛",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生跌倒事件",
+            "notify": "护士长",
+            "urgency": "本班内"
+          },
+          {
+            "condition": "皮肤出现红斑/水疱/破溃",
+            "notify": "伤口造口护士",
+            "urgency": "尽快"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时勿按摩患肢或热敷",
+          "抗凝治疗期间监测出血风险（如牙龈出血、瘀斑）",
+          "疼痛控制不佳时暂缓下床活动"
+        ],
+        "missing_information": [
+          "具体止痛药物及剂量",
+          "出血史或抗凝史",
+          "饮食摄入情况"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 36.593053481774405,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2545,
+        "prompt_tokens": 915,
+        "total_tokens": 3460,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_006",
+      "input": "45岁男性，车祸后胸髓损伤，双下肢感觉和运动丧失，入院第5天。Braden评分10分，骶尾部出现3cm×3cm暗紫色完整皮肤，按压不褪色，足跟皮肤发凉。留置尿管，偶有大便失禁。Caprini评分9分，医生因硬膜外血肿风险暂缓药物抗凝，已开间歇充气泵。患者上肢力量好，夜间想自行转移到轮椅。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "已有损伤",
+            "evidence": [
+              "Braden评分10分",
+              "胸髓损伤导致双下肢感觉和运动丧失",
+              "骶尾部3cm×3cm暗紫色完整皮肤且不褪色，警惕深部组织压力性损伤",
+              "尿管和大便失禁导致潮湿污染风险",
+              "足跟皮肤发凉提示循环/受压需关注"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "极高危",
+            "evidence": [
+              "脊髓损伤后双下肢瘫痪制动",
+              "入院第5天",
+              "Caprini评分9分",
+              "药物抗凝因硬膜外血肿风险暂缓"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "高危",
+            "evidence": [
+              "双下肢运动和感觉丧失",
+              "夜间想自行转移到轮椅",
+              "留置尿管存在牵绊风险",
+              "上肢力量好但转移安全能力未评估"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "立即报告并记录骶尾部疑似深部组织压力性损伤，拍照测量按制度交接",
+            "使用高规格减压床垫，严格翻身减压并避免直接压迫暗紫色区域",
+            "足跟完全悬空，检查足跟循环和皮温",
+            "失禁后及时清洁并使用皮肤保护膜，保持床单位干燥",
+            "请伤口造口护士评估分期和敷料/减压方案"
+          ],
+          "fall": [
+            "夜间加强巡视，轮椅转移必须由护士或康复人员评估并协助",
+            "床旁固定尿管和引流袋，避免转移时牵拉",
+            "进行轮椅刹车、移乘板和防滑措施宣教",
+            "必要时与医生/康复治疗师制定安全转移计划"
+          ],
+          "vte": [
+            "落实间歇充气泵，检查压力、佩戴时间和皮肤受压情况",
+            "在医嘱允许范围内进行上肢主动活动和下肢被动活动，避免造成脊柱或血肿风险",
+            "每班观察双下肢周径、皮温、颜色和肿胀",
+            "持续关注硬膜外血肿风险解除后药物预防评估"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "已有损伤每班评估皮肤和创面变化，翻身时即时观察，伤口专科按制度复评",
+          "fall": "高危每班复评，夜间和每次移乘前复评",
+          "vte": "极高危每班观察下肢，抗凝禁忌变化或活动计划变化时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "骶尾暗紫色区域扩大、出现水疱、破溃、疼痛或渗液",
+            "notify": "伤口造口护士/医生/护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现单侧下肢肿胀、皮温升高、突发胸痛气促或SpO2下降",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "患者坚持自行移乘、发生近跌倒或尿管牵拉",
+            "notify": "护士长/医生/康复治疗师",
+            "urgency": "尽快"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似深部组织损伤区域禁止按摩，不可使用环形垫集中受压",
+          "脊髓损伤患者下肢感觉缺失，热水袋和热敷易烫伤，应避免",
+          "硬膜外血肿风险未解除前药物抗凝必须遵医嘱，观察神经功能变化",
+          "移乘前必须锁定轮椅并保护尿管，不能让患者夜间独自转移"
+        ],
+        "missing_information": [
+          "脊柱稳定性和康复活动限制",
+          "硬膜外血肿影像及医生抗凝禁忌说明",
+          "足背动脉搏动和下肢周径基线",
+          "营养指标",
+          "疼痛或自主神经反射异常表现"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"已有损伤\",\n      \"evidence\": [\"Braden评分10分（低于12分提示高风险）\", \"骶尾部3cm×3cm暗紫色完整皮肤按压不褪色（1期压疮典型表现）\", \"双下肢感觉和运动丧失导致活动受限\", \"偶有大便失禁造成皮肤潮湿\", \"留置尿管\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"胸髓损伤致双下肢瘫痪但上肢力量好\", \"夜间尝试自行转移到轮椅（存在不安全移动行为）\", \"脊髓损伤后体位性低血压风险\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Caprini评分9分（≥5分提示高风险）\", \"胸髓损伤后制动卧床\", \"创伤史\"]\n    }\n  ],\n  \"overall_priority\": \"尽快处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"每2小时轴向翻身避免骶尾部持续受压\", \"使用气垫床或减压坐垫\", \"失禁后及时清洁干燥并涂抹皮肤保护剂\", \"每日检查骨突处皮肤（重点骶尾、足跟）\", \"教育患者及陪护识别早期压疮症状\"],\n    \"fall\": [\"夜间使用床栏并加强巡视\", \"教育患者转移需护士协助，禁止自行尝试\", \"评估并提供床旁便器减少夜间下床\", \"确保轮椅制动且转移过程有辅助设备\", \"进行安全环境检查（移除障碍物）\"],\n    \"vte\": [\"继续使用间歇充气泵（每日检查使用情况）\", \"指导上肢主动运动及踝泵运动\", \"监测下肢肿胀、疼痛、皮温变化\", \"记录出入量预防脱水\", \"遵医嘱动态评估抗凝时机\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每日\",\n    \"fall\": \"每班\",\n    \"vte\": \"每日\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"骶尾部皮肤破溃、渗液或感染迹象\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"发生跌倒事件或主诉头晕/黑朦\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"单侧下肢肿胀、疼痛、发红或突发呼吸困难/胸痛\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时禁止按摩下肢及热敷\", \"硬膜外血肿风险期间不擅自启动药物抗凝\", \"翻身时注意脊柱稳定性避免二次损伤\"],\n  \"missing_information\": [\"无Morse跌倒评分结果\", \"无意识状态及认知功能评估记录\", \"无具体药物清单（除已知抗凝暂缓）\"],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "已有损伤",
+            "evidence": [
+              "Braden评分10分（低于12分提示高风险）",
+              "骶尾部3cm×3cm暗紫色完整皮肤按压不褪色（1期压疮典型表现）",
+              "双下肢感觉和运动丧失导致活动受限",
+              "偶有大便失禁造成皮肤潮湿",
+              "留置尿管"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "高危",
+            "evidence": [
+              "胸髓损伤致双下肢瘫痪但上肢力量好",
+              "夜间尝试自行转移到轮椅（存在不安全移动行为）",
+              "脊髓损伤后体位性低血压风险"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "Caprini评分9分（≥5分提示高风险）",
+              "胸髓损伤后制动卧床",
+              "创伤史"
+            ]
+          }
+        ],
+        "overall_priority": "尽快处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时轴向翻身避免骶尾部持续受压",
+            "使用气垫床或减压坐垫",
+            "失禁后及时清洁干燥并涂抹皮肤保护剂",
+            "每日检查骨突处皮肤（重点骶尾、足跟）",
+            "教育患者及陪护识别早期压疮症状"
+          ],
+          "fall": [
+            "夜间使用床栏并加强巡视",
+            "教育患者转移需护士协助，禁止自行尝试",
+            "评估并提供床旁便器减少夜间下床",
+            "确保轮椅制动且转移过程有辅助设备",
+            "进行安全环境检查（移除障碍物）"
+          ],
+          "vte": [
+            "继续使用间歇充气泵（每日检查使用情况）",
+            "指导上肢主动运动及踝泵运动",
+            "监测下肢肿胀、疼痛、皮温变化",
+            "记录出入量预防脱水",
+            "遵医嘱动态评估抗凝时机"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每日",
+          "fall": "每班",
+          "vte": "每日"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "骶尾部皮肤破溃、渗液或感染迹象",
+            "notify": "伤口造口护士",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生跌倒事件或主诉头晕/黑朦",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "单侧下肢肿胀、疼痛、发红或突发呼吸困难/胸痛",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时禁止按摩下肢及热敷",
+          "硬膜外血肿风险期间不擅自启动药物抗凝",
+          "翻身时注意脊柱稳定性避免二次损伤"
+        ],
+        "missing_information": [
+          "无Morse跌倒评分结果",
+          "无意识状态及认知功能评估记录",
+          "无具体药物清单（除已知抗凝暂缓）"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 45.187849703012034,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2939,
+        "prompt_tokens": 926,
+        "total_tokens": 3865,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_007",
+      "input": "89岁女性，因肺部感染和心衰住院。长期使用呋塞米，夜尿多，近半年跌倒2次。今天凌晨自行去卫生间时差点摔倒，护士扶住。Morse评分80分。患者轻度认知障碍，听力差，使用助听器不稳定。Braden评分14分，双下肢凹陷性水肿，骶尾皮肤完整。因心衰活动耐量差，大部分时间卧床。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "极高危",
+            "evidence": [
+              "Morse评分80分",
+              "近半年跌倒2次",
+              "凌晨自行如厕发生近跌倒",
+              "轻度认知障碍、听力差",
+              "呋塞米导致夜尿多，心衰活动耐量差"
+            ]
+          },
+          {
+            "risk_category": "压疮",
+            "risk_level": "高危",
+            "evidence": [
+              "Braden评分14分",
+              "高龄、卧床时间长",
+              "双下肢凹陷性水肿",
+              "心衰和感染影响组织灌注与耐受"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "中危",
+            "evidence": [
+              "高龄、感染、心衰和卧床增加VTE风险",
+              "未提供手术、肿瘤或既往VTE等极高危因素",
+              "双下肢水肿更符合心衰背景，但需动态观察单侧改变"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时协助变换体位或坐卧减压，避免长时间半卧位剪切力",
+            "抬高下肢以医嘱和心衰耐受为前提，保护足跟和小腿水肿皮肤",
+            "保持皮肤清洁干燥，避免胶布反复粘贴造成皮肤撕裂",
+            "每班检查骶尾、足跟和小腿水肿处皮肤"
+          ],
+          "fall": [
+            "落实极高危跌倒标识，床低位、床栏、呼叫铃和常用物品可及",
+            "夜间加强巡视，主动安排床旁便器或陪同如厕",
+            "评估利尿剂给药时间对夜尿和跌倒的影响并反馈医生",
+            "确认助听器可用，沟通时面对患者、语速放慢",
+            "进行近跌倒事件记录和交班"
+          ],
+          "vte": [
+            "鼓励在心衰耐受范围内进行床上踝泵和短时坐起活动",
+            "观察双下肢是否由对称水肿变为单侧肿胀疼痛或皮温升高",
+            "根据医嘱使用机械预防时注意水肿皮肤受压"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "高危每班复评皮肤，水肿加重、发热或卧床增加时复评",
+          "fall": "极高危每班复评，夜间、利尿后和每次如厕前重点评估",
+          "vte": "中危每日复评，活动量下降或下肢症状变化时随时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "再次近跌倒、跌倒、意识改变或体位性低血压",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "水肿皮肤出现水疱、渗液、破溃或骶尾不褪色红斑",
+            "notify": "伤口造口护士/医生",
+            "urgency": "尽快"
+          },
+          {
+            "condition": "单侧下肢肿胀疼痛、皮温升高或突发胸闷气促",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "不要因使用床栏就减少巡视，认知障碍患者可能翻越床栏",
+          "心衰患者活动和抬腿需观察气促、SpO2和疲劳，避免过度活动",
+          "水肿脆弱皮肤避免强力按摩和粗暴撕除胶布",
+          "利尿剂调整需医生决定，护理端重点反馈夜尿和跌倒风险"
+        ],
+        "missing_information": [
+          "体位性血压",
+          "具体心功能状态和活动医嘱",
+          "当前氧合情况",
+          "用药中是否有镇静催眠药或降压药",
+          "既往VTE史"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Braden评分14分\", \"活动受限（卧床）\", \"双下肢凹陷性水肿\", \"心衰\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Morse评分80分\", \"近半年跌倒2次\", \"今日凌晨差点摔倒\", \"轻度认知障碍\", \"听力差\", \"助听器不稳定\", \"夜尿多\", \"使用呋塞米（利尿剂）\", \"活动耐量差\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"卧床\", \"89岁高龄\", \"心衰\", \"双下肢凹陷性水肿\"]\n    }\n  ],\n  \"overall_priority\": \"尽快处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"定时翻身（每2小时）\", \"使用气垫床或减压垫\", \"保持皮肤清洁干燥\", \"每日检查骶尾等骨突处皮肤\", \"加强营养支持\", \"管理水肿\"],\n    \"fall\": [\"床旁放置便器减少夜间如厕\", \"使用助行器或轮椅辅助活动\", \"确保床栏使用并固定\", \"安排陪护人员\", \"检查环境无障碍物和防滑\", \"评估利尿剂等药物副作用\", \"进行个体化跌倒教育\"],\n    \"vte\": [\"指导床上踝泵运动\", \"使用梯度压力弹力袜\", \"评估抗凝药物适应症及出血风险\", \"监测下肢肿胀疼痛及呼吸状况\", \"保证足够水分摄入\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每日\",\n    \"fall\": \"每班\",\n    \"vte\": \"每日\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"骶尾皮肤出现红斑、水疱或破溃\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"发生跌倒或坠床事件\",\n      \"notify\": \"医生/护士长\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"出现下肢不对称肿胀、疼痛、胸痛或呼吸困难\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时勿按摩患肢或热敷\", \"出血高危患者抗凝前需医嘱评估\", \"认知障碍患者避免约束并加强安全宣教\"],\n  \"missing_information\": [\"VTE风险评分（如Caprini）\", \"D-二聚体结果\", \"抗凝药物使用史\", \"手术或创伤史\"],\n  \"confidence\": \"中\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分14分",
+              "活动受限（卧床）",
+              "双下肢凹陷性水肿",
+              "心衰"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分80分",
+              "近半年跌倒2次",
+              "今日凌晨差点摔倒",
+              "轻度认知障碍",
+              "听力差",
+              "助听器不稳定",
+              "夜尿多",
+              "使用呋塞米（利尿剂）",
+              "活动耐量差"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "中危",
+            "evidence": [
+              "卧床",
+              "89岁高龄",
+              "心衰",
+              "双下肢凹陷性水肿"
+            ]
+          }
+        ],
+        "overall_priority": "尽快处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "定时翻身（每2小时）",
+            "使用气垫床或减压垫",
+            "保持皮肤清洁干燥",
+            "每日检查骶尾等骨突处皮肤",
+            "加强营养支持",
+            "管理水肿"
+          ],
+          "fall": [
+            "床旁放置便器减少夜间如厕",
+            "使用助行器或轮椅辅助活动",
+            "确保床栏使用并固定",
+            "安排陪护人员",
+            "检查环境无障碍物和防滑",
+            "评估利尿剂等药物副作用",
+            "进行个体化跌倒教育"
+          ],
+          "vte": [
+            "指导床上踝泵运动",
+            "使用梯度压力弹力袜",
+            "评估抗凝药物适应症及出血风险",
+            "监测下肢肿胀疼痛及呼吸状况",
+            "保证足够水分摄入"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每日",
+          "fall": "每班",
+          "vte": "每日"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "骶尾皮肤出现红斑、水疱或破溃",
+            "notify": "伤口造口护士",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生跌倒或坠床事件",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现下肢不对称肿胀、疼痛、胸痛或呼吸困难",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时勿按摩患肢或热敷",
+          "出血高危患者抗凝前需医嘱评估",
+          "认知障碍患者避免约束并加强安全宣教"
+        ],
+        "missing_information": [
+          "VTE风险评分（如Caprini）",
+          "D-二聚体结果",
+          "抗凝药物使用史",
+          "手术或创伤史"
+        ],
+        "confidence": "中"
+      },
+      "request_duration_seconds": 44.37894015107304,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3561,
+        "prompt_tokens": 914,
+        "total_tokens": 4475,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_008",
+      "input": "63岁男性，胃癌根治术后第2天。BMI 18，白蛋白30g/L，切口疼痛7分，因疼痛拒绝翻身和下床。Braden评分12分，Morse评分50分。医生开具低分子肝素和间歇充气泵；今日引流管血性液体较昨日增多，2小时80ml，血压100/62mmHg，P 108次/分。患者左小腿无肿痛。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "高危",
+            "evidence": [
+              "Braden评分12分",
+              "术后疼痛7分导致拒绝翻身",
+              "BMI 18、白蛋白30g/L提示营养风险",
+              "术后卧床和多管路"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分50分",
+              "术后第2天、疼痛和多管路",
+              "血压100/62mmHg、心率108次/分，可能虚弱或容量不足",
+              "首次下床能力未确认"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "胃癌恶性肿瘤术后",
+              "疼痛拒绝下床，活动减少",
+              "已开具低分子肝素和间歇充气泵",
+              "但当前引流血性液增多，需平衡出血风险"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "先评估疼痛并按医嘱镇痛，镇痛后协助翻身减压",
+            "使用减压垫保护骶尾和足跟，避免引流管压在皮肤下",
+            "每班检查皮肤和管路固定处，保持床单位平整",
+            "配合营养支持，记录摄入和胃肠功能恢复情况"
+          ],
+          "fall": [
+            "下床前评估血压、心率、疼痛和引流管固定情况",
+            "首次下床至少两人协助，先床边坐起观察头晕",
+            "固定引流管，防止牵拉导致疼痛或跌倒",
+            "床旁呼叫铃可及，禁止自行下床"
+          ],
+          "vte": [
+            "继续落实间歇充气泵，观察皮肤和压力点",
+            "在出血风险评估后按医嘱执行或暂停低分子肝素，不自行决定",
+            "鼓励床上踝泵、深呼吸和循序渐进活动",
+            "监测小腿肿胀疼痛、胸闷气促以及抗凝相关出血表现"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "高危每班复评，疼痛控制后评估翻身效果，Braden每日复评",
+          "fall": "高危每班复评，首次下床、镇痛后和血流动力学变化时复评",
+          "vte": "高危每日复评，抗凝给药前评估出血和下肢症状"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "引流血性液较前增多、2小时80ml伴心率快或血压下降",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "疼痛导致无法翻身、咳嗽或下床活动",
+            "notify": "医生/疼痛管理团队",
+            "urgency": "尽快"
+          },
+          {
+            "condition": "出现单侧下肢肿痛、胸闷气促或抗凝后出血表现",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "存在活动性出血疑虑时，低分子肝素执行需先核对医生是否调整医嘱",
+          "使用间歇充气泵不能替代下床活动和抗凝风险评估",
+          "翻身时保护腹部切口和引流管，避免牵拉",
+          "疑似DVT时禁止按摩小腿"
+        ],
+        "missing_information": [
+          "血红蛋白变化",
+          "凝血功能和血小板",
+          "引流液累计量和颜色趋势",
+          "术后活动医嘱",
+          "镇痛方案和效果"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Braden评分12分（≤12分高危）\", \"活动受限（因疼痛拒绝翻身和下床）\", \"营养不良（BMI 18，白蛋白30g/L）\", \"低灌注（血压100/62mmHg，心率108次/分）\", \"潮湿（引流管血性液体增多）\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Morse评分50分（≥45分高危）\", \"术后疼痛7分\", \"活动受限（拒绝下床）\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"胃癌根治术后（大手术）\", \"制动（拒绝下床）\", \"出血风险（引流管血性液体2小时80ml，血压100/62mmHg，心率108次/分）\"]\n    }\n  ],\n  \"overall_priority\": \"尽快处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"每2小时协助翻身减压（疼痛控制后）\", \"使用气垫床或减压垫\", \"保持皮肤清洁干燥，及时清理引流液\", \"加强营养支持（如高蛋白饮食）\", \"每日皮肤检查\"],\n    \"fall\": [\"床栏使用\", \"陪护在床旁\", \"疼痛控制后评估步态并鼓励早期下床\", \"环境安全（移除障碍物）\", \"评估夜尿和药物影响\"],\n    \"vte\": [\"按医嘱使用低分子肝素和间歇充气泵\", \"监测出血征象（引流液量、血压、心率）\", \"疼痛缓解后鼓励床上踝泵运动和早期下床\", \"观察下肢肿胀疼痛\", \"避免下肢受压\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"每班\",\n    \"vte\": \"每班\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"引流管血性液体持续增多（如每小时>50ml）或血压<90/60mmHg\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"左下肢出现肿胀、疼痛、皮温升高或D-二聚体升高\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"发生跌倒事件\",\n      \"notify\": \"护士长\",\n      \"urgency\": \"立即\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时避免按摩患肢和热敷\", \"出血高危时抗凝治疗需医生评估\", \"疼痛未控制前避免强制活动\", \"间歇充气泵使用期间监测皮肤和循环\"],\n  \"missing_information\": [\"无感觉障碍信息\", \"无水肿信息\", \"无发热信息\", \"无既往跌倒史\", \"无恶性肿瘤活动信息\"],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "高危",
+            "evidence": [
+              "Braden评分12分（≤12分高危）",
+              "活动受限（因疼痛拒绝翻身和下床）",
+              "营养不良（BMI 18，白蛋白30g/L）",
+              "低灌注（血压100/62mmHg，心率108次/分）",
+              "潮湿（引流管血性液体增多）"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分50分（≥45分高危）",
+              "术后疼痛7分",
+              "活动受限（拒绝下床）"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "胃癌根治术后（大手术）",
+              "制动（拒绝下床）",
+              "出血风险（引流管血性液体2小时80ml，血压100/62mmHg，心率108次/分）"
+            ]
+          }
+        ],
+        "overall_priority": "尽快处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "每2小时协助翻身减压（疼痛控制后）",
+            "使用气垫床或减压垫",
+            "保持皮肤清洁干燥，及时清理引流液",
+            "加强营养支持（如高蛋白饮食）",
+            "每日皮肤检查"
+          ],
+          "fall": [
+            "床栏使用",
+            "陪护在床旁",
+            "疼痛控制后评估步态并鼓励早期下床",
+            "环境安全（移除障碍物）",
+            "评估夜尿和药物影响"
+          ],
+          "vte": [
+            "按医嘱使用低分子肝素和间歇充气泵",
+            "监测出血征象（引流液量、血压、心率）",
+            "疼痛缓解后鼓励床上踝泵运动和早期下床",
+            "观察下肢肿胀疼痛",
+            "避免下肢受压"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "每班",
+          "vte": "每班"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "引流管血性液体持续增多（如每小时>50ml）或血压<90/60mmHg",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "左下肢出现肿胀、疼痛、皮温升高或D-二聚体升高",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生跌倒事件",
+            "notify": "护士长",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时避免按摩患肢和热敷",
+          "出血高危时抗凝治疗需医生评估",
+          "疼痛未控制前避免强制活动",
+          "间歇充气泵使用期间监测皮肤和循环"
+        ],
+        "missing_information": [
+          "无感觉障碍信息",
+          "无水肿信息",
+          "无发热信息",
+          "无既往跌倒史",
+          "无恶性肿瘤活动信息"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 45.748464938951656,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3642,
+        "prompt_tokens": 925,
+        "total_tokens": 4567,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_009",
+      "input": "70岁男性，慢阻肺急性加重使用无创呼吸机，鼻梁处被面罩压出1cm×0.5cm红斑，按压不褪色，患者烦躁多汗，反复拉扯面罩。SpO2在无创通气下92%。Braden评分17分，Morse评分40分。患者长期吸烟，近3天卧床为主，无手术史，无下肢肿痛。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "已有损伤",
+            "evidence": [
+              "无创呼吸机面罩鼻梁受压",
+              "鼻梁1cm×0.5cm不褪色红斑，符合医疗器械相关1期压力性损伤表现",
+              "烦躁多汗和反复拉扯面罩增加摩擦剪切",
+              "无创通气持续需要造成持续受压"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "中危",
+            "evidence": [
+              "Morse评分40分",
+              "烦躁、低氧边缘和管路设备牵绊",
+              "反复拉扯面罩，可能突然起身或拔管"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "中危",
+            "evidence": [
+              "近3天卧床为主",
+              "COPD急性加重和高龄增加风险",
+              "无手术史、无下肢肿痛，暂未见高危或疑似DVT证据"
+            ]
+          }
+        ],
+        "overall_priority": "尽快处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "立即评估面罩型号、松紧度和漏气情况，在保证通气效果前提下减压",
+            "鼻梁处使用合适的薄型保护敷料，避免影响面罩密闭",
+            "定时短暂解除压力并检查鼻梁、面颊、耳廓皮肤，需与氧合安全协调",
+            "保持面部干燥，及时处理汗液，减少摩擦",
+            "记录医疗器械相关压力性损伤部位、大小和颜色"
+          ],
+          "fall": [
+            "床旁加强巡视，解释无创通气目的，减少烦躁诱因",
+            "整理呼吸机管路，防止牵拉导致起身或跌倒",
+            "床低位、呼叫铃可及，必要时请家属陪伴",
+            "评估低氧、二氧化碳潴留或谵妄导致的烦躁"
+          ],
+          "vte": [
+            "鼓励在呼吸耐受范围内床上主动活动和踝泵",
+            "补液和痰液管理按医嘱执行，避免脱水加重血液黏稠",
+            "观察双下肢肿胀疼痛、皮温变化和突发呼吸困难是否超出COPD解释"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "已有器械相关损伤每班至少评估，面罩调整后30-60分钟复查受压处，持续无创时按制度定时查看",
+          "fall": "中危每班复评，烦躁、氧合下降或镇静用药后随时复评",
+          "vte": "中危每日复评，卧床延长或出现下肢/呼吸症状时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "鼻梁红斑扩大、出现水疱/破溃，或无法在保证通气下减压",
+            "notify": "医生/呼吸治疗师/伤口造口护士",
+            "urgency": "尽快"
+          },
+          {
+            "condition": "烦躁加重、意识改变、拔除面罩或SpO2下降",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现单侧下肢肿痛或突发胸痛、气促明显加重",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "不能为了减压随意松开面罩导致漏气和氧合恶化",
+          "保护敷料不能过厚，以免影响无创通气密闭性",
+          "烦躁患者使用约束或镇静需遵守医嘱和制度，持续观察呼吸抑制",
+          "疑似DVT时禁按摩和热敷下肢"
+        ],
+        "missing_information": [
+          "动脉血气和二氧化碳潴留情况",
+          "无创面罩型号和佩戴时长",
+          "是否使用镇静药",
+          "营养摄入和水分状态",
+          "既往VTE史"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"已有损伤\",\n      \"evidence\": [\"鼻梁处1cm×0.5cm红斑，按压不褪色（Stage 1表现）\", \"Braden评分17分（轻度风险但已有实际损伤）\", \"无创呼吸机面罩持续压迫\", \"患者烦躁多汗导致局部潮湿\", \"近3天卧床为主\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Morse评分40分（25-45分属中危）\", \"患者烦躁影响判断和配合\", \"卧床为主但可能下床活动\", \"使用无创呼吸机可能限制活动能力\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"年龄70岁（高龄）\", \"近3天卧床为主（制动）\", \"慢性阻塞性肺病（慢性基础病）\", \"长期吸烟史\", \"无手术史/创伤史\", \"无下肢肿痛（排除急性DVT）\"]\n    }\n  ],\n  \"overall_priority\": \"尽快处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\n      \"立即调整无创呼吸机面罩位置，使用减压敷料或软垫保护鼻梁\",\n      \"保持皮肤清洁干燥，及时擦干汗液，避免潮湿刺激\",\n      \"每2小时协助翻身，减轻局部压力，教育患者勿拉扯面罩\",\n      \"使用约束手套前需医嘱评估并记录，优先处理烦躁原因\",\n      \"监测红斑变化，记录伤口大小、颜色\"\n    ],\n    \"fall\": [\n      \"床旁加装床栏并确保功能正常\",\n      \"安排专人陪护，防止患者自行下床\",\n      \"评估烦躁原因（如缺氧、电解质紊乱），处理原发病\",\n      \"进行环境安全检查，固定管路避免牵绊\",\n      \"每班复评Morse评分，监测跌倒风险变化\"\n    ],\n    \"vte\": [\n      \"指导床上踝泵运动，每2小时1次\",\n      \"评估抗凝指征（如D-二聚体），咨询医生制定预防方案\",\n      \"监测下肢症状（肿胀、疼痛、皮温变化）及呼吸困难\",\n      \"保证足够水分摄入，预防脱水\",\n      \"考虑使用梯度压力弹力袜（需医嘱）\"\n    ]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"每班\",\n    \"vte\": \"每日\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"压疮红斑扩大、出现水疱或破溃\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"尽快\"\n    },\n    {\n      \"condition\": \"发生跌倒事件或Morse评分≥46分\",\n      \"notify\": \"医生/护士长\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"出现单侧下肢肿痛、呼吸困难或D-二聚体升高\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    }\n  ],\n  \"contraindications_precautions\": [\n    \"疑似DVT时禁止按摩患肢、热敷或剧烈被动活动\",\n    \"抗凝治疗前需评估出血风险（如凝血功能）\",\n    \"约束使用需严格遵守医嘱和制度，避免皮肤损伤\",\n    \"减压措施不得影响呼吸机治疗效果\"\n  ],\n  \"missing_information\": [],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "已有损伤",
+            "evidence": [
+              "鼻梁处1cm×0.5cm红斑，按压不褪色（Stage 1表现）",
+              "Braden评分17分（轻度风险但已有实际损伤）",
+              "无创呼吸机面罩持续压迫",
+              "患者烦躁多汗导致局部潮湿",
+              "近3天卧床为主"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "中危",
+            "evidence": [
+              "Morse评分40分（25-45分属中危）",
+              "患者烦躁影响判断和配合",
+              "卧床为主但可能下床活动",
+              "使用无创呼吸机可能限制活动能力"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "中危",
+            "evidence": [
+              "年龄70岁（高龄）",
+              "近3天卧床为主（制动）",
+              "慢性阻塞性肺病（慢性基础病）",
+              "长期吸烟史",
+              "无手术史/创伤史",
+              "无下肢肿痛（排除急性DVT）"
+            ]
+          }
+        ],
+        "overall_priority": "尽快处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "立即调整无创呼吸机面罩位置，使用减压敷料或软垫保护鼻梁",
+            "保持皮肤清洁干燥，及时擦干汗液，避免潮湿刺激",
+            "每2小时协助翻身，减轻局部压力，教育患者勿拉扯面罩",
+            "使用约束手套前需医嘱评估并记录，优先处理烦躁原因",
+            "监测红斑变化，记录伤口大小、颜色"
+          ],
+          "fall": [
+            "床旁加装床栏并确保功能正常",
+            "安排专人陪护，防止患者自行下床",
+            "评估烦躁原因（如缺氧、电解质紊乱），处理原发病",
+            "进行环境安全检查，固定管路避免牵绊",
+            "每班复评Morse评分，监测跌倒风险变化"
+          ],
+          "vte": [
+            "指导床上踝泵运动，每2小时1次",
+            "评估抗凝指征（如D-二聚体），咨询医生制定预防方案",
+            "监测下肢症状（肿胀、疼痛、皮温变化）及呼吸困难",
+            "保证足够水分摄入，预防脱水",
+            "考虑使用梯度压力弹力袜（需医嘱）"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "每班",
+          "vte": "每日"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "压疮红斑扩大、出现水疱或破溃",
+            "notify": "伤口造口护士",
+            "urgency": "尽快"
+          },
+          {
+            "condition": "发生跌倒事件或Morse评分≥46分",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现单侧下肢肿痛、呼吸困难或D-二聚体升高",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时禁止按摩患肢、热敷或剧烈被动活动",
+          "抗凝治疗前需评估出血风险（如凝血功能）",
+          "约束使用需严格遵守医嘱和制度，避免皮肤损伤",
+          "减压措施不得影响呼吸机治疗效果"
+        ],
+        "missing_information": [],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 45.145393908023834,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2932,
+        "prompt_tokens": 914,
+        "total_tokens": 3846,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_010",
+      "input": "54岁女性，左侧全膝关节置换术后第3天，正在使用低分子肝素预防。今天康复训练后左小腿疼痛加重，较右侧周径大3cm，皮温高，足背动脉可触及。护士发现患者家属正在给小腿热敷并按摩。Morse评分55分，Braden 17分。切口无明显渗血。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "VTE",
+            "risk_level": "疑似事件",
+            "evidence": [
+              "全膝关节置换术后第3天",
+              "左小腿疼痛加重、较右侧周径大3cm、皮温高",
+              "虽已使用低分子肝素，仍不能排除DVT",
+              "家属正在热敷按摩，存在血栓脱落风险"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分55分",
+              "术后康复训练期、患膝疼痛",
+              "活动能力未完全恢复，使用镇痛/抗凝后需防跌倒出血"
+            ]
+          },
+          {
+            "risk_category": "压疮",
+            "risk_level": "低危",
+            "evidence": [
+              "Braden 17分",
+              "可参与康复训练，皮肤未见异常",
+              "但术后活动受限需继续预防"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "保持床单位平整，保护足跟和切口周围皮肤",
+            "康复后检查支具、弹力袜或冰敷用品接触处皮肤",
+            "鼓励按医嘱变换体位"
+          ],
+          "fall": [
+            "暂停未经评估的独立行走，康复训练需护士/康复师指导",
+            "使用助行器并确认环境无障碍，穿防滑鞋",
+            "抗凝期间跌倒后需重点观察出血、血肿和切口情况"
+          ],
+          "vte": [
+            "立即停止家属对患肢按摩和热敷，解释风险",
+            "让患肢休息并避免剧烈活动，记录双小腿周径、疼痛、皮温和颜色",
+            "立即通知医生评估下肢静脉超声、D-二聚体和抗凝方案",
+            "在医生明确前暂停患肢间歇充气泵或强力康复训练"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "低危每日复评，支具/弹力袜使用后检查受压皮肤",
+          "fall": "高危每班复评，康复训练前后和镇痛用药后复评",
+          "vte": "疑似DVT立即评估，之后每班或按医嘱严密记录患肢体征"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "术后患肢单侧肿胀疼痛、周径差3cm、皮温高",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现胸痛、气促、咯血、晕厥或SpO2下降",
+            "notify": "医生/抢救团队",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生跌倒或抗凝相关皮下大片瘀斑、切口渗血",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时严禁按摩、热敷和剧烈被动活动，需立即纠正家属行为",
+          "已用抗凝不代表没有血栓，不能因预防用药而忽视症状",
+          "抗凝期间避免肌肉注射和不必要穿刺，穿刺后延长压迫但不揉搓",
+          "康复活动需待医生排除DVT或给出明确活动范围后继续"
+        ],
+        "missing_information": [
+          "低分子肝素剂量和给药时间",
+          "D-二聚体和凝血功能",
+          "下肢静脉超声结果",
+          "疼痛评分和是否有胸闷气促",
+          "康复活动强度"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Braden评分17分\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"Morse评分55分\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"极高危\",\n      \"evidence\": [\"左侧全膝关节置换术后第3天\", \"左小腿疼痛加重\", \"较右侧周径大3cm\", \"皮温高\", \"家属热敷按摩\"]\n    }\n  ],\n  \"overall_priority\": \"立即处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"定时翻身（每2小时）\", \"检查皮肤完整性（尤其骨突处）\", \"保持皮肤干燥清洁\", \"使用减压垫\"],\n    \"fall\": [\"使用床栏并固定\", \"协助下床活动并评估步态\", \"教育患者及家属防跌倒措施\", \"确保环境无障碍物\"],\n    \"vte\": [\"立即停止热敷和按摩\", \"通知医生进行DVT超声检查\", \"继续低分子肝素治疗（遵医嘱）\", \"监测下肢肿胀疼痛变化及生命体征\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每日\",\n    \"fall\": \"每班\",\n    \"vte\": \"立即评估后动态观察\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"左小腿肿胀疼痛进行性加重或出现呼吸困难/胸痛\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"切口渗血或出血迹象\",\n      \"notify\": \"医生\",\n      \"urgency\": \"尽快\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时避免患肢按摩和热敷\", \"监测出血风险（如切口渗血、牙龈出血）\", \"抗凝治疗期间避免剧烈活动\"],\n  \"missing_information\": [\"当前生命体征（血压/心率）\", \"D-二聚体检查结果\", \"具体用药（如止痛药）\"],\n  \"confidence\": \"高\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分17分"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分55分"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "极高危",
+            "evidence": [
+              "左侧全膝关节置换术后第3天",
+              "左小腿疼痛加重",
+              "较右侧周径大3cm",
+              "皮温高",
+              "家属热敷按摩"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "定时翻身（每2小时）",
+            "检查皮肤完整性（尤其骨突处）",
+            "保持皮肤干燥清洁",
+            "使用减压垫"
+          ],
+          "fall": [
+            "使用床栏并固定",
+            "协助下床活动并评估步态",
+            "教育患者及家属防跌倒措施",
+            "确保环境无障碍物"
+          ],
+          "vte": [
+            "立即停止热敷和按摩",
+            "通知医生进行DVT超声检查",
+            "继续低分子肝素治疗（遵医嘱）",
+            "监测下肢肿胀疼痛变化及生命体征"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每日",
+          "fall": "每班",
+          "vte": "立即评估后动态观察"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "左小腿肿胀疼痛进行性加重或出现呼吸困难/胸痛",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "切口渗血或出血迹象",
+            "notify": "医生",
+            "urgency": "尽快"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时避免患肢按摩和热敷",
+          "监测出血风险（如切口渗血、牙龈出血）",
+          "抗凝治疗期间避免剧烈活动"
+        ],
+        "missing_information": [
+          "当前生命体征（血压/心率）",
+          "D-二聚体检查结果",
+          "具体用药（如止痛药）"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 37.921144718071446,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2206,
+        "prompt_tokens": 898,
+        "total_tokens": 3104,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_011",
+      "input": "72岁男性，糖尿病肾病透析患者，因败血症入住肾内科。T 38.8℃，P 116次/分，BP 92/56mmHg。近2天卧床，意识淡漠，大小便失禁。Braden评分11分，骶尾部已有2cm×2cm水疱，周围潮红。血小板52×10^9/L，透析通路在左前臂，右颈中心静脉导管在位。Morse评分60分。医生因血小板低暂未开药物VTE预防。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "已有损伤",
+            "evidence": [
+              "Braden评分11分",
+              "骶尾部2cm×2cm水疱伴周围潮红，提示至少2期或需进一步分期压力性损伤",
+              "败血症、低血压、意识淡漠导致低灌注和活动受限",
+              "大小便失禁造成潮湿刺激"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分60分",
+              "意识淡漠、低血压、感染发热",
+              "透析通路和中心静脉导管在位",
+              "卧床后起身可能体位性低血压"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "感染败血症、卧床、中心静脉导管在位",
+              "透析患者血管通路相关风险",
+              "血小板52×10^9/L导致药物预防受限"
+            ]
+          }
+        ],
+        "overall_priority": "立即处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "立即记录水疱大小、部位、颜色和渗液，按制度上报并请伤口造口护士评估",
+            "使用减压床垫，避免骶尾部继续受压，翻身时保护水疱不被摩擦破裂",
+            "失禁后及时清洁，使用皮肤屏障保护，保持床单位干燥",
+            "优化营养和感染控制配合医嘱，观察低血压对皮肤灌注影响"
+          ],
+          "fall": [
+            "床低位、床栏、呼叫铃可及，加强巡视",
+            "意识淡漠和低血压期间不允许自行下床，转运透析或检查需多人协助",
+            "保护左前臂透析通路和右颈中心静脉导管，避免牵拉",
+            "起坐前评估血压和意识"
+          ],
+          "vte": [
+            "在医生评估下优先考虑机械预防或床上活动，避开透析通路和导管压迫",
+            "观察中心静脉导管侧颈部/上肢肿胀疼痛及双下肢肿胀",
+            "记录血小板、出血点、瘀斑、黑便等出血风险",
+            "与医生沟通血小板恢复后是否启动药物预防"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "已有损伤每班评估，失禁污染后立即查看，伤口专科按制度复评",
+          "fall": "高危每班复评，透析转运、低血压或意识变化时复评",
+          "vte": "高危每日复评，血小板变化、导管异常或肢体肿胀时随时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "骶尾水疱破裂、面积扩大、出现坏死、异味或感染迹象",
+            "notify": "伤口造口护士/医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "血压持续下降、意识变差、发生近跌倒或管路牵拉",
+            "notify": "医生/护士长",
+            "urgency": "立即"
+          },
+          {
+            "condition": "导管侧肢体肿胀疼痛、胸闷气促，或血小板低伴出血表现",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "血小板明显降低时药物抗凝需医生严格评估，护理中避免不必要穿刺和肌注",
+          "不得在透析通路侧测血压、穿刺或加压包扎",
+          "压力性水疱避免按摩和剪切，未经专科评估不要自行挑破",
+          "低血压和意识淡漠时禁止独自下床"
+        ],
+        "missing_information": [
+          "血培养和感染控制计划",
+          "凝血功能和血红蛋白",
+          "透析时间安排和抗凝方式",
+          "中心静脉导管置入时间",
+          "营养摄入和白蛋白"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"已有损伤\",\n      \"evidence\": [\n        \"Braden评分11分（<12分提示高危）\",\n        \"骶尾部2cm×2cm水疱，周围潮红（已形成2期压力性损伤）\",\n        \"近2天卧床（活动受限）\",\n        \"意识淡漠（感觉障碍）\",\n        \"大小便失禁（皮肤潮湿）\",\n        \"发热（38.8℃，增加组织代谢需求）\",\n        \"低血压（92/56mmHg，可能低灌注）\",\n        \"糖尿病肾病（营养不良风险）\"\n      ]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\n        \"Morse评分60分（≥45分提示高危）\",\n        \"卧床2天后尝试活动风险高\",\n        \"意识淡漠（意识改变）\",\n        \"低血压（体位性低血压风险）\",\n        \"大小便失禁（急迫如厕）\",\n        \"中心静脉导管和透析通路（管路牵绊）\",\n        \"心动过速（116次/分，提示虚弱）\"\n      ]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\n        \"卧床2天（制动）\",\n        \"败血症（感染）\",\n        \"中心静脉导管在位\",\n        \"年龄72岁（>60岁）\",\n        \"血小板52×10^9/L（出血风险，限制药物预防）\",\n        \"医生因血小板低暂未开药物VTE预防\"\n      ]\n    }\n  ],\n  \"overall_priority\": \"本班重点\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\n      \"定时翻身（每2小时），避免骶尾部持续受压\",\n      \"使用气垫床或减压垫\",\n      \"保持皮肤清洁干燥，失禁后及时清洁并涂抹皮肤保护剂\",\n      \"水疱处理：无菌敷料覆盖，勿刺破或热敷\",\n      \"监测伤口大小、渗液、感染迹象（红肿热痛）\",\n      \"加强营养支持（高蛋白饮食，监测白蛋白）\",\n      \"控制血糖和血压（避免高血糖和低灌注）\"\n    ],\n    \"fall\": [\n      \"床旁加床栏并固定，使用呼叫铃教育\",\n      \"协助如厕，避免独自下床（尤其意识淡漠时）\",\n      \"起床时动作缓慢，监测体位性低血压\",\n      \"确保环境无障碍物，移除多余管路\",\n      \"评估活动能力（意识改善后进行步态训练）\",\n      \"陪护在场，宣教安全措施\",\n      \"监测大小便频率，减少急迫\"\n    ],\n    \"vte\": [\n      \"指导床上踝泵运动（每小时10-15分钟）\",\n      \"使用梯度压力弹力袜（确认无禁忌后）\",\n      \"监测下肢症状（单侧肿胀、疼痛、发红）\",\n      \"保持充足水分摄入（避免脱水）\",\n      \"遵医嘱复查血小板和凝血功能\",\n      \"避免下肢静脉穿刺或压迫\"\n    ]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"每班\",\n    \"vte\": \"每天\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"骶尾部水疱扩大、渗液增多或出现脓性分泌物\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"尽快\"\n    },\n    {\n      \"condition\": \"发生跌倒或坠床事件\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"出现单侧下肢明显肿胀、疼痛、呼吸困难或胸痛\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    }\n  ],\n  \"contraindications_precautions\": [\n    \"血小板低（52×10^9/L），避免自行使用抗凝药物，需医生评估出血风险\",\n    \"疑似DVT时勿按摩患肢或热敷\",\n    \"压疮水疱处理避免热敷\",\n    \"意识淡漠患者使用约束需医嘱并遵守制度（每2小时松解）\",\n    \"中心静脉导管护理避免牵拉影响通路\"\n  ],\n  \"missing_information\": [\n    \"近期营养指标（如白蛋白、前白蛋白）\",\n    \"D-二聚体或下肢静脉超声结果\",\n    \"具体活动能力（如能否坐起、站立）\"\n  ],\n  \"confidence\": \"中\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "已有损伤",
+            "evidence": [
+              "Braden评分11分（<12分提示高危）",
+              "骶尾部2cm×2cm水疱，周围潮红（已形成2期压力性损伤）",
+              "近2天卧床（活动受限）",
+              "意识淡漠（感觉障碍）",
+              "大小便失禁（皮肤潮湿）",
+              "发热（38.8℃，增加组织代谢需求）",
+              "低血压（92/56mmHg，可能低灌注）",
+              "糖尿病肾病（营养不良风险）"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分60分（≥45分提示高危）",
+              "卧床2天后尝试活动风险高",
+              "意识淡漠（意识改变）",
+              "低血压（体位性低血压风险）",
+              "大小便失禁（急迫如厕）",
+              "中心静脉导管和透析通路（管路牵绊）",
+              "心动过速（116次/分，提示虚弱）"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "中危",
+            "evidence": [
+              "卧床2天（制动）",
+              "败血症（感染）",
+              "中心静脉导管在位",
+              "年龄72岁（>60岁）",
+              "血小板52×10^9/L（出血风险，限制药物预防）",
+              "医生因血小板低暂未开药物VTE预防"
+            ]
+          }
+        ],
+        "overall_priority": "本班重点",
+        "nursing_measures": {
+          "pressure_injury": [
+            "定时翻身（每2小时），避免骶尾部持续受压",
+            "使用气垫床或减压垫",
+            "保持皮肤清洁干燥，失禁后及时清洁并涂抹皮肤保护剂",
+            "水疱处理：无菌敷料覆盖，勿刺破或热敷",
+            "监测伤口大小、渗液、感染迹象（红肿热痛）",
+            "加强营养支持（高蛋白饮食，监测白蛋白）",
+            "控制血糖和血压（避免高血糖和低灌注）"
+          ],
+          "fall": [
+            "床旁加床栏并固定，使用呼叫铃教育",
+            "协助如厕，避免独自下床（尤其意识淡漠时）",
+            "起床时动作缓慢，监测体位性低血压",
+            "确保环境无障碍物，移除多余管路",
+            "评估活动能力（意识改善后进行步态训练）",
+            "陪护在场，宣教安全措施",
+            "监测大小便频率，减少急迫"
+          ],
+          "vte": [
+            "指导床上踝泵运动（每小时10-15分钟）",
+            "使用梯度压力弹力袜（确认无禁忌后）",
+            "监测下肢症状（单侧肿胀、疼痛、发红）",
+            "保持充足水分摄入（避免脱水）",
+            "遵医嘱复查血小板和凝血功能",
+            "避免下肢静脉穿刺或压迫"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "每班",
+          "vte": "每天"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "骶尾部水疱扩大、渗液增多或出现脓性分泌物",
+            "notify": "伤口造口护士",
+            "urgency": "尽快"
+          },
+          {
+            "condition": "发生跌倒或坠床事件",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现单侧下肢明显肿胀、疼痛、呼吸困难或胸痛",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "血小板低（52×10^9/L），避免自行使用抗凝药物，需医生评估出血风险",
+          "疑似DVT时勿按摩患肢或热敷",
+          "压疮水疱处理避免热敷",
+          "意识淡漠患者使用约束需医嘱并遵守制度（每2小时松解）",
+          "中心静脉导管护理避免牵拉影响通路"
+        ],
+        "missing_information": [
+          "近期营养指标（如白蛋白、前白蛋白）",
+          "D-二聚体或下肢静脉超声结果",
+          "具体活动能力（如能否坐起、站立）"
+        ],
+        "confidence": "中"
+      },
+      "request_duration_seconds": 45.436787178972736,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3634,
+        "prompt_tokens": 952,
+        "total_tokens": 4586,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "pressure_fall_vte_012",
+      "input": "66岁女性，腰椎管狭窄术后第1天。医生要求卧床平卧24小时，尿管在位，切口负压引流。患者疼痛4分，双下肢麻木较术前减轻。Braden评分16分，Morse评分45分。因担心术后硬膜外血肿，医嘱暂不使用药物抗凝，使用弹力袜。护士发现弹力袜上缘卷边压迫小腿，局部出现条索状红印。",
+      "expected_output": {
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "中危",
+            "evidence": [
+              "Braden评分16分",
+              "术后平卧24小时活动受限",
+              "弹力袜上缘卷边压迫小腿并出现条索状红印，存在器械/用品相关压力损伤风险",
+              "尿管和负压引流管路在位"
+            ]
+          },
+          {
+            "risk_category": "跌倒/坠床",
+            "risk_level": "高危",
+            "evidence": [
+              "Morse评分45分",
+              "腰椎术后、双下肢麻木、尿管和引流管在位",
+              "术后首次下床尚未评估"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "脊柱术后卧床平卧24小时",
+              "药物抗凝因硬膜外血肿风险暂缓",
+              "使用弹力袜说明需机械预防",
+              "下肢麻木可能影响症状表达"
+            ]
+          }
+        ],
+        "overall_priority": "本班重点",
+        "nursing_measures": {
+          "pressure_injury": [
+            "立即整理或更换合适尺码弹力袜，消除卷边压迫，复查红印是否消退",
+            "平卧期间定时小幅度减压，保护骶尾、足跟和管路压迫处",
+            "保持床单平整，避免负压引流管和尿管压在身下",
+            "每班检查弹力袜覆盖皮肤、足趾颜色温度和足背动脉"
+          ],
+          "fall": [
+            "严格执行卧床医嘱，首次下床需医生允许并由护士协助",
+            "床栏、床低位、呼叫铃可及，解释不得自行起身",
+            "下床前评估下肢感觉、肌力、头晕和管路固定",
+            "转运时保护腰部、尿管和负压引流"
+          ],
+          "vte": [
+            "继续机械预防但保证弹力袜尺码合适、无卷边、无局部勒压",
+            "鼓励医嘱允许范围内踝泵和足趾活动",
+            "观察小腿肿胀疼痛、皮温、颜色和周径变化",
+            "关注医生解除抗凝禁忌后的药物预防计划"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "中危每日复评；弹力袜压痕处理后30-60分钟复查，之后每班查看",
+          "fall": "高危每班复评，首次下床前必须复评",
+          "vte": "高危每日复评，卧床结束、抗凝禁忌变化或下肢症状出现时复评"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "弹力袜压痕不消退、出现水疱破溃、足趾发凉发紫或足背动脉减弱",
+            "notify": "医生/护士长/伤口造口护士",
+            "urgency": "尽快"
+          },
+          {
+            "condition": "出现新发下肢无力麻木加重、剧烈腰背痛或切口引流血性增多",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "单侧下肢肿胀疼痛、胸闷气促或疑似DVT/PE表现",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "弹力袜不能卷边或过紧，避免形成止血带效应和压力损伤",
+          "脊柱术后活动必须遵守医嘱，避免擅自翻身扭腰或下床",
+          "硬膜外血肿风险期药物抗凝需医生决定，注意神经功能变化",
+          "疑似DVT时不要按摩患肢或继续强力机械压迫"
+        ],
+        "missing_information": [
+          "具体手术方式和翻身限制",
+          "下肢肌力和感觉基线",
+          "凝血功能和血红蛋白",
+          "弹力袜尺码与穿戴时长",
+          "既往VTE史"
+        ],
+        "confidence": "高"
+      },
+      "model_output_text": "{\n  \"scenario\": \"压疮/跌倒/VTE风险提醒\",\n  \"risk_assessment\": [\n    {\n      \"risk_category\": \"压疮\",\n      \"risk_level\": \"已有损伤\",\n      \"evidence\": [\"Braden评分16分（中危）\", \"术后卧床平卧24小时活动受限\", \"尿管在位导致局部潮湿\", \"弹力袜卷边压迫小腿出现条索状红印（1期压疮迹象）\"]\n    },\n    {\n      \"risk_category\": \"跌倒\",\n      \"risk_level\": \"中危\",\n      \"evidence\": [\"Morse评分45分（中危）\", \"术后第1天卧床\", \"尿管及切口负压引流管路增加牵绊风险\", \"疼痛4分可能影响活动安全\"]\n    },\n    {\n      \"risk_category\": \"VTE\",\n      \"risk_level\": \"高危\",\n      \"evidence\": [\"腰椎术后制动卧床24小时\", \"年龄66岁女性\", \"弹力袜卷边影响静脉回流预防效果\", \"医嘱暂不使用药物抗凝\"]\n    }\n  ],\n  \"overall_priority\": \"尽快处理\",\n  \"nursing_measures\": {\n    \"pressure_injury\": [\"立即重新调整弹力袜，确保无卷边压迫\", \"每2小时检查受压部位皮肤并记录\", \"保持皮肤清洁干燥，及时处理尿管周围潮湿\", \"使用减压床垫或软枕分散压力\", \"避免局部热敷或按摩红印处\"],\n    \"fall\": [\"床旁设置跌倒警示标识\", \"指导患者卧床期间勿擅自下床，下床前评估疼痛及活动能力\", \"固定尿管和引流管，避免牵绊\", \"疼痛控制后计划术后24小时逐步下床活动\", \"评估环境安全（如床栏、呼叫器）\"],\n    \"vte\": [\"正确穿戴弹力袜并每班检查有无卷边\", \"指导并协助进行踝泵运动（每小时10-15分钟）\", \"监测双下肢周径、颜色、温度及主诉（肿胀/疼痛）\", \"确保每日液体摄入量≥2000ml预防脱水\", \"与医生沟通术后24小时抗凝方案\"]\n  },\n  \"review_frequency\": {\n    \"pressure_injury\": \"每班\",\n    \"fall\": \"每日\",\n    \"vte\": \"每班\"\n  },\n  \"escalation_notification_conditions\": [\n    {\n      \"condition\": \"局部红印进展为水疱或破溃\",\n      \"notify\": \"伤口造口护士\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"出现单侧下肢肿胀、疼痛、发红或D-二聚体升高\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    },\n    {\n      \"condition\": \"发生跌倒事件\",\n      \"notify\": \"医生\",\n      \"urgency\": \"立即\"\n    }\n  ],\n  \"contraindications_precautions\": [\"疑似DVT时禁止按摩患肢及热敷\", \"出血高危（如手术切口渗血）需医嘱评估抗凝\", \"意识清醒患者避免非必要约束\", \"弹力袜减压需确保不影响下肢血液循环及伤口引流\"],\n  \"missing_information\": [\"营养状况（如白蛋白、体重指数）\", \"活动能力细节（如床上肢体活动度）\", \"既往VTE或出血史\", \"药物史（如抗凝药使用）\"],\n  \"confidence\": \"中\"\n}",
+      "model_output_json": {
+        "scenario": "压疮/跌倒/VTE风险提醒",
+        "risk_assessment": [
+          {
+            "risk_category": "压疮",
+            "risk_level": "已有损伤",
+            "evidence": [
+              "Braden评分16分（中危）",
+              "术后卧床平卧24小时活动受限",
+              "尿管在位导致局部潮湿",
+              "弹力袜卷边压迫小腿出现条索状红印（1期压疮迹象）"
+            ]
+          },
+          {
+            "risk_category": "跌倒",
+            "risk_level": "中危",
+            "evidence": [
+              "Morse评分45分（中危）",
+              "术后第1天卧床",
+              "尿管及切口负压引流管路增加牵绊风险",
+              "疼痛4分可能影响活动安全"
+            ]
+          },
+          {
+            "risk_category": "VTE",
+            "risk_level": "高危",
+            "evidence": [
+              "腰椎术后制动卧床24小时",
+              "年龄66岁女性",
+              "弹力袜卷边影响静脉回流预防效果",
+              "医嘱暂不使用药物抗凝"
+            ]
+          }
+        ],
+        "overall_priority": "尽快处理",
+        "nursing_measures": {
+          "pressure_injury": [
+            "立即重新调整弹力袜，确保无卷边压迫",
+            "每2小时检查受压部位皮肤并记录",
+            "保持皮肤清洁干燥，及时处理尿管周围潮湿",
+            "使用减压床垫或软枕分散压力",
+            "避免局部热敷或按摩红印处"
+          ],
+          "fall": [
+            "床旁设置跌倒警示标识",
+            "指导患者卧床期间勿擅自下床，下床前评估疼痛及活动能力",
+            "固定尿管和引流管，避免牵绊",
+            "疼痛控制后计划术后24小时逐步下床活动",
+            "评估环境安全（如床栏、呼叫器）"
+          ],
+          "vte": [
+            "正确穿戴弹力袜并每班检查有无卷边",
+            "指导并协助进行踝泵运动（每小时10-15分钟）",
+            "监测双下肢周径、颜色、温度及主诉（肿胀/疼痛）",
+            "确保每日液体摄入量≥2000ml预防脱水",
+            "与医生沟通术后24小时抗凝方案"
+          ]
+        },
+        "review_frequency": {
+          "pressure_injury": "每班",
+          "fall": "每日",
+          "vte": "每班"
+        },
+        "escalation_notification_conditions": [
+          {
+            "condition": "局部红印进展为水疱或破溃",
+            "notify": "伤口造口护士",
+            "urgency": "立即"
+          },
+          {
+            "condition": "出现单侧下肢肿胀、疼痛、发红或D-二聚体升高",
+            "notify": "医生",
+            "urgency": "立即"
+          },
+          {
+            "condition": "发生跌倒事件",
+            "notify": "医生",
+            "urgency": "立即"
+          }
+        ],
+        "contraindications_precautions": [
+          "疑似DVT时禁止按摩患肢及热敷",
+          "出血高危（如手术切口渗血）需医嘱评估抗凝",
+          "意识清醒患者避免非必要约束",
+          "弹力袜减压需确保不影响下肢血液循环及伤口引流"
+        ],
+        "missing_information": [
+          "营养状况（如白蛋白、体重指数）",
+          "活动能力细节（如床上肢体活动度）",
+          "既往VTE或出血史",
+          "药物史（如抗凝药使用）"
+        ],
+        "confidence": "中"
+      },
+      "request_duration_seconds": 25.751097118016332,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3158,
+        "prompt_tokens": 921,
+        "total_tokens": 4079,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    }
+  ]
+}

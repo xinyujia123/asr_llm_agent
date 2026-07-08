@@ -1,0 +1,1857 @@
+{
+  "summary": {
+    "scenario_dir": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/02_admission_assessment",
+    "dataset": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/02_admission_assessment/dataset.jsonl",
+    "prompt": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/02_admission_assessment/prompt.md",
+    "provider": "baichuan",
+    "model_name": "Baichuan-M3-Plus",
+    "base_url": "https://api.baichuan-ai.com/v1/",
+    "output_prefix": "baichuan-m3-plus",
+    "request_count": 12,
+    "error_count": 0,
+    "parsed_json_count": 11,
+    "avg_request_duration_seconds": 40.88416906638304,
+    "total_request_duration_seconds": 490.61002879659645,
+    "usage_total": {
+      "completion_tokens": 18718,
+      "prompt_tokens": 339007,
+      "total_tokens": 357725,
+      "search_count": 12
+    },
+    "concurrency": 10,
+    "max_tokens": 4096,
+    "baichuan_with_search_enhance": "false"
+  },
+  "records": [
+    {
+      "id": "admission_assessment_001",
+      "input": "78岁女性，因社区获得性肺炎由急诊收入呼吸内科。主诉发热、咳嗽3天，今天气促加重。急诊记录：T 38.7℃，P 112次/分，R 26次/分，BP 96/58mmHg，SpO2 89%（空气），吸氧2L/min后93%。患者嗜睡但可唤醒，回答缓慢。既往COPD、高血压。自述青霉素过敏，曾出现全身皮疹。入院时未带助行器，家属说最近两天进食少、尿量少。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "急诊",
+          "chief_complaint": "发热咳嗽3天，气促加重",
+          "vital_signs": {
+            "temperature_c": 38.7,
+            "pulse_per_min": 112,
+            "respiration_per_min": 26,
+            "blood_pressure_mmHg": "96/58",
+            "spo2": "89%空气；吸氧2L/min后93%"
+          },
+          "consciousness": "嗜睡，可唤醒，回答缓慢",
+          "breathing": "气促，低氧血症，既往COPD",
+          "circulation": "低血压伴心动过速，存在灌注不足风险",
+          "allergy_history": [
+            "青霉素过敏，表现为全身皮疹"
+          ],
+          "past_history": [
+            "COPD",
+            "高血压"
+          ],
+          "nutrition_hydration": "近2天进食少、尿量少，疑脱水",
+          "mobility": "未带助行器，老年患者活动能力需进一步评估",
+          "skin_pressure_injury": "未提供，需入院后检查皮肤受压部位",
+          "missing_information": [
+            "疼痛评分",
+            "用药史",
+            "近24小时出入量",
+            "跌倒史",
+            "皮肤完整性",
+            "痰培养/血常规等医嘱结果"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "respiratory_risk": "低氧血症和COPD基础病，呼吸衰竭风险高",
+          "sepsis_risk": "发热、心动过速、呼吸急促、低血压，需警惕脓毒症",
+          "fall_risk": "高龄、嗜睡、低氧、可能虚弱，跌倒高风险",
+          "pressure_injury_risk": "高龄、营养摄入差、活动受限风险，需正式评分",
+          "medication_safety": "青霉素过敏，抗感染医嘱需核对禁忌"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "主管医生/值班医生",
+            "reason": "SpO2空气下89%、吸氧后仅93%，伴R 26次/分和嗜睡，需评估氧疗升级、血气分析及病情分级"
+          },
+          {
+            "urgency": "立即",
+            "target": "主管医生/快速反应流程按院内制度",
+            "reason": "BP 96/58mmHg、P 112次/分、发热，符合感染相关循环不稳定风险"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士",
+            "reason": "落实跌倒预防、床旁呼叫铃、床栏、陪护宣教，核对青霉素过敏标识"
+          }
+        ],
+        "nursing_priorities": [
+          "持续监测SpO2、呼吸频率、意识和血压，记录氧疗方式",
+          "按医嘱采集血培养/痰标本、建立静脉通路并关注补液反应",
+          "落实过敏标识，给药前双人核对抗菌药物",
+          "完成Braden、Morse、疼痛、营养和ADL评估",
+          "观察尿量，必要时协助记录出入量"
+        ]
+      },
+      "model_output_text": "```json\n{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": \"急诊\",\n    \"chief_complaint\": \"发热、咳嗽3天，气促加重1天\",\n    \"vital_signs\": {\n      \"temperature_c\": 38.7,\n      \"pulse_per_min\": 112,\n      \"respiration_per_min\": 26,\n      \"blood_pressure_mmHg\": \"96/58\",\n      \"spo2\": 89\n    },\n    \"consciousness_cognition\": \"嗜睡但可唤醒，回答缓慢\",\n    \"breathing_circulation\": \"呼吸急促，吸氧后SpO2改善；低血压，心率增快，提示循环不稳定\",\n    \"pain_score\": null,\n    \"allergy_history\": [\n      \"青霉素过敏（全身皮疹）\"\n    ],\n    \"past_history\": [\n      \"COPD\",\n      \"高血压\"\n    ],\n    \"medication_history\": [],\n    \"nutrition_hydration\": \"进食少、尿量少，提示可能存在脱水\",\n    \"elimination\": \"尿量少\",\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": \"未带助行器，活动能力可能受限\",\n    \"tubes_devices_wounds\": null,\n    \"infection_screening\": \"社区获得性肺炎，发热、白细胞可能升高（未提供）\",\n    \"mental_health_safety\": \"嗜睡，认知反应迟缓，需警惕谵妄\"\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"高危\",\n    \"fall_risk\": \"高风险（高龄、嗜睡、活动能力未知）\",\n    \"pressure_injury_risk\": \"中风险（高龄、活动减少、营养摄入不足）\",\n    \"vte_risk\": \"中高风险（高龄、活动减少、急性感染）\",\n    \"aspiration_risk\": \"中风险（嗜睡、进食减少）\",\n    \"bleeding_risk\": null,\n    \"infection_or_sepsis_risk\": \"高风险（发热、心动过速、低血压、嗜睡，符合脓毒症可能）\",\n    \"medication_safety_risk\": \"青霉素过敏，需避免β-内酰胺类药物；注意抗生素选择\",\n    \"other_key_risks\": [\n      \"容量不足/脱水\",\n      \"急性呼吸衰竭进展\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"生命体征提示脓毒症可能：体温>38°C，心率>90次/分，呼吸>20次/分，低血压（SBP<100 mmHg），意识改变（嗜睡）。符合**严重CAP的minor criteria**，如**动脉血压<90 mmHg需液体复苏**等 ^[3]^。需评估是否符合ICU指征\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"专科护士\",\n      \"reason\": \"青霉素过敏史（皮疹），需评估过敏类型。根据指南，**速发型青霉素过敏者应避免所有青霉素** ^[6]^；若非严重且5年前发生，可在受控情况下使用其他青霉素类药物 ^[6]^。当前治疗需避开青霉素类，考虑替代方案如头孢菌素（注意侧链差异）或单环β-内酰胺类 ^[6]^\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"持续监测生命体征，尤其血压、SpO2及意识状态\",\n    \"建立静脉通路，准备液体复苏\",\n    \"确保氧疗有效，维持SpO2 ≥94%\",\n    \"评估容量状态，记录出入量\",\n    \"预防跌倒：床栏使用、协助活动\"\n  ],\n  \"patient_safety_actions\": [\n    \"过敏标识腕带标注青霉素过敏\",\n    \"避免使用青霉素类药物，处方核对双人核查\",\n    \"评估误吸风险，必要时调整饮食\",\n    \"启动VTE预防评估，考虑机械或药物预防\"\n  ],\n  \"confidence\": \"高\"\n}\n```\n\n我建议您进一步查阅社区获得性肺炎合并脓毒症高危患者的早期识别标准及抗感染治疗的药物选择与过敏替代方案的临床指南。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": "急诊",
+          "chief_complaint": "发热、咳嗽3天，气促加重1天",
+          "vital_signs": {
+            "temperature_c": 38.7,
+            "pulse_per_min": 112,
+            "respiration_per_min": 26,
+            "blood_pressure_mmHg": "96/58",
+            "spo2": 89
+          },
+          "consciousness_cognition": "嗜睡但可唤醒，回答缓慢",
+          "breathing_circulation": "呼吸急促，吸氧后SpO2改善；低血压，心率增快，提示循环不稳定",
+          "pain_score": null,
+          "allergy_history": [
+            "青霉素过敏（全身皮疹）"
+          ],
+          "past_history": [
+            "COPD",
+            "高血压"
+          ],
+          "medication_history": [],
+          "nutrition_hydration": "进食少、尿量少，提示可能存在脱水",
+          "elimination": "尿量少",
+          "skin_pressure_injury": null,
+          "mobility_adl": "未带助行器，活动能力可能受限",
+          "tubes_devices_wounds": null,
+          "infection_screening": "社区获得性肺炎，发热、白细胞可能升高（未提供）",
+          "mental_health_safety": "嗜睡，认知反应迟缓，需警惕谵妄"
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "fall_risk": "高风险（高龄、嗜睡、活动能力未知）",
+          "pressure_injury_risk": "中风险（高龄、活动减少、营养摄入不足）",
+          "vte_risk": "中高风险（高龄、活动减少、急性感染）",
+          "aspiration_risk": "中风险（嗜睡、进食减少）",
+          "bleeding_risk": null,
+          "infection_or_sepsis_risk": "高风险（发热、心动过速、低血压、嗜睡，符合脓毒症可能）",
+          "medication_safety_risk": "青霉素过敏，需避免β-内酰胺类药物；注意抗生素选择",
+          "other_key_risks": [
+            "容量不足/脱水",
+            "急性呼吸衰竭进展"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "生命体征提示脓毒症可能：体温>38°C，心率>90次/分，呼吸>20次/分，低血压（SBP<100 mmHg），意识改变（嗜睡）。符合**严重CAP的minor criteria**，如**动脉血压<90 mmHg需液体复苏**等 ^[3]^。需评估是否符合ICU指征"
+          },
+          {
+            "urgency": "尽快",
+            "target": "专科护士",
+            "reason": "青霉素过敏史（皮疹），需评估过敏类型。根据指南，**速发型青霉素过敏者应避免所有青霉素** ^[6]^；若非严重且5年前发生，可在受控情况下使用其他青霉素类药物 ^[6]^。当前治疗需避开青霉素类，考虑替代方案如头孢菌素（注意侧链差异）或单环β-内酰胺类 ^[6]^"
+          }
+        ],
+        "nursing_priorities": [
+          "持续监测生命体征，尤其血压、SpO2及意识状态",
+          "建立静脉通路，准备液体复苏",
+          "确保氧疗有效，维持SpO2 ≥94%",
+          "评估容量状态，记录出入量",
+          "预防跌倒：床栏使用、协助活动"
+        ],
+        "patient_safety_actions": [
+          "过敏标识腕带标注青霉素过敏",
+          "避免使用青霉素类药物，处方核对双人核查",
+          "评估误吸风险，必要时调整饮食",
+          "启动VTE预防评估，考虑机械或药物预防"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 37.0898095741868,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1578,
+        "prompt_tokens": 17979,
+        "total_tokens": 19557,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_002",
+      "input": "35岁初产妇，剖宫产术后6小时由产房转入产科病区。自诉头晕、乏力，下腹痛6分。T 37.2℃，P 118次/分，R 20次/分，BP 88/52mmHg。护士查看产垫：30分钟内浸湿一大片，有血块约鸡蛋大小。宫底脐上1横指，质软，按压后有较多暗红色血液流出。尿管在位，近2小时尿量40ml。无已知药物过敏。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "产房术后转入",
+          "chief_complaint": "剖宫产术后6小时头晕乏力、下腹痛",
+          "vital_signs": {
+            "temperature_c": 37.2,
+            "pulse_per_min": 118,
+            "respiration_per_min": 20,
+            "blood_pressure_mmHg": "88/52"
+          },
+          "pain_score": 6,
+          "postoperative_status": "剖宫产术后6小时",
+          "uterine_assessment": "宫底脐上1横指，质软，按压后较多暗红色血液流出",
+          "bleeding": "30分钟内产垫浸湿一大片，有鸡蛋大小血块",
+          "urine_output": "尿管在位，近2小时尿量40ml",
+          "allergy_history": [],
+          "missing_information": [
+            "累计出血量",
+            "血红蛋白/凝血功能",
+            "输液通路和液体量",
+            "子宫收缩药使用情况",
+            "切口敷料情况"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "极高危",
+          "postpartum_hemorrhage_risk": "高度疑似产后出血，表现为低血压、心动过速、宫缩乏力、大量阴道流血和血块",
+          "shock_risk": "存在失血性休克风险，尿量减少提示灌注不足",
+          "fall_risk": "头晕、低血压、术后，跌倒高风险",
+          "pain_risk": "中重度疼痛，需在止血抢救同时评估镇痛安全"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "产科医生/麻醉医生/抢救团队按院内流程",
+            "reason": "疑似产后出血伴休克征象，需要立即处理宫缩乏力、评估输血和抢救措施"
+          },
+          {
+            "urgency": "立即",
+            "target": "责任护士/护士长",
+            "reason": "建立或确认双通路、备血抽血、严密计量出血量和尿量"
+          },
+          {
+            "urgency": "立即",
+            "target": "新生儿照护交接人员",
+            "reason": "母亲抢救期间需确保新生儿安全交接"
+          }
+        ],
+        "nursing_priorities": [
+          "立即平卧、保暖、吸氧，持续监测生命体征和意识",
+          "按摩子宫并按医嘱使用宫缩剂，保留血垫估算出血量",
+          "确认静脉通路通畅，配合抽血、备血、补液或输血",
+          "严密记录尿量，关注每小时尿量是否低于30ml",
+          "术后未稳定前禁止自行下床，落实跌倒预防"
+        ]
+      },
+      "model_output_text": "{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": \"产房\",\n    \"chief_complaint\": \"头晕、乏力，下腹痛6分\",\n    \"vital_signs\": {\n      \"temperature_c\": 37.2,\n      \"pulse_per_min\": 118,\n      \"respiration_per_min\": 20,\n      \"blood_pressure_mmHg\": \"88/52\",\n      \"spo2\": null\n    },\n    \"consciousness_cognition\": null,\n    \"breathing_circulation\": \"心动过速，低血压，提示循环不稳定\",\n    \"pain_score\": 6,\n    \"allergy_history\": [],\n    \"past_history\": [],\n    \"medication_history\": [],\n    \"nutrition_hydration\": null,\n    \"elimination\": \"近2小时尿量40ml，提示少尿\",\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": \"尿管在位，剖宫产术后伤口\",\n    \"infection_screening\": null,\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"血氧饱和度\",\n      \"意识状态\",\n      \"出血量具体评估方法\",\n      \"实验室检查结果（如血红蛋白）\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"高危\",\n    \"fall_risk\": \"高风险（因头晕、低血压）\",\n    \"pressure_injury_risk\": null,\n    \"vte_risk\": null,\n    \"aspiration_risk\": null,\n    \"bleeding_risk\": \"极高风险（活动性出血、宫缩乏力表现）\",\n    \"infection_or_sepsis_risk\": \"中风险（术后6小时，目前无发热）\",\n    \"medication_safety_risk\": null,\n    \"other_key_risks\": [\n      \"休克风险\",\n      \"急性肾损伤风险（少尿）\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"心动过速（118次/分）、低血压（88/52mmHg）、少尿（2小时仅40ml）、宫底高且质软、按压后大量暗红血流出，符合产后出血及休克早期表现。**休克指数为118/88≈1.34**，**>0.9提示可能需要大量输血** ^[4]^。且**患者已处于休克早期**，表现为**烦躁、皮肤湿冷、脉搏细数、脉压缩小** ^[2]^。\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"立即建立第二条静脉通路，快速补液\",\n    \"持续监测生命体征，每5-15分钟评估一次\",\n    \"评估累计出血量，使用称重法或容积法客观测量\",\n    \"按摩子宫以促进宫缩\",\n    \"准备宫缩剂（如缩宫素）及抢救药物\"\n  ],\n  \"patient_safety_actions\": [\n    \"保持平卧位，**去枕平卧，保暖、吸氧** ^[2]^\",\n    \"避免下床活动，防跌倒\",\n    \"准确记录出入量\",\n    \"密切观察阴道流血情况及血块大小\"\n  ],\n  \"confidence\": \"高\"\n}\n\n我建议您进一步查阅产后出血早期识别与处理的临床指南中关于子宫按摩、宫缩剂使用时机及输血阈值的推荐，您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": "产房",
+          "chief_complaint": "头晕、乏力，下腹痛6分",
+          "vital_signs": {
+            "temperature_c": 37.2,
+            "pulse_per_min": 118,
+            "respiration_per_min": 20,
+            "blood_pressure_mmHg": "88/52",
+            "spo2": null
+          },
+          "consciousness_cognition": null,
+          "breathing_circulation": "心动过速，低血压，提示循环不稳定",
+          "pain_score": 6,
+          "allergy_history": [],
+          "past_history": [],
+          "medication_history": [],
+          "nutrition_hydration": null,
+          "elimination": "近2小时尿量40ml，提示少尿",
+          "skin_pressure_injury": null,
+          "mobility_adl": null,
+          "tubes_devices_wounds": "尿管在位，剖宫产术后伤口",
+          "infection_screening": null,
+          "mental_health_safety": null,
+          "missing_information": [
+            "血氧饱和度",
+            "意识状态",
+            "出血量具体评估方法",
+            "实验室检查结果（如血红蛋白）"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "fall_risk": "高风险（因头晕、低血压）",
+          "pressure_injury_risk": null,
+          "vte_risk": null,
+          "aspiration_risk": null,
+          "bleeding_risk": "极高风险（活动性出血、宫缩乏力表现）",
+          "infection_or_sepsis_risk": "中风险（术后6小时，目前无发热）",
+          "medication_safety_risk": null,
+          "other_key_risks": [
+            "休克风险",
+            "急性肾损伤风险（少尿）"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "心动过速（118次/分）、低血压（88/52mmHg）、少尿（2小时仅40ml）、宫底高且质软、按压后大量暗红血流出，符合产后出血及休克早期表现。**休克指数为118/88≈1.34**，**>0.9提示可能需要大量输血** ^[4]^。且**患者已处于休克早期**，表现为**烦躁、皮肤湿冷、脉搏细数、脉压缩小** ^[2]^。"
+          }
+        ],
+        "nursing_priorities": [
+          "立即建立第二条静脉通路，快速补液",
+          "持续监测生命体征，每5-15分钟评估一次",
+          "评估累计出血量，使用称重法或容积法客观测量",
+          "按摩子宫以促进宫缩",
+          "准备宫缩剂（如缩宫素）及抢救药物"
+        ],
+        "patient_safety_actions": [
+          "保持平卧位，**去枕平卧，保暖、吸氧** ^[2]^",
+          "避免下床活动，防跌倒",
+          "准确记录出入量",
+          "密切观察阴道流血情况及血块大小"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 22.843672826187685,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1403,
+        "prompt_tokens": 25696,
+        "total_tokens": 27099,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_003",
+      "input": "64岁男性，因右侧肢体无力2小时拟诊脑梗死收入神经内科。T 36.5℃，P 86次/分，R 18次/分，BP 182/104mmHg，SpO2 96%。患者意识清楚但言语含糊，右上肢肌力2级、右下肢3级，口角左歪，饮水试验呛咳。既往房颤，长期服用华法林但近1周未规律服药。家属称患者入院前曾跌坐在地，无明显外伤。无药物过敏史。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "急诊/卒中通道收入",
+          "chief_complaint": "右侧肢体无力2小时",
+          "vital_signs": {
+            "temperature_c": 36.5,
+            "pulse_per_min": 86,
+            "respiration_per_min": 18,
+            "blood_pressure_mmHg": "182/104",
+            "spo2": "96%"
+          },
+          "neurological_status": "意识清楚，言语含糊，右上肢肌力2级、右下肢3级，口角歪斜",
+          "swallowing": "饮水试验呛咳，吞咽障碍风险",
+          "past_history": [
+            "房颤"
+          ],
+          "medication_history": [
+            "华法林长期服用，近1周不规律"
+          ],
+          "allergy_history": [],
+          "pre_admission_fall": "入院前跌坐在地，无明显外伤",
+          "missing_information": [
+            "发病准确时间/最后正常时间",
+            "NIHSS评分",
+            "头颅影像结果",
+            "INR和凝血功能",
+            "血糖",
+            "皮肤外伤检查"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "stroke_risk": "急性卒中疑似，发病2小时，需保持卒中绿色通道时效",
+          "aspiration_risk": "饮水呛咳，误吸高风险，未评估前禁食禁饮",
+          "fall_risk": "偏瘫、既往跌坐、言语障碍，跌倒/坠床高风险",
+          "bleeding_risk": "华法林使用史且用药不规律，溶栓或抗凝前必须核对凝血指标",
+          "blood_pressure_risk": "BP 182/104mmHg，需按卒中流程评估降压策略"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "卒中团队/神经内科医生",
+            "reason": "疑似急性脑梗死且发病2小时，需快速完成影像、凝血、血糖和治疗决策"
+          },
+          {
+            "urgency": "立即",
+            "target": "主管医生",
+            "reason": "吞咽呛咳，需下达禁食禁饮、吞咽评估和营养途径计划"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士",
+            "reason": "偏瘫和入院前跌倒，需坠床跌倒预防和皮肤外伤检查"
+          }
+        ],
+        "nursing_priorities": [
+          "保持气道通畅，床头按医嘱抬高，禁食禁饮直至吞咽评估通过",
+          "严密观察意识、瞳孔、肌力、言语变化并记录时间",
+          "落实卒中时间节点，配合抽血、影像、心电监护",
+          "评估跌倒/坠床风险，床栏、呼叫铃、陪护和转运保护",
+          "核对华法林史并提示凝血结果对治疗决策的重要性"
+        ]
+      },
+      "model_output_text": "{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": null,\n    \"chief_complaint\": \"右侧肢体无力2小时\",\n    \"vital_signs\": {\n      \"temperature_c\": 36.5,\n      \"pulse_per_min\": 86,\n      \"respiration_per_min\": 18,\n      \"blood_pressure_mmHg\": \"182/104\",\n      \"spo2\": 96\n    },\n    \"consciousness_cognition\": \"意识清楚，言语含糊\",\n    \"breathing_circulation\": \"呼吸平稳，血压显著升高\",\n    \"pain_score\": null,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"房颤\"\n    ],\n    \"medication_history\": [\n      \"华法林（近1周未规律服药）\"\n    ],\n    \"nutrition_hydration\": \"饮水呛咳，存在吞咽困难\",\n    \"elimination\": null,\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": \"右侧肢体无力，肌力下降\",\n    \"tubes_devices_wounds\": null,\n    \"infection_screening\": null,\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"入院前跌倒具体情况（如意识丧失、头部外伤）\",\n      \"近期INR值\",\n      \"疼痛评分\",\n      \"皮肤状况\",\n      \"排泄情况\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"极高危\",\n    \"fall_risk\": \"高风险（近期跌倒史，肢体无力）\",\n    \"pressure_injury_risk\": \"中危（活动受限）\",\n    \"vte_risk\": \"高风险（房颤、活动受限）\",\n    \"aspiration_risk\": \"高风险（饮水呛咳）\",\n    \"bleeding_risk\": \"中高危（长期华法林使用，近期不规律服药，血压显著升高）\",\n    \"infection_or_sepsis_risk\": \"低危\",\n    \"medication_safety_risk\": \"高（华法林为高警示药物，INR波动风险高）\",\n    \"other_key_risks\": [\n      \"急性脑梗死进展风险\",\n      \"高血压急症\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"血压182/104mmHg，符合高血压急症标准，且存在急性脑梗死，需紧急评估是否溶栓及降压策略\"\n    },\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"饮水呛咳提示吞咽障碍，存在高误吸风险，需尽快安排吞咽功能评估\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"医生\",\n      \"reason\": \"长期华法林治疗且近期不规律服药，需评估INR水平及出血/血栓风险，调整抗凝方案\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"持续监测生命体征，尤其血压变化\",\n    \"保持气道通畅，禁食水，避免误吸\",\n    \"预防跌倒，使用床栏，协助活动\",\n    \"评估皮肤状况，预防压力性损伤\",\n    \"准备进行NIHSS评分及影像学检查\"\n  ],\n  \"patient_safety_actions\": [\n    \"立即启动误吸预防措施：禁食水、抬高床头\",\n    \"执行跌倒预防措施：床栏使用、协助如厕、防滑鞋\",\n    \"评估用药安全：核对华法林使用史，准备监测INR\",\n    \"密切观察神经系统症状变化，警惕病情恶化\"\n  ],\n  \"confidence\": \"高\"\n}\n\n我建议您进一步查阅急性脑梗死患者在高血压急症下的血压管理目标及华法林相关脑出血风险评估的最新临床指南。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": null,
+          "chief_complaint": "右侧肢体无力2小时",
+          "vital_signs": {
+            "temperature_c": 36.5,
+            "pulse_per_min": 86,
+            "respiration_per_min": 18,
+            "blood_pressure_mmHg": "182/104",
+            "spo2": 96
+          },
+          "consciousness_cognition": "意识清楚，言语含糊",
+          "breathing_circulation": "呼吸平稳，血压显著升高",
+          "pain_score": null,
+          "allergy_history": [],
+          "past_history": [
+            "房颤"
+          ],
+          "medication_history": [
+            "华法林（近1周未规律服药）"
+          ],
+          "nutrition_hydration": "饮水呛咳，存在吞咽困难",
+          "elimination": null,
+          "skin_pressure_injury": null,
+          "mobility_adl": "右侧肢体无力，肌力下降",
+          "tubes_devices_wounds": null,
+          "infection_screening": null,
+          "mental_health_safety": null,
+          "missing_information": [
+            "入院前跌倒具体情况（如意识丧失、头部外伤）",
+            "近期INR值",
+            "疼痛评分",
+            "皮肤状况",
+            "排泄情况"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "极高危",
+          "fall_risk": "高风险（近期跌倒史，肢体无力）",
+          "pressure_injury_risk": "中危（活动受限）",
+          "vte_risk": "高风险（房颤、活动受限）",
+          "aspiration_risk": "高风险（饮水呛咳）",
+          "bleeding_risk": "中高危（长期华法林使用，近期不规律服药，血压显著升高）",
+          "infection_or_sepsis_risk": "低危",
+          "medication_safety_risk": "高（华法林为高警示药物，INR波动风险高）",
+          "other_key_risks": [
+            "急性脑梗死进展风险",
+            "高血压急症"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "血压182/104mmHg，符合高血压急症标准，且存在急性脑梗死，需紧急评估是否溶栓及降压策略"
+          },
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "饮水呛咳提示吞咽障碍，存在高误吸风险，需尽快安排吞咽功能评估"
+          },
+          {
+            "urgency": "尽快",
+            "target": "医生",
+            "reason": "长期华法林治疗且近期不规律服药，需评估INR水平及出血/血栓风险，调整抗凝方案"
+          }
+        ],
+        "nursing_priorities": [
+          "持续监测生命体征，尤其血压变化",
+          "保持气道通畅，禁食水，避免误吸",
+          "预防跌倒，使用床栏，协助活动",
+          "评估皮肤状况，预防压力性损伤",
+          "准备进行NIHSS评分及影像学检查"
+        ],
+        "patient_safety_actions": [
+          "立即启动误吸预防措施：禁食水、抬高床头",
+          "执行跌倒预防措施：床栏使用、协助如厕、防滑鞋",
+          "评估用药安全：核对华法林使用史，准备监测INR",
+          "密切观察神经系统症状变化，警惕病情恶化"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 24.602562612853944,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1477,
+        "prompt_tokens": 17617,
+        "total_tokens": 19094,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_004",
+      "input": "72岁男性，因“摔倒后左髋疼痛、不能站立”收入骨科，拟左股骨颈骨折。T 36.8℃，P 92次/分，R 18次/分，BP 150/86mmHg，SpO2 97%。疼痛8分，左下肢外旋短缩。患者有帕金森病和2型糖尿病，平时需助行器，夜间起床频繁。入院时骶尾部可见约2cm×2cm发红，按压不褪色。近24小时进食少。无药物过敏史。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "急诊收入骨科",
+          "chief_complaint": "摔倒后左髋疼痛、不能站立",
+          "vital_signs": {
+            "temperature_c": 36.8,
+            "pulse_per_min": 92,
+            "respiration_per_min": 18,
+            "blood_pressure_mmHg": "150/86",
+            "spo2": "97%"
+          },
+          "pain_score": 8,
+          "injury_assessment": "左下肢外旋短缩，拟左股骨颈骨折",
+          "past_history": [
+            "帕金森病",
+            "2型糖尿病"
+          ],
+          "mobility_adl": "平时需助行器，当前不能站立",
+          "elimination": "夜间起床频繁",
+          "skin_pressure_injury": "骶尾部2cm×2cm发红，按压不褪色，符合1期压力性损伤表现",
+          "nutrition": "近24小时进食少",
+          "allergy_history": [],
+          "missing_information": [
+            "血糖水平",
+            "抗凝/抗血小板用药",
+            "骨折影像结果",
+            "Braden和Morse评分",
+            "排尿原因评估",
+            "术前禁食计划"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "中高危",
+          "fall_risk": "极高，既往跌倒、帕金森、需助行器、夜尿频繁、骨折疼痛",
+          "pressure_injury_risk": "高，已有1期压力性损伤表现且活动受限、进食少",
+          "pain_risk": "重度疼痛，影响翻身、呼吸和配合治疗",
+          "glucose_risk": "糖尿病合并进食少，需监测低/高血糖",
+          "vte_risk": "髋部骨折和制动，VTE高风险"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "尽快",
+            "target": "骨科医生",
+            "reason": "疼痛8分及骨折体征明显，需镇痛、制动、影像/手术计划"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士/伤口造口护士按制度",
+            "reason": "骶尾部不可褪色红斑，需压力性损伤分期记录和减压措施"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士",
+            "reason": "极高跌倒风险和夜尿频繁，需床旁安全措施和如厕协助计划"
+          }
+        ],
+        "nursing_priorities": [
+          "患肢制动，避免牵拉搬动，按医嘱镇痛并复评疼痛",
+          "使用减压床垫或翻身减压，拍照/测量并交接骶尾部皮肤",
+          "落实高危跌倒标识，床旁便器、夜间照明、陪护和呼叫铃可及",
+          "监测血糖，结合禁食/手术计划预防低血糖",
+          "评估VTE风险，配合机械或药物预防医嘱"
+        ]
+      },
+      "model_output_text": "```json\n{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": null,\n    \"chief_complaint\": \"摔倒后左髋疼痛、不能站立\",\n    \"vital_signs\": {\n      \"temperature_c\": 36.8,\n      \"pulse_per_min\": 92,\n      \"respiration_per_min\": 18,\n      \"blood_pressure_mmHg\": \"150/86\",\n      \"spo2\": 97\n    },\n    \"consciousness_cognition\": null,\n    \"breathing_circulation\": null,\n    \"pain_score\": 8,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"帕金森病\",\n      \"2型糖尿病\"\n    ],\n    \"medication_history\": [],\n    \"nutrition_hydration\": \"近24小时进食少\",\n    \"elimination\": \"夜间起床频繁\",\n    \"skin_pressure_injury\": \"骶尾部约2cm×2cm发红，按压不褪色\",\n    \"mobility_adl\": \"平时需助行器\",\n    \"tubes_devices_wounds\": null,\n    \"infection_screening\": null,\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"意识状态\",\n      \"呼吸循环评估\",\n      \"药物史\",\n      \"感染筛查结果\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"中高危\",\n    \"fall_risk\": \"高风险\",\n    \"pressure_injury_risk\": \"高风险\",\n    \"vte_risk\": \"高风险\",\n    \"aspiration_risk\": \"中风险\",\n    \"bleeding_risk\": null,\n    \"infection_or_sepsis_risk\": \"中风险\",\n    \"medication_safety_risk\": \"中风险\",\n    \"other_key_risks\": [\n      \"骨折后活动受限导致并发症风险\",\n      \"帕金森病相关非运动症状（如直立性低血压）\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"本班内\",\n      \"target\": \"医生\",\n      \"reason\": \"骶尾部2cm×2cm发红，按压不褪色，提示1期压力性损伤，需评估并启动预防措施\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"专科护士\",\n      \"reason\": \"有帕金森病和糖尿病，使用助行器，存在高跌倒风险，需进行跌倒风险评估及环境安全干预\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"评估并管理疼痛（评分8分）\",\n    \"预防压力性损伤：定时翻身、减压垫使用、皮肤护理\",\n    \"评估跌倒风险并实施防跌倒措施\",\n    \"营养支持：评估进食减少原因，考虑营养风险\",\n    \"预防VTE：评估风险并考虑预防性抗凝\"\n  ],\n  \"patient_safety_actions\": [\n    \"保持环境整洁、宽敞、明亮，**安装防滑地板和扶手** ^[2]^\",\n    \"避免长时间保持某种体位，**每2-3小时更换体位或肢体活动1次** ^[2]^\",\n    \"为患者购置合适的防滑橡胶底鞋，裤脚不要太长以防绊倒 ^[2]^\",\n    \"指导进行防跌倒康复训练 ^[2]^\",\n    \"做好直立性低血压的观察与护理，**改变体位时采取渐进式方法** ^[2]^\",\n    \"保持床头抬高30-45度，尤其在管饲或进食后，**预防误吸** ^[2]^\"\n  ],\n  \"confidence\": \"高\"\n}\n```\n\n我建议您进一步查阅老年骨折患者围手术期VTE预防策略及出血风险平衡的最新临床指南。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": null,
+          "chief_complaint": "摔倒后左髋疼痛、不能站立",
+          "vital_signs": {
+            "temperature_c": 36.8,
+            "pulse_per_min": 92,
+            "respiration_per_min": 18,
+            "blood_pressure_mmHg": "150/86",
+            "spo2": 97
+          },
+          "consciousness_cognition": null,
+          "breathing_circulation": null,
+          "pain_score": 8,
+          "allergy_history": [],
+          "past_history": [
+            "帕金森病",
+            "2型糖尿病"
+          ],
+          "medication_history": [],
+          "nutrition_hydration": "近24小时进食少",
+          "elimination": "夜间起床频繁",
+          "skin_pressure_injury": "骶尾部约2cm×2cm发红，按压不褪色",
+          "mobility_adl": "平时需助行器",
+          "tubes_devices_wounds": null,
+          "infection_screening": null,
+          "mental_health_safety": null,
+          "missing_information": [
+            "意识状态",
+            "呼吸循环评估",
+            "药物史",
+            "感染筛查结果"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "中高危",
+          "fall_risk": "高风险",
+          "pressure_injury_risk": "高风险",
+          "vte_risk": "高风险",
+          "aspiration_risk": "中风险",
+          "bleeding_risk": null,
+          "infection_or_sepsis_risk": "中风险",
+          "medication_safety_risk": "中风险",
+          "other_key_risks": [
+            "骨折后活动受限导致并发症风险",
+            "帕金森病相关非运动症状（如直立性低血压）"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "本班内",
+            "target": "医生",
+            "reason": "骶尾部2cm×2cm发红，按压不褪色，提示1期压力性损伤，需评估并启动预防措施"
+          },
+          {
+            "urgency": "尽快",
+            "target": "专科护士",
+            "reason": "有帕金森病和糖尿病，使用助行器，存在高跌倒风险，需进行跌倒风险评估及环境安全干预"
+          }
+        ],
+        "nursing_priorities": [
+          "评估并管理疼痛（评分8分）",
+          "预防压力性损伤：定时翻身、减压垫使用、皮肤护理",
+          "评估跌倒风险并实施防跌倒措施",
+          "营养支持：评估进食减少原因，考虑营养风险",
+          "预防VTE：评估风险并考虑预防性抗凝"
+        ],
+        "patient_safety_actions": [
+          "保持环境整洁、宽敞、明亮，**安装防滑地板和扶手** ^[2]^",
+          "避免长时间保持某种体位，**每2-3小时更换体位或肢体活动1次** ^[2]^",
+          "为患者购置合适的防滑橡胶底鞋，裤脚不要太长以防绊倒 ^[2]^",
+          "指导进行防跌倒康复训练 ^[2]^",
+          "做好直立性低血压的观察与护理，**改变体位时采取渐进式方法** ^[2]^",
+          "保持床头抬高30-45度，尤其在管饲或进食后，**预防误吸** ^[2]^"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 43.62632914702408,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1475,
+        "prompt_tokens": 41900,
+        "total_tokens": 43375,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_005",
+      "input": "58岁女性，因糖尿病足感染收入内分泌科。右足底溃疡约3cm×4cm，有脓性渗液和异味，周围皮温高。T 38.2℃，P 104次/分，R 20次/分，BP 138/78mmHg。随机血糖22.6mmol/L。患者说近半年血糖控制差，胰岛素常漏打；既往慢性肾病3期。自述对碘伏接触后皮肤瘙痒红疹。足背动脉搏动弱，右足麻木。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "门急诊收入内分泌科",
+          "chief_complaint": "糖尿病足感染",
+          "vital_signs": {
+            "temperature_c": 38.2,
+            "pulse_per_min": 104,
+            "respiration_per_min": 20,
+            "blood_pressure_mmHg": "138/78"
+          },
+          "wound_assessment": "右足底3cm×4cm溃疡，脓性渗液、异味，周围皮温高",
+          "blood_glucose_mmol_l": 22.6,
+          "past_history": [
+            "糖尿病控制差",
+            "慢性肾病3期"
+          ],
+          "medication_adherence": "胰岛素常漏打",
+          "allergy_history": [
+            "疑似碘伏接触过敏：瘙痒红疹"
+          ],
+          "peripheral_circulation": "足背动脉搏动弱",
+          "neuropathy": "右足麻木",
+          "missing_information": [
+            "糖尿病类型和病程",
+            "HbA1c",
+            "肾功能/eGFR",
+            "白细胞/CRP/降钙素原",
+            "伤口培养",
+            "疼痛评分",
+            "是否发冷寒战"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "infection_risk": "糖尿病足感染伴发热、心动过速和脓性渗液，感染扩散风险高",
+          "hyperglycemia_risk": "随机血糖22.6mmol/L且胰岛素漏用，需警惕酮症或高渗状态",
+          "renal_risk": "慢性肾病3期，抗菌药和造影/检查需关注肾毒性和剂量",
+          "limb_ischemia_risk": "足背动脉弱、麻木，存在缺血和截肢风险",
+          "medication_safety": "疑似碘伏过敏，换药消毒需替代并记录"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "尽快",
+            "target": "主管医生/内分泌医生",
+            "reason": "发热、血糖22.6mmol/L和感染创面，需感染评估、降糖方案及酮症筛查"
+          },
+          {
+            "urgency": "尽快",
+            "target": "伤口/糖尿病足团队",
+            "reason": "脓性异味创面合并循环差，需要清创、培养、减压和血供评估"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士",
+            "reason": "记录碘伏过敏，避免相关消毒剂并设置过敏警示"
+          }
+        ],
+        "nursing_priorities": [
+          "监测血糖、酮体相关结果和感染生命体征变化",
+          "按无菌原则处理创面，记录大小、渗液、气味、周围皮肤和照片资料",
+          "避免患足负重受压，评估鞋袜和足部保护",
+          "核对肾功能后关注抗菌药、降糖药医嘱安全",
+          "进行胰岛素依从性和低血糖识别教育，待急性感染稳定后强化"
+        ]
+      },
+      "model_output_text": "```json\n{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": null,\n    \"chief_complaint\": \"糖尿病足感染\",\n    \"vital_signs\": {\n      \"temperature_c\": 38.2,\n      \"pulse_per_min\": 104,\n      \"respiration_per_min\": 20,\n      \"blood_pressure_mmHg\": \"138/78\",\n      \"spo2\": null\n    },\n    \"consciousness_cognition\": null,\n    \"breathing_circulation\": \"脉搏增快，提示可能存在感染性反应；足背动脉搏动弱提示外周动脉疾病\",\n    \"pain_score\": null,\n    \"allergy_history\": [\n      \"碘伏（接触后皮肤瘙痒红疹）\"\n    ],\n    \"past_history\": [\n      \"糖尿病\",\n      \"慢性肾病3期\"\n    ],\n    \"medication_history\": [\n      \"胰岛素（常漏打）\"\n    ],\n    \"nutrition_hydration\": null,\n    \"elimination\": null,\n    \"skin_pressure_injury\": \"右足底3cm×4cm溃疡，有脓性渗液和异味，周围皮温高，提示感染性伤口\",\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": \"右足底溃疡，有渗液\",\n    \"infection_screening\": \"存在局部感染体征（红、热、肿、脓性分泌物）及全身炎症反应（T 38.2℃，P 104次/分）\",\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"意识状态\",\n      \"血氧饱和度\",\n      \"疼痛评分\",\n      \"出入量\",\n      \"营养状况\",\n      \"心理状态\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"中高危\",\n    \"fall_risk\": \"可能增加（因糖尿病周围神经病变致足部麻木）\",\n    \"pressure_injury_risk\": \"高风险（存在神经病变、活动受限、慢性病）\",\n    \"vte_risk\": \"中风险（活动减少、慢性病）\",\n    \"aspiration_risk\": null,\n    \"bleeding_risk\": null,\n    \"infection_or_sepsis_risk\": \"高风险（局部感染伴发热、心动过速，符合全身炎症反应综合征标准）\",\n    \"medication_safety_risk\": \"高风险（胰岛素漏打致血糖控制差；慢性肾病3期影响药物代谢）\",\n    \"other_key_risks\": [\n      \"糖尿病足感染进展为坏死性筋膜炎或败血症的风险\",\n      \"下肢缺血导致清创困难及愈合延迟\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"医生\",\n      \"reason\": \"存在感染伴发热（38.2℃）及心动过速（104次/分），符合SIRS标准，提示中度以上感染，需评估是否为中重度糖尿病足感染并启动抗感染治疗。根据文献，**严重感染的定义包括体温>38℃或<36℃、心率>90次/分等系统症状** ^[1]^。当前已满足两项标准。\"\n    },\n    {\n      \"urgency\": \"本班内\",\n      \"target\": \"专科护士\",\n      \"reason\": \"慢性肾病3期合并感染，需调整抗生素种类及剂量，避免肾毒性药物；同时评估伤口处理方案。\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"监测生命体征变化，尤其体温、心率、血压趋势\",\n    \"评估伤口情况并规范换药，避免交叉感染\",\n    \"控制血糖，密切监测血糖水平，防止高血糖加重感染\",\n    \"评估下肢血供及神经病变程度\",\n    \"进行感染指标（如CRP、PCT、血常规）采样\"\n  ],\n  \"patient_safety_actions\": [\n    \"避免使用碘伏类消毒剂（已知过敏）\",\n    \"加强足部护理，防止进一步损伤\",\n    \"教育规律使用胰岛素的重要性\",\n    \"预防跌倒（因足部麻木）\",\n    \"评估营养状态，促进伤口愈合\"\n  ],\n  \"confidence\": \"高\"\n}\n```\n\n我建议您进一步查阅糖尿病足感染患者在慢性肾病背景下的抗生素选择与剂量调整的临床指南，以及国际糖尿病足工作组（IWGDF）关于感染分级和管理的最新推荐。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": null,
+          "chief_complaint": "糖尿病足感染",
+          "vital_signs": {
+            "temperature_c": 38.2,
+            "pulse_per_min": 104,
+            "respiration_per_min": 20,
+            "blood_pressure_mmHg": "138/78",
+            "spo2": null
+          },
+          "consciousness_cognition": null,
+          "breathing_circulation": "脉搏增快，提示可能存在感染性反应；足背动脉搏动弱提示外周动脉疾病",
+          "pain_score": null,
+          "allergy_history": [
+            "碘伏（接触后皮肤瘙痒红疹）"
+          ],
+          "past_history": [
+            "糖尿病",
+            "慢性肾病3期"
+          ],
+          "medication_history": [
+            "胰岛素（常漏打）"
+          ],
+          "nutrition_hydration": null,
+          "elimination": null,
+          "skin_pressure_injury": "右足底3cm×4cm溃疡，有脓性渗液和异味，周围皮温高，提示感染性伤口",
+          "mobility_adl": null,
+          "tubes_devices_wounds": "右足底溃疡，有渗液",
+          "infection_screening": "存在局部感染体征（红、热、肿、脓性分泌物）及全身炎症反应（T 38.2℃，P 104次/分）",
+          "mental_health_safety": null,
+          "missing_information": [
+            "意识状态",
+            "血氧饱和度",
+            "疼痛评分",
+            "出入量",
+            "营养状况",
+            "心理状态"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "中高危",
+          "fall_risk": "可能增加（因糖尿病周围神经病变致足部麻木）",
+          "pressure_injury_risk": "高风险（存在神经病变、活动受限、慢性病）",
+          "vte_risk": "中风险（活动减少、慢性病）",
+          "aspiration_risk": null,
+          "bleeding_risk": null,
+          "infection_or_sepsis_risk": "高风险（局部感染伴发热、心动过速，符合全身炎症反应综合征标准）",
+          "medication_safety_risk": "高风险（胰岛素漏打致血糖控制差；慢性肾病3期影响药物代谢）",
+          "other_key_risks": [
+            "糖尿病足感染进展为坏死性筋膜炎或败血症的风险",
+            "下肢缺血导致清创困难及愈合延迟"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "尽快",
+            "target": "医生",
+            "reason": "存在感染伴发热（38.2℃）及心动过速（104次/分），符合SIRS标准，提示中度以上感染，需评估是否为中重度糖尿病足感染并启动抗感染治疗。根据文献，**严重感染的定义包括体温>38℃或<36℃、心率>90次/分等系统症状** ^[1]^。当前已满足两项标准。"
+          },
+          {
+            "urgency": "本班内",
+            "target": "专科护士",
+            "reason": "慢性肾病3期合并感染，需调整抗生素种类及剂量，避免肾毒性药物；同时评估伤口处理方案。"
+          }
+        ],
+        "nursing_priorities": [
+          "监测生命体征变化，尤其体温、心率、血压趋势",
+          "评估伤口情况并规范换药，避免交叉感染",
+          "控制血糖，密切监测血糖水平，防止高血糖加重感染",
+          "评估下肢血供及神经病变程度",
+          "进行感染指标（如CRP、PCT、血常规）采样"
+        ],
+        "patient_safety_actions": [
+          "避免使用碘伏类消毒剂（已知过敏）",
+          "加强足部护理，防止进一步损伤",
+          "教育规律使用胰岛素的重要性",
+          "预防跌倒（因足部麻木）",
+          "评估营养状态，促进伤口愈合"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 39.989663572981954,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1615,
+        "prompt_tokens": 20387,
+        "total_tokens": 22002,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_006",
+      "input": "46岁男性，因上腹痛、呕血收入消化内科。今晚呕吐咖啡色液体约500ml，黑便2次。T 36.4℃，P 124次/分，R 22次/分，BP 92/60mmHg，SpO2 95%。面色苍白、出冷汗，诉头晕。既往乙肝肝硬化、食管胃底静脉曲张，近1周自行服用布洛芬止牙痛。无已知过敏。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "急诊收入消化内科",
+          "chief_complaint": "上腹痛、呕血、黑便",
+          "vital_signs": {
+            "temperature_c": 36.4,
+            "pulse_per_min": 124,
+            "respiration_per_min": 22,
+            "blood_pressure_mmHg": "92/60",
+            "spo2": "95%"
+          },
+          "bleeding": "咖啡色呕吐物约500ml，黑便2次",
+          "perfusion": "面色苍白、出冷汗、头晕",
+          "past_history": [
+            "乙肝肝硬化",
+            "食管胃底静脉曲张"
+          ],
+          "medication_history": [
+            "近1周自行服用布洛芬"
+          ],
+          "allergy_history": [],
+          "pain": "上腹痛，未给出评分",
+          "missing_information": [
+            "血红蛋白",
+            "凝血功能",
+            "肝功能",
+            "血型和交叉配血",
+            "呕血/黑便准确时间",
+            "意识状态分级",
+            "是否继续呕血"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "极高危",
+          "upper_gi_bleeding_risk": "活动性上消化道出血，高度怀疑静脉曲张破裂或NSAID相关出血",
+          "shock_risk": "低血压、心动过速、出汗头晕，失血性休克风险高",
+          "aspiration_risk": "呕血患者误吸风险高",
+          "medication_safety": "布洛芬可能加重出血，应报告并避免自行继续使用",
+          "fall_risk": "头晕和低血压，跌倒高风险"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "消化内科医生/抢救团队按院内制度",
+            "reason": "呕血约500ml伴BP 92/60、P 124，需急救处理、备血和内镜/止血评估"
+          },
+          {
+            "urgency": "立即",
+            "target": "责任护士/护士长",
+            "reason": "需建立静脉通路、禁食、计量出血量、备血抽血、床旁监护"
+          },
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "肝硬化静脉曲张病史提示再出血和休克风险高"
+          }
+        ],
+        "nursing_priorities": [
+          "取侧卧或头偏向一侧，备吸引装置，预防误吸",
+          "禁食禁饮，保留呕吐物/大便标本或记录颜色和量",
+          "持续监测血压、脉搏、意识、尿量，观察再呕血和黑便",
+          "建立静脉通路，配合抽血、交叉配血、补液/输血及止血药医嘱",
+          "告知避免NSAIDs，记录布洛芬用药史"
+        ]
+      },
+      "model_output_text": "```json\n{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": null,\n    \"chief_complaint\": \"上腹痛、呕血\",\n    \"vital_signs\": {\n      \"temperature_c\": 36.4,\n      \"pulse_per_min\": 124,\n      \"respiration_per_min\": 22,\n      \"blood_pressure_mmHg\": \"92/60\",\n      \"spo2\": 95\n    },\n    \"consciousness_cognition\": \"清醒，但有头晕\",\n    \"breathing_circulation\": \"心动过速、低血压、出冷汗、面色苍白，提示失血性周围循环衰竭\",\n    \"pain_score\": null,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"乙肝肝硬化\",\n      \"食管胃底静脉曲张\"\n    ],\n    \"medication_history\": [\n      \"近1周自行服用布洛芬止牙痛\"\n    ],\n    \"nutrition_hydration\": \"可能存在脱水\",\n    \"elimination\": \"黑便2次\",\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": null,\n    \"infection_screening\": null,\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"疼痛评分\",\n      \"意识状态细节\",\n      \"皮肤状况\",\n      \"管路情况\",\n      \"近期用药详情\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"高危\",\n    \"fall_risk\": \"高风险（因头晕、低血压）\",\n    \"pressure_injury_risk\": \"中风险\",\n    \"vte_risk\": \"中风险\",\n    \"aspiration_risk\": \"高风险（近期呕血）\",\n    \"bleeding_risk\": \"极高风险（活动性上消化道出血，呕血500ml，黑便）\",\n    \"infection_or_sepsis_risk\": \"中风险（肝硬化基础）\",\n    \"medication_safety_risk\": \"高风险（近期使用NSAIDs如布洛芬，加重出血风险）\",\n    \"other_key_risks\": [\n      \"休克风险\",\n      \"肝性脑病风险\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"存在活动性上消化道出血，伴心动过速（124次/分）、低血压（92/60mmHg），符合休克前期表现；根据材料，**收缩压 < 90mmHg，心率 > 120次/min**，伴有面色苍白、四肢湿冷或神志不清，表明有严重大出血导致的休克，需积极抢救 ^[1]^。此外，**短时间内出血量 > 1 000ml，可出现休克表现** ^[1]^，当前症状提示接近或已达此阈值。\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"专科护士\",\n      \"reason\": \"需建立大口径静脉通路、准备输血、监测尿量及中心静脉压，评估休克指数（心率/收缩压=124/92≈1.35），**休克指数大于1.0提示失血量1 200-2 000ml（占血容量30%-50%）** ^[1]^。\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"立即监测生命体征变化，尤其是血压和心率趋势\",\n    \"建立两条大口径静脉通路，准备快速补液\",\n    \"备血、交叉配血，准备输血\",\n    \"禁食，留置胃管观察出血情况（但注意材料指出**不建议常规留置胃管**，因其无明确改善预后价值） ^[1]^\",\n    \"评估活动性出血征象：如**呕吐物呈鲜红色、肠鸣音活跃、Hb持续下降**等提示活动性出血 ^[1]^\"\n  ],\n  \"patient_safety_actions\": [\n    \"床头抬高30度，防误吸\",\n    \"防跌倒措施：床栏使用、协助如厕\",\n    \"避免使用NSAIDs等加重出血药物\",\n    \"密切观察黑便次数、量及性状\"\n  ],\n  \"confidence\": \"高\"\n}\n```\n\n我建议您进一步查阅肝硬化患者合并上消化道出血的VTE预防策略及出血风险评估模型的最新临床指南。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": null,
+          "chief_complaint": "上腹痛、呕血",
+          "vital_signs": {
+            "temperature_c": 36.4,
+            "pulse_per_min": 124,
+            "respiration_per_min": 22,
+            "blood_pressure_mmHg": "92/60",
+            "spo2": 95
+          },
+          "consciousness_cognition": "清醒，但有头晕",
+          "breathing_circulation": "心动过速、低血压、出冷汗、面色苍白，提示失血性周围循环衰竭",
+          "pain_score": null,
+          "allergy_history": [],
+          "past_history": [
+            "乙肝肝硬化",
+            "食管胃底静脉曲张"
+          ],
+          "medication_history": [
+            "近1周自行服用布洛芬止牙痛"
+          ],
+          "nutrition_hydration": "可能存在脱水",
+          "elimination": "黑便2次",
+          "skin_pressure_injury": null,
+          "mobility_adl": null,
+          "tubes_devices_wounds": null,
+          "infection_screening": null,
+          "mental_health_safety": null,
+          "missing_information": [
+            "疼痛评分",
+            "意识状态细节",
+            "皮肤状况",
+            "管路情况",
+            "近期用药详情"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "fall_risk": "高风险（因头晕、低血压）",
+          "pressure_injury_risk": "中风险",
+          "vte_risk": "中风险",
+          "aspiration_risk": "高风险（近期呕血）",
+          "bleeding_risk": "极高风险（活动性上消化道出血，呕血500ml，黑便）",
+          "infection_or_sepsis_risk": "中风险（肝硬化基础）",
+          "medication_safety_risk": "高风险（近期使用NSAIDs如布洛芬，加重出血风险）",
+          "other_key_risks": [
+            "休克风险",
+            "肝性脑病风险"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "存在活动性上消化道出血，伴心动过速（124次/分）、低血压（92/60mmHg），符合休克前期表现；根据材料，**收缩压 < 90mmHg，心率 > 120次/min**，伴有面色苍白、四肢湿冷或神志不清，表明有严重大出血导致的休克，需积极抢救 ^[1]^。此外，**短时间内出血量 > 1 000ml，可出现休克表现** ^[1]^，当前症状提示接近或已达此阈值。"
+          },
+          {
+            "urgency": "尽快",
+            "target": "专科护士",
+            "reason": "需建立大口径静脉通路、准备输血、监测尿量及中心静脉压，评估休克指数（心率/收缩压=124/92≈1.35），**休克指数大于1.0提示失血量1 200-2 000ml（占血容量30%-50%）** ^[1]^。"
+          }
+        ],
+        "nursing_priorities": [
+          "立即监测生命体征变化，尤其是血压和心率趋势",
+          "建立两条大口径静脉通路，准备快速补液",
+          "备血、交叉配血，准备输血",
+          "禁食，留置胃管观察出血情况（但注意材料指出**不建议常规留置胃管**，因其无明确改善预后价值） ^[1]^",
+          "评估活动性出血征象：如**呕吐物呈鲜红色、肠鸣音活跃、Hb持续下降**等提示活动性出血 ^[1]^"
+        ],
+        "patient_safety_actions": [
+          "床头抬高30度，防误吸",
+          "防跌倒措施：床栏使用、协助如厕",
+          "避免使用NSAIDs等加重出血药物",
+          "密切观察黑便次数、量及性状"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 53.49877827707678,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1647,
+        "prompt_tokens": 51572,
+        "total_tokens": 53219,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_007",
+      "input": "82岁女性，从养老机构转入老年医学科，因“意识混乱、拒食2天”。T 37.9℃，P 98次/分，R 21次/分，BP 110/68mmHg，SpO2 94%。患者定向力差，夜间躁动，尿液混浊有异味。既往阿尔茨海默病、脑卒中后遗症，长期卧床，大小便失禁。入院查体：骶尾部4cm×5cm破溃，可见黄色腐肉，渗液中等，有异味。家属不清楚用药清单。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "养老机构转入",
+          "chief_complaint": "意识混乱、拒食2天",
+          "vital_signs": {
+            "temperature_c": 37.9,
+            "pulse_per_min": 98,
+            "respiration_per_min": 21,
+            "blood_pressure_mmHg": "110/68",
+            "spo2": "94%"
+          },
+          "cognition": "定向力差，夜间躁动，基础阿尔茨海默病，疑谵妄叠加",
+          "urinary": "大小便失禁，尿液混浊有异味，疑尿路感染",
+          "skin_pressure_injury": "骶尾部4cm×5cm破溃，黄色腐肉，中等渗液并异味，至少为3期或不可分期压力性损伤，需专业分期",
+          "nutrition": "拒食2天，营养和脱水风险",
+          "mobility_adl": "长期卧床，完全依赖风险",
+          "past_history": [
+            "阿尔茨海默病",
+            "脑卒中后遗症"
+          ],
+          "medication_history": "家属不清楚用药清单",
+          "missing_information": [
+            "疼痛评估或非语言疼痛表现",
+            "尿常规/培养",
+            "白细胞/CRP",
+            "Braden评分",
+            "吞咽能力",
+            "养老机构压疮处理记录",
+            "既往用药清单"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "infection_risk": "疑尿路感染及压力性损伤感染，老年患者可能进展为脓毒症",
+          "delirium_risk": "急性意识混乱、感染和拒食，谵妄高风险",
+          "pressure_injury_risk": "已有严重压力性损伤，继续恶化风险极高",
+          "nutrition_dehydration_risk": "拒食2天，脱水和营养不良风险高",
+          "fall_or_device_risk": "躁动患者有坠床和拔管风险，需非约束优先的安全措施"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "尽快",
+            "target": "主管医生",
+            "reason": "急性意识改变合并感染线索，需感染/谵妄评估和实验室检查"
+          },
+          {
+            "urgency": "尽快",
+            "target": "伤口造口护士/压疮小组",
+            "reason": "骶尾部破溃伴腐肉和异味，需分期、清创敷料方案和减压计划"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士/家属/养老机构",
+            "reason": "补齐用药清单、过敏史、基线认知和照护记录"
+          }
+        ],
+        "nursing_priorities": [
+          "完成谵妄筛查和安全评估，提供定向提示、陪护、夜间环境管理",
+          "采集尿液标本按医嘱检查，监测体温、心率、意识和尿量",
+          "立即减压翻身，使用合适支撑面，记录伤口大小、渗液、气味和周围皮肤",
+          "评估吞咽、营养和脱水，必要时报告营养支持需求",
+          "追问并核对长期用药及过敏史，避免漏服高风险药"
+        ]
+      },
+      "model_output_text": "{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": \"养老机构\",\n    \"chief_complaint\": \"意识混乱、拒食2天\",\n    \"vital_signs\": {\n      \"temperature_c\": 37.9,\n      \"pulse_per_min\": 98,\n      \"respiration_per_min\": 21,\n      \"blood_pressure_mmHg\": \"110/68\",\n      \"spo2\": 94\n    },\n    \"consciousness_cognition\": \"定向力差，夜间躁动，提示可能存在谵妄\",\n    \"breathing_circulation\": \"呼吸频率稍快，心率增快，血压正常偏低，需警惕感染性休克早期\",\n    \"pain_score\": null,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"阿尔茨海默病\",\n      \"脑卒中后遗症\",\n      \"长期卧床\",\n      \"大小便失禁\"\n    ],\n    \"medication_history\": [],\n    \"nutrition_hydration\": \"拒食2天，存在营养不良及脱水风险\",\n    \"elimination\": \"尿液混浊有异味，提示尿路感染可能；大小便失禁\",\n    \"skin_pressure_injury\": \"骶尾部4cm×5cm破溃，可见黄色腐肉，渗液中等，有异味，符合深部组织损伤或压力性损伤Ⅲ期\",\n    \"mobility_adl\": \"长期卧床，活动能力极差\",\n    \"tubes_devices_wounds\": \"骶尾部压疮伤口，需评估是否需清创或敷料处理\",\n    \"infection_screening\": \"发热、心率增快、尿液异常，提示可能存在尿路感染或全身性感染\",\n    \"mental_health_safety\": \"意识混乱、夜间躁动，符合谵妄表现，需评估诱因\",\n    \"missing_information\": [\n      \"用药清单不详\",\n      \"疼痛评分未评估\",\n      \"过敏史不详\",\n      \"近期饮食摄入量\",\n      \"液体摄入情况\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"高危\",\n    \"fall_risk\": \"低（因长期卧床）\",\n    \"pressure_injury_risk\": \"极高危\",\n    \"vte_risk\": \"高危（长期卧床）\",\n    \"aspiration_risk\": \"高危（意识混乱、拒食、可能存在吞咽障碍）\",\n    \"bleeding_risk\": null,\n    \"infection_or_sepsis_risk\": \"高危（发热、心率增快、尿液异常，提示感染可能）\",\n    \"medication_safety_risk\": \"高（用药清单不详，存在潜在药物相互作用或遗漏风险）\",\n    \"other_key_risks\": [\n      \"谵妄\",\n      \"营养不良\",\n      \"脱水\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"患者存在发热、心动过速、意识混乱及尿液异常，符合疑似感染性谵妄或尿路感染诱发脓毒症早期表现，需立即评估并启动抗感染治疗\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"专科护士\",\n      \"reason\": \"骶尾部压力性损伤已达Ⅲ期，需伤口专科护士评估清创及敷料方案\"\n    },\n    {\n      \"urgency\": \"本班内\",\n      \"target\": \"护士长\",\n      \"reason\": \"用药清单缺失，需协调家属尽快提供，避免用药错误\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"监测生命体征变化，尤其关注体温、心率及血压趋势\",\n    \"评估意识状态变化，记录躁动时间及频率\",\n    \"留取尿液标本进行尿常规及培养\",\n    \"伤口评估与护理，预防感染扩散\",\n    \"加强皮肤护理，定时翻身，避免压力性损伤恶化\"\n  ],\n  \"patient_safety_actions\": [\n    \"实施防跌倒措施，尽管卧床，但躁动时有坠床风险\",\n    \"床旁设置警示标识，提示认知障碍及感染风险\",\n    \"确保呼叫铃在可及范围，加强巡视，尤其夜间\",\n    \"评估吞咽功能前避免经口进食，预防误吸\",\n    \"尽快获取用药清单并核对医嘱\"\n  ],\n  \"confidence\": \"高\"\n}\n\n我建议您进一步查阅老年患者感染诱发谵妄的早期识别与处理策略，以及压力性损伤Ⅲ期的伤口管理最新临床指南。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": "养老机构",
+          "chief_complaint": "意识混乱、拒食2天",
+          "vital_signs": {
+            "temperature_c": 37.9,
+            "pulse_per_min": 98,
+            "respiration_per_min": 21,
+            "blood_pressure_mmHg": "110/68",
+            "spo2": 94
+          },
+          "consciousness_cognition": "定向力差，夜间躁动，提示可能存在谵妄",
+          "breathing_circulation": "呼吸频率稍快，心率增快，血压正常偏低，需警惕感染性休克早期",
+          "pain_score": null,
+          "allergy_history": [],
+          "past_history": [
+            "阿尔茨海默病",
+            "脑卒中后遗症",
+            "长期卧床",
+            "大小便失禁"
+          ],
+          "medication_history": [],
+          "nutrition_hydration": "拒食2天，存在营养不良及脱水风险",
+          "elimination": "尿液混浊有异味，提示尿路感染可能；大小便失禁",
+          "skin_pressure_injury": "骶尾部4cm×5cm破溃，可见黄色腐肉，渗液中等，有异味，符合深部组织损伤或压力性损伤Ⅲ期",
+          "mobility_adl": "长期卧床，活动能力极差",
+          "tubes_devices_wounds": "骶尾部压疮伤口，需评估是否需清创或敷料处理",
+          "infection_screening": "发热、心率增快、尿液异常，提示可能存在尿路感染或全身性感染",
+          "mental_health_safety": "意识混乱、夜间躁动，符合谵妄表现，需评估诱因",
+          "missing_information": [
+            "用药清单不详",
+            "疼痛评分未评估",
+            "过敏史不详",
+            "近期饮食摄入量",
+            "液体摄入情况"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "fall_risk": "低（因长期卧床）",
+          "pressure_injury_risk": "极高危",
+          "vte_risk": "高危（长期卧床）",
+          "aspiration_risk": "高危（意识混乱、拒食、可能存在吞咽障碍）",
+          "bleeding_risk": null,
+          "infection_or_sepsis_risk": "高危（发热、心率增快、尿液异常，提示感染可能）",
+          "medication_safety_risk": "高（用药清单不详，存在潜在药物相互作用或遗漏风险）",
+          "other_key_risks": [
+            "谵妄",
+            "营养不良",
+            "脱水"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "患者存在发热、心动过速、意识混乱及尿液异常，符合疑似感染性谵妄或尿路感染诱发脓毒症早期表现，需立即评估并启动抗感染治疗"
+          },
+          {
+            "urgency": "尽快",
+            "target": "专科护士",
+            "reason": "骶尾部压力性损伤已达Ⅲ期，需伤口专科护士评估清创及敷料方案"
+          },
+          {
+            "urgency": "本班内",
+            "target": "护士长",
+            "reason": "用药清单缺失，需协调家属尽快提供，避免用药错误"
+          }
+        ],
+        "nursing_priorities": [
+          "监测生命体征变化，尤其关注体温、心率及血压趋势",
+          "评估意识状态变化，记录躁动时间及频率",
+          "留取尿液标本进行尿常规及培养",
+          "伤口评估与护理，预防感染扩散",
+          "加强皮肤护理，定时翻身，避免压力性损伤恶化"
+        ],
+        "patient_safety_actions": [
+          "实施防跌倒措施，尽管卧床，但躁动时有坠床风险",
+          "床旁设置警示标识，提示认知障碍及感染风险",
+          "确保呼叫铃在可及范围，加强巡视，尤其夜间",
+          "评估吞咽功能前避免经口进食，预防误吸",
+          "尽快获取用药清单并核对医嘱"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 45.15909741492942,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1646,
+        "prompt_tokens": 17113,
+        "total_tokens": 18759,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_008",
+      "input": "29岁女性，因抑郁症伴自杀意念由急诊收入精神科开放病区。患者哭泣，称“活着没意思”，昨晚服用安眠药10片后被家属发现送医，洗胃后转入。T 36.6℃，P 88次/分，R 16次/分，BP 116/72mmHg，SpO2 98%。否认药物过敏。右手腕有新鲜浅表划痕。家属带来患者平时服用舍曲林和阿普唑仑。患者要求一个人待着，不愿交出手机充电线。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "急诊洗胃后转入精神科",
+          "chief_complaint": "抑郁症伴自杀意念，服安眠药后入院",
+          "vital_signs": {
+            "temperature_c": 36.6,
+            "pulse_per_min": 88,
+            "respiration_per_min": 16,
+            "blood_pressure_mmHg": "116/72",
+            "spo2": "98%"
+          },
+          "mental_status": "哭泣，表达明确消极自杀言语，要求独处",
+          "self_harm_history": "昨晚服用安眠药10片；右手腕新鲜浅表划痕",
+          "medication_history": [
+            "舍曲林",
+            "阿普唑仑",
+            "安眠药具体名称和剂量未知"
+          ],
+          "allergy_history": [],
+          "safety_items": "拒绝交出手机充电线，存在可用于自伤的物品",
+          "physical_status": "洗胃后转入，生命体征暂平稳",
+          "missing_information": [
+            "具体安眠药名称/剂量/服药时间",
+            "毒物检测和心电图结果",
+            "自杀计划、可及手段、既往自伤史",
+            "保护性因素",
+            "入院病区安全级别制度"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "suicide_risk": "极高，近期自杀行为、持续自杀意念、新鲜自伤痕迹、拒交危险物品",
+          "overdose_risk": "镇静催眠药过量后仍需观察迟发意识和呼吸抑制",
+          "violence_or_absconding_risk": "要求独处且不配合安全物品管理，需防走失和冲动行为",
+          "medication_safety": "阿普唑仑等镇静药需防重复用药和过度镇静"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "精神科医生/值班医生",
+            "reason": "近期服药自杀和当前自杀意念，需要自杀风险评估、观察级别和治疗计划"
+          },
+          {
+            "urgency": "立即",
+            "target": "责任护士/护士长",
+            "reason": "需按制度进行危险物品清点保管和高风险观察，不宜让患者独处"
+          },
+          {
+            "urgency": "尽快",
+            "target": "急诊/主管医生",
+            "reason": "核对洗胃后监测要求、毒物种类和迟发并发症风险"
+          }
+        ],
+        "nursing_priorities": [
+          "按高自杀风险落实连续观察或院内规定观察级别，保持视线可及",
+          "移除和登记充电线、锐器、药物等危险物品，过程尊重并解释",
+          "监测意识、呼吸、血压、瞳孔和过度镇静表现",
+          "检查并处理腕部划痕，记录部位、大小和感染风险",
+          "与家属核实药物、既往自伤史和触发事件，形成安全计划"
+        ]
+      },
+      "model_output_text": "{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": \"急诊\",\n    \"chief_complaint\": \"抑郁症伴自杀意念，服药过量后洗胃转入\",\n    \"vital_signs\": {\n      \"temperature_c\": 36.6,\n      \"pulse_per_min\": 88,\n      \"respiration_per_min\": 16,\n      \"blood_pressure_mmHg\": \"116/72\",\n      \"spo2\": 98\n    },\n    \"consciousness_cognition\": \"清醒，情绪低落，有自杀意念\",\n    \"breathing_circulation\": \"呼吸平稳，循环稳定\",\n    \"pain_score\": null,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"抑郁症\"\n    ],\n    \"medication_history\": [\n      \"舍曲林\",\n      \"阿普唑仑\"\n    ],\n    \"nutrition_hydration\": null,\n    \"elimination\": null,\n    \"skin_pressure_injury\": \"右手腕有新鲜浅表划痕\",\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": \"无留置管路\",\n    \"infection_screening\": null,\n    \"mental_health_safety\": \"存在自杀意念，有自伤行为（手腕划痕），拒绝交出手机充电线，有潜在自缢风险\",\n    \"missing_information\": [\n      \"疼痛评分\",\n      \"营养与脱水状况\",\n      \"排泄情况\",\n      \"感染筛查结果\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"极高危\",\n    \"fall_risk\": null,\n    \"pressure_injury_risk\": null,\n    \"vte_risk\": null,\n    \"aspiration_risk\": null,\n    \"bleeding_risk\": null,\n    \"infection_or_sepsis_risk\": null,\n    \"medication_safety_risk\": [\n      \"阿普唑仑存在滥用、依赖及戒断风险，尤其在长期使用或高剂量时可能引起**急性戒断反应（如癫痫）**，甚至危及生命\" ^[7]^。\n    ],\n    \"other_key_risks\": [\n      \"**自杀风险极高**：存在明确的自杀意念、既往自杀未遂行为（服药过量）、当前自伤行为（手腕划痕）及保留潜在自缢工具（手机充电线）\" ^[1]^。\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"患者存在极高自杀风险，有明确自杀意念、服药过量史及当前自伤行为，需立即评估并启动危机干预措施，包括可能的严密观察或转至封闭病房\"\n    },\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"护士长\",\n      \"reason\": \"需立即启动自杀风险护理预案，确保环境安全（如清除潜在自伤工具），并安排持续监护\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"确保环境安全，立即清除潜在自伤/自缢工具（如手机充电线）\",\n    \"启动自杀风险评估流程，识别与自杀相关的**临床、人口学和关键心理特征**，尤其注意**绝望感和持续自杀意图**者\" ^[1]^,\n    \"评估**自杀计划、准备及未遂行为**\" ^[2]^,\n    \"建立治疗联盟，提供支持性干预\"\n  ],\n  \"patient_safety_actions\": [\n    \"实施**严密观察**，必要时转至重症监护室\" ^[1]^,\n    \"告知亲友或其他关键人患者的情况和注意事项，以保障患者安全\" ^[1]^,\n    \"与患者**签署不自杀协议**\" ^[1]^,\n    \"提供**应对技能训练**，如放松训练、呼吸调节、蝴蝶拍技术等\" ^[1]^\n  ],\n  \"confidence\": \"高\"\n}\n\n我建议您进一步查阅精神科住院患者自杀风险分层评估工具及干预策略的临床指南，特别是针对急性期管理与环境安全规范。您需要我帮您检索相关文献吗？",
+      "model_output_json": null,
+      "request_duration_seconds": 53.87581697385758,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1543,
+        "prompt_tokens": 45071,
+        "total_tokens": 46614,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_009",
+      "input": "53岁男性，因慢性肾衰竭尿毒症准备首次血液透析收入肾内科。主诉乏力、恶心、夜间不能平卧。T 36.7℃，P 106次/分，R 24次/分，BP 178/96mmHg，SpO2 91%（空气）。双下肢凹陷性水肿，颈静脉充盈，肺部可闻及湿啰音。近24小时尿量约300ml。化验单显示K+ 6.2mmol/L，肌酐明显升高。左前臂动静脉内瘘术后3周，可触及震颤。无过敏史。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "门急诊收入肾内科",
+          "chief_complaint": "尿毒症准备首次血液透析，乏力恶心、不能平卧",
+          "vital_signs": {
+            "temperature_c": 36.7,
+            "pulse_per_min": 106,
+            "respiration_per_min": 24,
+            "blood_pressure_mmHg": "178/96",
+            "spo2": "91%空气"
+          },
+          "renal_status": "慢性肾衰竭尿毒症，近24小时尿量约300ml",
+          "fluid_status": "双下肢凹陷性水肿、颈静脉充盈、肺部湿啰音，容量负荷过重",
+          "lab_key_values": {
+            "potassium_mmol_l": 6.2,
+            "creatinine": "明显升高"
+          },
+          "vascular_access": "左前臂动静脉内瘘术后3周，可触及震颤",
+          "allergy_history": [],
+          "missing_information": [
+            "心电图表现",
+            "体重和干体重",
+            "透析医嘱和通路成熟评估",
+            "用药史尤其ACEI/ARB/保钾利尿剂",
+            "血红蛋白",
+            "乙肝/丙肝/HIV等透析前筛查"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "极高危",
+          "hyperkalemia_risk": "K+ 6.2mmol/L，致命心律失常风险",
+          "pulmonary_edema_risk": "低氧、不能平卧、湿啰音和水肿提示容量负荷过重/肺水肿风险",
+          "hypertension_risk": "BP 178/96mmHg，肾衰相关高血压需严密观察",
+          "vascular_access_risk": "新内瘘需保护，禁止测压、穿刺和负重压迫",
+          "fall_risk": "乏力、低氧和首次透析焦虑，跌倒中高风险"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "肾内科医生/值班医生",
+            "reason": "高钾6.2mmol/L合并低氧和容量负荷过重，需心电监护、降钾和急诊透析评估"
+          },
+          {
+            "urgency": "立即",
+            "target": "透析室/血透护士按流程",
+            "reason": "首次透析需通路评估、透析前筛查和宣教准备"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士",
+            "reason": "保护左前臂内瘘，设置醒目标识，避免测血压和采血"
+          }
+        ],
+        "nursing_priorities": [
+          "立即心电监护，观察心律失常、胸闷、肌无力等高钾表现",
+          "半卧位吸氧，监测SpO2、呼吸困难和肺部啰音变化",
+          "严格记录出入量和体重，按医嘱限制水钠",
+          "保护动静脉内瘘，评估震颤/杂音并交接禁止操作",
+          "配合急诊透析或降钾治疗准备，核对透析前感染筛查"
+        ]
+      },
+      "model_output_text": "{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": null,\n    \"chief_complaint\": \"乏力、恶心、夜间不能平卧\",\n    \"vital_signs\": {\n      \"temperature_c\": 36.7,\n      \"pulse_per_min\": 106,\n      \"respiration_per_min\": 24,\n      \"blood_pressure_mmHg\": \"178/96\",\n      \"spo2\": 91\n    },\n    \"consciousness_cognition\": null,\n    \"breathing_circulation\": \"呼吸急促，SpO2 91%（空气），肺部湿啰音，提示可能存在肺水肿；颈静脉充盈、双下肢凹陷性水肿提示容量负荷过重及右心功能不全\",\n    \"pain_score\": null,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"慢性肾衰竭尿毒症\"\n    ],\n    \"medication_history\": [],\n    \"nutrition_hydration\": \"可能存在容量超负荷，近24小时尿量仅300ml，提示少尿\",\n    \"elimination\": \"少尿（24小时尿量约300ml）\",\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": \"左前臂动静脉内瘘术后3周，可触及震颤\",\n    \"infection_screening\": null,\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"意识状态、疼痛评分、皮肤状况、活动能力、用药史、感染筛查结果\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"极高危\",\n    \"fall_risk\": null,\n    \"pressure_injury_risk\": null,\n    \"vte_risk\": null,\n    \"aspiration_risk\": null,\n    \"bleeding_risk\": null,\n    \"infection_or_sepsis_risk\": null,\n    \"medication_safety_risk\": null,\n    \"other_key_risks\": [\n      \"严重高血压\",\n      \"容量负荷过重导致急性心力衰竭风险\",\n      \"高钾血症（K+ 6.2 mmol/L）\",\n      \"代谢性酸中毒（未提供血气，但常见于尿毒症）\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"血钾6.2 mmol/L，已达严重高钾血症标准（≥6.5 mmol/L虽为危急值，但≥5.5 mmol/L已需警惕）；结合心动过速、呼吸急促及肺水肿体征，存在心律失常及心脏骤停风险。根据指南，**严重高钾血症（血钾≥6.5 mmol/L）为明确临床急症，可能危及生命** ^[2]^。此外，血压显著升高（178/96 mmHg）及肺水肿表现提示急性心力衰竭，需紧急处理。\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"抢救团队\",\n      \"reason\": \"存在充血性心力衰竭体征（颈静脉充盈、双下肢水肿、肺部湿啰音）及呼吸代偿（R 24次/分，SpO2 91%），提示可能发展为急性肺水肿，需评估是否需紧急透析。**当高钾血症药物治疗无效时，应启动紧急透析治疗** ^[5]^。且**血液透析是高效快速降低血钾浓度的措施**，尤其适用于严重、其他治疗效果不佳的高钾血症患者 ^[10]^。\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"持续心电监护，密切观察心律及T波变化\",\n    \"准备降钾药物（如胰岛素+葡萄糖、碳酸氢钠）及紧急透析准备\",\n    \"限制钾摄入，避免高钾饮食\",\n    \"监测尿量及生命体征变化\"\n  ],\n  \"patient_safety_actions\": [\n    \"避免使用含钾药物或溶液\",\n    \"确保动静脉内瘘侧肢体不受压，保护通路\",\n    \"床头抬高以改善呼吸\",\n    \"避免突然体位改变以防血压波动\"\n  ],\n  \"confidence\": \"高\"\n}\n\n我建议您进一步查阅严重高钾血症在慢性肾衰竭患者中的紧急处理流程及透析指征的最新临床指南，特别是关于心电图变化与药物干预时机的循证建议。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": null,
+          "chief_complaint": "乏力、恶心、夜间不能平卧",
+          "vital_signs": {
+            "temperature_c": 36.7,
+            "pulse_per_min": 106,
+            "respiration_per_min": 24,
+            "blood_pressure_mmHg": "178/96",
+            "spo2": 91
+          },
+          "consciousness_cognition": null,
+          "breathing_circulation": "呼吸急促，SpO2 91%（空气），肺部湿啰音，提示可能存在肺水肿；颈静脉充盈、双下肢凹陷性水肿提示容量负荷过重及右心功能不全",
+          "pain_score": null,
+          "allergy_history": [],
+          "past_history": [
+            "慢性肾衰竭尿毒症"
+          ],
+          "medication_history": [],
+          "nutrition_hydration": "可能存在容量超负荷，近24小时尿量仅300ml，提示少尿",
+          "elimination": "少尿（24小时尿量约300ml）",
+          "skin_pressure_injury": null,
+          "mobility_adl": null,
+          "tubes_devices_wounds": "左前臂动静脉内瘘术后3周，可触及震颤",
+          "infection_screening": null,
+          "mental_health_safety": null,
+          "missing_information": [
+            "意识状态、疼痛评分、皮肤状况、活动能力、用药史、感染筛查结果"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "极高危",
+          "fall_risk": null,
+          "pressure_injury_risk": null,
+          "vte_risk": null,
+          "aspiration_risk": null,
+          "bleeding_risk": null,
+          "infection_or_sepsis_risk": null,
+          "medication_safety_risk": null,
+          "other_key_risks": [
+            "严重高血压",
+            "容量负荷过重导致急性心力衰竭风险",
+            "高钾血症（K+ 6.2 mmol/L）",
+            "代谢性酸中毒（未提供血气，但常见于尿毒症）"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "血钾6.2 mmol/L，已达严重高钾血症标准（≥6.5 mmol/L虽为危急值，但≥5.5 mmol/L已需警惕）；结合心动过速、呼吸急促及肺水肿体征，存在心律失常及心脏骤停风险。根据指南，**严重高钾血症（血钾≥6.5 mmol/L）为明确临床急症，可能危及生命** ^[2]^。此外，血压显著升高（178/96 mmHg）及肺水肿表现提示急性心力衰竭，需紧急处理。"
+          },
+          {
+            "urgency": "尽快",
+            "target": "抢救团队",
+            "reason": "存在充血性心力衰竭体征（颈静脉充盈、双下肢水肿、肺部湿啰音）及呼吸代偿（R 24次/分，SpO2 91%），提示可能发展为急性肺水肿，需评估是否需紧急透析。**当高钾血症药物治疗无效时，应启动紧急透析治疗** ^[5]^。且**血液透析是高效快速降低血钾浓度的措施**，尤其适用于严重、其他治疗效果不佳的高钾血症患者 ^[10]^。"
+          }
+        ],
+        "nursing_priorities": [
+          "持续心电监护，密切观察心律及T波变化",
+          "准备降钾药物（如胰岛素+葡萄糖、碳酸氢钠）及紧急透析准备",
+          "限制钾摄入，避免高钾饮食",
+          "监测尿量及生命体征变化"
+        ],
+        "patient_safety_actions": [
+          "避免使用含钾药物或溶液",
+          "确保动静脉内瘘侧肢体不受压，保护通路",
+          "床头抬高以改善呼吸",
+          "避免突然体位改变以防血压波动"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 42.12784708291292,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1635,
+        "prompt_tokens": 21112,
+        "total_tokens": 22747,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_010",
+      "input": "67岁女性，因右乳癌术后第1天转入普通外科病房。右乳改良根治术后，腋窝负压引流管2根在位，近1小时合计引流鲜红色液体120ml。T 36.9℃，P 108次/分，R 20次/分，BP 102/64mmHg。患者诉切口胀痛7分，右上肢麻木。敷料外层局部渗血约手掌大小。既往高血压，服用阿司匹林但术前停药时间不详。无药物过敏。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "术后转入普通外科",
+          "chief_complaint": "右乳癌术后第1天，切口胀痛和引流增多",
+          "vital_signs": {
+            "temperature_c": 36.9,
+            "pulse_per_min": 108,
+            "respiration_per_min": 20,
+            "blood_pressure_mmHg": "102/64"
+          },
+          "postoperative_status": "右乳改良根治术后第1天",
+          "drains": "腋窝负压引流管2根在位，近1小时鲜红色引流合计120ml",
+          "wound_dressing": "敷料外层局部渗血约手掌大小",
+          "pain_score": 7,
+          "neurovascular_limb": "右上肢麻木，需评估感觉、运动、皮温、肿胀",
+          "past_history": [
+            "高血压"
+          ],
+          "medication_history": [
+            "阿司匹林，术前停药时间不详"
+          ],
+          "allergy_history": [],
+          "missing_information": [
+            "术中出血量",
+            "术后累计引流量",
+            "血红蛋白/凝血功能",
+            "引流管是否通畅及负压状态",
+            "右上肢周径和活动度",
+            "术后镇痛医嘱"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "postoperative_bleeding_risk": "鲜红引流1小时120ml、敷料渗血、心动过速和血压偏低，疑术后出血",
+          "hematoma_risk": "切口胀痛和渗血提示局部血肿风险",
+          "pain_risk": "疼痛7分，需镇痛并评估是否由血肿/出血导致",
+          "limb_safety_risk": "腋窝清扫后右上肢麻木，需防压迫、淋巴水肿和神经血管异常",
+          "medication_safety": "阿司匹林停药时间不详，增加出血风险线索"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "外科医生/值班医生",
+            "reason": "术后鲜红引流量快速增加并伴渗血、P 108、BP 102/64，需评估活动性出血或血肿"
+          },
+          {
+            "urgency": "立即",
+            "target": "责任护士/护士长",
+            "reason": "需严密计量引流、检查负压和敷料，准备抽血/补液等医嘱执行"
+          },
+          {
+            "urgency": "尽快",
+            "target": "医生",
+            "reason": "核实阿司匹林停药时间和凝血风险"
+          }
+        ],
+        "nursing_priorities": [
+          "保持引流管通畅和负压有效，记录每根管颜色、性质、量",
+          "观察敷料渗血范围并标记时间，不随意加压过紧影响血供",
+          "监测血压、脉搏、面色、尿量和头晕等失血表现",
+          "按医嘱镇痛，复评疼痛并警惕疼痛突然加重",
+          "患侧上肢避免测血压、采血和负重，评估麻木及肿胀"
+        ]
+      },
+      "model_output_text": "{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": \"术后转入\",\n    \"chief_complaint\": \"右乳癌术后第1天，切口胀痛，引流液增多\",\n    \"vital_signs\": {\n      \"temperature_c\": 36.9,\n      \"pulse_per_min\": 108,\n      \"respiration_per_min\": 20,\n      \"blood_pressure_mmHg\": \"102/64\",\n      \"spo2\": null\n    },\n    \"consciousness_cognition\": null,\n    \"breathing_circulation\": \"心率增快，血压偏低，提示可能存在循环容量不足或活动性出血\",\n    \"pain_score\": 7,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"高血压\",\n      \"乳腺癌\"\n    ],\n    \"medication_history\": [\n      \"阿司匹林（术前停药时间不详）\"\n    ],\n    \"nutrition_hydration\": null,\n    \"elimination\": null,\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": \"右乳术后伤口敷料局部渗血，手掌大小；腋窝负压引流管2根在位，近1小时引流鲜红色液体120ml\",\n    \"infection_screening\": null,\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"术前阿司匹林停药时间\",\n      \"当前血红蛋白水平\",\n      \"引流液性质是否持续为鲜红色\",\n      \"末梢灌注情况（如皮肤温度、毛细血管再充盈时间）\",\n      \"SpO2数值\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"高危\",\n    \"fall_risk\": null,\n    \"pressure_injury_risk\": null,\n    \"vte_risk\": null,\n    \"aspiration_risk\": null,\n    \"bleeding_risk\": \"高\",\n    \"infection_or_sepsis_risk\": \"中危\",\n    \"medication_safety_risk\": \"中危（抗血小板药物使用史）\",\n    \"other_key_risks\": [\n      \"术后血流动力学不稳定\",\n      \"引流液量及性质提示活动性出血\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"近1小时引流液达120ml且为鲜红色，伴心动过速（P 108次/分）及相对低血压（BP 102/64mmHg），提示活动性术后出血。根据文献，**术后出血定义为引流液>100ml直至术后次日早晨** ^[1]^。当前情况已符合该标准，需立即评估是否需干预止血。\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"持续监测生命体征，尤其心率、血压趋势\",\n    \"每15-30分钟评估引流液量、颜色及速度\",\n    \"评估伤口敷料渗血范围是否扩大\",\n    \"保持静脉通路通畅，备血及补液\",\n    \"避免不必要的活动，防止出血加重\"\n  ],\n  \"patient_safety_actions\": [\n    \"立即报告医生引流液量及生命体征异常\",\n    \"准备血常规、凝血功能检查\",\n    \"评估是否需紧急影像学或重返手术室止血\",\n    \"记录出血评估标准：**引流液>100ml或需手动压迫止血** ^[1]^\"\n  ],\n  \"confidence\": \"高\"\n}\n\n我建议您进一步查阅术后出血高风险患者的抗血小板药物管理及逆转策略的最新临床指南。您需要我帮您检索相关文献吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": "术后转入",
+          "chief_complaint": "右乳癌术后第1天，切口胀痛，引流液增多",
+          "vital_signs": {
+            "temperature_c": 36.9,
+            "pulse_per_min": 108,
+            "respiration_per_min": 20,
+            "blood_pressure_mmHg": "102/64",
+            "spo2": null
+          },
+          "consciousness_cognition": null,
+          "breathing_circulation": "心率增快，血压偏低，提示可能存在循环容量不足或活动性出血",
+          "pain_score": 7,
+          "allergy_history": [],
+          "past_history": [
+            "高血压",
+            "乳腺癌"
+          ],
+          "medication_history": [
+            "阿司匹林（术前停药时间不详）"
+          ],
+          "nutrition_hydration": null,
+          "elimination": null,
+          "skin_pressure_injury": null,
+          "mobility_adl": null,
+          "tubes_devices_wounds": "右乳术后伤口敷料局部渗血，手掌大小；腋窝负压引流管2根在位，近1小时引流鲜红色液体120ml",
+          "infection_screening": null,
+          "mental_health_safety": null,
+          "missing_information": [
+            "术前阿司匹林停药时间",
+            "当前血红蛋白水平",
+            "引流液性质是否持续为鲜红色",
+            "末梢灌注情况（如皮肤温度、毛细血管再充盈时间）",
+            "SpO2数值"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "fall_risk": null,
+          "pressure_injury_risk": null,
+          "vte_risk": null,
+          "aspiration_risk": null,
+          "bleeding_risk": "高",
+          "infection_or_sepsis_risk": "中危",
+          "medication_safety_risk": "中危（抗血小板药物使用史）",
+          "other_key_risks": [
+            "术后血流动力学不稳定",
+            "引流液量及性质提示活动性出血"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "近1小时引流液达120ml且为鲜红色，伴心动过速（P 108次/分）及相对低血压（BP 102/64mmHg），提示活动性术后出血。根据文献，**术后出血定义为引流液>100ml直至术后次日早晨** ^[1]^。当前情况已符合该标准，需立即评估是否需干预止血。"
+          }
+        ],
+        "nursing_priorities": [
+          "持续监测生命体征，尤其心率、血压趋势",
+          "每15-30分钟评估引流液量、颜色及速度",
+          "评估伤口敷料渗血范围是否扩大",
+          "保持静脉通路通畅，备血及补液",
+          "避免不必要的活动，防止出血加重"
+        ],
+        "patient_safety_actions": [
+          "立即报告医生引流液量及生命体征异常",
+          "准备血常规、凝血功能检查",
+          "评估是否需紧急影像学或重返手术室止血",
+          "记录出血评估标准：**引流液>100ml或需手动压迫止血** ^[1]^"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 50.818023265805095,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1465,
+        "prompt_tokens": 15447,
+        "total_tokens": 16912,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_011",
+      "input": "41岁男性，因急性胰腺炎收入消化内科。饮酒后突发上腹部持续剧痛放射至背部，呕吐3次。T 38.1℃，P 116次/分，R 24次/分，BP 100/62mmHg，SpO2 96%。疼痛9分，腹胀明显。化验提示血淀粉酶升高，血钙偏低。患者口渴明显，入院前6小时未排尿。既往高脂血症。无过敏史。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "急诊收入消化内科",
+          "chief_complaint": "饮酒后上腹部持续剧痛放射至背部，呕吐",
+          "vital_signs": {
+            "temperature_c": 38.1,
+            "pulse_per_min": 116,
+            "respiration_per_min": 24,
+            "blood_pressure_mmHg": "100/62",
+            "spo2": "96%"
+          },
+          "pain_score": 9,
+          "gastrointestinal": "呕吐3次，腹胀明显",
+          "lab_key_values": {
+            "amylase": "升高",
+            "calcium": "偏低"
+          },
+          "hydration_perfusion": "口渴明显，入院前6小时未排尿，血压偏低伴心动过速",
+          "past_history": [
+            "高脂血症"
+          ],
+          "allergy_history": [],
+          "missing_information": [
+            "血脂/甘油三酯",
+            "尿量精确记录和肾功能",
+            "腹部影像",
+            "血糖",
+            "C反应蛋白/血常规",
+            "是否有胆石症史",
+            "体重和液体复苏医嘱"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "severe_pancreatitis_risk": "发热、心动过速、低血压边缘、无尿6小时、低钙和腹胀，需警惕重症胰腺炎",
+          "hypovolemia_risk": "呕吐、第三间隙丢失、口渴和少尿，容量不足风险高",
+          "pain_risk": "疼痛9分，为重度疼痛",
+          "electrolyte_risk": "低钙可能提示病情较重并有抽搐/心律风险",
+          "aspiration_risk": "频繁呕吐，误吸风险"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "主管医生/值班医生",
+            "reason": "疑急性胰腺炎伴容量不足和少尿，需要液体复苏、严密监测和重症评估"
+          },
+          {
+            "urgency": "尽快",
+            "target": "医生",
+            "reason": "血钙偏低和腹胀明显，需关注重症指标和并发症"
+          },
+          {
+            "urgency": "入院即刻",
+            "target": "责任护士",
+            "reason": "疼痛9分和呕吐，需禁食、胃肠减压准备按医嘱、误吸预防"
+          }
+        ],
+        "nursing_priorities": [
+          "禁食禁饮，呕吐时侧卧或头偏向一侧，备吸引",
+          "建立静脉通路，按医嘱补液并严密记录尿量，必要时留置导尿评估",
+          "监测生命体征、腹痛腹胀、意识和尿量，识别休克早期表现",
+          "按医嘱镇痛并复评疼痛，避免遗漏疼痛加重信号",
+          "观察低钙相关麻木、抽搐、心律异常，跟踪电解质结果"
+        ]
+      },
+      "model_output_text": "```json\n{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": null,\n    \"chief_complaint\": \"饮酒后突发上腹部持续剧痛放射至背部，伴呕吐\",\n    \"vital_signs\": {\n      \"temperature_c\": 38.1,\n      \"pulse_per_min\": 116,\n      \"respiration_per_min\": 24,\n      \"blood_pressure_mmHg\": \"100/62\",\n      \"spo2\": 96\n    },\n    \"consciousness_cognition\": null,\n    \"breathing_circulation\": \"心动过速、呼吸增快、血压偏低，提示循环不稳定\",\n    \"pain_score\": 9,\n    \"allergy_history\": [],\n    \"past_history\": [\"高脂血症\"],\n    \"medication_history\": [],\n    \"nutrition_hydration\": \"口渴明显，6小时无尿，提示容量不足\",\n    \"elimination\": \"入院前6小时未排尿\",\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": null,\n    \"infection_screening\": \"体温38.1℃，白细胞可能升高（未提供），存在SIRS可能\",\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"意识状态\",\n      \"腹部体征（压痛、反跳痛、肌紧张）\",\n      \"血钙具体数值\",\n      \"血尿素氮、肌酐、CRP等实验室指标\",\n      \"尿量监测记录\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"高危\",\n    \"fall_risk\": null,\n    \"pressure_injury_risk\": null,\n    \"vte_risk\": null,\n    \"aspiration_risk\": \"呕吐3次，存在误吸风险\",\n    \"bleeding_risk\": null,\n    \"infection_or_sepsis_risk\": \"体温升高、心动过速、呼吸增快，符合SIRS标准（≥2项）^[1]^；若持续存在，将增加器官衰竭风险\",\n    \"medication_safety_risk\": null,\n    \"other_key_risks\": [\n      \"容量不足/休克早期\",\n      \"急性肾损伤风险（无尿6小时）\",\n      \"病情可能向重症急性胰腺炎发展\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"生命体征提示SIRS（体温>38℃、心率>90次/分、呼吸>20次/分）^[1]^，血压偏低（100/62mmHg），结合无尿6小时及口渴，提示早期休克，需立即评估容量状态并启动液体复苏\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"医生\",\n      \"reason\": \"血钙偏低，若**血钙 < 1.5 mmol/L**，提示预后不良^[1]^；需动态监测电解质及器官功能\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"立即建立静脉通路，准备液体复苏\",\n    \"每小时监测尿量，评估肾功能及容量反应\",\n    \"持续监测生命体征（每15-30分钟）直至稳定\",\n    \"评估腹痛变化及腹部体征\",\n    \"动态监测血钙、BUN、CRP等严重度指标\"\n  ],\n  \"patient_safety_actions\": [\n    \"保持呼吸道通畅，预防呕吐物误吸\",\n    \"避免随意调整输液速度，防止容量过负荷\",\n    \"记录出入量，严格液体管理\",\n    \"警惕腹腔间隔室综合征（ACS）表现，如腹胀进行性加重\"\n  ],\n  \"confidence\": \"高\"\n}\n```\n\n我建议您进一步查阅急性胰腺炎患者早期液体复苏的策略及其对器官功能保护的疗效与安全性，以及相关临床指南推荐。您需要我帮您检索这方面的权威研究或指南吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": null,
+          "chief_complaint": "饮酒后突发上腹部持续剧痛放射至背部，伴呕吐",
+          "vital_signs": {
+            "temperature_c": 38.1,
+            "pulse_per_min": 116,
+            "respiration_per_min": 24,
+            "blood_pressure_mmHg": "100/62",
+            "spo2": 96
+          },
+          "consciousness_cognition": null,
+          "breathing_circulation": "心动过速、呼吸增快、血压偏低，提示循环不稳定",
+          "pain_score": 9,
+          "allergy_history": [],
+          "past_history": [
+            "高脂血症"
+          ],
+          "medication_history": [],
+          "nutrition_hydration": "口渴明显，6小时无尿，提示容量不足",
+          "elimination": "入院前6小时未排尿",
+          "skin_pressure_injury": null,
+          "mobility_adl": null,
+          "tubes_devices_wounds": null,
+          "infection_screening": "体温38.1℃，白细胞可能升高（未提供），存在SIRS可能",
+          "mental_health_safety": null,
+          "missing_information": [
+            "意识状态",
+            "腹部体征（压痛、反跳痛、肌紧张）",
+            "血钙具体数值",
+            "血尿素氮、肌酐、CRP等实验室指标",
+            "尿量监测记录"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "fall_risk": null,
+          "pressure_injury_risk": null,
+          "vte_risk": null,
+          "aspiration_risk": "呕吐3次，存在误吸风险",
+          "bleeding_risk": null,
+          "infection_or_sepsis_risk": "体温升高、心动过速、呼吸增快，符合SIRS标准（≥2项）^[1]^；若持续存在，将增加器官衰竭风险",
+          "medication_safety_risk": null,
+          "other_key_risks": [
+            "容量不足/休克早期",
+            "急性肾损伤风险（无尿6小时）",
+            "病情可能向重症急性胰腺炎发展"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "生命体征提示SIRS（体温>38℃、心率>90次/分、呼吸>20次/分）^[1]^，血压偏低（100/62mmHg），结合无尿6小时及口渴，提示早期休克，需立即评估容量状态并启动液体复苏"
+          },
+          {
+            "urgency": "尽快",
+            "target": "医生",
+            "reason": "血钙偏低，若**血钙 < 1.5 mmol/L**，提示预后不良^[1]^；需动态监测电解质及器官功能"
+          }
+        ],
+        "nursing_priorities": [
+          "立即建立静脉通路，准备液体复苏",
+          "每小时监测尿量，评估肾功能及容量反应",
+          "持续监测生命体征（每15-30分钟）直至稳定",
+          "评估腹痛变化及腹部体征",
+          "动态监测血钙、BUN、CRP等严重度指标"
+        ],
+        "patient_safety_actions": [
+          "保持呼吸道通畅，预防呕吐物误吸",
+          "避免随意调整输液速度，防止容量过负荷",
+          "记录出入量，严格液体管理",
+          "警惕腹腔间隔室综合征（ACS）表现，如腹胀进行性加重"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 43.491680621868,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1512,
+        "prompt_tokens": 35506,
+        "total_tokens": 37018,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    },
+    {
+      "id": "admission_assessment_012",
+      "input": "76岁男性，因慢性心力衰竭急性加重收入心内科。主诉胸闷气促、夜间憋醒3天，今天不能平卧。T 36.6℃，P 118次/分，R 28次/分，BP 168/92mmHg，SpO2 88%（空气），坐位吸氧4L/min后94%。双肺湿啰音，双下肢水肿。既往冠心病、房颤、心衰，服用地高辛、呋塞米、华法林，最近因食欲差自行少服利尿剂。入院时带有家中药盒，药名混放。",
+      "expected_output": {
+        "assessment_fields": {
+          "admission_source": "急诊/门诊收入心内科",
+          "chief_complaint": "胸闷气促、夜间憋醒3天，不能平卧",
+          "vital_signs": {
+            "temperature_c": 36.6,
+            "pulse_per_min": 118,
+            "respiration_per_min": 28,
+            "blood_pressure_mmHg": "168/92",
+            "spo2": "88%空气；坐位吸氧4L/min后94%"
+          },
+          "cardiorespiratory": "不能平卧、双肺湿啰音、双下肢水肿，急性容量负荷表现",
+          "past_history": [
+            "冠心病",
+            "房颤",
+            "慢性心力衰竭"
+          ],
+          "medication_history": [
+            "地高辛",
+            "呋塞米",
+            "华法林",
+            "近期自行少服利尿剂",
+            "家中药盒药名混放"
+          ],
+          "allergy_history": "未提供",
+          "nutrition": "食欲差",
+          "missing_information": [
+            "心电图",
+            "BNP/NT-proBNP",
+            "电解质和肾功能",
+            "INR",
+            "地高辛血药浓度或中毒表现",
+            "体重变化",
+            "尿量",
+            "过敏史"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "heart_failure_risk": "急性心衰加重，低氧、不能平卧、湿啰音和水肿明显",
+          "respiratory_failure_risk": "空气SpO2 88%、R 28，呼吸衰竭风险",
+          "arrhythmia_risk": "房颤、心动过速，需心电监护",
+          "medication_safety": "地高辛、华法林和利尿剂管理混乱，存在中毒、出血、电解质紊乱和漏服风险",
+          "fall_risk": "低氧、气促、利尿后如厕频繁风险，跌倒中高危"
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "心内科医生/值班医生",
+            "reason": "低氧、不能平卧、R 28和湿啰音提示急性心衰加重，需氧疗、利尿/扩血管等医嘱评估"
+          },
+          {
+            "urgency": "立即",
+            "target": "责任护士",
+            "reason": "需心电监护、严格出入量、体位管理和用药核对"
+          },
+          {
+            "urgency": "尽快",
+            "target": "药师/医生",
+            "reason": "家中药盒混放且含华法林、地高辛等高警示药，需药物重整"
+          }
+        ],
+        "nursing_priorities": [
+          "协助端坐位或半坐卧位，持续吸氧并监测SpO2、呼吸频率和呼吸困难",
+          "心电监护，观察胸痛、心律失常、意识改变和低灌注表现",
+          "严格记录出入量、尿量和每日体重，按医嘱执行利尿并观察电解质风险",
+          "进行药物重整，核对地高辛、华法林、利尿剂剂量和服药依从性",
+          "落实跌倒预防，尤其利尿治疗后协助如厕"
+        ]
+      },
+      "model_output_text": "```json\n{\n  \"scenario\": \"入院评估\",\n  \"assessment_fields\": {\n    \"admission_source\": null,\n    \"chief_complaint\": \"胸闷气促、夜间憋醒3天，今天不能平卧\",\n    \"vital_signs\": {\n      \"temperature_c\": 36.6,\n      \"pulse_per_min\": 118,\n      \"respiration_per_min\": 28,\n      \"blood_pressure_mmHg\": \"168/92\",\n      \"spo2\": 88\n    },\n    \"consciousness_cognition\": null,\n    \"breathing_circulation\": \"呼吸急促，双肺湿啰音，SpO2 88%（空气），坐位吸氧后改善至94%\",\n    \"pain_score\": null,\n    \"allergy_history\": [],\n    \"past_history\": [\n      \"冠心病\",\n      \"房颤\",\n      \"心力衰竭\"\n    ],\n    \"medication_history\": [\n      \"地高辛\",\n      \"呋塞米\",\n      \"华法林\"\n    ],\n    \"nutrition_hydration\": \"近期食欲差，可能摄入不足\",\n    \"elimination\": null,\n    \"skin_pressure_injury\": null,\n    \"mobility_adl\": null,\n    \"tubes_devices_wounds\": null,\n    \"infection_screening\": null,\n    \"mental_health_safety\": null,\n    \"missing_information\": [\n      \"意识状态\",\n      \"疼痛评分\",\n      \"皮肤状况\",\n      \"排泄情况\",\n      \"管路/伤口\",\n      \"感染筛查结果\",\n      \"心理安全评估\"\n    ]\n  },\n  \"risk_judgement\": {\n    \"overall_acuity\": \"高危\",\n    \"fall_risk\": \"高风险（因心率快、可能使用地高辛及利尿剂）\",\n    \"pressure_injury_risk\": \"中风险（活动受限可能）\",\n    \"vte_risk\": \"高风险（心衰、活动减少）\",\n    \"aspiration_risk\": \"中风险（呼吸困难、可能进食困难）\",\n    \"bleeding_risk\": \"高风险（使用华法林，可能INR异常）\",\n    \"infection_or_sepsis_risk\": \"中风险（食欲差可能提示感染诱因）\",\n    \"medication_safety_risk\": \"极高风险（药物混放、自行减量、使用地高辛和华法林）\",\n    \"other_key_risks\": [\n      \"洋地黄中毒风险（心率118次/分，可能为房颤伴快速心室率，且自行调整药物）\",\n      \"容量负荷过重（不能平卧、湿啰音、水肿）\"\n    ]\n  },\n  \"escalation_required\": true,\n  \"escalation_items\": [\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"存在急性心衰表现：呼吸频率28次/分，SpO2 88%（空气），端坐呼吸，双肺湿啰音，提示肺淤血；血压升高（168/92mmHg），符合高血压性急性心衰。根据材料，**大多数急性心衰患者表现为收缩压正常或升高（＞140mmHg）** ^[1]^。应尽快启动治疗。\"\n    },\n    {\n      \"urgency\": \"立即\",\n      \"target\": \"医生\",\n      \"reason\": \"心率118次/分，结合房颤病史，**主要适应证是房颤伴快速心室率（＞110次/min）的急性心衰患者**，可考虑使用洋地黄类药物 ^[1]^。但需评估地高辛血药浓度，警惕中毒。\"\n    },\n    {\n      \"urgency\": \"尽快\",\n      \"target\": \"专科护士/药师\",\n      \"reason\": \"药物混放、自行减量，存在严重用药安全风险。**整合系统性药物审查、多学科协作及个体化决策对最小化医源性伤害至关重要** ^[10]^。建议尽快进行药物重整。\"\n    }\n  ],\n  \"nursing_priorities\": [\n    \"维持氧合：持续监测SpO2，保持吸氧通畅\",\n    \"监测容量状态：每日评估体重、出入量、水肿变化\",\n    \"心电、血压持续监测\",\n    \"评估洋地黄中毒征象（如视觉异常、心律失常）\",\n    \"预防跌倒：床边警示、协助活动\"\n  ],\n  \"patient_safety_actions\": [\n    \"立即核对并整理药物，避免错误用药\",\n    \"评估INR，监测出血征象（因使用华法林）\",\n    \"启动VTE预防措施（如无禁忌）\",\n    \"进行药物依从性教育，避免自行调整剂量\"\n  ],\n  \"confidence\": \"高\"\n}\n```\n\n我建议您进一步查阅心力衰竭患者在急性期使用地高辛的安全性及血药浓度监测的临床指南，特别是房颤伴快速心室率时的用药风险与获益。您需要我帮您检索相关权威研究或指南吗？",
+      "model_output_json": {
+        "scenario": "入院评估",
+        "assessment_fields": {
+          "admission_source": null,
+          "chief_complaint": "胸闷气促、夜间憋醒3天，今天不能平卧",
+          "vital_signs": {
+            "temperature_c": 36.6,
+            "pulse_per_min": 118,
+            "respiration_per_min": 28,
+            "blood_pressure_mmHg": "168/92",
+            "spo2": 88
+          },
+          "consciousness_cognition": null,
+          "breathing_circulation": "呼吸急促，双肺湿啰音，SpO2 88%（空气），坐位吸氧后改善至94%",
+          "pain_score": null,
+          "allergy_history": [],
+          "past_history": [
+            "冠心病",
+            "房颤",
+            "心力衰竭"
+          ],
+          "medication_history": [
+            "地高辛",
+            "呋塞米",
+            "华法林"
+          ],
+          "nutrition_hydration": "近期食欲差，可能摄入不足",
+          "elimination": null,
+          "skin_pressure_injury": null,
+          "mobility_adl": null,
+          "tubes_devices_wounds": null,
+          "infection_screening": null,
+          "mental_health_safety": null,
+          "missing_information": [
+            "意识状态",
+            "疼痛评分",
+            "皮肤状况",
+            "排泄情况",
+            "管路/伤口",
+            "感染筛查结果",
+            "心理安全评估"
+          ]
+        },
+        "risk_judgement": {
+          "overall_acuity": "高危",
+          "fall_risk": "高风险（因心率快、可能使用地高辛及利尿剂）",
+          "pressure_injury_risk": "中风险（活动受限可能）",
+          "vte_risk": "高风险（心衰、活动减少）",
+          "aspiration_risk": "中风险（呼吸困难、可能进食困难）",
+          "bleeding_risk": "高风险（使用华法林，可能INR异常）",
+          "infection_or_sepsis_risk": "中风险（食欲差可能提示感染诱因）",
+          "medication_safety_risk": "极高风险（药物混放、自行减量、使用地高辛和华法林）",
+          "other_key_risks": [
+            "洋地黄中毒风险（心率118次/分，可能为房颤伴快速心室率，且自行调整药物）",
+            "容量负荷过重（不能平卧、湿啰音、水肿）"
+          ]
+        },
+        "escalation_required": true,
+        "escalation_items": [
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "存在急性心衰表现：呼吸频率28次/分，SpO2 88%（空气），端坐呼吸，双肺湿啰音，提示肺淤血；血压升高（168/92mmHg），符合高血压性急性心衰。根据材料，**大多数急性心衰患者表现为收缩压正常或升高（＞140mmHg）** ^[1]^。应尽快启动治疗。"
+          },
+          {
+            "urgency": "立即",
+            "target": "医生",
+            "reason": "心率118次/分，结合房颤病史，**主要适应证是房颤伴快速心室率（＞110次/min）的急性心衰患者**，可考虑使用洋地黄类药物 ^[1]^。但需评估地高辛血药浓度，警惕中毒。"
+          },
+          {
+            "urgency": "尽快",
+            "target": "专科护士/药师",
+            "reason": "药物混放、自行减量，存在严重用药安全风险。**整合系统性药物审查、多学科协作及个体化决策对最小化医源性伤害至关重要** ^[10]^。建议尽快进行药物重整。"
+          }
+        ],
+        "nursing_priorities": [
+          "维持氧合：持续监测SpO2，保持吸氧通畅",
+          "监测容量状态：每日评估体重、出入量、水肿变化",
+          "心电、血压持续监测",
+          "评估洋地黄中毒征象（如视觉异常、心律失常）",
+          "预防跌倒：床边警示、协助活动"
+        ],
+        "patient_safety_actions": [
+          "立即核对并整理药物，避免错误用药",
+          "评估INR，监测出血征象（因使用华法林）",
+          "启动VTE预防措施（如无禁忌）",
+          "进行药物依从性教育，避免自行调整剂量"
+        ],
+        "confidence": "高"
+      },
+      "request_duration_seconds": 33.48674742691219,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 1722,
+        "prompt_tokens": 29607,
+        "total_tokens": 31329,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 1
+      }
+    }
+  ]
+}

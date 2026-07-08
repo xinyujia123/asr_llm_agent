@@ -1,0 +1,1391 @@
+{
+  "summary": {
+    "scenario_dir": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/01_nursing_document_generation",
+    "dataset": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/01_nursing_document_generation/dataset.jsonl",
+    "prompt": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/nurse_llm_test/01_nursing_document_generation/prompt.md",
+    "provider": "baichuan",
+    "model_name": "Baichuan-M3",
+    "base_url": "https://api.baichuan-ai.com/v1/",
+    "output_prefix": "baichuan-m3",
+    "request_count": 12,
+    "error_count": 0,
+    "parsed_json_count": 11,
+    "avg_request_duration_seconds": 38.09560546928939,
+    "total_request_duration_seconds": 457.1472656314727,
+    "usage_total": {
+      "completion_tokens": 37283,
+      "prompt_tokens": 8315,
+      "total_tokens": 45598,
+      "search_count": 0
+    },
+    "concurrency": 10,
+    "max_tokens": 4096,
+    "baichuan_with_search_enhance": "false"
+  },
+  "records": [
+    {
+      "id": "NDG-001",
+      "input": "7月8日9点20分，新入院18床王秀兰，女，72岁，慢阻肺合并慢性心衰，主诉活动后气促3天。入科时神清，能对答，口唇轻度紫绀，体温36.8，脉搏96，呼吸24，血压138/78，未吸氧血氧88，给鼻导管2升每分钟后升到94。双下肢轻度凹陷性水肿，夜间平卧会憋醒。青霉素过敏，别写成头孢。家属陪护，走路需要扶，过去半年跌倒过一次。",
+      "expected_output": {
+        "document_type": "入院护理评估/首次护理记录",
+        "patient": {
+          "bed": "18床",
+          "name": "王秀兰",
+          "sex": "女",
+          "age": "72岁",
+          "allergy": "青霉素过敏"
+        },
+        "record_time": "2026-07-08 09:20",
+        "assessment": {
+          "consciousness": "神清，可正确对答",
+          "chief_problem": "活动后气促3天，慢阻肺合并慢性心衰入院",
+          "vital_signs": {
+            "T": "36.8℃",
+            "P": "96次/分",
+            "R": "24次/分",
+            "BP": "138/78mmHg",
+            "SpO2_before_oxygen": "88%",
+            "SpO2_after_oxygen": "94%，鼻导管吸氧2L/min"
+          },
+          "physical_findings": [
+            "口唇轻度紫绀",
+            "双下肢轻度凹陷性水肿",
+            "夜间平卧后憋醒"
+          ],
+          "self_care_and_safety": "行走需扶助，家属陪护，近半年有跌倒史"
+        },
+        "nursing_problems": [
+          "气体交换受损风险",
+          "心衰液体潴留相关风险",
+          "跌倒高风险",
+          "药物过敏风险"
+        ],
+        "nursing_measures": [
+          "遵医嘱予鼻导管吸氧2L/min，观察呼吸频率、SpO2及紫绀变化",
+          "协助半卧位或舒适体位，减少活动耗氧",
+          "评估水肿、夜间呼吸困难及出入量，异常及时报告医生",
+          "落实跌倒预防：床栏、呼叫铃在手边、下床有人陪同、防滑鞋",
+          "病历及腕带/过敏标识注明青霉素过敏，给药前双人核对"
+        ],
+        "evaluation": "吸氧后SpO2由88%升至94%，患者气促较入科时缓解，仍需持续观察呼吸和心衰加重征象。",
+        "risk_flags": [
+          "低氧血症",
+          "慢阻肺/心衰基础病",
+          "跌倒史",
+          "青霉素过敏"
+        ],
+        "follow_up": [
+          "持续监测生命体征和SpO2",
+          "记录出入量及下肢水肿变化",
+          "完成跌倒风险评估并交接班重点提示"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"入院护理评估\",\n  \"patient\": {\n    \"床号\": \"18\",\n    \"姓名\": \"王秀兰\",\n    \"性别\": \"女\",\n    \"年龄\": \"72\",\n    \"诊断\": \"慢阻肺合并慢性心衰\",\n    \"过敏史\": \"青霉素过敏\"\n  },\n  \"record_time\": \"7月8日9点20分\",\n  \"source_summary\": \"72岁女性，慢阻肺合并心衰，主诉活动后气促3天。入科神清，口唇紫绀，生命体征：T36.8℃，P96，R24，BP138/78。未吸氧SpO2 88%，吸氧后94%。双下肢水肿，夜间平卧憋醒。青霉素过敏。家属陪护，有跌倒史。\",\n  \"assessment\": {\n    \"主诉\": \"活动后气促3天\",\n    \"生命体征\": \"体温36.8℃，脉搏96次/分，呼吸24次/分，血压138/78mmHg\",\n    \"血氧饱和度\": \"未吸氧88%，鼻导管吸氧2L/min后94%\",\n    \"体征\": \"口唇轻度紫绀，双下肢轻度凹陷性水肿，夜间平卧憋醒\",\n    \"意识状态\": \"神清，能对答\"\n  },\n  \"nursing_problems\": [\n    \"气体交换受损\",\n    \"体液过多\",\n    \"活动耐力下降\",\n    \"跌倒风险\",\n    \"皮肤完整性受损风险\"\n  ],\n  \"nursing_measures\": [\n    \"已执行：给予鼻导管吸氧2L/min，血氧改善\",\n    \"持续监测生命体征及血氧饱和度\",\n    \"记录24小时出入量\",\n    \"评估下肢水肿程度\",\n    \"指导半卧位休息\",\n    \"实施跌倒预防措施（床旁扶手、呼叫器）\",\n    \"健康教育：呼吸锻炼、限盐饮食\"\n  ],\n  \"evaluation\": \"吸氧后血氧饱和度提升至94%，呼吸困难症状部分缓解。\",\n  \"risk_flags\": [\n    \"低氧血症风险\",\n    \"心衰加重风险\",\n    \"跌倒风险\",\n    \"压力性损伤风险\"\n  ],\n  \"follow_up\": [\n    \"每4小时监测生命体征\",\n    \"每日评估呼吸困难及水肿情况\",\n    \"复测血氧饱和度\",\n    \"评估跌倒预防措施落实情况\",\n    \"与医生沟通治疗方案\",\n    \"交接班重点：血氧、水肿、跌倒风险\"\n  ],\n  \"missing_information\": [\n    \"体重\",\n    \"详细用药史\",\n    \"近期检查结果（如血常规、电解质、心电图）\",\n    \"既往心衰控制情况\"\n  ],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "入院护理评估",
+        "patient": {
+          "床号": "18",
+          "姓名": "王秀兰",
+          "性别": "女",
+          "年龄": "72",
+          "诊断": "慢阻肺合并慢性心衰",
+          "过敏史": "青霉素过敏"
+        },
+        "record_time": "7月8日9点20分",
+        "source_summary": "72岁女性，慢阻肺合并心衰，主诉活动后气促3天。入科神清，口唇紫绀，生命体征：T36.8℃，P96，R24，BP138/78。未吸氧SpO2 88%，吸氧后94%。双下肢水肿，夜间平卧憋醒。青霉素过敏。家属陪护，有跌倒史。",
+        "assessment": {
+          "主诉": "活动后气促3天",
+          "生命体征": "体温36.8℃，脉搏96次/分，呼吸24次/分，血压138/78mmHg",
+          "血氧饱和度": "未吸氧88%，鼻导管吸氧2L/min后94%",
+          "体征": "口唇轻度紫绀，双下肢轻度凹陷性水肿，夜间平卧憋醒",
+          "意识状态": "神清，能对答"
+        },
+        "nursing_problems": [
+          "气体交换受损",
+          "体液过多",
+          "活动耐力下降",
+          "跌倒风险",
+          "皮肤完整性受损风险"
+        ],
+        "nursing_measures": [
+          "已执行：给予鼻导管吸氧2L/min，血氧改善",
+          "持续监测生命体征及血氧饱和度",
+          "记录24小时出入量",
+          "评估下肢水肿程度",
+          "指导半卧位休息",
+          "实施跌倒预防措施（床旁扶手、呼叫器）",
+          "健康教育：呼吸锻炼、限盐饮食"
+        ],
+        "evaluation": "吸氧后血氧饱和度提升至94%，呼吸困难症状部分缓解。",
+        "risk_flags": [
+          "低氧血症风险",
+          "心衰加重风险",
+          "跌倒风险",
+          "压力性损伤风险"
+        ],
+        "follow_up": [
+          "每4小时监测生命体征",
+          "每日评估呼吸困难及水肿情况",
+          "复测血氧饱和度",
+          "评估跌倒预防措施落实情况",
+          "与医生沟通治疗方案",
+          "交接班重点：血氧、水肿、跌倒风险"
+        ],
+        "missing_information": [
+          "体重",
+          "详细用药史",
+          "近期检查结果（如血常规、电解质、心电图）",
+          "既往心衰控制情况"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 34.30516959098168,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2616,
+        "prompt_tokens": 724,
+        "total_tokens": 3340,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-002",
+      "input": "3床李明，男56岁，今天做腹腔镜胆囊切除，15点10分回病房，现在是术后6小时。患者清醒，诉切口疼，数字评分4分，恶心不明显。体温37.8，脉搏88，呼吸20，血压126/76，血氧97。腹部三个小切口敷料干燥，右上腹引流管通畅，6小时引出淡红色液30毫升。尿管在位，尿色淡黄，量约400毫升。还没排气。",
+      "expected_output": {
+        "document_type": "术后护理记录",
+        "patient": {
+          "bed": "3床",
+          "name": "李明",
+          "sex": "男",
+          "age": "56岁"
+        },
+        "record_time": "术后6小时，2026-07-08 21:10",
+        "assessment": {
+          "operation": "腹腔镜胆囊切除术后返回病房",
+          "consciousness": "清醒",
+          "symptoms": [
+            "切口疼痛NRS 4分",
+            "恶心不明显",
+            "未排气"
+          ],
+          "vital_signs": {
+            "T": "37.8℃",
+            "P": "88次/分",
+            "R": "20次/分",
+            "BP": "126/76mmHg",
+            "SpO2": "97%"
+          },
+          "wound_and_tubes": [
+            "腹部3处小切口敷料干燥",
+            "右上腹引流管通畅，6小时淡红色引流液30ml",
+            "尿管在位，尿色淡黄，尿量约400ml"
+          ]
+        },
+        "nursing_problems": [
+          "术后疼痛",
+          "术后出血/感染风险",
+          "管路滑脱风险",
+          "肠功能未恢复"
+        ],
+        "nursing_measures": [
+          "按术后护理常规监测生命体征、意识、腹痛和腹胀变化",
+          "保持引流管通畅，妥善固定，记录引流液颜色、性质和量",
+          "观察切口敷料渗血渗液情况，保持敷料清洁干燥",
+          "评估疼痛，指导保护切口、深呼吸和有效咳嗽，必要时遵医嘱镇痛",
+          "保持尿管通畅并记录尿量，做好会阴护理",
+          "未排气前按医嘱禁食/饮食管理，鼓励床上活动，条件允许时协助早期下床"
+        ],
+        "evaluation": "生命体征平稳，切口敷料干燥，引流量及颜色符合术后早期观察范围，疼痛可耐受。",
+        "risk_flags": [
+          "术后早期",
+          "体温37.8℃需复测",
+          "腹腔引流管在位",
+          "尿管在位",
+          "未排气"
+        ],
+        "follow_up": [
+          "继续观察体温、腹痛腹胀、排气情况",
+          "交接引流液量30ml及尿量400ml",
+          "若出现鲜红引流液增多、发热升高或腹痛加重，立即报告医生"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"术后护理记录\",\n  \"patient\": {\n    \"bed_number\": \"3\",\n    \"name\": \"李明\",\n    \"gender\": \"男\",\n    \"age\": \"56岁\",\n    \"diagnosis\": \"腹腔镜胆囊切除术后\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"术后6小时\",\n  \"source_summary\": \"患者李明，男56岁，腹腔镜胆囊切除术后6小时，清醒，主诉切口疼痛4分，无明显恶心。生命体征：T 37.8°C，P 88，R 20，BP 126/76，SpO2 97%。腹部切口敷料干燥，引流管通畅引出淡红色液30ml，尿管在位尿量400ml。未排气。\",\n  \"assessment\": {\n    \"chief_complaint\": \"切口疼痛4分\",\n    \"symptoms\": \"无明显恶心\",\n    \"vital_signs\": \"体温37.8°C，脉搏88次/分，呼吸20次/分，血压126/76mmHg，血氧饱和度97%\",\n    \"physical_signs\": \"腹部三个小切口敷料干燥，右上腹引流管通畅，尿管在位\",\n    \"wound_drainage\": \"引流液30ml淡红色\",\n    \"urine_output\": \"400ml（6小时）\",\n    \"pain_score\": \"4分\"\n  },\n  \"nursing_problems\": [\"切口疼痛\", \"术后吸收热\", \"肠功能未恢复\"],\n  \"nursing_measures\": [\"已进行疼痛评估\", \"应继续监测生命体征及引流液情况\", \"鼓励患者早期下床活动\", \"指导患者进行深呼吸及咳嗽\"],\n  \"evaluation\": \"患者术后6小时，生命体征平稳，切口无红肿渗出，引流液量少色正常，尿量正常，无出血或感染迹象。\",\n  \"risk_flags\": [\"肠梗阻风险（未排气）\", \"深静脉血栓风险（术后卧床）\"],\n  \"follow_up\": [\"继续观察引流液量及颜色变化\", \"每4小时评估疼痛\", \"监测体温变化\", \"鼓励患者下床活动\", \"注意排气及排便情况\"],\n  \"missing_information\": [\"过敏史\", \"具体诊断（如胆囊结石）\", \"手术中情况\", \"药物使用（如止痛药、抗生素）\", \"出入量（输入量）\"],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "术后护理记录",
+        "patient": {
+          "bed_number": "3",
+          "name": "李明",
+          "gender": "男",
+          "age": "56岁",
+          "diagnosis": "腹腔镜胆囊切除术后",
+          "allergy_history": "未提供"
+        },
+        "record_time": "术后6小时",
+        "source_summary": "患者李明，男56岁，腹腔镜胆囊切除术后6小时，清醒，主诉切口疼痛4分，无明显恶心。生命体征：T 37.8°C，P 88，R 20，BP 126/76，SpO2 97%。腹部切口敷料干燥，引流管通畅引出淡红色液30ml，尿管在位尿量400ml。未排气。",
+        "assessment": {
+          "chief_complaint": "切口疼痛4分",
+          "symptoms": "无明显恶心",
+          "vital_signs": "体温37.8°C，脉搏88次/分，呼吸20次/分，血压126/76mmHg，血氧饱和度97%",
+          "physical_signs": "腹部三个小切口敷料干燥，右上腹引流管通畅，尿管在位",
+          "wound_drainage": "引流液30ml淡红色",
+          "urine_output": "400ml（6小时）",
+          "pain_score": "4分"
+        },
+        "nursing_problems": [
+          "切口疼痛",
+          "术后吸收热",
+          "肠功能未恢复"
+        ],
+        "nursing_measures": [
+          "已进行疼痛评估",
+          "应继续监测生命体征及引流液情况",
+          "鼓励患者早期下床活动",
+          "指导患者进行深呼吸及咳嗽"
+        ],
+        "evaluation": "患者术后6小时，生命体征平稳，切口无红肿渗出，引流液量少色正常，尿量正常，无出血或感染迹象。",
+        "risk_flags": [
+          "肠梗阻风险（未排气）",
+          "深静脉血栓风险（术后卧床）"
+        ],
+        "follow_up": [
+          "继续观察引流液量及颜色变化",
+          "每4小时评估疼痛",
+          "监测体温变化",
+          "鼓励患者下床活动",
+          "注意排气及排便情况"
+        ],
+        "missing_information": [
+          "过敏史",
+          "具体诊断（如胆囊结石）",
+          "手术中情况",
+          "药物使用（如止痛药、抗生素）",
+          "出入量（输入量）"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 31.778693478088826,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3825,
+        "prompt_tokens": 704,
+        "total_tokens": 4529,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-003",
+      "input": "12床赵强，男64岁，贫血输A型悬浮红细胞，开始输血15分钟后说发冷、腰酸，测体温38.5，输血前是36.9，血压110/68，脉搏112，呼吸24，血氧95。立即停止输血，保留静脉通路换生理盐水，通知医生和输血科，血袋和输血器已封存送检，抽血和尿标本按医嘱送检。现在寒战减轻，没有皮疹和呼吸困难。",
+      "expected_output": {
+        "document_type": "输血巡视及输血不良反应护理记录",
+        "patient": {
+          "bed": "12床",
+          "name": "赵强",
+          "sex": "男",
+          "age": "64岁",
+          "blood_component": "A型悬浮红细胞"
+        },
+        "record_time": "输血开始后15分钟",
+        "assessment": {
+          "reaction_time": "输血15分钟后出现症状",
+          "symptoms": [
+            "发冷",
+            "寒战",
+            "腰酸"
+          ],
+          "negative_findings": [
+            "无皮疹",
+            "无呼吸困难"
+          ],
+          "vital_signs": {
+            "T_before": "36.9℃",
+            "T_reaction": "38.5℃",
+            "P": "112次/分",
+            "R": "24次/分",
+            "BP": "110/68mmHg",
+            "SpO2": "95%"
+          }
+        },
+        "nursing_problems": [
+          "疑似输血不良反应",
+          "发热/寒战",
+          "潜在溶血反应风险"
+        ],
+        "nursing_measures": [
+          "立即停止输血，保留静脉通路",
+          "更换输液器并以0.9%氯化钠注射液维持静脉通路",
+          "立即通知医生及输血科，配合医嘱处理",
+          "监测生命体征、尿色、腰背痛、皮疹及呼吸情况",
+          "封存血袋及输血器，按流程送检",
+          "按医嘱采集血标本和尿标本送检",
+          "完整记录输血开始时间、反应出现时间、症状、处理措施及转归"
+        ],
+        "evaluation": "处理后患者寒战减轻，暂未见皮疹、呼吸困难或血压下降，仍需严密观察迟发反应。",
+        "risk_flags": [
+          "疑似急性输血反应",
+          "体温较输血前升高1.6℃",
+          "心率112次/分",
+          "腰酸需警惕溶血"
+        ],
+        "follow_up": [
+          "继续每15-30分钟复测生命体征直至稳定",
+          "观察尿色和尿量",
+          "追踪输血反应检验结果并交接班"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"输血反应护理记录\",\n  \"patient\": {\n    \"bed_number\": \"12床\",\n    \"name\": \"赵强\",\n    \"gender\": \"男\",\n    \"age\": 64,\n    \"diagnosis\": \"贫血\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"未提供\",\n  \"source_summary\": \"患者12床赵强，男64岁，因贫血输A型悬浮红细胞，输血15分钟后出现发冷、腰酸，体温升至38.5℃，伴寒战。立即停止输血，更换生理盐水，通知医生及输血科，封存血袋送检。现寒战减轻，无皮疹及呼吸困难。\",\n  \"assessment\": {\n    \"chief_complaint\": \"输血15分钟后发冷、腰酸，寒战\",\n    \"vital_signs\": \"体温38.5℃（前36.9℃），血压110/68mmHg，脉搏112次/分，呼吸24次/分，血氧饱和度95%\",\n    \"physical_signs\": \"寒战减轻，无皮疹，无呼吸困难\",\n    \"other_assessments\": \"输血反应迹象\"\n  },\n  \"nursing_problems\": [\"输血反应\", \"体温过高\"],\n  \"nursing_measures\": [\n    \"立即停止输血\",\n    \"保留静脉通路并更换生理盐水\",\n    \"通知医生和输血科\",\n    \"封存血袋和输血器送检\",\n    \"按医嘱采集血尿标本送检\",\n    \"持续监测生命体征\",\n    \"观察寒战、皮疹、呼吸困难等症状变化\"\n  ],\n  \"evaluation\": \"寒战减轻，无皮疹及呼吸困难，生命体征需持续监测。\",\n  \"risk_flags\": [\"输血反应可能进展\", \"需警惕过敏或溶血反应\"],\n  \"follow_up\": [\n    \"继续监测体温、脉搏、呼吸、血压\",\n    \"观察有无新症状\",\n    \"等待检验结果\",\n    \"根据医嘱处理\"\n  ],\n  \"missing_information\": [\n    \"具体贫血类型\",\n    \"过敏史\",\n    \"输血量\",\n    \"开始输血确切时间\",\n    \"输血前血压/脉搏/呼吸基础值\"\n  ],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "输血反应护理记录",
+        "patient": {
+          "bed_number": "12床",
+          "name": "赵强",
+          "gender": "男",
+          "age": 64,
+          "diagnosis": "贫血",
+          "allergy_history": "未提供"
+        },
+        "record_time": "未提供",
+        "source_summary": "患者12床赵强，男64岁，因贫血输A型悬浮红细胞，输血15分钟后出现发冷、腰酸，体温升至38.5℃，伴寒战。立即停止输血，更换生理盐水，通知医生及输血科，封存血袋送检。现寒战减轻，无皮疹及呼吸困难。",
+        "assessment": {
+          "chief_complaint": "输血15分钟后发冷、腰酸，寒战",
+          "vital_signs": "体温38.5℃（前36.9℃），血压110/68mmHg，脉搏112次/分，呼吸24次/分，血氧饱和度95%",
+          "physical_signs": "寒战减轻，无皮疹，无呼吸困难",
+          "other_assessments": "输血反应迹象"
+        },
+        "nursing_problems": [
+          "输血反应",
+          "体温过高"
+        ],
+        "nursing_measures": [
+          "立即停止输血",
+          "保留静脉通路并更换生理盐水",
+          "通知医生和输血科",
+          "封存血袋和输血器送检",
+          "按医嘱采集血尿标本送检",
+          "持续监测生命体征",
+          "观察寒战、皮疹、呼吸困难等症状变化"
+        ],
+        "evaluation": "寒战减轻，无皮疹及呼吸困难，生命体征需持续监测。",
+        "risk_flags": [
+          "输血反应可能进展",
+          "需警惕过敏或溶血反应"
+        ],
+        "follow_up": [
+          "继续监测体温、脉搏、呼吸、血压",
+          "观察有无新症状",
+          "等待检验结果",
+          "根据医嘱处理"
+        ],
+        "missing_information": [
+          "具体贫血类型",
+          "过敏史",
+          "输血量",
+          "开始输血确切时间",
+          "输血前血压/脉搏/呼吸基础值"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 25.7068737980444,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3144,
+        "prompt_tokens": 706,
+        "total_tokens": 3850,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-004",
+      "input": "8床陈阿姨，68岁，2型糖尿病，早餐前打了胰岛素但早饭吃得少。10点半突然出汗、手抖、心慌，意识清楚，床旁血糖2.8。给她口服葡萄糖15克，15分钟后复测4.6，症状明显缓解，又让她吃了半碗粥。医生已知晓，要求午餐前再测一次。",
+      "expected_output": {
+        "document_type": "低血糖护理处置记录",
+        "patient": {
+          "bed": "8床",
+          "name": "陈阿姨",
+          "age": "68岁",
+          "diagnosis": "2型糖尿病"
+        },
+        "record_time": "2026-07-08 10:30",
+        "assessment": {
+          "trigger": "早餐前使用胰岛素后进食少",
+          "symptoms": [
+            "出汗",
+            "手抖",
+            "心慌"
+          ],
+          "consciousness": "意识清楚",
+          "blood_glucose_initial": "2.8mmol/L",
+          "blood_glucose_after_15min": "4.6mmol/L"
+        },
+        "nursing_problems": [
+          "低血糖",
+          "胰岛素治疗相关进食不足风险"
+        ],
+        "nursing_measures": [
+          "立即评估意识状态和吞咽能力，患者清醒可经口补糖",
+          "给予口服葡萄糖15g",
+          "15分钟后复测血糖并评估症状",
+          "症状缓解后指导进食半碗粥以维持血糖",
+          "通知医生并按要求继续监测",
+          "宣教胰岛素注射后需按时足量进食，出现出汗、手抖、心慌应立即呼叫护士"
+        ],
+        "evaluation": "补糖15分钟后血糖升至4.6mmol/L，出汗、手抖、心慌明显缓解，意识始终清楚。",
+        "risk_flags": [
+          "血糖2.8mmol/L",
+          "胰岛素后进食不足",
+          "老年患者"
+        ],
+        "follow_up": [
+          "午餐前复测血糖",
+          "观察低血糖反复发生",
+          "交接胰岛素用药与进食匹配情况"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"低血糖事件护理记录\",\n  \"patient\": {\n    \"bed_number\": \"8床\",\n    \"name\": \"陈阿姨\",\n    \"gender\": \"女\",\n    \"age\": \"68岁\",\n    \"diagnosis\": \"2型糖尿病\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"10:30\",\n  \"source_summary\": \"患者8床陈阿姨，68岁，2型糖尿病，早餐前注射胰岛素后进食少，10:30突发低血糖症状（出汗、手抖、心慌），床旁血糖2.8mmol/L，口服葡萄糖15g后15分钟血糖4.6mmol/L，症状缓解，进食半碗粥。医生已知晓，要求午餐前复测。\",\n  \"assessment\": {\n    \"chief_complaint\": \"出汗、手抖、心慌，意识清楚\",\n    \"vital_signs\": \"血糖：2.8mmol/L（床旁）\",\n    \"physical_signs\": \"意识清楚\",\n    \"wound_drainage\": \"\",\n    \"intake_output\": \"\",\n    \"pain_score\": \"\"\n  },\n  \"nursing_problems\": [\"急性低血糖\", \"胰岛素治疗相关风险\"],\n  \"nursing_measures\": [\n    \"已执行：口服葡萄糖15g\",\n    \"已执行：15分钟后复测血糖\",\n    \"已执行：进食半碗粥\",\n    \"应继续：监测血糖及症状变化\",\n    \"应继续：确保规律饮食\"\n  ],\n  \"evaluation\": \"口服葡萄糖后15分钟血糖升至4.6mmol/L，低血糖症状明显缓解\",\n  \"risk_flags\": [\"低血糖复发风险\"],\n  \"follow_up\": [\"午餐前复测血糖\", \"持续观察低血糖症状\"],\n  \"missing_information\": [\"过敏史\", \"胰岛素具体类型及剂量\", \"其他生命体征（如血压、心率）\"],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "低血糖事件护理记录",
+        "patient": {
+          "bed_number": "8床",
+          "name": "陈阿姨",
+          "gender": "女",
+          "age": "68岁",
+          "diagnosis": "2型糖尿病",
+          "allergy_history": "未提供"
+        },
+        "record_time": "10:30",
+        "source_summary": "患者8床陈阿姨，68岁，2型糖尿病，早餐前注射胰岛素后进食少，10:30突发低血糖症状（出汗、手抖、心慌），床旁血糖2.8mmol/L，口服葡萄糖15g后15分钟血糖4.6mmol/L，症状缓解，进食半碗粥。医生已知晓，要求午餐前复测。",
+        "assessment": {
+          "chief_complaint": "出汗、手抖、心慌，意识清楚",
+          "vital_signs": "血糖：2.8mmol/L（床旁）",
+          "physical_signs": "意识清楚",
+          "wound_drainage": "",
+          "intake_output": "",
+          "pain_score": ""
+        },
+        "nursing_problems": [
+          "急性低血糖",
+          "胰岛素治疗相关风险"
+        ],
+        "nursing_measures": [
+          "已执行：口服葡萄糖15g",
+          "已执行：15分钟后复测血糖",
+          "已执行：进食半碗粥",
+          "应继续：监测血糖及症状变化",
+          "应继续：确保规律饮食"
+        ],
+        "evaluation": "口服葡萄糖后15分钟血糖升至4.6mmol/L，低血糖症状明显缓解",
+        "risk_flags": [
+          "低血糖复发风险"
+        ],
+        "follow_up": [
+          "午餐前复测血糖",
+          "持续观察低血糖症状"
+        ],
+        "missing_information": [
+          "过敏史",
+          "胰岛素具体类型及剂量",
+          "其他生命体征（如血压、心率）"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 41.80309469602071,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2902,
+        "prompt_tokens": 664,
+        "total_tokens": 3566,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-005",
+      "input": "21床刘建国，男59岁，冠心病支架术后第二天，16点05分突然胸骨后压榨样痛，说8分，伴大汗和恶心。血压150/92，脉搏110，呼吸26，血氧93。立即让他卧床休息，吸氧4升，通知医生，床旁心电图已做，按医嘱舌下含服硝酸甘油一次并抽急诊心肌酶，5分钟后疼痛降到5分，血压136/84，没有晕厥。",
+      "expected_output": {
+        "document_type": "突发胸痛护理记录",
+        "patient": {
+          "bed": "21床",
+          "name": "刘建国",
+          "sex": "男",
+          "age": "59岁",
+          "history": "冠心病支架术后第2天"
+        },
+        "record_time": "2026-07-08 16:05",
+        "assessment": {
+          "symptoms": [
+            "突发胸骨后压榨样疼痛，NRS 8分",
+            "大汗",
+            "恶心"
+          ],
+          "negative_findings": [
+            "无晕厥"
+          ],
+          "vital_signs_before": {
+            "BP": "150/92mmHg",
+            "P": "110次/分",
+            "R": "26次/分",
+            "SpO2": "93%"
+          },
+          "post_intervention": {
+            "pain_score_after_5min": "5分",
+            "BP": "136/84mmHg"
+          }
+        },
+        "nursing_problems": [
+          "急性冠脉事件风险",
+          "疼痛",
+          "低氧风险",
+          "支架术后并发症观察"
+        ],
+        "nursing_measures": [
+          "立即嘱患者卧床休息，减少活动",
+          "予吸氧4L/min，持续监测SpO2和呼吸",
+          "立即通知医生并协助床旁心电图检查",
+          "遵医嘱舌下含服硝酸甘油1次，观察血压和疼痛变化",
+          "遵医嘱抽急诊心肌酶/心肌损伤标志物",
+          "严密观察胸痛性质、持续时间、伴随症状及有无低血压、晕厥"
+        ],
+        "evaluation": "处理5分钟后胸痛由8分降至5分，血压136/84mmHg，无晕厥，但仍存在急性冠脉事件风险。",
+        "risk_flags": [
+          "支架术后第2天胸痛",
+          "大汗恶心",
+          "心率110次/分",
+          "SpO2 93%",
+          "需追踪心电图和心肌酶结果"
+        ],
+        "follow_up": [
+          "持续心电监护或按医嘱监测",
+          "复评疼痛评分和生命体征",
+          "胸痛不缓解或加重立即再次报告医生/启动急救流程"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"急性胸痛事件护理记录\",\n  \"patient\": {\n    \"bed_number\": \"21\",\n    \"name\": \"刘建国\",\n    \"gender\": \"男\",\n    \"age\": 59,\n    \"diagnosis\": \"冠心病支架术后（第2天）\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"16:05\",\n  \"source_summary\": \"患者21床刘建国，男59岁，冠心病支架术后第2天，16:05突发胸骨后压榨样痛8分，伴大汗恶心。生命体征：BP 150/92, P 110, R 26, SpO2 93%。立即予卧床、吸氧4L/min、通知医生，行床旁心电图，舌下含服硝酸甘油，抽急诊心肌酶。5分钟后疼痛缓解至5分，BP 136/84，无晕厥。\",\n  \"assessment\": {\n    \"chief_complaint\": \"胸骨后压榨样痛8分，伴大汗、恶心\",\n    \"vital_signs\": {\n      \"blood_pressure\": \"150/92 mmHg\",\n      \"pulse\": \"110 次/分\",\n      \"respiratory_rate\": \"26 次/分\",\n      \"oxygen_saturation\": \"93%\"\n    },\n    \"other_assessment\": \"无晕厥\"\n  },\n  \"nursing_problems\": [\"急性疼痛\", \"心肌缺血风险\", \"低氧血症风险\"],\n  \"nursing_measures\": [\"卧床休息\", \"吸氧4L/min\", \"通知医生\", \"床旁心电图检查\", \"舌下含服硝酸甘油\", \"抽急诊心肌酶\", \"持续监测生命体征\", \"疼痛评分每5分钟\"],\n  \"evaluation\": [\"疼痛缓解至5分\", \"血压降至136/84 mmHg\", \"无晕厥\"],\n  \"risk_flags\": [\"急性心肌梗死风险\", \"心律失常风险\"],\n  \"follow_up\": [\"等待心肌酶结果\", \"心电图结果复评\", \"持续心电监护\", \"医生进一步处理\"],\n  \"missing_information\": [\"过敏史\", \"具体支架类型\", \"手术日期\"],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "急性胸痛事件护理记录",
+        "patient": {
+          "bed_number": "21",
+          "name": "刘建国",
+          "gender": "男",
+          "age": 59,
+          "diagnosis": "冠心病支架术后（第2天）",
+          "allergy_history": "未提供"
+        },
+        "record_time": "16:05",
+        "source_summary": "患者21床刘建国，男59岁，冠心病支架术后第2天，16:05突发胸骨后压榨样痛8分，伴大汗恶心。生命体征：BP 150/92, P 110, R 26, SpO2 93%。立即予卧床、吸氧4L/min、通知医生，行床旁心电图，舌下含服硝酸甘油，抽急诊心肌酶。5分钟后疼痛缓解至5分，BP 136/84，无晕厥。",
+        "assessment": {
+          "chief_complaint": "胸骨后压榨样痛8分，伴大汗、恶心",
+          "vital_signs": {
+            "blood_pressure": "150/92 mmHg",
+            "pulse": "110 次/分",
+            "respiratory_rate": "26 次/分",
+            "oxygen_saturation": "93%"
+          },
+          "other_assessment": "无晕厥"
+        },
+        "nursing_problems": [
+          "急性疼痛",
+          "心肌缺血风险",
+          "低氧血症风险"
+        ],
+        "nursing_measures": [
+          "卧床休息",
+          "吸氧4L/min",
+          "通知医生",
+          "床旁心电图检查",
+          "舌下含服硝酸甘油",
+          "抽急诊心肌酶",
+          "持续监测生命体征",
+          "疼痛评分每5分钟"
+        ],
+        "evaluation": [
+          "疼痛缓解至5分",
+          "血压降至136/84 mmHg",
+          "无晕厥"
+        ],
+        "risk_flags": [
+          "急性心肌梗死风险",
+          "心律失常风险"
+        ],
+        "follow_up": [
+          "等待心肌酶结果",
+          "心电图结果复评",
+          "持续心电监护",
+          "医生进一步处理"
+        ],
+        "missing_information": [
+          "过敏史",
+          "具体支架类型",
+          "手术日期"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 43.75002997298725,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3214,
+        "prompt_tokens": 704,
+        "total_tokens": 3918,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-006",
+      "input": "5床孙玉梅，82岁，脑梗后左侧肢体乏力，凌晨1点20分在床旁地面被发现，家属说刚离开去接水。患者清醒，说想自己上厕所，左额有约2厘米肿胀，左髋疼痛3分，未见明显出血，血压142/80，脉搏90，呼吸19，血氧96。护士未扶起前先评估，通知医生，协助制动，医生看后开头颅CT和髋部片，已通知家属，床栏和呼叫铃重新检查。",
+      "expected_output": {
+        "document_type": "跌倒/坠床事件护理记录",
+        "patient": {
+          "bed": "5床",
+          "name": "孙玉梅",
+          "age": "82岁",
+          "history": "脑梗后左侧肢体乏力"
+        },
+        "record_time": "2026-07-09 01:20",
+        "assessment": {
+          "event": "患者在床旁地面被发现，疑自行如厕时跌倒",
+          "consciousness": "清醒",
+          "injury_findings": [
+            "左额约2cm肿胀",
+            "左髋疼痛NRS 3分",
+            "未见明显出血"
+          ],
+          "vital_signs": {
+            "BP": "142/80mmHg",
+            "P": "90次/分",
+            "R": "19次/分",
+            "SpO2": "96%"
+          },
+          "cause_clues": [
+            "家属短暂离开",
+            "患者想自行上厕所",
+            "既往左侧肢体乏力"
+          ]
+        },
+        "nursing_problems": [
+          "跌倒后损伤风险",
+          "再次跌倒高风险",
+          "潜在颅脑/髋部损伤风险"
+        ],
+        "nursing_measures": [
+          "发现后先评估意识、呼吸、循环、疼痛及外伤情况，未盲目扶起",
+          "立即通知医生到场评估",
+          "协助患者保持安全体位并制动，避免加重潜在骨折或颅脑损伤",
+          "遵医嘱完善头颅CT及髋部影像检查",
+          "通知家属并说明需陪护及呼叫协助",
+          "重新落实跌倒预防措施：床栏、呼叫铃、夜间照明、防滑、如厕陪同",
+          "按不良事件/跌倒流程上报并记录"
+        ],
+        "evaluation": "患者意识清楚，生命体征暂平稳，外伤局部肿胀及髋痛待影像检查排除严重损伤。",
+        "risk_flags": [
+          "高龄",
+          "脑梗后肢体乏力",
+          "夜间自行如厕",
+          "头部受伤",
+          "髋部疼痛"
+        ],
+        "follow_up": [
+          "密切观察头痛、呕吐、意识改变、瞳孔变化",
+          "观察左髋疼痛和活动受限",
+          "追踪影像结果并交接班重点提示"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"跌倒事件护理记录\",\n  \"patient\": {\n    \"bed_number\": \"5床\",\n    \"name\": \"孙玉梅\",\n    \"age\": \"82岁\",\n    \"diagnosis\": \"脑梗后左侧肢体乏力\"\n  },\n  \"record_time\": \"凌晨1点20分\",\n  \"source_summary\": \"5床孙玉梅，82岁，脑梗后左侧肢体乏力，凌晨1点20分跌倒于床旁，主诉左额肿胀、左髋疼痛，生命体征：血压142/80，脉搏90，呼吸19，血氧96%，已通知医生安排影像学检查。\",\n  \"assessment\": {\n    \"chief_complaint\": \"患者自述想上厕所后跌倒，左额肿胀，左髋疼痛\",\n    \"vital_signs\": \"血压142/80 mmHg，脉搏90次/分，呼吸19次/分，血氧饱和度96%\",\n    \"physical_findings\": \"左额约2厘米肿胀，无明显出血；左髋压痛，疼痛评分3分；意识清醒；左侧肢体乏力\"\n  },\n  \"nursing_problems\": [\n    \"跌倒事件\",\n    \"头部外伤风险\",\n    \"髋部损伤风险\",\n    \"活动障碍（脑梗后）\",\n    \"潜在颅内出血风险\"\n  ],\n  \"nursing_measures\": [\n    \"已执行：跌倒后未立即扶起，进行初步评估；通知医生；协助制动；医生安排头颅CT和髋部X光；通知家属；重新检查床栏和呼叫铃\",\n    \"应继续：持续监测生命体征和神经系统症状；观察疼痛变化；预防压疮；进行跌倒风险再评估；确保环境安全\"\n  ],\n  \"evaluation\": \"患者已接受初步处理，影像学检查进行中，当前生命体征稳定，需等待检查结果以确定损伤程度。\",\n  \"risk_flags\": [\n    \"颅内出血风险\",\n    \"髋部骨折风险\",\n    \"再次跌倒风险\",\n    \"神经功能恶化风险\"\n  ],\n  \"follow_up\": [\n    \"复查头颅CT和髋部X光结果\",\n    \"持续监测意识、瞳孔、肢体活动\",\n    \"疼痛管理\",\n    \"康复科会诊\",\n    \"交接班重点报告\"\n  ],\n  \"missing_information\": [\n    \"患者性别\",\n    \"过敏史\",\n    \"详细病史（如脑梗具体时间）\",\n    \"用药情况（如抗凝药）\"\n  ],\n  \"uncertain_items\": [\n    \"疼痛评分3分的具体量表未明确\"\n  ]\n}",
+      "model_output_json": {
+        "document_type": "跌倒事件护理记录",
+        "patient": {
+          "bed_number": "5床",
+          "name": "孙玉梅",
+          "age": "82岁",
+          "diagnosis": "脑梗后左侧肢体乏力"
+        },
+        "record_time": "凌晨1点20分",
+        "source_summary": "5床孙玉梅，82岁，脑梗后左侧肢体乏力，凌晨1点20分跌倒于床旁，主诉左额肿胀、左髋疼痛，生命体征：血压142/80，脉搏90，呼吸19，血氧96%，已通知医生安排影像学检查。",
+        "assessment": {
+          "chief_complaint": "患者自述想上厕所后跌倒，左额肿胀，左髋疼痛",
+          "vital_signs": "血压142/80 mmHg，脉搏90次/分，呼吸19次/分，血氧饱和度96%",
+          "physical_findings": "左额约2厘米肿胀，无明显出血；左髋压痛，疼痛评分3分；意识清醒；左侧肢体乏力"
+        },
+        "nursing_problems": [
+          "跌倒事件",
+          "头部外伤风险",
+          "髋部损伤风险",
+          "活动障碍（脑梗后）",
+          "潜在颅内出血风险"
+        ],
+        "nursing_measures": [
+          "已执行：跌倒后未立即扶起，进行初步评估；通知医生；协助制动；医生安排头颅CT和髋部X光；通知家属；重新检查床栏和呼叫铃",
+          "应继续：持续监测生命体征和神经系统症状；观察疼痛变化；预防压疮；进行跌倒风险再评估；确保环境安全"
+        ],
+        "evaluation": "患者已接受初步处理，影像学检查进行中，当前生命体征稳定，需等待检查结果以确定损伤程度。",
+        "risk_flags": [
+          "颅内出血风险",
+          "髋部骨折风险",
+          "再次跌倒风险",
+          "神经功能恶化风险"
+        ],
+        "follow_up": [
+          "复查头颅CT和髋部X光结果",
+          "持续监测意识、瞳孔、肢体活动",
+          "疼痛管理",
+          "康复科会诊",
+          "交接班重点报告"
+        ],
+        "missing_information": [
+          "患者性别",
+          "过敏史",
+          "详细病史（如脑梗具体时间）",
+          "用药情况（如抗凝药）"
+        ],
+        "uncertain_items": [
+          "疼痛评分3分的具体量表未明确"
+        ]
+      },
+      "request_duration_seconds": 46.354111871216446,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3706,
+        "prompt_tokens": 704,
+        "total_tokens": 4410,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-007",
+      "input": "ICU 2床周某，男76岁，肺部感染卧床，Braden评分11分。今天翻身时发现骶尾部皮肤破损，约2乘1.5厘米，表皮缺损，创面粉红，有少量渗液，没有黑痂和脓液，周围皮肤发红。已清洁创面，贴泡沫敷料，使用气垫床，2小时翻身一次，告知医生和家属，营养科会诊申请已提。",
+      "expected_output": {
+        "document_type": "压力性损伤评估及护理记录",
+        "patient": {
+          "location": "ICU 2床",
+          "name": "周某",
+          "sex": "男",
+          "age": "76岁",
+          "condition": "肺部感染卧床"
+        },
+        "record_time": "2026-07-08",
+        "assessment": {
+          "risk_score": "Braden评分11分，高风险",
+          "site": "骶尾部",
+          "wound_description": "约2cm×1.5cm，表皮缺损，创面粉红，少量渗液，周围皮肤发红，无黑痂、无脓液",
+          "stage": "符合2期压力性损伤表现"
+        },
+        "nursing_problems": [
+          "压力性损伤2期",
+          "皮肤完整性受损",
+          "感染风险",
+          "营养不良风险/修复需求增加"
+        ],
+        "nursing_measures": [
+          "清洁创面并保持周围皮肤清洁干燥",
+          "给予泡沫敷料保护，按渗液情况和敷料规范更换",
+          "使用气垫床减压",
+          "落实至少每2小时翻身，避免骶尾部持续受压",
+          "观察创面大小、颜色、渗液、气味及周围皮肤变化",
+          "通知医生和家属，按院内流程记录和上报",
+          "申请营养科会诊，评估蛋白和热量支持需求"
+        ],
+        "evaluation": "骶尾部创面已处理并减压保护，暂未见脓液或坏死，需持续观察愈合和感染征象。",
+        "risk_flags": [
+          "Braden 11分",
+          "长期卧床",
+          "骶尾部2期压力性损伤",
+          "少量渗液"
+        ],
+        "follow_up": [
+          "每日或按规范复评创面尺寸和分期",
+          "检查翻身记录和减压措施落实",
+          "追踪营养会诊意见"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"压力性损伤护理记录\",\n  \"patient\": {\n    \"bed_number\": \"2床\",\n    \"name\": \"周某\",\n    \"gender\": \"男\",\n    \"age\": \"76岁\",\n    \"diagnosis\": \"肺部感染\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"未提供\",\n  \"source_summary\": \"ICU 2床周某，男76岁，肺部感染卧床，Braden评分11分。今日翻身时发现骶尾部皮肤破损，大小约2×1.5cm，表皮缺损，创面粉红，少量渗液，无黑痂脓液，周围发红。已清洁创面、贴泡沫敷料、使用气垫床、2小时翻身，告知医生家属，申请营养科会诊。\",\n  \"assessment\": {\n    \"complaint\": \"骶尾部皮肤破损（护士发现）\",\n    \"vital_signs\": \"未提供\",\n    \"physical_signs\": \"骶尾部皮肤破损，约2×1.5厘米，表皮缺损，创面粉红",
+      "model_output_json": null,
+      "request_duration_seconds": 48.319465436041355,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 4096,
+        "prompt_tokens": 681,
+        "total_tokens": 4777,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-008",
+      "input": "15床何女士，45岁，乳腺癌化疗，右上臂PICC维护。外露长度3厘米和上次一样，臂围25厘米。敷贴边缘卷起，穿刺点没有红肿、渗血、渗液，患者说不疼。抽回血顺畅，10毫升生理盐水脉冲冲管后正压封管，更换透明敷贴和肝素帽，全程无菌操作，已提醒她洗澡防水、不要提重物。",
+      "expected_output": {
+        "document_type": "PICC导管维护护理记录",
+        "patient": {
+          "bed": "15床",
+          "name": "何女士",
+          "age": "45岁",
+          "diagnosis": "乳腺癌化疗"
+        },
+        "record_time": "2026-07-08",
+        "assessment": {
+          "catheter": "右上臂PICC",
+          "external_length": "3cm，与上次一致",
+          "arm_circumference": "25cm",
+          "dressing": "敷贴边缘卷起",
+          "insertion_site": "无红肿、渗血、渗液",
+          "pain": "无疼痛",
+          "patency": "抽回血顺畅"
+        },
+        "nursing_problems": [
+          "中心静脉导管感染风险",
+          "导管移位/脱出风险",
+          "敷贴松动"
+        ],
+        "nursing_measures": [
+          "按PICC维护流程全程无菌操作",
+          "更换透明敷贴及肝素帽",
+          "使用10ml生理盐水脉冲式冲管，正压封管",
+          "核对外露长度和臂围并记录，观察穿刺点及沿静脉走行有无异常",
+          "妥善固定导管，处理敷贴卷边",
+          "宣教洗澡时防水保护，避免提重物和牵拉导管，如出现红肿、疼痛、发热、渗液及时报告"
+        ],
+        "evaluation": "导管通畅，外露长度及臂围较前无变化，穿刺点无感染表现，维护后敷贴固定良好。",
+        "risk_flags": [
+          "PICC在位",
+          "敷贴卷边",
+          "化疗患者感染风险"
+        ],
+        "follow_up": [
+          "按计划定期维护PICC",
+          "下次维护继续比较外露长度和臂围",
+          "观察导管相关感染、血栓和堵管征象"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"PICC导管维护护理记录\",\n  \"patient\": {\n    \"bed_number\": \"15床\",\n    \"name\": \"何女士\",\n    \"gender\": \"女\",\n    \"age\": \"45岁\",\n    \"diagnosis\": \"乳腺癌（化疗中）\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"未提供\",\n  \"source_summary\": \"15床何女士，45岁，乳腺癌化疗，行右上臂PICC维护。外露长度3cm，臂围25cm。敷贴边缘卷起，穿刺点无红肿渗血渗液，主诉无痛。抽回血顺畅，生理盐水冲管后封管，更换敷贴和肝素帽，无菌操作。已指导防水、避免提重物。\",\n  \"assessment\": {\n    \"chief_complaint\": \"无痛\",\n    \"vital_signs\": \"未提供\",\n    \"physical_signs\": \"穿刺点无红肿、渗血、渗液；敷贴边缘卷起；外露长度3cm；臂围25cm\",\n    \"wound_catheter\": \"右上臂PICC导管\",\n    \"intake_output\": \"未提供\",\n    \"pain_score\": \"无痛（主诉）\"\n  },\n  \"nursing_problems\": [\n    \"敷贴边缘卷起，存在感染或导管移位风险\",\n    \"化疗患者免疫力低下，导管相关并发症风险增高\"\n  ],\n  \"nursing_measures\": [\n    \"已执行：抽回血顺畅，10ml生理盐水脉冲冲管，正压封管，更换透明敷贴和肝素帽，全程无菌操作\",\n    \"应继续：监测穿刺点情况，指导患者PICC护理（洗澡防水、避免提重物）\"\n  ],\n  \"evaluation\": \"穿刺点无异常，导管功能正常，敷贴更换后固定良好\",\n  \"risk_flags\": [\n    \"感染风险（敷贴卷起）\",\n    \"导管相关血栓或堵塞风险\",\n    \"化疗患者免疫力低下\"\n  ],\n  \"follow_up\": [\n    \"监测穿刺点有无红肿热痛\",\n    \"定期PICC维护（按规范）\",\n    \"交接班时重点评估导管外露长度、敷贴固定及患者主诉\"\n  ],\n  \"missing_information\": [\n    \"记录时间\",\n    \"生命体征（体温、血压等）\",\n    \"过敏史\",\n    \"具体化疗方案及周期\"\n  ],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "PICC导管维护护理记录",
+        "patient": {
+          "bed_number": "15床",
+          "name": "何女士",
+          "gender": "女",
+          "age": "45岁",
+          "diagnosis": "乳腺癌（化疗中）",
+          "allergy_history": "未提供"
+        },
+        "record_time": "未提供",
+        "source_summary": "15床何女士，45岁，乳腺癌化疗，行右上臂PICC维护。外露长度3cm，臂围25cm。敷贴边缘卷起，穿刺点无红肿渗血渗液，主诉无痛。抽回血顺畅，生理盐水冲管后封管，更换敷贴和肝素帽，无菌操作。已指导防水、避免提重物。",
+        "assessment": {
+          "chief_complaint": "无痛",
+          "vital_signs": "未提供",
+          "physical_signs": "穿刺点无红肿、渗血、渗液；敷贴边缘卷起；外露长度3cm；臂围25cm",
+          "wound_catheter": "右上臂PICC导管",
+          "intake_output": "未提供",
+          "pain_score": "无痛（主诉）"
+        },
+        "nursing_problems": [
+          "敷贴边缘卷起，存在感染或导管移位风险",
+          "化疗患者免疫力低下，导管相关并发症风险增高"
+        ],
+        "nursing_measures": [
+          "已执行：抽回血顺畅，10ml生理盐水脉冲冲管，正压封管，更换透明敷贴和肝素帽，全程无菌操作",
+          "应继续：监测穿刺点情况，指导患者PICC护理（洗澡防水、避免提重物）"
+        ],
+        "evaluation": "穿刺点无异常，导管功能正常，敷贴更换后固定良好",
+        "risk_flags": [
+          "感染风险（敷贴卷起）",
+          "导管相关血栓或堵塞风险",
+          "化疗患者免疫力低下"
+        ],
+        "follow_up": [
+          "监测穿刺点有无红肿热痛",
+          "定期PICC维护（按规范）",
+          "交接班时重点评估导管外露长度、敷贴固定及患者主诉"
+        ],
+        "missing_information": [
+          "记录时间",
+          "生命体征（体温、血压等）",
+          "过敏史",
+          "具体化疗方案及周期"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 35.96869938308373,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2301,
+        "prompt_tokens": 684,
+        "total_tokens": 2985,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-009",
+      "input": "10床马先生，70岁，前列腺增生术后留置尿管第5天。今天下午体温38.2，说下腹不舒服，尿袋里尿液混浊有沉淀，尿量这班500毫升，尿管没有扭曲受压。已报告医生，按医嘱留取中段？不，是从采样口无菌采尿培养，鼓励饮水，做会阴护理，尿袋低于膀胱水平。",
+      "expected_output": {
+        "document_type": "留置尿管护理及感染风险记录",
+        "patient": {
+          "bed": "10床",
+          "name": "马先生",
+          "age": "70岁",
+          "history": "前列腺增生术后",
+          "catheter_day": "留置尿管第5天"
+        },
+        "record_time": "2026-07-08 下午班",
+        "assessment": {
+          "symptoms": [
+            "体温38.2℃",
+            "下腹不适"
+          ],
+          "urine": "尿液混浊有沉淀，本班尿量500ml",
+          "catheter_status": "尿管通畅，无扭曲受压，尿袋低于膀胱水平"
+        },
+        "nursing_problems": [
+          "导尿管相关尿路感染风险/疑似感染",
+          "发热",
+          "留置尿管护理需求"
+        ],
+        "nursing_measures": [
+          "报告医生患者发热、下腹不适及尿液混浊情况",
+          "按医嘱从尿管采样口严格无菌采集尿培养标本，不记录为普通中段尿",
+          "保持尿管及引流袋低位通畅，避免扭曲、受压和逆流",
+          "进行会阴护理，保持尿道口清洁",
+          "记录尿量、颜色、性质及体温变化",
+          "鼓励饮水或按医嘱管理入量，评估拔管条件"
+        ],
+        "evaluation": "尿管当前通畅，本班尿量500ml；已按无菌要求留取尿培养，患者仍发热需继续观察。",
+        "risk_flags": [
+          "留置尿管第5天",
+          "体温38.2℃",
+          "尿液混浊沉淀",
+          "下腹不适"
+        ],
+        "follow_up": [
+          "追踪尿培养结果",
+          "复测体温并观察寒战、尿痛、血尿",
+          "与医生评估是否尽早拔除尿管"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"术后护理记录\",\n  \"patient\": {\n    \"bed_number\": \"10床\",\n    \"name\": \"马先生\",\n    \"gender\": \"男\",\n    \"age\": \"70岁\",\n    \"diagnosis\": \"前列腺增生术后留置尿管第5天\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"未提供\",\n  \"source_summary\": \"10床马先生，70岁，前列腺增生术后第5天，下午体温38.2°C，主诉下腹不适，尿液混浊有沉淀，尿量500ml/班。已报告医生，执行尿培养、鼓励饮水等措施。\",\n  \"assessment\": {\n    \"chief_complaint\": \"下腹不适\",\n    \"vital_signs\": \"体温38.2°C\",\n    \"physical_signs\": \"尿液混浊有沉淀\",\n    \"urine_output\": \"500ml/班\",\n    \"catheter_status\": \"无扭曲受压\"\n  },\n  \"nursing_problems\": [\"尿路感染风险\", \"发热原因待查\"],\n  \"nursing_measures\": [\n    \"已执行：报告医生\",\n    \"已执行：留取尿培养（从采样口无菌）\",\n    \"已执行：鼓励饮水\",\n    \"已执行：会阴护理\",\n    \"已执行：尿袋低于膀胱水平\",\n    \"应继续：监测体温变化\",\n    \"应继续：观察尿液性状\",\n    \"应继续：记录尿量\"\n  ],\n  \"evaluation\": \"当前体温升高、尿液异常，已启动感染排查措施，症状待缓解，尿培养结果待回报。\",\n  \"risk_flags\": [\"尿路感染\", \"感染性发热\"],\n  \"follow_up\": [\"复测体温\", \"关注尿培养结果\", \"症状变化观察\", \"必要时复查血常规\"],\n  \"missing_information\": [\"具体时间\", \"过敏史\", \"其他生命体征（如血压、心率）\", \"疼痛评分\"],\n  \"uncertain_items\": [\"尿培养方法：最初提及中段尿，后纠正为采样口\"]\n}",
+      "model_output_json": {
+        "document_type": "术后护理记录",
+        "patient": {
+          "bed_number": "10床",
+          "name": "马先生",
+          "gender": "男",
+          "age": "70岁",
+          "diagnosis": "前列腺增生术后留置尿管第5天",
+          "allergy_history": "未提供"
+        },
+        "record_time": "未提供",
+        "source_summary": "10床马先生，70岁，前列腺增生术后第5天，下午体温38.2°C，主诉下腹不适，尿液混浊有沉淀，尿量500ml/班。已报告医生，执行尿培养、鼓励饮水等措施。",
+        "assessment": {
+          "chief_complaint": "下腹不适",
+          "vital_signs": "体温38.2°C",
+          "physical_signs": "尿液混浊有沉淀",
+          "urine_output": "500ml/班",
+          "catheter_status": "无扭曲受压"
+        },
+        "nursing_problems": [
+          "尿路感染风险",
+          "发热原因待查"
+        ],
+        "nursing_measures": [
+          "已执行：报告医生",
+          "已执行：留取尿培养（从采样口无菌）",
+          "已执行：鼓励饮水",
+          "已执行：会阴护理",
+          "已执行：尿袋低于膀胱水平",
+          "应继续：监测体温变化",
+          "应继续：观察尿液性状",
+          "应继续：记录尿量"
+        ],
+        "evaluation": "当前体温升高、尿液异常，已启动感染排查措施，症状待缓解，尿培养结果待回报。",
+        "risk_flags": [
+          "尿路感染",
+          "感染性发热"
+        ],
+        "follow_up": [
+          "复测体温",
+          "关注尿培养结果",
+          "症状变化观察",
+          "必要时复查血常规"
+        ],
+        "missing_information": [
+          "具体时间",
+          "过敏史",
+          "其他生命体征（如血压、心率）",
+          "疼痛评分"
+        ],
+        "uncertain_items": [
+          "尿培养方法：最初提及中段尿，后纠正为采样口"
+        ]
+      },
+      "request_duration_seconds": 43.77377759409137,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3255,
+        "prompt_tokens": 678,
+        "total_tokens": 3933,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-010",
+      "input": "产科6床张女士，28岁，顺产后2小时，诉头有点晕。血压96/60，脉搏104，宫底脐下1指，子宫偏软，按揉后变硬，阴道出血约180毫升，有少量血块，会阴切口无活动性出血。已按摩子宫，协助排空膀胱，通知医生，按医嘱静滴缩宫素，继续称量会阴垫。宝宝在旁边，家属在。",
+      "expected_output": {
+        "document_type": "产后2小时护理观察记录",
+        "patient": {
+          "location": "产科6床",
+          "name": "张女士",
+          "age": "28岁",
+          "delivery": "顺产后2小时"
+        },
+        "record_time": "产后2小时",
+        "assessment": {
+          "symptoms": [
+            "头晕"
+          ],
+          "vital_signs": {
+            "BP": "96/60mmHg",
+            "P": "104次/分"
+          },
+          "uterus": "宫底脐下1指，子宫偏软，按摩后变硬",
+          "lochia_bleeding": "阴道出血约180ml，少量血块",
+          "perineal_wound": "会阴切口无活动性出血",
+          "support": "家属在旁，婴儿在旁"
+        },
+        "nursing_problems": [
+          "产后出血风险",
+          "子宫收缩乏力风险",
+          "血容量不足风险"
+        ],
+        "nursing_measures": [
+          "立即评估生命体征、意识、头晕程度、子宫收缩及阴道出血量",
+          "持续按摩子宫并观察宫缩反应",
+          "协助排空膀胱，减少膀胱充盈影响宫缩",
+          "通知医生",
+          "遵医嘱静脉滴注缩宫素",
+          "称量会阴垫，准确记录出血量、血块及恶露性状",
+          "观察会阴切口有无活动性出血"
+        ],
+        "evaluation": "按摩后子宫转硬，会阴切口暂未见活动性出血；患者血压偏低、心率偏快且出血180ml，需严密观察出血进展。",
+        "risk_flags": [
+          "顺产后2小时",
+          "血压96/60mmHg",
+          "心率104次/分",
+          "子宫偏软",
+          "出血约180ml伴血块",
+          "头晕"
+        ],
+        "follow_up": [
+          "继续15分钟级别密切观察宫缩、宫底高度和出血量，按院内产后观察规范执行",
+          "若出血增多、宫缩差、头晕加重或血压下降，立即报告医生并启动产后出血处理流程",
+          "持续称量会阴垫并交接累计出血量"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"产后护理记录\",\n  \"patient\": {\n    \"bed_number\": \"6床\",\n    \"name\": \"张女士\",\n    \"gender\": \"女\",\n    \"age\": \"28岁\",\n    \"diagnosis\": \"顺产\",\n    \"allergy_history\": \"未提供\"\n  },\n  \"record_time\": \"未提供\",\n  \"source_summary\": \"产科6床张女士，28岁，顺产后2小时主诉头晕。血压96/60 mmHg，脉搏104次/分。宫底脐下1指，子宫偏软（按揉后变硬），阴道出血约180ml（含少量血块），会阴切口无活动性出血。已实施子宫按摩、排空膀胱、通知医生、静滴缩宫素，继续会阴垫称量。宝宝及家属在场。\",\n  \"assessment\": {\n    \"chief_complaint\": \"头晕\",\n    \"vital_signs\": \"血压96/60 mmHg，脉搏104次/分\",\n    \"physical_findings\": \"宫底脐下1指，子宫偏软（按揉后变硬），阴道出血约180ml（少量血块），会阴切口无活动性出血\"\n  },\n  \"nursing_problems\": [\"产后出血风险\", \"低血压\", \"体液不足可能\"],\n  \"nursing_measures\": [\"已按摩子宫\", \"已协助排空膀胱\", \"已通知医生\", \"已按医嘱静滴缩宫素\", \"继续称量会阴垫\", \"持续监测生命体征及阴道出血量\"],\n  \"evaluation\": \"子宫收缩改善（按揉后变硬），但阴道出血量180ml、血压偏低、脉搏增快，需警惕早期产后出血或体液不足。\",\n  \"risk_flags\": [\"产后出血\", \"低血压\", \"心动过速\"],\n  \"follow_up\": [\"持续监测生命体征每15-30分钟\", \"每小时评估阴道出血量及子宫收缩\", \"复测血常规（遵医嘱）\", \"确保缩宫素输注通畅\", \"交接时重点报告出血量及生命体征变化\"],\n  \"missing_information\": [\"具体记录时间\", \"过敏史\", \"体温/呼吸/血氧饱和度\", \"产程细节（如是否足月）\", \"会阴切口类型\"],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "产后护理记录",
+        "patient": {
+          "bed_number": "6床",
+          "name": "张女士",
+          "gender": "女",
+          "age": "28岁",
+          "diagnosis": "顺产",
+          "allergy_history": "未提供"
+        },
+        "record_time": "未提供",
+        "source_summary": "产科6床张女士，28岁，顺产后2小时主诉头晕。血压96/60 mmHg，脉搏104次/分。宫底脐下1指，子宫偏软（按揉后变硬），阴道出血约180ml（含少量血块），会阴切口无活动性出血。已实施子宫按摩、排空膀胱、通知医生、静滴缩宫素，继续会阴垫称量。宝宝及家属在场。",
+        "assessment": {
+          "chief_complaint": "头晕",
+          "vital_signs": "血压96/60 mmHg，脉搏104次/分",
+          "physical_findings": "宫底脐下1指，子宫偏软（按揉后变硬），阴道出血约180ml（少量血块），会阴切口无活动性出血"
+        },
+        "nursing_problems": [
+          "产后出血风险",
+          "低血压",
+          "体液不足可能"
+        ],
+        "nursing_measures": [
+          "已按摩子宫",
+          "已协助排空膀胱",
+          "已通知医生",
+          "已按医嘱静滴缩宫素",
+          "继续称量会阴垫",
+          "持续监测生命体征及阴道出血量"
+        ],
+        "evaluation": "子宫收缩改善（按揉后变硬），但阴道出血量180ml、血压偏低、脉搏增快，需警惕早期产后出血或体液不足。",
+        "risk_flags": [
+          "产后出血",
+          "低血压",
+          "心动过速"
+        ],
+        "follow_up": [
+          "持续监测生命体征每15-30分钟",
+          "每小时评估阴道出血量及子宫收缩",
+          "复测血常规（遵医嘱）",
+          "确保缩宫素输注通畅",
+          "交接时重点报告出血量及生命体征变化"
+        ],
+        "missing_information": [
+          "具体记录时间",
+          "过敏史",
+          "体温/呼吸/血氧饱和度",
+          "产程细节（如是否足月）",
+          "会阴切口类型"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 46.07571391295642,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 3399,
+        "prompt_tokens": 687,
+        "total_tokens": 4086,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-011",
+      "input": "23床魏女士，52岁，卵巢癌，左前臂外周静脉输注紫杉醇时说针眼周围胀痛，局部发红，约3乘4厘米轻度肿胀，回抽回血不畅，滴速变慢。立即停止输液，没有拔针，回抽残余药液约1毫升，通知医生和静疗护士，抬高患肢，边界已标记，冷敷按药物要求执行，疼痛评分从5分降到3分。",
+      "expected_output": {
+        "document_type": "化疗药物外渗疑似护理记录",
+        "patient": {
+          "bed": "23床",
+          "name": "魏女士",
+          "age": "52岁",
+          "diagnosis": "卵巢癌",
+          "medication": "紫杉醇"
+        },
+        "record_time": "2026-07-08",
+        "assessment": {
+          "event": "左前臂外周静脉输注紫杉醇过程中疑似外渗",
+          "local_findings": [
+            "针眼周围胀痛，NRS 5分",
+            "局部发红",
+            "约3cm×4cm轻度肿胀",
+            "回抽回血不畅",
+            "滴速变慢"
+          ],
+          "post_intervention": "疼痛降至NRS 3分"
+        },
+        "nursing_problems": [
+          "疑似化疗药物外渗",
+          "局部组织损伤风险",
+          "疼痛"
+        ],
+        "nursing_measures": [
+          "立即停止输注，保留针头/留置针，避免继续外渗",
+          "尝试回抽残余药液，已回抽约1ml",
+          "立即通知医生和静疗护士/专科护士",
+          "抬高患肢，避免按摩局部",
+          "标记红肿边界并记录范围",
+          "按紫杉醇及院内流程执行冷敷等局部处理",
+          "持续评估疼痛、肿胀、皮肤颜色、温度、水疱或坏死情况",
+          "向患者说明勿自行热敷、按揉或用力活动患肢"
+        ],
+        "evaluation": "停止输注并处理后疼痛由5分降至3分，局部仍有3cm×4cm红肿，需严密随访组织损伤进展。",
+        "risk_flags": [
+          "化疗药物外渗疑似",
+          "紫杉醇",
+          "局部红肿3cm×4cm",
+          "回血不畅/滴速变慢"
+        ],
+        "follow_up": [
+          "按外渗处理流程定时复评并拍照/记录范围变化",
+          "追踪医生和静疗护士处理意见",
+          "若红肿扩大、疼痛加重、水疱或皮肤破溃，立即上报"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"化疗药物外渗护理记录\",\n  \"patient\": {\n    \"床号\": \"23\",\n    \"姓名\": \"魏女士\",\n    \"性别\": \"女\",\n    \"年龄\": \"52\",\n    \"诊断\": \"卵巢癌\",\n    \"过敏史\": \"未提供\"\n  },\n  \"record_time\": \"未提供\",\n  \"source_summary\": \"23床魏女士，52岁，卵巢癌，左前臂输注紫杉醇时主诉针眼周围胀痛，局部发红、轻度肿胀约3×4厘米，回抽回血不畅，滴速变慢。立即停输液，未拔针，回抽残余药液1ml，通知医生及静疗护士，抬高患肢，标记边界，按药物要求冷敷，疼痛评分从5分降至3分。\",\n  \"assessment\": {\n    \"主诉/症状\": \"针眼周围胀痛\",\n    \"症状\": [\"局部发红\", \"轻度肿胀约3×4厘米\"],\n    \"体征\": [\"回抽回血不畅\", \"滴速变慢\"],\n    \"疼痛评分\": \"5分（处理前）\"\n  },\n  \"nursing_problems\": [\"化疗药物外渗风险\", \"静脉炎风险\", \"疼痛\"],\n  \"nursing_measures\": [\n    \"已执行：立即停止输液\",\n    \"已执行：未拔针，回抽残余药液约1毫升\",\n    \"已执行：通知医生和静疗护士\",\n    \"已执行：抬高患肢\",\n    \"已执行：边界标记\",\n    \"已执行：按药物要求冷敷\",\n    \"应继续：持续冷敷观察\",\n    \"应继续：监测局部肿胀、发红变化\"\n  ],\n  \"evaluation\": \"疼痛评分降至3分；局部肿胀、发红情况待进一步观察\",\n  \"risk_flags\": [\"化疗药物外渗可能导致组织坏死，需重点监测\"],\n  \"follow_up\": [\n    \"继续冷敷处理\",\n    \"每4小时评估局部情况（肿胀、发红、疼痛）\",\n    \"复测疼痛评分\",\n    \"必要时请静疗护士会诊\",\n    \"完整记录事件经过及后续变化\"\n  ],\n  \"missing_information\": [\"具体时间\", \"过敏史\", \"生命体征（如血压、心率）\", \"药物浓度\"],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "化疗药物外渗护理记录",
+        "patient": {
+          "床号": "23",
+          "姓名": "魏女士",
+          "性别": "女",
+          "年龄": "52",
+          "诊断": "卵巢癌",
+          "过敏史": "未提供"
+        },
+        "record_time": "未提供",
+        "source_summary": "23床魏女士，52岁，卵巢癌，左前臂输注紫杉醇时主诉针眼周围胀痛，局部发红、轻度肿胀约3×4厘米，回抽回血不畅，滴速变慢。立即停输液，未拔针，回抽残余药液1ml，通知医生及静疗护士，抬高患肢，标记边界，按药物要求冷敷，疼痛评分从5分降至3分。",
+        "assessment": {
+          "主诉/症状": "针眼周围胀痛",
+          "症状": [
+            "局部发红",
+            "轻度肿胀约3×4厘米"
+          ],
+          "体征": [
+            "回抽回血不畅",
+            "滴速变慢"
+          ],
+          "疼痛评分": "5分（处理前）"
+        },
+        "nursing_problems": [
+          "化疗药物外渗风险",
+          "静脉炎风险",
+          "疼痛"
+        ],
+        "nursing_measures": [
+          "已执行：立即停止输液",
+          "已执行：未拔针，回抽残余药液约1毫升",
+          "已执行：通知医生和静疗护士",
+          "已执行：抬高患肢",
+          "已执行：边界标记",
+          "已执行：按药物要求冷敷",
+          "应继续：持续冷敷观察",
+          "应继续：监测局部肿胀、发红变化"
+        ],
+        "evaluation": "疼痛评分降至3分；局部肿胀、发红情况待进一步观察",
+        "risk_flags": [
+          "化疗药物外渗可能导致组织坏死，需重点监测"
+        ],
+        "follow_up": [
+          "继续冷敷处理",
+          "每4小时评估局部情况（肿胀、发红、疼痛）",
+          "复测疼痛评分",
+          "必要时请静疗护士会诊",
+          "完整记录事件经过及后续变化"
+        ],
+        "missing_information": [
+          "具体时间",
+          "过敏史",
+          "生命体征（如血压、心率）",
+          "药物浓度"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 35.76742063695565,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2148,
+        "prompt_tokens": 687,
+        "total_tokens": 2835,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    },
+    {
+      "id": "NDG-012",
+      "input": "32床吴国华，男66岁，慢性心力衰竭这次因气促水肿住院，今天准备出院。现在无明显气促，能平地慢走，血压128/72，脉搏78，血氧96，双下肢水肿基本消退。医生开了呋塞米、螺内酯、沙库巴曲缬沙坦，叮嘱低盐饮食、每日称体重，1周心内科复诊。患者有时忘记吃药，儿子说会帮忙做药盒。",
+      "expected_output": {
+        "document_type": "出院护理小结/出院健康教育记录",
+        "patient": {
+          "bed": "32床",
+          "name": "吴国华",
+          "sex": "男",
+          "age": "66岁",
+          "diagnosis": "慢性心力衰竭"
+        },
+        "record_time": "2026-07-08 出院日",
+        "assessment": {
+          "current_status": [
+            "无明显气促",
+            "可平地慢走",
+            "双下肢水肿基本消退"
+          ],
+          "vital_signs": {
+            "BP": "128/72mmHg",
+            "P": "78次/分",
+            "SpO2": "96%"
+          },
+          "medications": [
+            "呋塞米",
+            "螺内酯",
+            "沙库巴曲缬沙坦"
+          ],
+          "adherence_risk": "患者有时忘记服药，儿子愿意协助药盒管理"
+        },
+        "nursing_problems": [
+          "心衰复发风险",
+          "用药依从性不足风险",
+          "容量管理需求"
+        ],
+        "nursing_measures": [
+          "进行出院用药宣教：按医嘱规律服用利尿剂、螺内酯、沙库巴曲缬沙坦，不自行停药或加减量",
+          "指导低盐饮食，避免高盐腌制食品，按医嘱控制饮水量",
+          "指导每日同一时间称体重并记录，关注短期体重快速增加",
+          "教育识别警示症状：气促加重、夜间憋醒、下肢水肿加重、尿量明显减少、头晕低血压等及时就医",
+          "建议家属使用分格药盒或服药提醒协助管理",
+          "告知1周后心内科复诊并携带体重、血压、症状记录"
+        ],
+        "evaluation": "患者及儿子能复述低盐饮食、每日称体重、按时服药和1周复诊要求，家属同意协助药盒管理。",
+        "risk_flags": [
+          "慢性心衰",
+          "利尿剂用药",
+          "既往忘服药",
+          "需家庭自我监测"
+        ],
+        "follow_up": [
+          "1周心内科复诊",
+          "居家记录体重、血压、症状和服药情况",
+          "出现心衰加重警示症状及时返院"
+        ]
+      },
+      "model_output_text": "{\n  \"document_type\": \"出院护理小结\",\n  \"patient\": {\n    \"bed_number\": \"32\",\n    \"name\": \"吴国华\",\n    \"gender\": \"男\",\n    \"age\": 66,\n    \"diagnosis\": \"慢性心力衰竭\"\n  },\n  \"record_time\": \"未提供\",\n  \"source_summary\": \"患者吴国华，男66岁，慢性心力衰竭住院，主因气促水肿。今日出院，症状缓解，生命体征平稳，水肿消退。医嘱药物治疗、低盐饮食、每日体重监测，1周复诊。患者有漏服药史，家属协助管理。\",\n  \"assessment\": {\n    \"chief_complaint\": \"无明显气促，能平地慢走\",\n    \"vital_signs\": \"血压128/72 mmHg，脉搏78次/分，血氧饱和度96%\",\n    \"physical_signs\": \"双下肢水肿基本消退\"\n  },\n  \"nursing_problems\": [\n    \"有漏服药物风险\",\n    \"慢性心力衰竭自我管理需求\"\n  ],\n  \"nursing_measures\": [\n    \"已执行：出院指导（包括药物、低盐饮食、体重监测）\",\n    \"应继续：每日称体重、按时服用呋塞米/螺内酯/沙库巴曲缬沙坦、低盐饮食\"\n  ],\n  \"evaluation\": \"症状改善，水肿消退，生命体征稳定，活动耐力恢复。\",\n  \"risk_flags\": [\n    \"漏服药物风险（需家属监督药盒管理）\"\n  ],\n  \"follow_up\": [\n    \"1周心内科复诊\",\n    \"监测每日体重及心衰症状（如气促、水肿）\",\n    \"如有不适及时急诊\"\n  ],\n  \"missing_information\": [\n    \"过敏史\",\n    \"住院期间实验室检查结果（如电解质、肾功能）\",\n    \"具体药物剂量\",\n    \"体重变化数据\",\n    \"有无夜间呼吸困难等其他症状\"\n  ],\n  \"uncertain_items\": []\n}",
+      "model_output_json": {
+        "document_type": "出院护理小结",
+        "patient": {
+          "bed_number": "32",
+          "name": "吴国华",
+          "gender": "男",
+          "age": 66,
+          "diagnosis": "慢性心力衰竭"
+        },
+        "record_time": "未提供",
+        "source_summary": "患者吴国华，男66岁，慢性心力衰竭住院，主因气促水肿。今日出院，症状缓解，生命体征平稳，水肿消退。医嘱药物治疗、低盐饮食、每日体重监测，1周复诊。患者有漏服药史，家属协助管理。",
+        "assessment": {
+          "chief_complaint": "无明显气促，能平地慢走",
+          "vital_signs": "血压128/72 mmHg，脉搏78次/分，血氧饱和度96%",
+          "physical_signs": "双下肢水肿基本消退"
+        },
+        "nursing_problems": [
+          "有漏服药物风险",
+          "慢性心力衰竭自我管理需求"
+        ],
+        "nursing_measures": [
+          "已执行：出院指导（包括药物、低盐饮食、体重监测）",
+          "应继续：每日称体重、按时服用呋塞米/螺内酯/沙库巴曲缬沙坦、低盐饮食"
+        ],
+        "evaluation": "症状改善，水肿消退，生命体征稳定，活动耐力恢复。",
+        "risk_flags": [
+          "漏服药物风险（需家属监督药盒管理）"
+        ],
+        "follow_up": [
+          "1周心内科复诊",
+          "监测每日体重及心衰症状（如气促、水肿）",
+          "如有不适及时急诊"
+        ],
+        "missing_information": [
+          "过敏史",
+          "住院期间实验室检查结果（如电解质、肾功能）",
+          "具体药物剂量",
+          "体重变化数据",
+          "有无夜间呼吸困难等其他症状"
+        ],
+        "uncertain_items": []
+      },
+      "request_duration_seconds": 23.544215261004865,
+      "request_error": null,
+      "usage": {
+        "completion_tokens": 2677,
+        "prompt_tokens": 692,
+        "total_tokens": 3369,
+        "completion_tokens_details": null,
+        "prompt_tokens_details": null,
+        "search_count": 0
+      }
+    }
+  ]
+}
