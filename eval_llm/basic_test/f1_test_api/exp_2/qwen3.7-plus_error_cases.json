@@ -1,0 +1,1054 @@
+[
+  {
+    "id": 2,
+    "input": "患者回族，说小学没毕业，就记个小学文化吧。昨天下午两点步行入院的，考虑冠心病。现在的体温是36度。",
+    "expected": {
+      "assessmentTime": "2026-01-10 15:30:00",
+      "ethnicity": "回族",
+      "education": "小学",
+      "admissionTime": "2026-01-09 14:00:00",
+      "admissionMethod": "步行",
+      "diagnosis": "考虑冠心病",
+      "temperature": "36.0"
+    },
+    "predicted": {
+      "assessmentTime": "2026-01-10 15:30:00",
+      "education": "小学",
+      "ethnicity": "回族",
+      "admissionTime": "2026-01-09 14:00:00",
+      "admissionMethod": "步行",
+      "diagnosis": "冠心病",
+      "temperature": "36.0"
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "考虑冠心病",
+        "predicted": "冠心病",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-01-10 15:30:00\",\n  \"education\": \"小学\",\n  \"ethnicity\": \"回族\",\n  \"admissionTime\": \"2026-01-09 14:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"冠心病\",\n  \"temperature\": \"36.0\"\n}",
+    "request_duration_seconds": 19.998913381015882,
+    "request_error": null
+  },
+  {
+    "id": 3,
+    "input": "病人接了尿袋，还在打点滴。皮肤上有个造口。买波八十，神志清醒。今天天气挺冷的。",
+    "expected": {
+      "assessmentTime": "2025-12-01 08:00:00",
+      "catheter": [
+        "导尿管",
+        "静脉通路"
+      ],
+      "skin": [
+        "造口"
+      ],
+      "pulseRate": "80",
+      "consciousness": "清醒"
+    },
+    "predicted": {
+      "assessmentTime": "2025-12-01 08:00:00",
+      "catheter": [
+        "导尿管"
+      ],
+      "skin": [
+        "造口"
+      ],
+      "pulseRate": "80",
+      "consciousness": "清醒"
+    },
+    "error_details": {
+      "catheter": {
+        "expected": [
+          "导尿管",
+          "静脉通路"
+        ],
+        "predicted": [
+          "导尿管"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2025-12-01 08:00:00\",\n  \"catheter\": [\n    \"导尿管\"\n  ],\n  \"skin\": [\n    \"造口\"\n  ],\n  \"pulseRate\": \"80\",\n  \"consciousness\": \"清醒\"\n}",
+    "request_duration_seconds": 20.922702979994938,
+    "request_error": null
+  },
+  {
+    "id": 7,
+    "input": "今天早上八点用轮椅推入病房的，学历是大专，疑似胃溃疡，家属带了拐杖过来。",
+    "expected": {
+      "assessmentTime": "2026-09-15 08:00:00",
+      "admissionMethod": "轮椅",
+      "education": "大专以上",
+      "diagnosis": "疑似胃溃疡",
+      "admissionTime": "2026-09-15 08:00:00"
+    },
+    "predicted": {
+      "assessmentTime": "2026-09-15 08:00:00",
+      "education": "大专以上",
+      "admissionMethod": "轮椅",
+      "diagnosis": "胃溃疡"
+    },
+    "error_details": {
+      "admissionTime": {
+        "expected": "2026-09-15 08:00:00",
+        "predicted": null,
+        "type": "FN"
+      },
+      "diagnosis": {
+        "expected": "疑似胃溃疡",
+        "predicted": "胃溃疡",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-09-15 08:00:00\",\n  \"education\": \"大专以上\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"胃溃疡\"\n}",
+    "request_duration_seconds": 15.85595855396241,
+    "request_error": null
+  },
+  {
+    "id": 11,
+    "input": "病人是汉族，文盲。上午十点钟用担架抬进来的，诊断是急性阑尾炎。神志是模糊的。",
+    "expected": {
+      "assessmentTime": "2026-07-15 14:30:00",
+      "admissionTime": "2026-07-15 10:00:00",
+      "ethnicity": "汉族",
+      "education": "文盲",
+      "admissionMethod": "其他",
+      "diagnosis": "急性阑尾炎",
+      "consciousness": "模糊"
+    },
+    "predicted": {
+      "assessmentTime": "2026-07-15 14:30:00",
+      "ethnicity": "汉族",
+      "education": "文盲",
+      "admissionTime": "2026-07-15 10:00:00",
+      "admissionMethod": "平车",
+      "diagnosis": "急性阑尾炎",
+      "consciousness": "模糊"
+    },
+    "error_details": {
+      "admissionMethod": {
+        "expected": "其他",
+        "predicted": "平车",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-07-15 14:30:00\",\n  \"ethnicity\": \"汉族\",\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-07-15 10:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"急性阑尾炎\",\n  \"consciousness\": \"模糊\"\n}",
+    "request_duration_seconds": 28.159040264086798,
+    "request_error": null
+  },
+  {
+    "id": 12,
+    "input": "昨天晚上九点查房，病人皮肤有个小破损。接了静脉通路，没有插导尿管。睡眠不太好但算正常吧。",
+    "expected": {
+      "assessmentTime": "2026-07-31 21:00:00",
+      "skin": [
+        "破损"
+      ],
+      "catheter": [
+        "静脉通路"
+      ],
+      "sleep": "正常"
+    },
+    "predicted": {
+      "assessmentTime": "2026-07-31 21:00:00",
+      "skin": [
+        "破损"
+      ],
+      "sleep": "正常"
+    },
+    "error_details": {
+      "catheter": {
+        "expected": [
+          "静脉通路"
+        ],
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-07-31 21:00:00\",\n  \"skin\": [\n    \"破损\"\n  ],\n  \"sleep\": \"正常\"\n}",
+    "request_duration_seconds": 20.51848140708171,
+    "request_error": null
+  },
+  {
+    "id": 13,
+    "input": "下午三点的时候，学压八十一百二十，体重六十公斤，身高一百六十五厘米。患者一直抱怨食欲不振，没吃多少东西。血糖是六点零。",
+    "expected": {
+      "assessmentTime": "2026-09-05 15:00:00",
+      "systolicPressure": "120",
+      "diastolicPressure": "80",
+      "weight": "60.0",
+      "height": "165",
+      "bloodSugar": "6.0"
+    },
+    "predicted": {
+      "assessmentTime": "2026-09-05 15:00:00",
+      "systolicPressure": "120",
+      "diastolicPressure": "80",
+      "weight": "60.0",
+      "height": "165",
+      "diet": "异常",
+      "bloodSugar": "6.0"
+    },
+    "error_details": {
+      "diet": {
+        "expected": null,
+        "predicted": "异常",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-09-05 15:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"weight\": \"60.0\",\n  \"height\": \"165\",\n  \"diet\": \"异常\",\n  \"bloodSugar\": \"6.0\"\n}",
+    "request_duration_seconds": 16.949027471011505,
+    "request_error": null
+  },
+  {
+    "id": 17,
+    "input": "初中文化，汉族。今天中午十二点被120送过来的，考虑是脑出血。现在处于嗜睡状态。",
+    "expected": {
+      "assessmentTime": "2027-01-08 14:00:00",
+      "admissionTime": "2027-01-08 12:00:00",
+      "education": "初中",
+      "ethnicity": "汉族",
+      "admissionMethod": "其他",
+      "diagnosis": "考虑脑出血",
+      "consciousness": "嗜睡"
+    },
+    "predicted": {
+      "assessmentTime": "2027-01-08 14:00:00",
+      "education": "初中",
+      "ethnicity": "汉族",
+      "admissionTime": "2027-01-08 12:00:00",
+      "diagnosis": "脑出血",
+      "consciousness": "嗜睡"
+    },
+    "error_details": {
+      "admissionMethod": {
+        "expected": "其他",
+        "predicted": null,
+        "type": "FN"
+      },
+      "diagnosis": {
+        "expected": "考虑脑出血",
+        "predicted": "脑出血",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2027-01-08 14:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2027-01-08 12:00:00\",\n  \"diagnosis\": \"脑出血\",\n  \"consciousness\": \"嗜睡\"\n}",
+    "request_duration_seconds": 24.92641263990663,
+    "request_error": null
+  },
+  {
+    "id": 22,
+    "input": "病人现在神志清醒，不过背部有个压疮。",
+    "expected": {
+      "assessmentTime": "2026-04-12 10:15:00",
+      "consciousness": "清醒",
+      "skin": [
+        "其他"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-04-12 10:15:00",
+      "consciousness": "清醒",
+      "skin": [
+        "溃疡"
+      ]
+    },
+    "error_details": {
+      "skin": {
+        "expected": [
+          "其他"
+        ],
+        "predicted": [
+          "溃疡"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-12 10:15:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\n    \"溃疡\"\n  ]\n}",
+    "request_duration_seconds": 11.979382916120812,
+    "request_error": null
+  },
+  {
+    "id": 39,
+    "input": "前天下午两点入院的，初步考虑是肺炎。",
+    "expected": {
+      "assessmentTime": "2026-05-10 08:00:00",
+      "admissionTime": "2026-05-08 14:00:00",
+      "diagnosis": "考虑肺炎"
+    },
+    "predicted": {
+      "assessmentTime": "2026-05-10 08:00:00",
+      "admissionTime": "2026-05-08 14:00:00",
+      "diagnosis": "肺炎"
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "考虑肺炎",
+        "predicted": "肺炎",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-10 08:00:00\",\n  \"admissionTime\": \"2026-05-08 14:00:00\",\n  \"diagnosis\": \"肺炎\"\n}",
+    "request_duration_seconds": 10.1275779819116,
+    "request_error": null
+  },
+  {
+    "id": 42,
+    "input": "汉族，初中文化，昨天下午两点轮椅推入，考虑阑尾炎。没有任何过敏。",
+    "expected": {
+      "assessmentTime": "2026-03-05 09:00:00",
+      "ethnicity": "汉族",
+      "education": "初中",
+      "admissionTime": "2026-03-04 14:00:00",
+      "admissionMethod": "轮椅",
+      "diagnosis": "考虑阑尾炎",
+      "allergyHistory": [
+        "无"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-05 09:00:00",
+      "education": "初中",
+      "ethnicity": "汉族",
+      "admissionTime": "2026-03-04 14:00:00",
+      "admissionMethod": "轮椅",
+      "diagnosis": "阑尾炎",
+      "allergyHistory": [
+        "无"
+      ]
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "考虑阑尾炎",
+        "predicted": "阑尾炎",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 09:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2026-03-04 14:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"阑尾炎\",\n  \"allergyHistory\": [\n    \"无\"\n  ]\n}",
+    "request_duration_seconds": 14.775025030132383,
+    "request_error": null
+  },
+  {
+    "id": 43,
+    "input": "患者说今天中午想吃点饺子，精神挺好，能自己下床走动。",
+    "expected": {
+      "assessmentTime": "2026-03-05 11:20:00"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-05 11:20:00",
+      "consciousness": "清醒"
+    },
+    "error_details": {
+      "consciousness": {
+        "expected": null,
+        "predicted": "清醒",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 11:20:00\",\n  \"consciousness\": \"清醒\"\n}",
+    "request_duration_seconds": 13.01139626186341,
+    "request_error": null
+  },
+  {
+    "id": 45,
+    "input": "昨天半夜一点，高压一百五，低压九十，打了点滴，接了尿袋。",
+    "expected": {
+      "assessmentTime": "2026-03-05 01:00:00",
+      "systolicPressure": "150",
+      "diastolicPressure": "90",
+      "catheter": [
+        "静脉通路",
+        "导尿管"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-05 01:00:00",
+      "systolicPressure": "150",
+      "diastolicPressure": "90",
+      "catheter": [
+        "导尿管"
+      ]
+    },
+    "error_details": {
+      "catheter": {
+        "expected": [
+          "静脉通路",
+          "导尿管"
+        ],
+        "predicted": [
+          "导尿管"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 01:00:00\",\n  \"systolicPressure\": \"150\",\n  \"diastolicPressure\": \"90\",\n  \"catheter\": [\n    \"导尿管\"\n  ]\n}",
+    "request_duration_seconds": 17.286052083829418,
+    "request_error": null
+  },
+  {
+    "id": 48,
+    "input": "前天下午三点救护车送进来的，说是考虑心梗。大专毕业。对海鲜过敏。",
+    "expected": {
+      "assessmentTime": "2026-03-07 10:00:00",
+      "admissionTime": "2026-03-05 15:00:00",
+      "admissionMethod": "其他",
+      "diagnosis": "考虑心梗",
+      "education": "大专以上",
+      "allergyHistory": [
+        "海鲜"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-07 10:00:00",
+      "education": "大专以上",
+      "admissionTime": "2026-03-05 15:00:00",
+      "diagnosis": "心梗",
+      "allergyHistory": [
+        "海鲜"
+      ]
+    },
+    "error_details": {
+      "admissionMethod": {
+        "expected": "其他",
+        "predicted": null,
+        "type": "FN"
+      },
+      "diagnosis": {
+        "expected": "考虑心梗",
+        "predicted": "心梗",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:00:00\",\n  \"education\": \"大专以上\",\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"diagnosis\": \"心梗\",\n  \"allergyHistory\": [\n    \"海鲜\"\n  ]\n}",
+    "request_duration_seconds": 19.08517014514655,
+    "request_error": null
+  },
+  {
+    "id": 50,
+    "input": "学压八十一百二，麦博六十，心率六十，病人现在处于浅昏迷。手上有压疮。",
+    "expected": {
+      "assessmentTime": "2026-03-08 08:30:00",
+      "systolicPressure": "120",
+      "diastolicPressure": "80",
+      "pulseRate": "60",
+      "heartRate": "60",
+      "consciousness": "浅昏迷",
+      "skin": [
+        "其他"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-08 08:30:00",
+      "systolicPressure": "120",
+      "diastolicPressure": "80",
+      "pulseRate": "60",
+      "heartRate": "60",
+      "consciousness": "浅昏迷",
+      "skin": [
+        "溃疡"
+      ]
+    },
+    "error_details": {
+      "skin": {
+        "expected": [
+          "其他"
+        ],
+        "predicted": [
+          "溃疡"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 08:30:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"60\",\n  \"heartRate\": \"60\",\n  \"consciousness\": \"浅昏迷\",\n  \"skin\": [\n    \"溃疡\"\n  ]\n}",
+    "request_duration_seconds": 19.665429409127682,
+    "request_error": null
+  },
+  {
+    "id": 54,
+    "input": "患者维吾尔族，没上过学，昨天上午九点背入急诊，考虑骨折。",
+    "expected": {
+      "assessmentTime": "2026-03-10 10:30:00",
+      "ethnicity": "维吾尔族",
+      "education": "未入学",
+      "admissionTime": "2026-03-09 09:00:00",
+      "admissionMethod": "背入",
+      "diagnosis": "考虑骨折"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-10 10:30:00",
+      "education": "未入学",
+      "ethnicity": "维吾尔族",
+      "admissionTime": "2026-03-09 09:00:00",
+      "admissionMethod": "背入",
+      "diagnosis": "骨折"
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "考虑骨折",
+        "predicted": "骨折",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 10:30:00\",\n  \"education\": \"未入学\",\n  \"ethnicity\": \"维吾尔族\",\n  \"admissionTime\": \"2026-03-09 09:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"骨折\"\n}",
+    "request_duration_seconds": 17.878712930018082,
+    "request_error": null
+  },
+  {
+    "id": 58,
+    "input": "前天下午五点120送来的，确诊脑出血。意识昏迷，接了静脉通路，带有出血点。",
+    "expected": {
+      "assessmentTime": "2026-03-12 09:00:00",
+      "admissionTime": "2026-03-10 17:00:00",
+      "admissionMethod": "其他",
+      "diagnosis": "确诊脑出血",
+      "consciousness": "昏迷",
+      "catheter": [
+        "静脉通路"
+      ],
+      "skin": [
+        "出血点"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-12 09:00:00",
+      "admissionTime": "2026-03-10 17:00:00",
+      "diagnosis": "脑出血",
+      "consciousness": "昏迷",
+      "catheter": [
+        "静脉通路"
+      ],
+      "skin": [
+        "出血点"
+      ]
+    },
+    "error_details": {
+      "admissionMethod": {
+        "expected": "其他",
+        "predicted": null,
+        "type": "FN"
+      },
+      "diagnosis": {
+        "expected": "确诊脑出血",
+        "predicted": "脑出血",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 09:00:00\",\n  \"admissionTime\": \"2026-03-10 17:00:00\",\n  \"diagnosis\": \"脑出血\",\n  \"consciousness\": \"昏迷\",\n  \"catheter\": [\"静脉通路\"],\n  \"skin\": [\"出血点\"]\n}",
+    "request_duration_seconds": 39.28486758703366,
+    "request_error": null
+  },
+  {
+    "id": 59,
+    "input": "上午十一点半测的，学压一百三八十五，夫妻二十，血糖五点二，没有任何过敏史，食欲不振。",
+    "expected": {
+      "assessmentTime": "2026-03-12 11:30:00",
+      "systolicPressure": "130",
+      "diastolicPressure": "85",
+      "respiratoryRate": "20",
+      "bloodSugar": "5.2",
+      "allergyHistory": [
+        "无"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-12 11:30:00",
+      "systolicPressure": "130",
+      "diastolicPressure": "85",
+      "respiratoryRate": "20",
+      "bloodSugar": "5.2",
+      "allergyHistory": [
+        "无"
+      ],
+      "diet": "异常"
+    },
+    "error_details": {
+      "diet": {
+        "expected": null,
+        "predicted": "异常",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 11:30:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"respiratoryRate\": \"20\",\n  \"bloodSugar\": \"5.2\",\n  \"allergyHistory\": [\n    \"无\"\n  ],\n  \"diet\": \"异常\"\n}",
+    "request_duration_seconds": 15.167347894981503,
+    "request_error": null
+  },
+  {
+    "id": 64,
+    "input": "病人神志清醒，正在打点滴。",
+    "expected": {
+      "assessmentTime": "2026-03-06 14:00:00",
+      "consciousness": "清醒",
+      "catheter": [
+        "静脉通路"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-06 14:00:00",
+      "consciousness": "清醒"
+    },
+    "error_details": {
+      "catheter": {
+        "expected": [
+          "静脉通路"
+        ],
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 14:00:00\",\n  \"consciousness\": \"清醒\"\n}",
+    "request_duration_seconds": 11.613025805912912,
+    "request_error": null
+  },
+  {
+    "id": 66,
+    "input": "昨天下午三点平车推入，考虑胃炎。",
+    "expected": {
+      "assessmentTime": "2026-03-06 16:00:00",
+      "admissionTime": "2026-03-05 15:00:00",
+      "admissionMethod": "平车",
+      "diagnosis": "考虑胃炎"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-06 16:00:00",
+      "admissionTime": "2026-03-05 15:00:00",
+      "admissionMethod": "平车",
+      "diagnosis": "胃炎"
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "考虑胃炎",
+        "predicted": "胃炎",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 16:00:00\",\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"胃炎\"\n}",
+    "request_duration_seconds": 11.941844598157331,
+    "request_error": null
+  },
+  {
+    "id": 71,
+    "input": "接了尿袋，排尿是正常的。",
+    "expected": {
+      "assessmentTime": "2026-03-07 15:30:00",
+      "catheter": [
+        "导尿管"
+      ],
+      "urination": "正常"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-07 15:30:00",
+      "catheter": [
+        "尿袋"
+      ],
+      "urination": "正常"
+    },
+    "error_details": {
+      "catheter": {
+        "expected": [
+          "导尿管"
+        ],
+        "predicted": [
+          "尿袋"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 15:30:00\",\n  \"catheter\": [\n    \"尿袋\"\n  ],\n  \"urination\": \"正常\"\n}",
+    "request_duration_seconds": 7.967439818894491,
+    "request_error": null
+  },
+  {
+    "id": 82,
+    "input": "前天晚上十点入院，轮椅推入。现在打点滴，麦博八十次每分。",
+    "expected": {
+      "assessmentTime": "2026-03-06 08:00:00",
+      "admissionTime": "2026-03-04 22:00:00",
+      "admissionMethod": "轮椅",
+      "catheter": [
+        "静脉通路"
+      ],
+      "pulseRate": "80"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-06 08:00:00",
+      "admissionTime": "2026-03-04 22:00:00",
+      "admissionMethod": "轮椅",
+      "pulseRate": "80"
+    },
+    "error_details": {
+      "catheter": {
+        "expected": [
+          "静脉通路"
+        ],
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"admissionTime\": \"2026-03-04 22:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"pulseRate\": \"80\"\n}",
+    "request_duration_seconds": 16.34922748687677,
+    "request_error": null
+  },
+  {
+    "id": 86,
+    "input": "回族，考虑急性阑尾炎，今天排便一次，尿袋正常。",
+    "expected": {
+      "assessmentTime": "2026-03-08 11:00:00",
+      "ethnicity": "回族",
+      "diagnosis": "考虑急性阑尾炎",
+      "stoolFrequency": "1",
+      "catheter": [
+        "导尿管"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-08 11:00:00",
+      "ethnicity": "回族",
+      "diagnosis": "急性阑尾炎",
+      "defecation": "正常",
+      "stoolFrequency": "1",
+      "urination": "正常"
+    },
+    "error_details": {
+      "defecation": {
+        "expected": null,
+        "predicted": "正常",
+        "type": "FP"
+      },
+      "urination": {
+        "expected": null,
+        "predicted": "正常",
+        "type": "FP"
+      },
+      "catheter": {
+        "expected": [
+          "导尿管"
+        ],
+        "predicted": null,
+        "type": "FN"
+      },
+      "diagnosis": {
+        "expected": "考虑急性阑尾炎",
+        "predicted": "急性阑尾炎",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 11:00:00\",\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"急性阑尾炎\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"urination\": \"正常\"\n}",
+    "request_duration_seconds": 28.183082772884518,
+    "request_error": null
+  },
+  {
+    "id": 88,
+    "input": "体温三十七度，皮肤有一个压疮。睡眠异常，失眠了一整夜。",
+    "expected": {
+      "assessmentTime": "2026-03-09 08:30:00",
+      "temperature": "37.0",
+      "skin": [
+        "其他"
+      ],
+      "sleep": "异常"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-09 08:30:00",
+      "temperature": "37.0",
+      "skin": [
+        "溃疡"
+      ],
+      "sleep": "异常"
+    },
+    "error_details": {
+      "skin": {
+        "expected": [
+          "其他"
+        ],
+        "predicted": [
+          "溃疡"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 08:30:00\",\n  \"temperature\": \"37.0\",\n  \"skin\": [\n    \"溃疡\"\n  ],\n  \"sleep\": \"异常\"\n}",
+    "request_duration_seconds": 13.706379023147747,
+    "request_error": null
+  },
+  {
+    "id": 90,
+    "input": "早上八点由救护车送入，入院诊断为高血压，神志嗜睡。",
+    "expected": {
+      "assessmentTime": "2026-03-10 08:00:00",
+      "admissionTime": "2026-03-10 08:00:00",
+      "admissionMethod": "其他",
+      "diagnosis": "高血压",
+      "consciousness": "嗜睡"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-10 09:00:00",
+      "admissionTime": "2026-03-10 08:00:00",
+      "diagnosis": "高血压",
+      "consciousness": "嗜睡"
+    },
+    "error_details": {
+      "admissionMethod": {
+        "expected": "其他",
+        "predicted": null,
+        "type": "FN"
+      },
+      "assessmentTime": {
+        "expected": "2026-03-10 08:00:00",
+        "predicted": "2026-03-10 09:00:00",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 09:00:00\",\n  \"admissionTime\": \"2026-03-10 08:00:00\",\n  \"diagnosis\": \"高血压\",\n  \"consciousness\": \"嗜睡\"\n}",
+    "request_duration_seconds": 17.068110222928226,
+    "request_error": null
+  },
+  {
+    "id": 99,
+    "input": "皮肤有皮疹和出血点，正在打点滴，没有胃口不想吃饭。初中文化。",
+    "expected": {
+      "assessmentTime": "2026-03-14 15:00:00",
+      "skin": [
+        "皮疹",
+        "出血点"
+      ],
+      "catheter": [
+        "静脉通路"
+      ],
+      "education": "初中或中专"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-14 15:00:00",
+      "education": "初中",
+      "skin": [
+        "皮疹",
+        "出血点"
+      ],
+      "catheter": [
+        "静脉留置针"
+      ],
+      "diet": "异常"
+    },
+    "error_details": {
+      "diet": {
+        "expected": null,
+        "predicted": "异常",
+        "type": "FP"
+      },
+      "catheter": {
+        "expected": [
+          "静脉通路"
+        ],
+        "predicted": [
+          "静脉留置针"
+        ],
+        "type": "Mismatch"
+      },
+      "education": {
+        "expected": "初中或中专",
+        "predicted": "初中",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 15:00:00\",\n  \"education\": \"初中\",\n  \"skin\": [\n    \"皮疹\",\n    \"出血点\"\n  ],\n  \"catheter\": [\n    \"静脉留置针\"\n  ],\n  \"diet\": \"异常\"\n}",
+    "request_duration_seconds": 15.233172630192712,
+    "request_error": null
+  },
+  {
+    "id": 103,
+    "input": "昨天晚上八点背进来的，小学文化，诊断考虑心力衰竭。",
+    "expected": {
+      "assessmentTime": "2026-03-16 11:00:00",
+      "admissionTime": "2026-03-15 20:00:00",
+      "admissionMethod": "背入",
+      "education": "小学",
+      "diagnosis": "考虑心力衰竭"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-16 11:00:00",
+      "education": "小学",
+      "admissionTime": "2026-03-15 20:00:00",
+      "admissionMethod": "背入",
+      "diagnosis": "心力衰竭"
+    },
+    "error_details": {
+      "diagnosis": {
+        "expected": "考虑心力衰竭",
+        "predicted": "心力衰竭",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-16 11:00:00\",\n  \"education\": \"小学\",\n  \"admissionTime\": \"2026-03-15 20:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"心力衰竭\"\n}",
+    "request_duration_seconds": 13.358879160135984,
+    "request_error": null
+  },
+  {
+    "id": 109,
+    "input": "前天上午十点来的，平车推入，现在打点滴呢。",
+    "expected": {
+      "assessmentTime": "2026-03-19 14:00:00",
+      "admissionTime": "2026-03-17 10:00:00",
+      "admissionMethod": "平车",
+      "catheter": [
+        "静脉通路"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-19 14:00:00",
+      "admissionTime": "2026-03-17 10:00:00",
+      "admissionMethod": "平车"
+    },
+    "error_details": {
+      "catheter": {
+        "expected": [
+          "静脉通路"
+        ],
+        "predicted": null,
+        "type": "FN"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-19 14:00:00\",\n  \"admissionTime\": \"2026-03-17 10:00:00\",\n  \"admissionMethod\": \"平车\"\n}",
+    "request_duration_seconds": 15.319459263933823,
+    "request_error": null
+  },
+  {
+    "id": 110,
+    "input": "体重七十点五公斤，有点发烧，食欲不振。",
+    "expected": {
+      "assessmentTime": "2026-03-20 08:00:00",
+      "weight": "70.5"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-20 08:00:00",
+      "weight": "70.5",
+      "diet": "异常"
+    },
+    "error_details": {
+      "diet": {
+        "expected": null,
+        "predicted": "异常",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-20 08:00:00\",\n  \"weight\": \"70.5\",\n  \"diet\": \"异常\"\n}",
+    "request_duration_seconds": 10.207809899002314,
+    "request_error": null
+  },
+  {
+    "id": 111,
+    "input": "饮食异常，吃不下东西。晚上睡得晚。",
+    "expected": {
+      "assessmentTime": "2026-03-20 16:30:00",
+      "diet": "异常"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-20 16:30:00",
+      "diet": "异常",
+      "sleep": "异常"
+    },
+    "error_details": {
+      "sleep": {
+        "expected": null,
+        "predicted": "异常",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-20 16:30:00\",\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
+    "request_duration_seconds": 6.225735513027757,
+    "request_error": null
+  },
+  {
+    "id": 113,
+    "input": "120担架抬进来的，诊断考虑脑梗死，神志药物镇静状。",
+    "expected": {
+      "assessmentTime": "2026-03-21 11:00:00",
+      "admissionMethod": "其他",
+      "diagnosis": "考虑脑梗死",
+      "consciousness": "药物镇静状"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-21 11:00:00",
+      "admissionMethod": "平车",
+      "diagnosis": "脑梗死",
+      "consciousness": "药物镇静状"
+    },
+    "error_details": {
+      "admissionMethod": {
+        "expected": "其他",
+        "predicted": "平车",
+        "type": "Mismatch"
+      },
+      "diagnosis": {
+        "expected": "考虑脑梗死",
+        "predicted": "脑梗死",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-21 11:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"脑梗死\",\n  \"consciousness\": \"药物镇静状\"\n}",
+    "request_duration_seconds": 10.47348294686526,
+    "request_error": null
+  },
+  {
+    "id": 114,
+    "input": "对花粉过敏，肚子上有个造口，别的地方皮肤完整。",
+    "expected": {
+      "assessmentTime": "2026-03-22 10:30:00",
+      "allergyHistory": [
+        "花粉"
+      ],
+      "skin": [
+        "造口"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-22 10:30:00",
+      "allergyHistory": [
+        "花粉"
+      ],
+      "skin": [
+        "造口",
+        "完整"
+      ]
+    },
+    "error_details": {
+      "skin": {
+        "expected": [
+          "造口"
+        ],
+        "predicted": [
+          "造口",
+          "完整"
+        ],
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-22 10:30:00\",\n  \"allergyHistory\": [\n    \"花粉\"\n  ],\n  \"skin\": [\n    \"造口\",\n    \"完整\"\n  ]\n}",
+    "request_duration_seconds": 8.531229642918333,
+    "request_error": null
+  },
+  {
+    "id": 119,
+    "input": "大学毕业，今天早上测的脉搏是七十八，能正常交流。",
+    "expected": {
+      "assessmentTime": "2026-03-24 14:00:00",
+      "education": "大专以上",
+      "pulseRate": "78"
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-24 14:00:00",
+      "education": "大专以上",
+      "pulseRate": "78",
+      "consciousness": "清醒"
+    },
+    "error_details": {
+      "consciousness": {
+        "expected": null,
+        "predicted": "清醒",
+        "type": "FP"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-24 14:00:00\",\n  \"education\": \"大专以上\",\n  \"pulseRate\": \"78\",\n  \"consciousness\": \"清醒\"\n}",
+    "request_duration_seconds": 20.53267889097333,
+    "request_error": null
+  }
+]

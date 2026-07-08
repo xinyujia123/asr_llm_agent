@@ -1,5 +1,33 @@
 [
   {
+    "id": 7,
+    "input": "今天早上八点用轮椅推入病房的，学历是大专，疑似胃溃疡，家属带了拐杖过来。",
+    "expected": {
+      "assessmentTime": "2026-09-15 08:00:00",
+      "admissionMethod": "轮椅",
+      "education": "大专以上",
+      "diagnosis": "疑似胃溃疡",
+      "admissionTime": "2026-09-15 08:00:00"
+    },
+    "predicted": {
+      "assessmentTime": "2026-09-15 10:20:00",
+      "education": "大专以上",
+      "admissionTime": "2026-09-15 08:00:00",
+      "admissionMethod": "轮椅",
+      "diagnosis": "疑似胃溃疡"
+    },
+    "error_details": {
+      "assessmentTime": {
+        "expected": "2026-09-15 08:00:00",
+        "predicted": "2026-09-15 10:20:00",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-09-15 10:20:00\",\n  \"education\": \"大专以上\",\n  \"admissionTime\": \"2026-09-15 08:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"疑似胃溃疡\"\n}",
+    "request_duration_seconds": 15.558161947876215,
+    "request_error": null
+  },
+  {
     "id": 58,
     "input": "前天下午五点120送来的，确诊脑出血。意识昏迷，接了静脉通路，带有出血点。",
     "expected": {
@@ -36,7 +64,8 @@
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 09:00:00\",\n  \"admissionTime\": \"2026-03-10 17:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"脑出血\",\n  \"consciousness\": \"昏迷\",\n  \"skin\": [\n    \"出血点\"\n  ],\n  \"catheter\": [\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 18.735794477164745
+    "request_duration_seconds": 17.900960732949898,
+    "request_error": null
   },
   {
     "id": 59,
@@ -69,7 +98,8 @@
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 11:30:00\",\n  \"allergyHistory\": [\n    \"无\"\n  ],\n  \"bloodSugar\": \"5.2\",\n  \"respiratoryRate\": \"20\",\n  \"systolicPressure\": \"138\",\n  \"diastolicPressure\": \"85\"\n}",
-    "request_duration_seconds": 22.860140857985243
+    "request_duration_seconds": 23.229569613933563,
+    "request_error": null
   },
   {
     "id": 86,
@@ -87,21 +117,28 @@
       "assessmentTime": "2026-03-08 11:00:00",
       "ethnicity": "回族",
       "diagnosis": "考虑急性阑尾炎",
+      "defecation": "正常",
+      "stoolFrequency": "1",
+      "urination": "正常",
       "catheter": [
         "导尿管"
-      ],
-      "urination": "正常",
-      "stoolFrequency": "1"
+      ]
     },
     "error_details": {
+      "defecation": {
+        "expected": null,
+        "predicted": "正常",
+        "type": "FP"
+      },
       "urination": {
         "expected": null,
         "predicted": "正常",
         "type": "FP"
       }
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 11:00:00\",\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"catheter\": [\n    \"导尿管\"\n  ],\n  \"urination\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_duration_seconds": 24.99503357312642
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 11:00:00\",\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"urination\": \"正常\",\n  \"catheter\": [\n    \"导尿管\"\n  ]\n}",
+    "request_duration_seconds": 19.717856178991497,
+    "request_error": null
   },
   {
     "id": 90,
@@ -128,7 +165,8 @@
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 09:00:00\",\n  \"admissionTime\": \"2026-03-10 08:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"高血压\",\n  \"consciousness\": \"嗜睡\"\n}",
-    "request_duration_seconds": 11.839086805004627
+    "request_duration_seconds": 12.528463958064094,
+    "request_error": null
   },
   {
     "id": 99,
@@ -163,6 +201,39 @@
       }
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 15:00:00\",\n  \"education\": \"初中\",\n  \"skin\": [\n    \"皮疹\",\n    \"出血点\"\n  ],\n  \"catheter\": [\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 14.778925715945661
+    "request_duration_seconds": 12.12005961383693,
+    "request_error": null
+  },
+  {
+    "id": 102,
+    "input": "血糖六点七，学压一百三八十五，没有过敏史。",
+    "expected": {
+      "assessmentTime": "2026-03-16 09:00:00",
+      "bloodSugar": "6.7",
+      "systolicPressure": "130",
+      "diastolicPressure": "85",
+      "allergyHistory": [
+        "无"
+      ]
+    },
+    "predicted": {
+      "assessmentTime": "2026-03-16 09:00:00",
+      "bloodSugar": "6.7",
+      "systolicPressure": "138",
+      "diastolicPressure": "85",
+      "allergyHistory": [
+        "无"
+      ]
+    },
+    "error_details": {
+      "systolicPressure": {
+        "expected": "130",
+        "predicted": "138",
+        "type": "Mismatch"
+      }
+    },
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-16 09:00:00\",\n  \"bloodSugar\": \"6.7\",\n  \"systolicPressure\": \"138\",\n  \"diastolicPressure\": \"85\",\n  \"allergyHistory\": [\n    \"无\"\n  ]\n}",
+    "request_duration_seconds": 11.551476462045684,
+    "request_error": null
   }
 ]

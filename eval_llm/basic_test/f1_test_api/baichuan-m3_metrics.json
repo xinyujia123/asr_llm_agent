@@ -1,35 +1,35 @@
 {
   "admissionMethod": {
     "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 20,
+    "recall": 0.95,
+    "f1": 0.9743589743589743,
+    "tp": 19,
     "fp": 0,
-    "fn": 0
+    "fn": 1
   },
   "admissionTime": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 18,
-    "fp": 0,
-    "fn": 0
+    "precision": 0.8947368421052632,
+    "recall": 0.9444444444444444,
+    "f1": 0.918918918918919,
+    "tp": 17,
+    "fp": 2,
+    "fn": 1
   },
   "allergyHistory": {
-    "precision": 1.0,
+    "precision": 0.8947368421052632,
     "recall": 1.0,
-    "f1": 1.0,
+    "f1": 0.9444444444444444,
     "tp": 17,
-    "fp": 0,
+    "fp": 2,
     "fn": 0
   },
   "assessmentTime": {
-    "precision": 0.9916666666666667,
-    "recall": 0.9916666666666667,
-    "f1": 0.9916666666666667,
-    "tp": 119,
-    "fp": 1,
-    "fn": 1
+    "precision": 0.9747899159663865,
+    "recall": 0.9666666666666667,
+    "f1": 0.9707112970711297,
+    "tp": 116,
+    "fp": 3,
+    "fn": 4
   },
   "bloodSugar": {
     "precision": 1.0,
@@ -40,11 +40,11 @@
     "fn": 0
   },
   "catheter": {
-    "precision": 1.0,
+    "precision": 0.9473684210526315,
     "recall": 1.0,
-    "f1": 1.0,
+    "f1": 0.972972972972973,
     "tp": 18,
-    "fp": 0,
+    "fp": 1,
     "fn": 0
   },
   "consciousness": {
@@ -64,36 +64,36 @@
     "fn": 0
   },
   "diagnosis": {
-    "precision": 0.9375,
-    "recall": 0.9375,
-    "f1": 0.9375,
-    "tp": 15,
+    "precision": 0.9333333333333333,
+    "recall": 0.875,
+    "f1": 0.9032258064516129,
+    "tp": 14,
     "fp": 1,
-    "fn": 1
+    "fn": 2
   },
   "diastolicPressure": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 26,
-    "fp": 0,
-    "fn": 0
+    "precision": 0.8461538461538461,
+    "recall": 0.8461538461538461,
+    "f1": 0.8461538461538461,
+    "tp": 22,
+    "fp": 4,
+    "fn": 4
   },
   "diet": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 8,
-    "fp": 0,
-    "fn": 0
+    "precision": 0.6363636363636364,
+    "recall": 0.875,
+    "f1": 0.7368421052631579,
+    "tp": 7,
+    "fp": 4,
+    "fn": 1
   },
   "education": {
-    "precision": 0.9411764705882353,
-    "recall": 0.9411764705882353,
-    "f1": 0.9411764705882353,
-    "tp": 16,
+    "precision": 0.9375,
+    "recall": 0.8823529411764706,
+    "f1": 0.9090909090909091,
+    "tp": 15,
     "fp": 1,
-    "fn": 1
+    "fn": 2
   },
   "ethnicity": {
     "precision": 1.0,
@@ -136,12 +136,12 @@
     "fn": 0
   },
   "skin": {
-    "precision": 1.0,
-    "recall": 1.0,
-    "f1": 1.0,
-    "tp": 17,
-    "fp": 0,
-    "fn": 0
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
   },
   "sleep": {
     "precision": 1.0,
@@ -160,12 +160,12 @@
     "fn": 0
   },
   "systolicPressure": {
-    "precision": 0.9615384615384616,
-    "recall": 0.9615384615384616,
-    "f1": 0.9615384615384616,
-    "tp": 25,
-    "fp": 1,
-    "fn": 1
+    "precision": 0.8076923076923077,
+    "recall": 0.8076923076923077,
+    "f1": 0.8076923076923077,
+    "tp": 21,
+    "fp": 5,
+    "fn": 5
   },
   "temperature": {
     "precision": 1.0,
@@ -176,11 +176,11 @@
     "fn": 0
   },
   "urination": {
-    "precision": 0.9,
+    "precision": 1.0,
     "recall": 1.0,
-    "f1": 0.9473684210526316,
+    "f1": 1.0,
     "tp": 9,
-    "fp": 1,
+    "fp": 0,
     "fn": 0
   },
   "weight": {
@@ -192,20 +192,20 @@
     "fn": 0
   },
   "summary": {
-    "total_category_avg_f1": 0.9908020841602498,
-    "total_sample_aggregate_f1": 0.9903329752953813,
-    "avg_request_duration_seconds": 11.24321060369839,
-    "precision": 0.9892703862660944,
-    "recall": 0.9913978494623656,
-    "tp": 461,
-    "fp": 5,
-    "fn": 4,
+    "total_category_avg_f1": 0.9552328355419379,
+    "total_sample_aggregate_f1": 0.9517684887459806,
+    "avg_request_duration_seconds": 9.941892266690653,
+    "precision": 0.9487179487179487,
+    "recall": 0.9548387096774194,
+    "tp": 444,
+    "fp": 24,
+    "fn": 21,
     "field_count": 24,
     "request_count": 120,
-    "total_request_duration_seconds": 1349.1852724438068,
-    "provider": "qwen",
-    "model_name": "qwen3.7-plus",
-    "base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1/",
-    "output_prefix": "qwen3.7-plus"
+    "total_request_duration_seconds": 1193.0270720028784,
+    "provider": "baichuan",
+    "model_name": "Baichuan-M3",
+    "base_url": "https://api.baichuan-ai.com/v1/",
+    "output_prefix": "baichuan-m3"
   }
 }

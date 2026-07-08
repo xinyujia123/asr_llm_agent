@@ -5,11 +5,18 @@
       "assessmentTime": "2026-03-05 10:00:00"
     },
     "predicted": {
-      "assessmentTime": "2026-03-05 10:00:00"
+      "assessmentTime": "2026-03-05 10:00:00",
+      "diet": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\"\n}",
-    "request_duration_seconds": 9.791529373032972,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\",\n  \"diet\": \"异常\"\n}",
+    "request_duration_seconds": 19.702141619985923,
+    "request_error": null,
     "metrics": {
+      "diet": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
@@ -33,9 +40,15 @@
       "respiratoryRate": "20",
       "pulseRate": "75"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"75\"\n}",
-    "request_duration_seconds": 12.418121614959091,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"75\"\n}\n\n我建议您进一步查阅该患者生命体征变化趋势及异常指标（如血压、呼吸频率）的临床意义，以及相关评估的时效性依据。您需要我帮您检索这方面的最新指南或文献吗？",
+    "request_duration_seconds": 20.606828401098028,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -46,17 +59,12 @@
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -83,10 +91,11 @@
       "diagnosis": "考虑冠心病",
       "temperature": "36.0"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-01-10 15:30:00\",\n  \"education\": \"小学\",\n  \"ethnicity\": \"回族\",\n  \"admissionTime\": \"2026-01-09 14:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"考虑冠心病\",\n  \"temperature\": \"36.0\"\n}",
-    "request_duration_seconds": 19.460388097912073,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-01-10 15:30:00\",\n  \"education\": \"小学\",\n  \"ethnicity\": \"回族\",\n  \"admissionTime\": \"2026-01-09 14:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"考虑冠心病\",\n  \"temperature\": \"36.0\"\n}\n\n我建议您进一步查阅冠心病患者在非急性期的常规监测指标及管理指南，特别是关于生活方式干预和二级预防的推荐。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 21.58816155209206,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -96,27 +105,27 @@
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "temperature": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -145,24 +154,20 @@
         "造口"
       ],
       "catheter": [
-        "导尿管",
-        "静脉通路"
+        "静脉通路",
+        "导尿管"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2025-12-01 08:00:00\",\n  \"pulseRate\": \"80\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\n    \"造口\"\n  ],\n  \"catheter\": [\n    \"导尿管\",\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 9.633134094066918,
+    "generated_text": "{\n  \"assessmentTime\": \"2025-12-01 08:00:00\",\n  \"pulseRate\": \"80\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"造口\"],\n  \"catheter\": [\"静脉通路\", \"导尿管\"]\n}\n\n我建议您进一步查阅留置导管（如静脉通路、导尿管）相关感染预防与皮肤造口护理的临床指南。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 32.9288367240224,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -173,6 +178,11 @@
         "fn": 0
       },
       "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -201,9 +211,20 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-12 11:00:00\",\n  \"height\": \"170\",\n  \"weight\": \"65.5\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\",\n  \"allergyHistory\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 15.308376733213663,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-12 11:00:00\",\n  \"height\": \"170\",\n  \"weight\": \"65.5\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\",\n  \"allergyHistory\": [\"无\"]\n}\n\n我建议您进一步查阅该患者血压值在不同体位下的变化及其可能提示的循环功能状态，以及相关临床指南中的评估标准。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 44.76222157408483,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -214,22 +235,12 @@
         "fp": 0,
         "fn": 0
       },
-      "weight": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "height": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "allergyHistory": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -250,15 +261,11 @@
       "diet": "正常",
       "sleep": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-08-20 09:00:00\",\n  \"bloodSugar\": \"5.2\",\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}",
-    "request_duration_seconds": 13.36960118287243,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-08-20 09:00:00\",\n  \"bloodSugar\": \"5.2\",\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}\n\n我建议您进一步查阅血脂偏高患者的长期心血管风险及干预策略的相关临床指南或系统综述。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 51.730919673806056,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "sleep": {
+      "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -268,7 +275,12 @@
         "fp": 0,
         "fn": 0
       },
-      "diet": {
+      "bloodSugar": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -286,15 +298,16 @@
     },
     "predicted": {
       "assessmentTime": "2026-02-28 16:00:00",
-      "heartRate": "70",
       "urination": "异常",
       "defecation": "正常",
-      "stoolFrequency": "1"
+      "stoolFrequency": "1",
+      "heartRate": "70"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-02-28 16:00:00\",\n  \"heartRate\": \"70\",\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_duration_seconds": 14.215646041091532,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-02-28 16:00:00\",\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"heartRate\": \"70\"\n}\n\n我建议您进一步查阅排尿异常的常见病因及评估方法，特别是泌尿系统感染、梗阻或神经源性膀胱的鉴别诊断。您需要我帮您检索相关临床指南吗？",
+    "request_duration_seconds": 51.9346402741503,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -304,17 +317,17 @@
         "fp": 0,
         "fn": 0
       },
+      "heartRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "stoolFrequency": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "defecation": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "heartRate": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -333,18 +346,13 @@
     "predicted": {
       "assessmentTime": "2026-09-15 08:00:00",
       "education": "大专以上",
-      "admissionTime": "2026-09-15 08:00:00",
       "admissionMethod": "轮椅",
       "diagnosis": "疑似胃溃疡"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-09-15 08:00:00\",\n  \"education\": \"大专以上\",\n  \"admissionTime\": \"2026-09-15 08:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"疑似胃溃疡\"\n}",
-    "request_duration_seconds": 13.992598232114688,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-09-15 08:00:00\",\n  \"education\": \"大专以上\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"疑似胃溃疡\"\n}",
+    "request_duration_seconds": 41.1361326999031,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "admissionMethod": {
         "tp": 1,
         "fp": 0,
@@ -355,12 +363,17 @@
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -378,14 +391,20 @@
     },
     "predicted": {
       "assessmentTime": "2026-11-11 20:00:00",
+      "pulseRate": "90",
       "systolicPressure": "130",
       "diastolicPressure": "90",
-      "respiratoryRate": "25",
-      "pulseRate": "90"
+      "respiratoryRate": "25"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-11-11 20:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"90\",\n  \"respiratoryRate\": \"25\",\n  \"pulseRate\": \"90\"\n}",
-    "request_duration_seconds": 16.2671728360001,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-11-11 20:00:00\",\n  \"pulseRate\": \"90\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"90\",\n  \"respiratoryRate\": \"25\"\n}",
+    "request_duration_seconds": 36.37144011887722,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -396,17 +415,12 @@
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -435,15 +449,11 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-04-04 22:00:00\",\n  \"allergyHistory\": [\n    \"海鲜\"\n  ],\n  \"heartRate\": \"85\",\n  \"catheter\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 12.031259400071576,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-04 22:00:00\",\n  \"allergyHistory\": [\"海鲜\"],\n  \"heartRate\": \"85\",\n  \"catheter\": [\"无\"]\n}",
+    "request_duration_seconds": 43.93149888794869,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "catheter": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -453,7 +463,12 @@
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -476,19 +491,16 @@
       "temperature": "37.2",
       "systolicPressure": "140",
       "diastolicPressure": "95",
+      "heartRate": "300",
       "allergyHistory": [
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-06-10 08:00:00\",\n  \"temperature\": \"37.2\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"95\",\n  \"allergyHistory\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 11.836897528031841,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-06-10 08:00:00\",\n  \"temperature\": \"37.2\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"95\",\n  \"heartRate\": \"300\",\n  \"allergyHistory\": [\"无\"]\n}",
+    "request_duration_seconds": 31.547761987894773,
+    "request_error": null,
     "metrics": {
-      "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -498,12 +510,22 @@
         "fp": 0,
         "fn": 0
       },
+      "heartRate": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -522,18 +544,19 @@
       "consciousness": "模糊"
     },
     "predicted": {
-      "assessmentTime": "2026-07-15 14:30:00",
-      "education": "文盲",
+      "assessmentTime": "2026-07-15 10:00:00",
       "ethnicity": "汉族",
+      "education": "文盲",
       "admissionTime": "2026-07-15 10:00:00",
       "admissionMethod": "其他",
       "diagnosis": "急性阑尾炎",
       "consciousness": "模糊"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-07-15 14:30:00\",\n  \"education\": \"文盲\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2026-07-15 10:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"急性阑尾炎\",\n  \"consciousness\": \"模糊\"\n}",
-    "request_duration_seconds": 19.128131464822218,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-07-15 10:00:00\",\n  \"ethnicity\": \"汉族\",\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-07-15 10:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"急性阑尾炎\",\n  \"consciousness\": \"模糊\"\n}",
+    "request_duration_seconds": 31.753054084954783,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -543,27 +566,27 @@
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -589,28 +612,28 @@
       ],
       "catheter": [
         "静脉通路"
-      ],
-      "sleep": "正常"
+      ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-07-31 21:00:00\",\n  \"skin\": [\n    \"破损\"\n  ],\n  \"catheter\": [\n    \"静脉通路\"\n  ],\n  \"sleep\": \"正常\"\n}",
-    "request_duration_seconds": 17.415975681040436,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-07-31 21:00:00\",\n  \"skin\": [\"破损\"],\n  \"catheter\": [\"静脉通路\"]\n}",
+    "request_duration_seconds": 28.692890206119046,
+    "request_error": null,
     "metrics": {
-      "sleep": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
+      "sleep": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -629,18 +652,25 @@
     },
     "predicted": {
       "assessmentTime": "2026-09-05 15:00:00",
-      "systolicPressure": "120",
-      "diastolicPressure": "80",
       "weight": "60.0",
       "height": "165",
-      "bloodSugar": "6.0"
+      "bloodSugar": "6.0",
+      "systolicPressure": "120",
+      "diastolicPressure": "80",
+      "diet": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-09-05 15:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"weight\": \"60.0\",\n  \"height\": \"165\",\n  \"bloodSugar\": \"6.0\"\n}",
-    "request_duration_seconds": 19.916166824987158,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-09-05 15:00:00\",\n  \"weight\": \"60.0\",\n  \"height\": \"165\",\n  \"bloodSugar\": \"6.0\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"diet\": \"异常\"\n}\n\n我建议您进一步查阅该患者食欲不振可能涉及的代谢或消化系统病因，以及相关临床评估指南。您需要我帮您检索这方面的权威研究或诊断流程吗？",
+    "request_duration_seconds": 46.34413339011371,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
+        "fn": 0
+      },
+      "diet": {
+        "tp": 0,
+        "fp": 1,
         "fn": 0
       },
       "diastolicPressure": {
@@ -653,17 +683,17 @@
         "fp": 0,
         "fn": 0
       },
-      "weight": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "height": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "bloodSugar": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -683,26 +713,28 @@
       "assessmentTime": "2026-10-12 11:00:00",
       "consciousness": "清醒",
       "skin": [
+        "手术切口",
         "其他"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-10-12 11:00:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\n    \"其他\"\n  ]\n}",
-    "request_duration_seconds": 19.23465989017859,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-10-12 11:00:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"手术切口\", \"其他\"]\n}",
+    "request_duration_seconds": 16.185188230825588,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
+      },
+      "skin": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       }
     }
   },
@@ -716,29 +748,30 @@
     },
     "predicted": {
       "assessmentTime": "2026-11-20 20:00:00",
-      "temperature": "36.5",
       "pulseRate": "88",
-      "respiratoryRate": "19"
+      "respiratoryRate": "19",
+      "temperature": "36.5"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-11-20 20:00:00\",\n  \"temperature\": \"36.5\",\n  \"pulseRate\": \"88\",\n  \"respiratoryRate\": \"19\"\n}",
-    "request_duration_seconds": 13.432816510088742,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-11-20 20:00:00\",\n  \"pulseRate\": \"88\",\n  \"respiratoryRate\": \"19\",\n  \"temperature\": \"36.5\"\n}\n\n我建议您进一步查阅呼吸频率异常的临床意义及可能影响因素，包括其在不同人群中的正常范围和相关系统综述。您需要我帮您检索这方面的最新指南或文献吗？",
+    "request_duration_seconds": 24.724869668018073,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -754,7 +787,8 @@
       "assessmentTime": "2026-12-05 08:30:00"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-12-05 08:30:00\"\n}",
-    "request_duration_seconds": 12.043783174129203,
+    "request_duration_seconds": 39.03489314089529,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -775,18 +809,19 @@
       "consciousness": "嗜睡"
     },
     "predicted": {
-      "assessmentTime": "2027-01-08 14:00:00",
+      "assessmentTime": "2027-01-08 12:00:00",
       "education": "初中",
       "ethnicity": "汉族",
       "admissionTime": "2027-01-08 12:00:00",
       "admissionMethod": "其他",
-      "diagnosis": "考虑脑出血",
+      "diagnosis": "考虑是脑出血",
       "consciousness": "嗜睡"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2027-01-08 14:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2027-01-08 12:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑脑出血\",\n  \"consciousness\": \"嗜睡\"\n}",
-    "request_duration_seconds": 12.747769000940025,
+    "generated_text": "{\n  \"assessmentTime\": \"2027-01-08 12:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2027-01-08 12:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑是脑出血\",\n  \"consciousness\": \"嗜睡\"\n}\n\n我建议您进一步查阅脑出血患者在急性期的血压管理目标及神经功能监测的临床指南。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 34.918904420919716,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -796,27 +831,27 @@
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "diagnosis": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -835,21 +870,22 @@
     },
     "predicted": {
       "assessmentTime": "2027-02-14 09:00:00",
-      "bloodSugar": "5.8",
-      "heartRate": "75",
       "urination": "异常",
       "defecation": "正常",
-      "stoolFrequency": "1"
+      "stoolFrequency": "1",
+      "bloodSugar": "5.8",
+      "heartRate": "75"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2027-02-14 09:00:00\",\n  \"bloodSugar\": \"5.8\",\n  \"heartRate\": \"75\",\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_duration_seconds": 15.3451539571397,
+    "generated_text": "{\n  \"assessmentTime\": \"2027-02-14 09:00:00\",\n  \"urination\": \"异常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\",\n  \"bloodSugar\": \"5.8\",\n  \"heartRate\": \"75\"\n}\n\n我建议您进一步查阅尿痛的常见病因及鉴别诊断，特别是泌尿系统感染的相关临床指南。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 39.70110804098658,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -864,12 +900,12 @@
         "fp": 0,
         "fn": 0
       },
-      "defecation": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -902,20 +938,11 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2027-03-20 15:00:00\",\n  \"admissionTime\": \"2027-03-18 14:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"allergyHistory\": [\n    \"青霉素\",\n    \"头孢\"\n  ],\n  \"catheter\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 15.05467092199251,
+    "generated_text": "{\n  \"assessmentTime\": \"2027-03-20 15:00:00\",\n  \"admissionTime\": \"2027-03-18 14:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"catheter\": [\"无\"]\n}",
+    "request_duration_seconds": 38.9363082209602,
+    "request_error": null,
     "metrics": {
       "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -925,7 +952,17 @@
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -945,7 +982,8 @@
       "heartRate": "80"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-04-10 08:00:00\",\n  \"temperature\": \"36.5\",\n  \"heartRate\": \"80\"\n}",
-    "request_duration_seconds": 8.768252800218761,
+    "request_duration_seconds": 40.282879575155675,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -974,24 +1012,25 @@
     },
     "predicted": {
       "assessmentTime": "2026-04-11 14:30:00",
+      "pulseRate": "75",
       "systolicPressure": "120",
-      "diastolicPressure": "80",
-      "pulseRate": "75"
+      "diastolicPressure": "80"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-04-11 14:30:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"75\"\n}",
-    "request_duration_seconds": 8.127981696045026,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-11 14:30:00\",\n  \"pulseRate\": \"75\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}\n\n我建议您进一步查阅高血压患者血压测量的标准化操作流程及影响因素的临床指南。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 14.741123734042048,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1020,14 +1059,15 @@
       ]
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-04-12 10:15:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"其他\"]\n}",
-    "request_duration_seconds": 11.578747666208073,
+    "request_duration_seconds": 23.158481599995866,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1052,14 +1092,15 @@
       "stoolFrequency": "1"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-04-13 16:00:00\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_duration_seconds": 7.991947256028652,
+    "request_duration_seconds": 18.94995802291669,
+    "request_error": null,
     "metrics": {
-      "defecation": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1083,10 +1124,11 @@
       "diet": "正常",
       "bloodSugar": "5.2"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-04-14 07:30:00\",\n  \"diet\": \"正常\",\n  \"bloodSugar\": \"5.2\"\n}",
-    "request_duration_seconds": 8.907204139046371,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-14 07:30:00\",\n  \"diet\": \"正常\",\n  \"bloodSugar\": \"5.2\"\n}\n\n我建议您进一步查阅空腹血糖在不同人群（如老年人、妊娠期）中的解读差异及糖尿病诊断标准的相关临床指南。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 17.743553334847093,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1096,7 +1138,7 @@
         "fp": 0,
         "fn": 0
       },
-      "diet": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1118,28 +1160,26 @@
       "assessmentTime": "2026-04-15 11:20:00",
       "allergyHistory": [
         "头孢"
-      ],
-      "catheter": [
-        "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-04-15 11:20:00\",\n  \"allergyHistory\": [\n    \"头孢\"\n  ],\n  \"catheter\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 8.776355251204222,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-15 11:20:00\",\n  \"allergyHistory\": [\"头孢\"]\n}",
+    "request_duration_seconds": 22.158336547901854,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
+      },
+      "catheter": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
       }
     }
   },
@@ -1155,20 +1195,21 @@
       "respiratoryRate": "20",
       "weight": "60.5"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-04-16 09:45:00\",\n  \"respiratoryRate\": \"20\",\n  \"weight\": \"60.5\"\n}",
-    "request_duration_seconds": 7.795004902873188,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-04-16 09:45:00\",\n  \"respiratoryRate\": \"20\",\n  \"weight\": \"60.5\"\n}\n\n我建议您进一步查阅呼吸频率异常对氧合状态的影响及相关临床干预阈值的权威研究。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 15.34844771400094,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "weight": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1183,24 +1224,25 @@
       "diagnosis": "疑似骨折"
     },
     "predicted": {
-      "assessmentTime": "2026-04-17 15:10:00",
       "admissionMethod": "平车",
-      "diagnosis": "疑似骨折"
+      "diagnosis": "疑似骨折",
+      "assessmentTime": "2026-04-17 15:10:00"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-04-17 15:10:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"疑似骨折\"\n}",
-    "request_duration_seconds": 6.613639159826562,
+    "generated_text": "{\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"疑似骨折\",\n  \"assessmentTime\": \"2026-04-17 15:10:00\"\n}",
+    "request_duration_seconds": 14.353824520949274,
+    "request_error": null,
     "metrics": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1220,14 +1262,15 @@
       "urination": "正常"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-04-18 08:25:00\",\n  \"sleep\": \"异常\",\n  \"urination\": \"正常\"\n}",
-    "request_duration_seconds": 6.45940674492158,
+    "request_duration_seconds": 12.512207963038236,
+    "request_error": null,
     "metrics": {
-      "sleep": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1252,7 +1295,8 @@
       "pulseRate": "72"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-04-19 13:50:00\",\n  \"height\": \"175\",\n  \"pulseRate\": \"72\"\n}",
-    "request_duration_seconds": 8.268130408832803,
+    "request_duration_seconds": 12.722359447041526,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -1281,15 +1325,16 @@
       "assessmentTime": "2026-05-01 09:00:00",
       "temperature": "37.3"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-01 09:00:00\",\n  \"temperature\": \"37.3\"\n}",
-    "request_duration_seconds": 6.433934203116223,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-01 09:00:00\",\n  \"temperature\": \"37.3\"\n}\n\n我建议您进一步查阅发热患者体温监测的临床意义及动态变化对病情评估的影响，特别是感染与非感染性病因的鉴别。您需要我帮您检索相关临床指南吗？",
+    "request_duration_seconds": 16.753944248193875,
+    "request_error": null,
     "metrics": {
-      "temperature": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1306,24 +1351,25 @@
     },
     "predicted": {
       "assessmentTime": "2026-05-02 10:00:00",
+      "pulseRate": "80",
       "systolicPressure": "130",
-      "diastolicPressure": "85",
-      "pulseRate": "80"
+      "diastolicPressure": "85"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-02 10:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"pulseRate\": \"80\"\n}",
-    "request_duration_seconds": 9.055844435933977,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-02 10:00:00\",\n  \"pulseRate\": \"80\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\"\n}",
+    "request_duration_seconds": 13.133583260001615,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1347,10 +1393,11 @@
       "bloodSugar": "5.5",
       "diet": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-03 08:00:00\",\n  \"bloodSugar\": \"5.5\",\n  \"diet\": \"正常\"\n}",
-    "request_duration_seconds": 9.260778423165902,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-03 08:00:00\",\n  \"bloodSugar\": \"5.5\",\n  \"diet\": \"正常\"\n}\n\n我建议您进一步查阅空腹血糖在不同人群（如糖尿病前期、妊娠期）中的解读标准及临床管理指南。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 13.102764117065817,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1360,7 +1407,7 @@
         "fp": 0,
         "fn": 0
       },
-      "diet": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1376,13 +1423,13 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-05-04 14:00:00",
       "allergyHistory": [
         "青霉素"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-04 14:00:00\",\n  \"allergyHistory\": [\n    \"青霉素\"\n  ]\n}",
-    "request_duration_seconds": 6.471390150021762,
+    "generated_text": "{\n  \"allergyHistory\": [\"青霉素\"]\n}",
+    "request_duration_seconds": 9.929411209188402,
+    "request_error": null,
     "metrics": {
       "allergyHistory": {
         "tp": 1,
@@ -1390,9 +1437,9 @@
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 1,
+        "tp": 0,
         "fp": 0,
-        "fn": 0
+        "fn": 1
       }
     }
   },
@@ -1418,25 +1465,26 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-05 16:30:00\",\n  \"consciousness\": \"模糊\",\n  \"skin\": [\n    \"完整\"\n  ],\n  \"catheter\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 8.319378215819597,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-05 16:30:00\",\n  \"consciousness\": \"模糊\",\n  \"skin\": [\"完整\"],\n  \"catheter\": [\"无\"]\n}",
+    "request_duration_seconds": 12.947773771826178,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "skin": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1452,11 +1500,12 @@
     },
     "predicted": {
       "assessmentTime": "2026-05-06 11:15:00",
-      "heartRate": "90",
+      "pulseRate": "90",
       "respiratoryRate": "22"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-06 11:15:00\",\n  \"heartRate\": \"90\",\n  \"respiratoryRate\": \"22\"\n}",
-    "request_duration_seconds": 6.298279308946803,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-06 11:15:00\",\n  \"pulseRate\": \"90\",\n  \"respiratoryRate\": \"22\"\n}\n\n我建议您进一步查阅呼吸频率增快的临床意义及相关鉴别诊断的最新临床指南。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 12.529458167031407,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -1468,10 +1517,15 @@
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
-        "tp": 1,
-        "fp": 0,
+      "pulseRate": {
+        "tp": 0,
+        "fp": 1,
         "fn": 0
+      },
+      "heartRate": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
       }
     }
   },
@@ -1483,19 +1537,26 @@
     },
     "predicted": {
       "assessmentTime": "2026-05-07 09:45:00",
-      "defecation": "异常"
+      "defecation": "异常",
+      "stoolFrequency": "0"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-07 09:45:00\",\n  \"defecation\": \"异常\"\n}",
-    "request_duration_seconds": 9.216764955082908,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-07 09:45:00\",\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"0\"\n}",
+    "request_duration_seconds": 14.74583498807624,
+    "request_error": null,
     "metrics": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
+      "stoolFrequency": {
+        "tp": 0,
+        "fp": 1,
         "fn": 0
       }
     }
@@ -1509,11 +1570,12 @@
     },
     "predicted": {
       "assessmentTime": "2026-05-08 15:20:00",
-      "weight": "55.0",
-      "height": "168"
+      "height": "168",
+      "weight": "55.0"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-08 15:20:00\",\n  \"weight\": \"55.0\",\n  \"height\": \"168\"\n}",
-    "request_duration_seconds": 6.765302324900404,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-08 15:20:00\",\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
+    "request_duration_seconds": 15.03756064386107,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -1547,19 +1609,20 @@
       "admissionMethod": "轮椅"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-05-09 10:30:00\",\n  \"education\": \"高中或中专\",\n  \"ethnicity\": \"壮族\",\n  \"admissionMethod\": \"轮椅\"\n}",
-    "request_duration_seconds": 7.78834994090721,
+    "request_duration_seconds": 14.15784978796728,
+    "request_error": null,
     "metrics": {
       "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "ethnicity": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1581,20 +1644,21 @@
     "predicted": {
       "assessmentTime": "2026-05-10 08:00:00",
       "admissionTime": "2026-05-08 14:00:00",
-      "diagnosis": "考虑肺炎"
+      "diagnosis": "初步考虑是肺炎"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-05-10 08:00:00\",\n  \"admissionTime\": \"2026-05-08 14:00:00\",\n  \"diagnosis\": \"考虑肺炎\"\n}",
-    "request_duration_seconds": 9.345680700847879,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-05-10 08:00:00\",\n  \"admissionTime\": \"2026-05-08 14:00:00\",\n  \"diagnosis\": \"初步考虑是肺炎\"\n}",
+    "request_duration_seconds": 25.56053375895135,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
+      },
+      "diagnosis": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       },
       "admissionTime": {
         "tp": 1,
@@ -1619,15 +1683,11 @@
       "systolicPressure": "120",
       "diastolicPressure": "80"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\",\n  \"temperature\": \"36.5\",\n  \"heartRate\": \"80\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}",
-    "request_duration_seconds": 10.579544116044417,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\",\n  \"temperature\": \"36.5\",\n  \"heartRate\": \"80\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\"\n}\n\n我建议您进一步查阅该患者生命体征的动态变化趋势及异常值的临床意义，特别是血压与心率的关联分析。您需要我帮您检索相关评估指南吗？",
+    "request_duration_seconds": 33.54566541593522,
+    "request_error": null,
     "metrics": {
-      "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1642,7 +1702,12 @@
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1663,15 +1728,16 @@
       "respiratoryRate": "20",
       "pulseRate": "75"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 08:00:00\",\n  \"weight\": \"65.0\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"75\"\n}",
-    "request_duration_seconds": 11.77696187607944,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 08:00:00\",\n  \"weight\": \"65.0\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"75\"\n}\n\n我建议您进一步查阅呼吸频率异常对患者氧合状态及临床预后的影响，以及相关生命体征的关联评估。您需要我帮您检索这方面的最新临床指南吗？",
+    "request_duration_seconds": 16.755079508991912,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
+      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1681,7 +1747,7 @@
         "fp": 0,
         "fn": 0
       },
-      "pulseRate": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1712,20 +1778,11 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 09:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2026-03-04 14:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"考虑阑尾炎\",\n  \"allergyHistory\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 15.183929708087817,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 09:00:00\",\n  \"education\": \"初中\",\n  \"ethnicity\": \"汉族\",\n  \"admissionTime\": \"2026-03-04 14:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"diagnosis\": \"考虑阑尾炎\",\n  \"allergyHistory\": [\"无\"]\n}",
+    "request_duration_seconds": 17.554990691831335,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1735,17 +1792,27 @@
         "fp": 0,
         "fn": 0
       },
-      "education": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1758,14 +1825,29 @@
       "assessmentTime": "2026-03-05 11:20:00"
     },
     "predicted": {
-      "assessmentTime": "2026-03-05 11:20:00"
+      "assessmentTime": "2026-03-05 12:00:00",
+      "consciousness": "清醒",
+      "skin": [
+        "完整"
+      ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 11:20:00\"\n}",
-    "request_duration_seconds": 11.386462495895103,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 12:00:00\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"完整\"]\n}",
+    "request_duration_seconds": 15.33671608613804,
+    "request_error": null,
     "metrics": {
+      "consciousness": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
       "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "skin": {
+        "tp": 0,
+        "fp": 1,
         "fn": 0
       }
     }
@@ -1794,10 +1876,11 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\",\n  \"bloodSugar\": \"5.8\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\n    \"完整\"\n  ],\n  \"catheter\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 12.432268660049886,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 10:00:00\",\n  \"bloodSugar\": \"5.8\",\n  \"consciousness\": \"清醒\",\n  \"skin\": [\"完整\"],\n  \"catheter\": [\"无\"]\n}",
+    "request_duration_seconds": 21.357306245947257,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1807,17 +1890,17 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "catheter": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "skin": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1844,9 +1927,15 @@
         "导尿管"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 01:00:00\",\n  \"systolicPressure\": \"150\",\n  \"diastolicPressure\": \"90\",\n  \"catheter\": [\n    \"静脉通路\",\n    \"导尿管\"\n  ]\n}",
-    "request_duration_seconds": 12.135921409120783,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 01:00:00\",\n  \"systolicPressure\": \"150\",\n  \"diastolicPressure\": \"90\",\n  \"catheter\": [\"静脉通路\", \"导尿管\"]\n}",
+    "request_duration_seconds": 14.754636589903384,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -1858,11 +1947,6 @@
         "fn": 0
       },
       "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1886,9 +1970,10 @@
       "stoolFrequency": "1"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:30:00\",\n  \"height\": \"170\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_duration_seconds": 10.168094811029732,
+    "request_duration_seconds": 15.766762860119343,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1903,7 +1988,7 @@
         "fp": 0,
         "fn": 0
       },
-      "defecation": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1929,13 +2014,24 @@
       "assessmentTime": "2026-03-06 16:00:00",
       "pulseRate": "80",
       "respiratoryRate": "22",
-      "systolicPressure": "130",
+      "systolicPressure": "139",
       "diastolicPressure": "95",
       "consciousness": "嗜睡"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 16:00:00\",\n  \"pulseRate\": \"80\",\n  \"respiratoryRate\": \"22\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"95\",\n  \"consciousness\": \"嗜睡\"\n}",
-    "request_duration_seconds": 11.035185740096495,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 16:00:00\",\n  \"pulseRate\": \"80\",\n  \"respiratoryRate\": \"22\",\n  \"systolicPressure\": \"139\",\n  \"diastolicPressure\": \"95\",\n  \"consciousness\": \"嗜睡\"\n}\n\n我建议您进一步查阅嗜睡状态患者的呼吸频率变化及其与血压波动的关联性，重点关注中枢性呼吸抑制的早期识别。您需要我帮您检索相关临床指南吗？",
+    "request_duration_seconds": 28.44946561404504,
+    "request_error": null,
     "metrics": {
+      "consciousness": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "systolicPressure": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -1946,22 +2042,12 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -1990,25 +2076,11 @@
         "海鲜"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:00:00\",\n  \"education\": \"大专以上\",\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑心梗\",\n  \"allergyHistory\": [\n    \"海鲜\"\n  ]\n}",
-    "request_duration_seconds": 16.91686757002026,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:00:00\",\n  \"education\": \"大专以上\",\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑心梗\",\n  \"allergyHistory\": [\"海鲜\"]\n}",
+    "request_duration_seconds": 19.970246765064076,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2018,7 +2090,22 @@
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2038,19 +2125,20 @@
       "weight": "50.0"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 06:00:00\",\n  \"temperature\": \"37.0\",\n  \"weight\": \"50.0\"\n}",
-    "request_duration_seconds": 8.673787358915433,
+    "request_duration_seconds": 20.298387086950243,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "weight": {
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2072,19 +2160,30 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-08 08:30:00",
-      "systolicPressure": "120",
-      "diastolicPressure": "80",
       "pulseRate": "60",
       "heartRate": "60",
+      "systolicPressure": "120",
+      "diastolicPressure": "80",
       "consciousness": "浅昏迷",
       "skin": [
         "其他"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 08:30:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"60\",\n  \"heartRate\": \"60\",\n  \"consciousness\": \"浅昏迷\",\n  \"skin\": [\n    \"其他\"\n  ]\n}",
-    "request_duration_seconds": 14.113397825974971,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 08:30:00\",\n  \"pulseRate\": \"60\",\n  \"heartRate\": \"60\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"consciousness\": \"浅昏迷\",\n  \"skin\": [\"其他\"]\n}\n\n我建议您进一步查阅浅昏迷患者皮肤压疮的分期评估与管理策略，以及相关临床指南中的预防措施。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 34.1888669130858,
+    "request_error": null,
     "metrics": {
+      "consciousness": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2099,17 +2198,7 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "skin": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2137,14 +2226,10 @@
       "admissionMethod": "步行",
       "diagnosis": "急性胃肠炎"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 14:00:00\",\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-03-07 23:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"急性胃肠炎\"\n}",
-    "request_duration_seconds": 15.818673327099532,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 14:00:00\",\n  \"education\": \"文盲\",\n  \"admissionTime\": \"2026-03-07 23:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"diagnosis\": \"急性胃肠炎\"\n}\n\n我建议您进一步查阅急性胃肠炎在成人患者中的常见并发症及临床管理指南，特别是补液治疗和电解质平衡的处理原则。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 25.625184776028618,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "admissionMethod": {
         "tp": 1,
         "fp": 0,
@@ -2155,12 +2240,17 @@
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2183,15 +2273,11 @@
       "sleep": "正常",
       "diet": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 02:00:00\",\n  \"respiratoryRate\": \"18\",\n  \"bloodSugar\": \"6.0\",\n  \"sleep\": \"正常\",\n  \"diet\": \"正常\"\n}",
-    "request_duration_seconds": 11.064065327867866,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 02:00:00\",\n  \"respiratoryRate\": \"18\",\n  \"bloodSugar\": \"6.0\",\n  \"sleep\": \"正常\",\n  \"diet\": \"正常\"\n}\n\n我建议您进一步查阅呼吸频率异常的临床意义及夜间低血糖风险的相关研究，特别是对睡眠中生理指标变化的监测数据。您需要我帮您检索这方面的最新指南或文献吗？",
+    "request_duration_seconds": 15.56795199518092,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "sleep": {
+      "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2201,7 +2287,12 @@
         "fp": 0,
         "fn": 0
       },
-      "diet": {
+      "bloodSugar": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2237,20 +2328,21 @@
         "皮疹"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 16:00:00\",\n  \"temperature\": \"38.5\",\n  \"allergyHistory\": [\n    \"青霉素\",\n    \"头孢\"\n  ],\n  \"skin\": [\n    \"皮疹\"\n  ]\n}",
-    "request_duration_seconds": 10.52619540086016,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 16:00:00\",\n  \"temperature\": \"38.5\",\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"skin\": [\"皮疹\"]\n}\n\n我建议您进一步查阅青霉素与头孢类药物交叉过敏反应的临床证据及过敏史记录的规范管理相关指南。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 15.368288257159293,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2281,19 +2373,10 @@
       "diagnosis": "考虑骨折"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 10:30:00\",\n  \"education\": \"未入学\",\n  \"ethnicity\": \"维吾尔族\",\n  \"admissionTime\": \"2026-03-09 09:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"考虑骨折\"\n}",
-    "request_duration_seconds": 17.71898046298884,
+    "request_duration_seconds": 32.43318451801315,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2303,12 +2386,22 @@
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2330,19 +2423,20 @@
       "pulseRate": "90"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 08:30:00\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"90\",\n  \"pulseRate\": \"90\"\n}",
-    "request_duration_seconds": 22.00223276601173,
+    "request_duration_seconds": 19.60660193208605,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2365,20 +2459,16 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-11 11:00:00",
+      "weight": "45.0",
       "defecation": "异常",
       "stoolFrequency": "3",
-      "urination": "正常",
-      "weight": "45.0"
+      "urination": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 11:00:00\",\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"3\",\n  \"urination\": \"正常\",\n  \"weight\": \"45.0\"\n}",
-    "request_duration_seconds": 10.347842155955732,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 11:00:00\",\n  \"weight\": \"45.0\",\n  \"defecation\": \"异常\",\n  \"stoolFrequency\": \"3\",\n  \"urination\": \"正常\"\n}\n\n我建议您进一步查阅体重下降与排便异常的可能病因及相互关联，特别是胃肠道疾病的相关临床指南或系统综述。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 17.3796693792101,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "stoolFrequency": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2388,12 +2478,17 @@
         "fp": 0,
         "fn": 0
       },
-      "weight": {
+      "stoolFrequency": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "defecation": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2412,14 +2507,20 @@
     "predicted": {
       "assessmentTime": "2026-03-11 16:00:00",
       "education": "高中或中专",
-      "sleep": "异常",
       "heartRate": "100",
-      "temperature": "37.2"
+      "temperature": "37.2",
+      "sleep": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 16:00:00\",\n  \"education\": \"高中或中专\",\n  \"sleep\": \"异常\",\n  \"heartRate\": \"100\",\n  \"temperature\": \"37.2\"\n}",
-    "request_duration_seconds": 9.142799000022933,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 16:00:00\",\n  \"education\": \"高中或中专\",\n  \"heartRate\": \"100\",\n  \"temperature\": \"37.2\",\n  \"sleep\": \"异常\"\n}\n\n我建议您进一步查阅心率增快与低热在睡眠异常患者中的可能关联及其鉴别诊断，包括感染、甲状腺功能异常等病因的临床评估策略。您需要我帮您检索相关临床指南或系统综述吗？",
+    "request_duration_seconds": 16.96375825209543,
+    "request_error": null,
     "metrics": {
-      "sleep": {
+      "temperature": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2429,17 +2530,12 @@
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "education": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2465,7 +2561,7 @@
       "assessmentTime": "2026-03-12 09:00:00",
       "admissionTime": "2026-03-10 17:00:00",
       "admissionMethod": "其他",
-      "diagnosis": "脑出血",
+      "diagnosis": "确诊脑出血",
       "consciousness": "昏迷",
       "skin": [
         "出血点"
@@ -2474,13 +2570,14 @@
         "静脉通路"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 09:00:00\",\n  \"admissionTime\": \"2026-03-10 17:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"脑出血\",\n  \"consciousness\": \"昏迷\",\n  \"skin\": [\n    \"出血点\"\n  ],\n  \"catheter\": [\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 18.735794477164745,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 09:00:00\",\n  \"admissionTime\": \"2026-03-10 17:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"确诊脑出血\",\n  \"consciousness\": \"昏迷\",\n  \"skin\": [\"出血点\"],\n  \"catheter\": [\"静脉通路\"]\n}",
+    "request_duration_seconds": 20.21411070902832,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+      "consciousness": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
       "admissionMethod": {
         "tp": 1,
@@ -2492,22 +2589,22 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2528,18 +2625,25 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-12 11:30:00",
+      "systolicPressure": "130",
+      "diastolicPressure": "85",
+      "respiratoryRate": "20",
+      "bloodSugar": "5.2",
       "allergyHistory": [
         "无"
       ],
-      "bloodSugar": "5.2",
-      "respiratoryRate": "20",
-      "systolicPressure": "138",
-      "diastolicPressure": "85"
+      "diet": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 11:30:00\",\n  \"allergyHistory\": [\n    \"无\"\n  ],\n  \"bloodSugar\": \"5.2\",\n  \"respiratoryRate\": \"20\",\n  \"systolicPressure\": \"138\",\n  \"diastolicPressure\": \"85\"\n}",
-    "request_duration_seconds": 22.860140857985243,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 11:30:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"respiratoryRate\": \"20\",\n  \"bloodSugar\": \"5.2\",\n  \"allergyHistory\": [\"无\"],\n  \"diet\": \"异常\"\n}\n\n我建议您进一步查阅高血压患者血压控制目标值在不同临床情境下的推荐范围，以及血糖波动与饮食异常的关联性证据。您需要我帮您检索相关临床指南或系统综述吗？",
+    "request_duration_seconds": 35.571421794826165,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2554,20 +2658,20 @@
         "fp": 0,
         "fn": 0
       },
+      "diet": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
+      "bloodSugar": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
-      },
-      "allergyHistory": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
       }
     }
   },
@@ -2584,7 +2688,8 @@
       "heartRate": "78"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"temperature\": \"36.5\",\n  \"heartRate\": \"78\"\n}",
-    "request_duration_seconds": 6.841349181020632,
+    "request_duration_seconds": 13.956994615029544,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -2617,20 +2722,21 @@
       "diastolicPressure": "80",
       "pulseRate": "75"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"75\"\n}",
-    "request_duration_seconds": 8.64064059802331,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 09:00:00\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"75\"\n}\n\n我建议您进一步查阅高血压患者脉率与血压变异性相关的临床预后研究及最新管理指南。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 35.195546058006585,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2650,17 +2756,17 @@
       "weight": "55.0"
     },
     "predicted": {
-      "assessmentTime": "2026-03-06 10:00:00",
       "height": "168",
       "weight": "55.0"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 10:00:00\",\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
-    "request_duration_seconds": 10.069654627004638,
+    "generated_text": "{\n  \"height\": \"168\",\n  \"weight\": \"55.0\"\n}",
+    "request_duration_seconds": 12.547564317006618,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
-        "tp": 1,
+        "tp": 0,
         "fp": 0,
-        "fn": 0
+        "fn": 1
       },
       "height": {
         "tp": 1,
@@ -2686,15 +2792,16 @@
       "respiratoryRate": "18",
       "bloodSugar": "5.8"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 11:00:00\",\n  \"respiratoryRate\": \"18\",\n  \"bloodSugar\": \"5.8\"\n}",
-    "request_duration_seconds": 8.21928668092005,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 11:00:00\",\n  \"respiratoryRate\": \"18\",\n  \"bloodSugar\": \"5.8\"\n}\n\n我建议您进一步查阅呼吸频率异常与血糖水平关联性的临床意义及可能病因，特别是心肺与代谢相互作用的最新研究进展。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 21.153547120047733,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2722,15 +2829,16 @@
         "静脉通路"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 14:00:00\",\n  \"consciousness\": \"清醒\",\n  \"catheter\": [\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 7.8122827699407935,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 14:00:00\",\n  \"consciousness\": \"清醒\",\n  \"catheter\": [\"静脉通路\"]\n}",
+    "request_duration_seconds": 7.9204167269635946,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2754,7 +2862,6 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-06 15:00:00",
       "skin": [
         "手术切口"
       ],
@@ -2762,18 +2869,19 @@
         "头孢"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 15:00:00\",\n  \"skin\": [\n    \"手术切口\"\n  ],\n  \"allergyHistory\": [\n    \"头孢\"\n  ]\n}",
-    "request_duration_seconds": 9.304068956058472,
+    "generated_text": "{\n  \"skin\": [\"手术切口\"],\n  \"allergyHistory\": [\"头孢\"]\n}",
+    "request_duration_seconds": 16.9262191420421,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
       },
       "skin": {
         "tp": 1,
@@ -2791,30 +2899,30 @@
       "diagnosis": "考虑胃炎"
     },
     "predicted": {
-      "assessmentTime": "2026-03-06 16:00:00",
-      "admissionTime": "2026-03-05 15:00:00",
+      "admissionTime": "2026-03-04 15:00:00",
       "admissionMethod": "平车",
       "diagnosis": "考虑胃炎"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 16:00:00\",\n  \"admissionTime\": \"2026-03-05 15:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"考虑胃炎\"\n}",
-    "request_duration_seconds": 11.749958059983328,
+    "generated_text": "{\n  \"admissionTime\": \"2026-03-04 15:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"diagnosis\": \"考虑胃炎\"\n}",
+    "request_duration_seconds": 11.183809059904888,
+    "request_error": null,
     "metrics": {
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
       "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "admissionMethod": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "admissionTime": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2829,24 +2937,24 @@
       "education": "大专以上"
     },
     "predicted": {
-      "assessmentTime": "2026-03-07 08:30:00",
-      "education": "大专以上",
-      "ethnicity": "满族"
+      "ethnicity": "满族",
+      "education": "大专以上"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 08:30:00\",\n  \"education\": \"大专以上\",\n  \"ethnicity\": \"满族\"\n}",
-    "request_duration_seconds": 6.244331199908629,
+    "generated_text": "{\n  \"ethnicity\": \"满族\",\n  \"education\": \"大专以上\"\n}",
+    "request_duration_seconds": 7.718643504893407,
+    "request_error": null,
     "metrics": {
-      "ethnicity": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "assessmentTime": {
-        "tp": 1,
+        "tp": 0,
         "fp": 0,
-        "fn": 0
+        "fn": 1
       },
       "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2861,24 +2969,24 @@
       "sleep": "正常"
     },
     "predicted": {
-      "assessmentTime": "2026-03-07 09:30:00",
       "diet": "正常",
       "sleep": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 09:30:00\",\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}",
-    "request_duration_seconds": 6.0616504698991776,
+    "generated_text": "{\n  \"diet\": \"正常\",\n  \"sleep\": \"正常\"\n}",
+    "request_duration_seconds": 13.111715203151107,
+    "request_error": null,
     "metrics": {
-      "sleep": {
+      "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 1,
+        "tp": 0,
         "fp": 0,
-        "fn": 0
+        "fn": 1
       },
-      "diet": {
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2898,14 +3006,15 @@
       "stoolFrequency": "2"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:30:00\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"2\"\n}",
-    "request_duration_seconds": 8.564205002970994,
+    "request_duration_seconds": 13.139959483174607,
+    "request_error": null,
     "metrics": {
-      "defecation": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -2926,11 +3035,12 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-07 09:00:00",
-      "systolicPressure": "130",
+      "systolicPressure": "139",
       "diastolicPressure": "90"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 09:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"90\"\n}",
-    "request_duration_seconds": 8.366770531982183,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 09:00:00\",\n  \"systolicPressure\": \"139\",\n  \"diastolicPressure\": \"90\"\n}",
+    "request_duration_seconds": 8.762725617969409,
+    "request_error": null,
     "metrics": {
       "diastolicPressure": {
         "tp": 1,
@@ -2943,9 +3053,9 @@
         "fn": 0
       },
       "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       }
     }
   },
@@ -2965,20 +3075,21 @@
       ],
       "urination": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 15:30:00\",\n  \"catheter\": [\n    \"导尿管\"\n  ],\n  \"urination\": \"正常\"\n}",
-    "request_duration_seconds": 6.715766404056922,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 15:30:00\",\n  \"catheter\": [\"导尿管\"],\n  \"urination\": \"正常\"\n}",
+    "request_duration_seconds": 11.925286897923797,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "urination": {
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "urination": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3001,20 +3112,21 @@
       ],
       "consciousness": "昏迷"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 16:30:00\",\n  \"allergyHistory\": [\n    \"无\"\n  ],\n  \"consciousness\": \"昏迷\"\n}",
-    "request_duration_seconds": 8.05155556788668,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 16:30:00\",\n  \"allergyHistory\": [\"无\"],\n  \"consciousness\": \"昏迷\"\n}",
+    "request_duration_seconds": 11.736907646991313,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "consciousness": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3034,19 +3146,20 @@
       "pulseRate": "82"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 09:00:00\",\n  \"weight\": \"70.0\",\n  \"pulseRate\": \"82\"\n}",
-    "request_duration_seconds": 9.84052665787749,
+    "request_duration_seconds": 10.359673714032397,
+    "request_error": null,
     "metrics": {
-      "weight": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3065,8 +3178,9 @@
       "temperature": "37.0",
       "respiratoryRate": "20"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 14:00:00\",\n  \"temperature\": \"37.0\",\n  \"respiratoryRate\": \"20\"\n}",
-    "request_duration_seconds": 9.395306798862293,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 14:00:00\",\n  \"temperature\": \"37.0\",\n  \"respiratoryRate\": \"20\"\n}\n\n我建议您进一步查阅呼吸频率异常的临床意义及常见病因的评估方法，特别是结合体温升高的鉴别诊断。您需要我帮您检索相关临床指南吗？",
+    "request_duration_seconds": 21.171917921863496,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -3097,15 +3211,16 @@
       "bloodSugar": "6.1",
       "heartRate": "90"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 16:00:00\",\n  \"bloodSugar\": \"6.1\",\n  \"heartRate\": \"90\"\n}",
-    "request_duration_seconds": 9.384958258131519,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 16:00:00\",\n  \"bloodSugar\": \"6.1\",\n  \"heartRate\": \"90\"\n}\n\n我建议您进一步查阅该患者血糖水平在空腹与餐后状态下的临床意义及其对心率影响的相关研究，特别是糖尿病或心血管疾病患者的长期管理指南。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 20.5340393059887,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3133,15 +3248,16 @@
         "皮疹"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 09:30:00\",\n  \"consciousness\": \"嗜睡\",\n  \"skin\": [\n    \"皮疹\"\n  ]\n}",
-    "request_duration_seconds": 6.988580401986837,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 09:30:00\",\n  \"consciousness\": \"嗜睡\",\n  \"skin\": [\"皮疹\"]\n}",
+    "request_duration_seconds": 12.34947526594624,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3168,7 +3284,8 @@
       "admissionMethod": "步行"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 11:30:00\",\n  \"education\": \"初中\",\n  \"admissionTime\": \"2026-03-09 10:00:00\",\n  \"admissionMethod\": \"步行\"\n}",
-    "request_duration_seconds": 9.745326878968626,
+    "request_duration_seconds": 18.758422372164205,
+    "request_error": null,
     "metrics": {
       "admissionMethod": {
         "tp": 1,
@@ -3180,12 +3297,12 @@
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3200,14 +3317,15 @@
       "sleep": "异常"
     },
     "predicted": {
-      "assessmentTime": "2026-03-09 14:00:00",
       "diet": "异常",
-      "sleep": "异常"
+      "sleep": "异常",
+      "assessmentTime": "2026-03-09 14:00:00"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 14:00:00\",\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\"\n}",
-    "request_duration_seconds": 5.9486939599737525,
+    "generated_text": "{\n  \"diet\": \"异常\",\n  \"sleep\": \"异常\",\n  \"assessmentTime\": \"2026-03-09 14:00:00\"\n}",
+    "request_duration_seconds": 13.349109192145988,
+    "request_error": null,
     "metrics": {
-      "sleep": {
+      "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3217,7 +3335,7 @@
         "fp": 0,
         "fn": 0
       },
-      "diet": {
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3236,15 +3354,21 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-09 16:30:00",
+      "systolicPressure": "117",
+      "diastolicPressure": "75",
       "catheter": [
         "无"
-      ],
-      "systolicPressure": "110",
-      "diastolicPressure": "75"
+      ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 16:30:00\",\n  \"catheter\": [\n    \"无\"\n  ],\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"75\"\n}",
-    "request_duration_seconds": 8.665306719951332,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 16:30:00\",\n  \"systolicPressure\": \"117\",\n  \"diastolicPressure\": \"75\",\n  \"catheter\": [\"无\"]\n}\n\n我建议您进一步查阅高血压患者血压测量的标准化操作流程及影响因素的相关临床指南。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 18.751176782185212,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -3256,11 +3380,6 @@
         "fn": 0
       },
       "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3283,9 +3402,20 @@
       "diastolicPressure": "80",
       "respiratoryRate": "20"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 09:00:00\",\n  \"temperature\": \"36.5\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"respiratoryRate\": \"20\"\n}",
-    "request_duration_seconds": 11.115030767861754,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 09:00:00\",\n  \"temperature\": \"36.5\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"80\",\n  \"respiratoryRate\": \"20\"\n}\n\n我建议您进一步查阅该患者生命体征监测中呼吸频率与心率的关联性及其在临床评估中的意义，特别是异常呼吸模式的识别。您需要我帮您检索相关临床指南吗？",
+    "request_duration_seconds": 13.962436611065641,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "temperature": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -3296,17 +3426,7 @@
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3324,28 +3444,29 @@
     "predicted": {
       "assessmentTime": "2026-03-05 15:30:00",
       "education": "高中或中专",
-      "heartRate": "75",
-      "consciousness": "清醒"
+      "consciousness": "清醒",
+      "heartRate": "75"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 15:30:00\",\n  \"education\": \"高中或中专\",\n  \"heartRate\": \"75\",\n  \"consciousness\": \"清醒\"\n}",
-    "request_duration_seconds": 12.370923144975677,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-05 15:30:00\",\n  \"education\": \"高中或中专\",\n  \"consciousness\": \"清醒\",\n  \"heartRate\": \"75\"\n}\n\n我建议您进一步查阅该患者在查房时的生命体征完整性（如血压、呼吸频率等）是否需补充评估，以及家属陪同对病情陈述的影响。您需要我帮您检索相关临床评估指南吗？",
+    "request_duration_seconds": 19.776925307000056,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "heartRate": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3372,8 +3493,9 @@
         "静脉通路"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"admissionTime\": \"2026-03-04 22:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"pulseRate\": \"80\",\n  \"catheter\": [\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 16.779690482886508,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 08:00:00\",\n  \"admissionTime\": \"2026-03-04 22:00:00\",\n  \"admissionMethod\": \"轮椅\",\n  \"pulseRate\": \"80\",\n  \"catheter\": [\"静脉通路\"]\n}",
+    "request_duration_seconds": 16.991275697015226,
+    "request_error": null,
     "metrics": {
       "admissionMethod": {
         "tp": 1,
@@ -3385,7 +3507,7 @@
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3395,7 +3517,7 @@
         "fp": 0,
         "fn": 0
       },
-      "admissionTime": {
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3424,9 +3546,20 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 14:00:00\",\n  \"height\": \"170\",\n  \"weight\": \"65.0\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"80\",\n  \"allergyHistory\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 12.910862863995135,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-06 14:00:00\",\n  \"height\": \"170\",\n  \"weight\": \"65.0\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"80\",\n  \"allergyHistory\": [\"无\"]\n}\n\n我建议您进一步查阅高血压诊断标准及血压测量的准确性影响因素，特别是不同测量时机和体位对结果的影响。您需要我帮您检索相关临床指南吗？",
+    "request_duration_seconds": 19.1619839228224,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "allergyHistory": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -3437,22 +3570,12 @@
         "fp": 0,
         "fn": 0
       },
-      "weight": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "height": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "allergyHistory": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3483,10 +3606,11 @@
       ],
       "bloodSugar": "5.6"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 09:00:00\",\n  \"allergyHistory\": [\n    \"青霉素\",\n    \"头孢\"\n  ],\n  \"skin\": [\n    \"破损\"\n  ],\n  \"bloodSugar\": \"5.6\"\n}",
-    "request_duration_seconds": 11.513943730853498,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 09:00:00\",\n  \"allergyHistory\": [\"青霉素\", \"头孢\"],\n  \"skin\": [\"破损\"],\n  \"bloodSugar\": \"5.6\"\n}\n\n我建议您进一步查阅青霉素与头孢类药物交叉过敏反应的临床证据及过敏史记录的规范要求。您需要我帮您检索相关指南或文献吗？",
+    "request_duration_seconds": 18.366321376990527,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3496,7 +3620,7 @@
         "fp": 0,
         "fn": 0
       },
-      "allergyHistory": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3517,7 +3641,8 @@
       "assessmentTime": "2026-03-07 10:00:00"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-07 10:00:00\"\n}",
-    "request_duration_seconds": 5.778665354009718,
+    "request_duration_seconds": 10.310285328887403,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -3541,21 +3666,17 @@
       "assessmentTime": "2026-03-08 11:00:00",
       "ethnicity": "回族",
       "diagnosis": "考虑急性阑尾炎",
+      "stoolFrequency": "1",
+      "urination": "正常",
       "catheter": [
         "导尿管"
-      ],
-      "urination": "正常",
-      "stoolFrequency": "1"
+      ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 11:00:00\",\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"catheter\": [\n    \"导尿管\"\n  ],\n  \"urination\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_duration_seconds": 24.99503357312642,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 11:00:00\",\n  \"ethnicity\": \"回族\",\n  \"diagnosis\": \"考虑急性阑尾炎\",\n  \"stoolFrequency\": \"1\",\n  \"urination\": \"正常\",\n  \"catheter\": [\"导尿管\"]\n}",
+    "request_duration_seconds": 14.960736091947183,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
+      "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3565,17 +3686,22 @@
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "urination": {
         "tp": 0,
         "fp": 1,
         "fn": 0
       },
-      "ethnicity": {
+      "assessmentTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diagnosis": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3598,9 +3724,15 @@
       "pulseRate": "70",
       "respiratoryRate": "22"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 16:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"70\",\n  \"respiratoryRate\": \"22\"\n}",
-    "request_duration_seconds": 12.810999525012448,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-08 16:00:00\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"80\",\n  \"pulseRate\": \"70\",\n  \"respiratoryRate\": \"22\"\n}\n\n我建议您进一步查阅高血压患者血压测量的标准化操作流程及影响因素的临床指南。您需要我帮您检索相关文献吗？",
+    "request_duration_seconds": 19.754982968093827,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -3611,17 +3743,12 @@
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3646,10 +3773,11 @@
       ],
       "sleep": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 08:30:00\",\n  \"temperature\": \"37.0\",\n  \"skin\": [\n    \"其他\"\n  ],\n  \"sleep\": \"异常\"\n}",
-    "request_duration_seconds": 11.588779677869752,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 08:30:00\",\n  \"temperature\": \"37.0\",\n  \"skin\": [\"其他\"],\n  \"sleep\": \"异常\"\n}\n\n我建议您进一步查阅压疮的分期评估标准及感染征象的临床识别要点，您需要我帮您检索相关指南吗？",
+    "request_duration_seconds": 14.758312747813761,
+    "request_error": null,
     "metrics": {
-      "sleep": {
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3659,12 +3787,12 @@
         "fp": 0,
         "fn": 0
       },
-      "temperature": {
+      "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
+      "sleep": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3686,7 +3814,6 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-09 11:15:00",
       "allergyHistory": [
         "海鲜"
       ],
@@ -3697,25 +3824,26 @@
         "导尿管"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-09 11:15:00\",\n  \"allergyHistory\": [\n    \"海鲜\"\n  ],\n  \"skin\": [\n    \"完整\"\n  ],\n  \"catheter\": [\n    \"导尿管\"\n  ]\n}",
-    "request_duration_seconds": 14.062437485903502,
+    "generated_text": "{\n  \"allergyHistory\": [\"海鲜\"],\n  \"skin\": [\"完整\"],\n  \"catheter\": [\"导尿管\"]\n}",
+    "request_duration_seconds": 18.529759586090222,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
       "skin": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3732,16 +3860,17 @@
       "consciousness": "嗜睡"
     },
     "predicted": {
-      "assessmentTime": "2026-03-10 09:00:00",
+      "assessmentTime": "2026-03-10 08:00:00",
       "admissionTime": "2026-03-10 08:00:00",
       "admissionMethod": "其他",
       "diagnosis": "高血压",
       "consciousness": "嗜睡"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 09:00:00\",\n  \"admissionTime\": \"2026-03-10 08:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"高血压\",\n  \"consciousness\": \"嗜睡\"\n}",
-    "request_duration_seconds": 11.839086805004627,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 08:00:00\",\n  \"admissionTime\": \"2026-03-10 08:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"高血压\",\n  \"consciousness\": \"嗜睡\"\n}",
+    "request_duration_seconds": 16.37006692797877,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3752,11 +3881,11 @@
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 0,
-        "fp": 1,
-        "fn": 1
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
       },
-      "consciousness": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3780,15 +3909,16 @@
       "heartRate": "80",
       "bloodSugar": "6.0"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 14:00:00\",\n  \"heartRate\": \"80\",\n  \"bloodSugar\": \"6.0\"\n}",
-    "request_duration_seconds": 10.454827427864075,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-10 14:00:00\",\n  \"heartRate\": \"80\",\n  \"bloodSugar\": \"6.0\"\n}\n\n我建议您进一步查阅血糖6.0 mmol/L在不同临床情境下的解读及其对糖尿病筛查的意义，以及相关权威研究或临床指南中的诊断阈值。您需要我帮您检索这方面的资料吗？",
+    "request_duration_seconds": 16.824380174046382,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3815,24 +3945,25 @@
       "weight": "50.0"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 10:00:00\",\n  \"education\": \"文盲\",\n  \"temperature\": \"36.5\",\n  \"weight\": \"50.0\"\n}",
-    "request_duration_seconds": 10.694322040071711,
+    "request_duration_seconds": 11.332816750044003,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "weight": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "education": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3850,14 +3981,15 @@
       "urination": "异常"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-11 16:00:00\",\n  \"urination\": \"异常\"\n}",
-    "request_duration_seconds": 7.744657458039001,
+    "request_duration_seconds": 12.534731304971501,
+    "request_error": null,
     "metrics": {
-      "urination": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "urination": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3873,7 +4005,8 @@
       "assessmentTime": "2026-03-12 07:00:00"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 07:00:00\"\n}",
-    "request_duration_seconds": 12.459974962985143,
+    "request_duration_seconds": 15.120665741153061,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
@@ -3897,19 +4030,20 @@
       "diastolicPressure": "70"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-12 11:00:00\",\n  \"pulseRate\": \"75\",\n  \"systolicPressure\": \"120\",\n  \"diastolicPressure\": \"70\"\n}",
-    "request_duration_seconds": 8.774913012981415,
+    "request_duration_seconds": 19.562073395820335,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3932,20 +4066,21 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-13 14:30:00",
-      "defecation": "正常",
-      "urination": "正常",
       "admissionTime": "2026-03-12 21:00:00",
-      "admissionMethod": "步行"
+      "admissionMethod": "步行",
+      "urination": "正常",
+      "defecation": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-13 14:30:00\",\n  \"defecation\": \"正常\",\n  \"urination\": \"正常\",\n  \"admissionTime\": \"2026-03-12 21:00:00\",\n  \"admissionMethod\": \"步行\"\n}",
-    "request_duration_seconds": 14.513225313043222,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-13 14:30:00\",\n  \"admissionTime\": \"2026-03-12 21:00:00\",\n  \"admissionMethod\": \"步行\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\"\n}",
+    "request_duration_seconds": 25.40775430481881,
+    "request_error": null,
     "metrics": {
-      "admissionMethod": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3955,7 +4090,7 @@
         "fp": 0,
         "fn": 0
       },
-      "defecation": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3982,14 +4117,10 @@
       "diastolicPressure": "70"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-13 20:00:00\",\n  \"heartRate\": \"75\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
-    "request_duration_seconds": 9.328631839016452,
+    "request_duration_seconds": 19.346087754005566,
+    "request_error": null,
     "metrics": {
-      "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
+      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -3999,7 +4130,12 @@
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4017,14 +4153,25 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-14 08:30:00",
-      "respiratoryRate": "18",
       "systolicPressure": "140",
       "diastolicPressure": "90",
+      "respiratoryRate": "18",
       "consciousness": "昏睡"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 08:30:00\",\n  \"respiratoryRate\": \"18\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"90\",\n  \"consciousness\": \"昏睡\"\n}",
-    "request_duration_seconds": 19.972556160995737,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 08:30:00\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"90\",\n  \"respiratoryRate\": \"18\",\n  \"consciousness\": \"昏睡\"\n}",
+    "request_duration_seconds": 18.54689749190584,
+    "request_error": null,
     "metrics": {
+      "consciousness": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -4036,16 +4183,6 @@
         "fn": 0
       },
       "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "consciousness": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4074,17 +4211,24 @@
       ],
       "catheter": [
         "静脉通路"
-      ]
+      ],
+      "diet": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 15:00:00\",\n  \"education\": \"初中\",\n  \"skin\": [\n    \"皮疹\",\n    \"出血点\"\n  ],\n  \"catheter\": [\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 14.778925715945661,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-14 15:00:00\",\n  \"education\": \"初中\",\n  \"skin\": [\"皮疹\", \"出血点\"],\n  \"catheter\": [\"静脉通路\"],\n  \"diet\": \"异常\"\n}",
+    "request_duration_seconds": 25.762148587964475,
+    "request_error": null,
     "metrics": {
+      "diet": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "catheter": {
+      "skin": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4094,7 +4238,7 @@
         "fp": 1,
         "fn": 1
       },
-      "skin": {
+      "catheter": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4113,20 +4257,21 @@
       "pulseRate": "80",
       "respiratoryRate": "19"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-15 14:00:00\",\n  \"pulseRate\": \"80\",\n  \"respiratoryRate\": \"19\"\n}",
-    "request_duration_seconds": 7.754833498969674,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-15 14:00:00\",\n  \"pulseRate\": \"80\",\n  \"respiratoryRate\": \"19\"\n}\n\n我建议您进一步查阅呼吸频率异常对患者病情评估的影响及相关临床指南中的预警标准。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 16.543260975042358,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
+      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "pulseRate": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4146,9 +4291,10 @@
       "consciousness": "浅昏迷"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-15 10:00:00\",\n  \"ethnicity\": \"壮族\",\n  \"consciousness\": \"浅昏迷\"\n}",
-    "request_duration_seconds": 9.246630032081157,
+    "request_duration_seconds": 19.573057101108134,
+    "request_error": null,
     "metrics": {
-      "ethnicity": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4158,7 +4304,7 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "ethnicity": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4179,16 +4325,22 @@
     "predicted": {
       "assessmentTime": "2026-03-16 09:00:00",
       "bloodSugar": "6.7",
-      "systolicPressure": "130",
+      "systolicPressure": "138",
       "diastolicPressure": "85",
       "allergyHistory": [
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-16 09:00:00\",\n  \"bloodSugar\": \"6.7\",\n  \"systolicPressure\": \"130\",\n  \"diastolicPressure\": \"85\",\n  \"allergyHistory\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 10.968436010880396,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-16 09:00:00\",\n  \"bloodSugar\": \"6.7\",\n  \"systolicPressure\": \"138\",\n  \"diastolicPressure\": \"85\",\n  \"allergyHistory\": [\"无\"]\n}\n\n我建议您进一步查阅该患者血糖与血压控制目标在特定人群（如糖尿病、高血压）中的管理策略及相关临床指南。您需要我帮您检索这方面的权威研究吗？",
+    "request_duration_seconds": 26.546812657034025,
+    "request_error": null,
     "metrics": {
-      "bloodSugar": {
+      "systolicPressure": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4203,12 +4355,7 @@
         "fp": 0,
         "fn": 0
       },
-      "allergyHistory": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
+      "bloodSugar": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4232,13 +4379,9 @@
       "diagnosis": "考虑心力衰竭"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-16 11:00:00\",\n  \"education\": \"小学\",\n  \"admissionTime\": \"2026-03-15 20:00:00\",\n  \"admissionMethod\": \"背入\",\n  \"diagnosis\": \"考虑心力衰竭\"\n}",
-    "request_duration_seconds": 10.845457428134978,
+    "request_duration_seconds": 18.14214238896966,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "admissionMethod": {
         "tp": 1,
         "fp": 0,
@@ -4249,12 +4392,17 @@
         "fp": 0,
         "fn": 0
       },
-      "education": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "education": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4274,7 +4422,6 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-17 14:00:00",
       "skin": [
         "钉道",
         "溃疡"
@@ -4283,13 +4430,14 @@
         "无"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-17 14:00:00\",\n  \"skin\": [\n    \"钉道\",\n    \"溃疡\"\n  ],\n  \"catheter\": [\n    \"无\"\n  ]\n}",
-    "request_duration_seconds": 12.78282672399655,
+    "generated_text": "{\n  \"skin\": [\"钉道\", \"溃疡\"],\n  \"catheter\": [\"无\"]\n}",
+    "request_duration_seconds": 18.317016992950812,
+    "request_error": null,
     "metrics": {
       "assessmentTime": {
-        "tp": 1,
+        "tp": 0,
         "fp": 0,
-        "fn": 0
+        "fn": 1
       },
       "skin": {
         "tp": 1,
@@ -4314,14 +4462,15 @@
       "heartRate": "65"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-17 08:30:00\",\n  \"heartRate\": \"65\"\n}",
-    "request_duration_seconds": 8.47896544705145,
+    "request_duration_seconds": 24.318827804178,
+    "request_error": null,
     "metrics": {
-      "heartRate": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4337,16 +4486,17 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-18 09:00:00",
-      "systolicPressure": "110",
-      "diastolicPressure": "70"
+      "systolicPressure": "115",
+      "diastolicPressure": "75"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-18 09:00:00\",\n  \"systolicPressure\": \"110\",\n  \"diastolicPressure\": \"70\"\n}",
-    "request_duration_seconds": 8.033735743025318,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-18 09:00:00\",\n  \"systolicPressure\": \"115\",\n  \"diastolicPressure\": \"75\"\n}",
+    "request_duration_seconds": 17.343485889956355,
+    "request_error": null,
     "metrics": {
       "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       },
       "assessmentTime": {
         "tp": 1,
@@ -4354,9 +4504,9 @@
         "fn": 0
       },
       "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       }
     }
   },
@@ -4372,15 +4522,16 @@
       "respiratoryRate": "19",
       "defecation": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-18 15:00:00\",\n  \"respiratoryRate\": \"19\",\n  \"defecation\": \"正常\"\n}",
-    "request_duration_seconds": 7.9007617509923875,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-18 15:00:00\",\n  \"respiratoryRate\": \"19\",\n  \"defecation\": \"正常\"\n}\n\n我建议您进一步查阅呼吸频率异常的临床意义及可能相关疾病的早期识别要点，以及其在不同人群中的正常值范围差异。您需要我帮您检索相关临床指南吗？",
+    "request_duration_seconds": 22.752578967018053,
+    "request_error": null,
     "metrics": {
-      "defecation": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4398,11 +4549,18 @@
       "assessmentTime": "2026-03-19 10:00:00"
     },
     "predicted": {
-      "assessmentTime": "2026-03-19 10:00:00"
+      "assessmentTime": "2026-03-19 10:00:00",
+      "diet": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-19 10:00:00\"\n}",
-    "request_duration_seconds": 7.092954759951681,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-19 10:00:00\",\n  \"diet\": \"异常\"\n}",
+    "request_duration_seconds": 19.748470803024247,
+    "request_error": null,
     "metrics": {
+      "diet": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
       "assessmentTime": {
         "tp": 1,
         "fp": 0,
@@ -4421,32 +4579,32 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-19 14:00:00",
       "admissionTime": "2026-03-17 10:00:00",
       "admissionMethod": "平车",
       "catheter": [
         "静脉通路"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-19 14:00:00\",\n  \"admissionTime\": \"2026-03-17 10:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"catheter\": [\n    \"静脉通路\"\n  ]\n}",
-    "request_duration_seconds": 12.62152968114242,
+    "generated_text": "{\n  \"admissionTime\": \"2026-03-17 10:00:00\",\n  \"admissionMethod\": \"平车\",\n  \"catheter\": [\"静脉通路\"]\n}",
+    "request_duration_seconds": 21.954566043801606,
+    "request_error": null,
     "metrics": {
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
+      },
+      "admissionTime": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "admissionMethod": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "catheter": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "admissionTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4461,17 +4619,24 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-20 08:00:00",
-      "weight": "70.5"
+      "weight": "70.5",
+      "diet": "异常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-20 08:00:00\",\n  \"weight\": \"70.5\"\n}",
-    "request_duration_seconds": 11.200460392050445,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-20 08:00:00\",\n  \"weight\": \"70.5\",\n  \"diet\": \"异常\"\n}",
+    "request_duration_seconds": 19.77070802799426,
+    "request_error": null,
     "metrics": {
-      "weight": {
+      "diet": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "weight": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4485,21 +4650,27 @@
       "diet": "异常"
     },
     "predicted": {
-      "assessmentTime": "2026-03-20 16:30:00",
-      "diet": "异常"
+      "diet": "异常",
+      "sleep": "正常"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-20 16:30:00\",\n  \"diet\": \"异常\"\n}",
-    "request_duration_seconds": 7.9392264920752496,
+    "generated_text": "{\n  \"diet\": \"异常\",\n  \"sleep\": \"正常\"\n}",
+    "request_duration_seconds": 24.732554818037897,
+    "request_error": null,
     "metrics": {
       "diet": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
+      "sleep": {
+        "tp": 0,
+        "fp": 1,
         "fn": 0
+      },
+      "assessmentTime": {
+        "tp": 0,
+        "fp": 0,
+        "fn": 1
       }
     }
   },
@@ -4519,9 +4690,15 @@
       "respiratoryRate": "20",
       "pulseRate": "90"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-21 09:15:00\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"100\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"90\"\n}",
-    "request_duration_seconds": 9.28621695493348,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-21 09:15:00\",\n  \"systolicPressure\": \"140\",\n  \"diastolicPressure\": \"100\",\n  \"respiratoryRate\": \"20\",\n  \"pulseRate\": \"90\"\n}\n\n我建议您进一步查阅高血压患者血压控制目标值在不同临床情境下的推荐差异，以及呼吸频率与脉率异常的关联意义。您需要我帮您检索相关临床指南或系统综述吗？",
+    "request_duration_seconds": 33.2209126080852,
+    "request_error": null,
     "metrics": {
+      "systolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
       "diastolicPressure": {
         "tp": 1,
         "fp": 0,
@@ -4532,17 +4709,12 @@
         "fp": 0,
         "fn": 0
       },
-      "respiratoryRate": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "systolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "pulseRate": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4558,15 +4730,16 @@
       "consciousness": "药物镇静状"
     },
     "predicted": {
-      "assessmentTime": "2026-03-21 11:00:00",
       "admissionMethod": "其他",
       "diagnosis": "考虑脑梗死",
-      "consciousness": "药物镇静状"
+      "consciousness": "药物镇静状",
+      "assessmentTime": "2026-03-21 11:00:00"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-21 11:00:00\",\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑脑梗死\",\n  \"consciousness\": \"药物镇静状\"\n}",
-    "request_duration_seconds": 9.022897931048647,
+    "generated_text": "{\n  \"admissionMethod\": \"其他\",\n  \"diagnosis\": \"考虑脑梗死\",\n  \"consciousness\": \"药物镇静状\",\n  \"assessmentTime\": \"2026-03-21 11:00:00\"\n}",
+    "request_duration_seconds": 23.972301417961717,
+    "request_error": null,
     "metrics": {
-      "diagnosis": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4581,7 +4754,7 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "diagnosis": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4600,31 +4773,32 @@
       ]
     },
     "predicted": {
-      "assessmentTime": "2026-03-22 10:30:00",
       "allergyHistory": [
         "花粉"
       ],
       "skin": [
-        "造口"
+        "造口",
+        "完整"
       ]
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-22 10:30:00\",\n  \"allergyHistory\": [\n    \"花粉\"\n  ],\n  \"skin\": [\n    \"造口\"\n  ]\n}",
-    "request_duration_seconds": 7.78203640691936,
+    "generated_text": "{\n  \"allergyHistory\": [\"花粉\"],\n  \"skin\": [\"造口\", \"完整\"]\n}",
+    "request_duration_seconds": 25.74244238808751,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
       "allergyHistory": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "skin": {
-        "tp": 1,
+      "assessmentTime": {
+        "tp": 0,
         "fp": 0,
-        "fn": 0
+        "fn": 1
+      },
+      "skin": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       }
     }
   },
@@ -4639,14 +4813,15 @@
       "temperature": "38.2"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-22 03:00:00\",\n  \"temperature\": \"38.2\"\n}",
-    "request_duration_seconds": 9.277161228936166,
+    "request_duration_seconds": 17.631469507003203,
+    "request_error": null,
     "metrics": {
-      "temperature": {
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "assessmentTime": {
+      "temperature": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4670,19 +4845,10 @@
       "stoolFrequency": "1"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-23 15:00:00\",\n  \"diet\": \"正常\",\n  \"urination\": \"正常\",\n  \"defecation\": \"正常\",\n  \"stoolFrequency\": \"1\"\n}",
-    "request_duration_seconds": 10.574125827057287,
+    "request_duration_seconds": 14.542761077871546,
+    "request_error": null,
     "metrics": {
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "diet": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "stoolFrequency": {
+      "defecation": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4692,7 +4858,17 @@
         "fp": 0,
         "fn": 0
       },
-      "defecation": {
+      "stoolFrequency": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "diet": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4709,29 +4885,30 @@
     },
     "predicted": {
       "assessmentTime": "2026-03-23 17:00:00",
-      "systolicPressure": "90",
-      "diastolicPressure": "80",
-      "heartRate": "110"
+      "heartRate": "110",
+      "systolicPressure": "98",
+      "diastolicPressure": "80"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-23 17:00:00\",\n  \"systolicPressure\": \"90\",\n  \"diastolicPressure\": \"80\",\n  \"heartRate\": \"110\"\n}",
-    "request_duration_seconds": 10.112737698014826,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-23 17:00:00\",\n  \"heartRate\": \"110\",\n  \"systolicPressure\": \"98\",\n  \"diastolicPressure\": \"80\"\n}",
+    "request_duration_seconds": 16.337721779942513,
+    "request_error": null,
     "metrics": {
-      "diastolicPressure": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "assessmentTime": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
+      "systolicPressure": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
       },
       "heartRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
-      "systolicPressure": {
+      "diastolicPressure": {
+        "tp": 1,
+        "fp": 0,
+        "fn": 0
+      },
+      "assessmentTime": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4751,9 +4928,10 @@
       "consciousness": "模糊"
     },
     "generated_text": "{\n  \"assessmentTime\": \"2026-03-24 06:30:00\",\n  \"respiratoryRate\": \"16\",\n  \"consciousness\": \"模糊\"\n}",
-    "request_duration_seconds": 15.270775962853804,
+    "request_duration_seconds": 15.93865817785263,
+    "request_error": null,
     "metrics": {
-      "respiratoryRate": {
+      "consciousness": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4763,7 +4941,7 @@
         "fp": 0,
         "fn": 0
       },
-      "consciousness": {
+      "respiratoryRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
@@ -4778,24 +4956,31 @@
       "pulseRate": "78"
     },
     "predicted": {
-      "assessmentTime": "2026-03-24 14:00:00",
+      "assessmentTime": "2026-03-24 08:00:00",
       "education": "大专以上",
-      "pulseRate": "78"
+      "pulseRate": "78",
+      "consciousness": "清醒"
     },
-    "generated_text": "{\n  \"assessmentTime\": \"2026-03-24 14:00:00\",\n  \"education\": \"大专以上\",\n  \"pulseRate\": \"78\"\n}",
-    "request_duration_seconds": 14.390424815937877,
+    "generated_text": "{\n  \"assessmentTime\": \"2026-03-24 08:00:00\",\n  \"education\": \"大专以上\",\n  \"pulseRate\": \"78\",\n  \"consciousness\": \"清醒\"\n}",
+    "request_duration_seconds": 19.956921262899414,
+    "request_error": null,
     "metrics": {
+      "consciousness": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 0
+      },
       "assessmentTime": {
+        "tp": 0,
+        "fp": 1,
+        "fn": 1
+      },
+      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
       },
       "education": {
-        "tp": 1,
-        "fp": 0,
-        "fn": 0
-      },
-      "pulseRate": {
         "tp": 1,
         "fp": 0,
         "fn": 0
