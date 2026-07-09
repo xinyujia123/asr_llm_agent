@@ -145,6 +145,10 @@ BENCHMARK_CONCURRENCY = parse_int_env("BENCHMARK_CONCURRENCY", 1)
 BENCHMARK_PREFLIGHT = parse_bool_env("BENCHMARK_PREFLIGHT", True)
 BENCHMARK_LOG_REQUESTS = parse_bool_env("BENCHMARK_LOG_REQUESTS", True)
 BENCHMARK_ABORT_ON_TIMEOUT = parse_bool_env("BENCHMARK_ABORT_ON_TIMEOUT", False)
+LLM_STREAM = parse_bool_env(
+    "LLM_STREAM",
+    LLM_PROVIDER in ("bailing", "antling", "ant-ling", "ling"),
+)
 DEFAULT_MAX_TOKENS = 8192 if LLM_PROVIDER == "baichuan" else None
 LLM_MAX_TOKENS = parse_int_env("LLM_MAX_TOKENS", DEFAULT_MAX_TOKENS)
 
@@ -209,6 +213,21 @@ def message_content_to_text(content):
     return str(content)
 
 
+def object_to_dict(value):
+    if value is None:
+        return {}
+    if hasattr(value, "model_dump"):
+        return value.model_dump()
+    if isinstance(value, dict):
+        return value
+    result = {}
+    for key in ("role", "content", "reasoning_content", "tool_calls", "refusal"):
+        attr = getattr(value, key, None)
+        if attr is not None:
+            result[key] = attr
+    return result
+
+
 def flatten_system_messages(messages):
     system_parts = [
         message_content_to_text(message.get("content"))
@@ -269,7 +288,7 @@ def build_chat_request(messages):
         "model": LLM_MODEL_NAME,
         "messages": normalize_messages_for_provider(messages),
         "temperature": LLM_TEMPERATURE,
-        "stream": False,
+        "stream": LLM_STREAM,
     }
     if LLM_TOP_P is not None:
         request_kwargs["top_p"] = LLM_TOP_P
@@ -282,14 +301,63 @@ def build_chat_request(messages):
     return request_kwargs
 
 
-def extract_response_text(response):
-    if not response or not response.choices:
-        return ""
-    message = response.choices[0].message
+def extract_message_text(message):
     content = getattr(message, "content", "") or ""
     if isinstance(content, list):
         return message_content_to_text(content)
     return str(content)
+
+
+def extract_non_stream_response(response):
+    if not response or not response.choices:
+        return "", None, {}
+
+    choice = response.choices[0]
+    message = getattr(choice, "message", None)
+    output_text = extract_message_text(message) if message is not None else ""
+    response_metadata = {
+        "finish_reason": getattr(choice, "finish_reason", None),
+        "message": object_to_dict(message),
+    }
+    return output_text, response_metadata["finish_reason"], response_metadata
+
+
+async def collect_stream_response(stream):
+    content_parts = []
+    finish_reason = None
+    chunk_count = 0
+    last_delta = {}
+
+    async for chunk in stream:
+        chunk_count += 1
+        for choice in getattr(chunk, "choices", None) or []:
+            current_finish_reason = getattr(choice, "finish_reason", None)
+            if current_finish_reason is not None:
+                finish_reason = current_finish_reason
+
+            delta = getattr(choice, "delta", None)
+            if delta is None:
+                continue
+            delta_dict = object_to_dict(delta)
+            if delta_dict:
+                last_delta = delta_dict
+            content = delta_dict.get("content")
+            if content:
+                content_parts.append(message_content_to_text(content))
+
+    response_metadata = {
+        "finish_reason": finish_reason,
+        "stream_chunks": chunk_count,
+        "last_delta": last_delta,
+    }
+    return "".join(content_parts), finish_reason, response_metadata
+
+
+async def call_model(client, messages):
+    response = await client.chat.completions.create(**build_chat_request(messages))
+    if LLM_STREAM:
+        return await collect_stream_response(response)
+    return extract_non_stream_response(response)
 
 
 class FatalAPIError(RuntimeError):
@@ -446,19 +514,23 @@ async def process_record(client, record, semaphore, record_id=None):
         if BENCHMARK_LOG_REQUESTS:
             print(f"Starting request for {label}...", flush=True)
         try:
-            response = await asyncio.wait_for(
-                client.chat.completions.create(**build_chat_request(messages)),
+            generated_text, finish_reason, response_metadata = await asyncio.wait_for(
+                call_model(client, messages),
                 timeout=LLM_REQUEST_TIMEOUT_S
             )
-            generated_text = extract_response_text(response)
             request_duration_seconds = time.perf_counter() - start_time
             if BENCHMARK_LOG_REQUESTS:
                 print(
                     f"Finished request for {label} in {request_duration_seconds:.2f}s "
-                    f"({len(generated_text)} chars).",
+                    f"({len(generated_text)} chars, finish_reason={finish_reason}).",
                     flush=True
                 )
-            return generated_text, request_duration_seconds, None
+                if not generated_text:
+                    print(
+                        f"Empty response for {label}: {json.dumps(response_metadata, ensure_ascii=False)}",
+                        flush=True,
+                    )
+            return generated_text, request_duration_seconds, None, finish_reason, response_metadata
         except asyncio.TimeoutError as e:
             request_duration_seconds = time.perf_counter() - start_time
             error_message = (
@@ -468,14 +540,14 @@ async def process_record(client, record, semaphore, record_id=None):
             if BENCHMARK_ABORT_ON_TIMEOUT:
                 raise FatalAPIError(error_message) from e
             print(f"Timeout processing {label}: {error_message}", flush=True)
-            return "", request_duration_seconds, error_message
+            return "", request_duration_seconds, error_message, None, {}
         except Exception as e:
             request_duration_seconds = time.perf_counter() - start_time
             if is_fatal_api_error(e):
                 raise FatalAPIError(format_api_error(e)) from e
             error_message = str(e)
             print(f"Error processing {label}: {error_message}", flush=True)
-            return "", request_duration_seconds, error_message
+            return "", request_duration_seconds, error_message, None, {}
 
 async def main():
     if AsyncOpenAI is None:
@@ -492,6 +564,7 @@ async def main():
     print("Execution mode: sequential")
     print(f"Preflight: {BENCHMARK_PREFLIGHT}")
     print(f"Prompt: {BENCHMARK_PROMPT_NAME}")
+    print(f"Stream: {LLM_STREAM}")
     print(f"Max tokens: {LLM_MAX_TOKENS}")
     print(f"Request timeout: {LLM_REQUEST_TIMEOUT_S}s")
     print(f"Abort on timeout: {BENCHMARK_ABORT_ON_TIMEOUT}")
@@ -524,7 +597,8 @@ async def main():
     global_stats = {} # {field: {'tp': 0, 'fp': 0, 'fn': 0}}
     total_request_duration_seconds = 0.0
     
-    for i, (generated_text, request_duration_seconds, request_error) in enumerate(record_outputs):
+    for i, record_output in enumerate(record_outputs):
+        generated_text, request_duration_seconds, request_error, finish_reason, response_metadata = record_output
         total_request_duration_seconds += request_duration_seconds
         predicted_json = parse_json(generated_text)
         expected_json = data[i]['expected_output']
@@ -559,7 +633,9 @@ async def main():
                 'error_details': error_details,
                 'generated_text': generated_text,
                 'request_duration_seconds': request_duration_seconds,
-                'request_error': request_error
+                'request_error': request_error,
+                'finish_reason': finish_reason,
+                'response_metadata': response_metadata
             })
 
         # Aggregate global stats
@@ -577,6 +653,8 @@ async def main():
             'generated_text': generated_text,
             'request_duration_seconds': request_duration_seconds,
             'request_error': request_error,
+            'finish_reason': finish_reason,
+            'response_metadata': response_metadata,
             'metrics': record_stats
         })
         
@@ -642,6 +720,7 @@ async def main():
         'model_name': LLM_MODEL_NAME,
         'base_url': LLM_BASE_URL,
         'prompt_name': BENCHMARK_PROMPT_NAME,
+        'stream': LLM_STREAM,
         'output_prefix': OUTPUT_PREFIX,
         'output_dir': OUTPUT_DIR,
         'execution_mode': 'sequential'
