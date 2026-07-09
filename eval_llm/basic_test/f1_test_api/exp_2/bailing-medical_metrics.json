@@ -1,0 +1,214 @@
+{
+  "admissionMethod": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 20,
+    "fp": 0,
+    "fn": 0
+  },
+  "admissionTime": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 18,
+    "fp": 0,
+    "fn": 0
+  },
+  "allergyHistory": {
+    "precision": 1.0,
+    "recall": 0.9411764705882353,
+    "f1": 0.9696969696969697,
+    "tp": 16,
+    "fp": 0,
+    "fn": 1
+  },
+  "assessmentTime": {
+    "precision": 0.9652173913043478,
+    "recall": 0.925,
+    "f1": 0.9446808510638298,
+    "tp": 111,
+    "fp": 4,
+    "fn": 9
+  },
+  "bloodSugar": {
+    "precision": 1.0,
+    "recall": 0.9230769230769231,
+    "f1": 0.9600000000000001,
+    "tp": 12,
+    "fp": 0,
+    "fn": 1
+  },
+  "catheter": {
+    "precision": 0.6666666666666666,
+    "recall": 0.4444444444444444,
+    "f1": 0.5333333333333333,
+    "tp": 8,
+    "fp": 4,
+    "fn": 10
+  },
+  "consciousness": {
+    "precision": 0.9047619047619048,
+    "recall": 1.0,
+    "f1": 0.9500000000000001,
+    "tp": 19,
+    "fp": 2,
+    "fn": 0
+  },
+  "defecation": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 10,
+    "fp": 0,
+    "fn": 0
+  },
+  "diagnosis": {
+    "precision": 0.3125,
+    "recall": 0.3125,
+    "f1": 0.3125,
+    "tp": 5,
+    "fp": 11,
+    "fn": 11
+  },
+  "diastolicPressure": {
+    "precision": 0.9411764705882353,
+    "recall": 0.6153846153846154,
+    "f1": 0.744186046511628,
+    "tp": 16,
+    "fp": 1,
+    "fn": 10
+  },
+  "diet": {
+    "precision": 0.7272727272727273,
+    "recall": 1.0,
+    "f1": 0.8421052631578948,
+    "tp": 8,
+    "fp": 3,
+    "fn": 0
+  },
+  "education": {
+    "precision": 0.9411764705882353,
+    "recall": 0.9411764705882353,
+    "f1": 0.9411764705882353,
+    "tp": 16,
+    "fp": 1,
+    "fn": 1
+  },
+  "ethnicity": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 9,
+    "fp": 0,
+    "fn": 0
+  },
+  "heartRate": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "height": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 7,
+    "fp": 0,
+    "fn": 0
+  },
+  "pulseRate": {
+    "precision": 0.9411764705882353,
+    "recall": 0.8421052631578947,
+    "f1": 0.8888888888888888,
+    "tp": 16,
+    "fp": 1,
+    "fn": 3
+  },
+  "respiratoryRate": {
+    "precision": 1.0,
+    "recall": 0.6111111111111112,
+    "f1": 0.7586206896551725,
+    "tp": 11,
+    "fp": 0,
+    "fn": 7
+  },
+  "skin": {
+    "precision": 0.8823529411764706,
+    "recall": 0.8823529411764706,
+    "f1": 0.8823529411764706,
+    "tp": 15,
+    "fp": 2,
+    "fn": 2
+  },
+  "sleep": {
+    "precision": 1.0,
+    "recall": 0.875,
+    "f1": 0.9333333333333333,
+    "tp": 7,
+    "fp": 0,
+    "fn": 1
+  },
+  "stoolFrequency": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 8,
+    "fp": 0,
+    "fn": 0
+  },
+  "systolicPressure": {
+    "precision": 0.7647058823529411,
+    "recall": 0.5,
+    "f1": 0.6046511627906976,
+    "tp": 13,
+    "fp": 4,
+    "fn": 13
+  },
+  "temperature": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 15,
+    "fp": 0,
+    "fn": 0
+  },
+  "urination": {
+    "precision": 0.8181818181818182,
+    "recall": 1.0,
+    "f1": 0.9,
+    "tp": 9,
+    "fp": 2,
+    "fn": 0
+  },
+  "weight": {
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0,
+    "tp": 12,
+    "fp": 0,
+    "fn": 0
+  },
+  "summary": {
+    "total_category_avg_f1": 0.8818969145915189,
+    "total_sample_aggregate_f1": 0.8839285714285715,
+    "avg_request_duration_seconds": 12.23888606710825,
+    "precision": 0.9187935034802784,
+    "recall": 0.8516129032258064,
+    "tp": 396,
+    "fp": 35,
+    "fn": 69,
+    "field_count": 24,
+    "request_count": 120,
+    "total_request_duration_seconds": 1468.6663280529901,
+    "provider": "bailing",
+    "model_name": "AntAngelMed",
+    "base_url": "https://api.ant-ling.com/v1/",
+    "prompt_name": "MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_NOHUMAN_V1",
+    "output_prefix": "bailing-medical",
+    "output_dir": "/home/jiaxinyu/projects/asr_llm_agent/eval_llm/basic_test/f1_test_api/exp_2",
+    "execution_mode": "sequential"
+  }
+}
