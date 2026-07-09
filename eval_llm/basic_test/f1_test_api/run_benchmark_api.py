@@ -25,6 +25,7 @@ load_dotenv(dotenv_path)
 
 # --- 配置项 ---
 BAICHUAN_DEFAULT_BASE_URL = "https://api.baichuan-ai.com/v1/"
+ANT_LING_DEFAULT_BASE_URL = "https://api.ant-ling.com/v1/"
 
 
 def first_env(*names):
@@ -61,14 +62,33 @@ def infer_provider():
     if explicit_provider:
         return explicit_provider.strip().lower()
 
-    model_hint = first_env("BAICHUAN_MODEL_NAME", "LLM_MODEL_NAME") or ""
-    base_url_hint = first_env("BAICHUAN_BASE_URL", "LLM_BASE_URL") or ""
+    model_hint = first_env(
+        "BAICHUAN_MODEL_NAME",
+        "BAILING_MODEL_NAME",
+        "ANT_LING_MODEL_NAME",
+        "LING_MODEL_NAME",
+        "LLM_MODEL_NAME",
+    ) or ""
+    base_url_hint = first_env(
+        "BAICHUAN_BASE_URL",
+        "BAILING_BASE_URL",
+        "ANT_LING_BASE_URL",
+        "LLM_BASE_URL",
+    ) or ""
     if (
         os.getenv("BAICHUAN_API_KEY")
         or "baichuan" in model_hint.lower()
         or "baichuan-ai.com" in base_url_hint.lower()
     ):
         return "baichuan"
+    if (
+        os.getenv("BAILING_API_KEY")
+        or os.getenv("ANT_LING_API_KEY")
+        or os.getenv("LING_API_KEY")
+        or "ant-ling.com" in base_url_hint.lower()
+        or model_hint.lower().startswith(("ling-", "ring-"))
+    ):
+        return "bailing"
     return "qwen"
 
 
@@ -95,6 +115,24 @@ if LLM_PROVIDER == "baichuan":
         os.getenv("BAICHUAN_BASE_URL") or BAICHUAN_DEFAULT_BASE_URL
     )
     LLM_MODEL_NAME = first_env("BAICHUAN_MODEL_NAME", "LLM_MODEL_NAME") or "Baichuan-M3"
+elif LLM_PROVIDER in ("bailing", "antling", "ant-ling", "ling"):
+    LLM_API_KEY = first_env(
+        "BAILING_API_KEY",
+        "ANT_LING_API_KEY",
+        "LING_API_KEY",
+        "LLM_API_KEY",
+    )
+    LLM_BASE_URL = normalize_openai_base_url(
+        os.getenv("BAILING_BASE_URL")
+        or os.getenv("ANT_LING_BASE_URL")
+        or os.getenv("LING_BASE_URL")
+        or os.getenv("LLM_BASE_URL")
+        or ANT_LING_DEFAULT_BASE_URL
+    )
+    LLM_MODEL_NAME = (
+        first_env("BAILING_MODEL_NAME", "ANT_LING_MODEL_NAME", "LING_MODEL_NAME", "LLM_MODEL_NAME")
+        or "AntAngelMed"
+    )
 else:
     LLM_API_KEY = first_env("LLM_API_KEY", "QWEN_API_KEY")
     LLM_BASE_URL = normalize_openai_base_url(os.getenv("LLM_BASE_URL"))
@@ -120,11 +158,19 @@ BAICHUAN_DISABLE_FOLLOWUP = os.getenv("BAICHUAN_DISABLE_FOLLOWUP")
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.join(SCRIPT_DIR, '..'))
 try:
-    from prompts import MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_V1
+    import prompts as benchmark_prompts
 except ImportError:
     # Fallback if running from a different directory
     sys.path.append('/workspace/audio_llm_agent/code/eval_llm/basic_test')
-    from prompts import MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_V1
+    import prompts as benchmark_prompts
+
+BENCHMARK_PROMPT_NAME = os.getenv(
+    "BENCHMARK_PROMPT_NAME",
+    "MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_V1",
+)
+if not hasattr(benchmark_prompts, BENCHMARK_PROMPT_NAME):
+    raise RuntimeError(f"Unknown BENCHMARK_PROMPT_NAME: {BENCHMARK_PROMPT_NAME}")
+MEDICAL_EXTRACTOR_PROMPT = getattr(benchmark_prompts, BENCHMARK_PROMPT_NAME)
 
 # Paths
 BASE_DIR = os.path.abspath(os.path.join(SCRIPT_DIR, '..'))
@@ -314,7 +360,7 @@ def construct_messages(record):
     sys_time = record.get('current_sys_time', '')
     day_before = record.get('the_day_before_yesterday', '')
     
-    system_content = MEDICAL_EXTRACTOR_PROMPT_NOINFER_NOCOT_V1.replace(
+    system_content = MEDICAL_EXTRACTOR_PROMPT.replace(
         "{CURRENT_SYS_TIME}", sys_time
     ).replace(
         "{THE_DAY_BEFORE_YESTERDAY}", day_before
@@ -437,12 +483,15 @@ async def main():
     if not LLM_API_KEY:
         if LLM_PROVIDER == "baichuan":
             raise RuntimeError("Missing API key. Set BAICHUAN_API_KEY for Baichuan.")
+        if LLM_PROVIDER in ("bailing", "antling", "ant-ling", "ling"):
+            raise RuntimeError("Missing API key. Set BAILING_API_KEY or ANT_LING_API_KEY for Bailing/Ant Ling.")
         raise RuntimeError("Missing API key. Set LLM_API_KEY or QWEN_API_KEY.")
 
     print(f"Initializing API client: provider={LLM_PROVIDER}, model={LLM_MODEL_NAME}")
     print(f"Base URL: {LLM_BASE_URL}")
     print("Execution mode: sequential")
     print(f"Preflight: {BENCHMARK_PREFLIGHT}")
+    print(f"Prompt: {BENCHMARK_PROMPT_NAME}")
     print(f"Max tokens: {LLM_MAX_TOKENS}")
     print(f"Request timeout: {LLM_REQUEST_TIMEOUT_S}s")
     print(f"Abort on timeout: {BENCHMARK_ABORT_ON_TIMEOUT}")
@@ -592,6 +641,7 @@ async def main():
         'provider': LLM_PROVIDER,
         'model_name': LLM_MODEL_NAME,
         'base_url': LLM_BASE_URL,
+        'prompt_name': BENCHMARK_PROMPT_NAME,
         'output_prefix': OUTPUT_PREFIX,
         'output_dir': OUTPUT_DIR,
         'execution_mode': 'sequential'
