@@ -145,6 +145,10 @@ BENCHMARK_CONCURRENCY = max(1, min(parse_int_env("BENCHMARK_CONCURRENCY", 10), 2
 BENCHMARK_PREFLIGHT = parse_bool_env("BENCHMARK_PREFLIGHT", True)
 BENCHMARK_LOG_REQUESTS = parse_bool_env("BENCHMARK_LOG_REQUESTS", True)
 BENCHMARK_ABORT_ON_TIMEOUT = parse_bool_env("BENCHMARK_ABORT_ON_TIMEOUT", False)
+LLM_STREAM = parse_bool_env(
+    "LLM_STREAM",
+    LLM_PROVIDER in ("bailing", "antling", "ant-ling", "ling"),
+)
 
 BAICHUAN_THINKING_BUDGET_TOKENS = parse_int_env("BAICHUAN_THINKING_BUDGET_TOKENS")
 BAICHUAN_TOP_K = parse_int_env("BAICHUAN_TOP_K")
@@ -194,6 +198,21 @@ def message_content_to_text(content):
                 parts.append(json.dumps(part, ensure_ascii=False))
         return "\n".join(part for part in parts if part)
     return str(content)
+
+
+def object_to_dict(value):
+    if value is None:
+        return {}
+    if hasattr(value, "model_dump"):
+        return value.model_dump()
+    if isinstance(value, dict):
+        return value
+    result = {}
+    for key in ("role", "content", "reasoning_content", "tool_calls", "refusal"):
+        attr = getattr(value, key, None)
+        if attr is not None:
+            result[key] = attr
+    return result
 
 
 def flatten_system_messages(messages):
@@ -271,7 +290,7 @@ def build_chat_request(messages):
         "model": LLM_MODEL_NAME,
         "messages": normalize_messages_for_provider(messages),
         "temperature": LLM_TEMPERATURE,
-        "stream": False,
+        "stream": LLM_STREAM,
     }
     if LLM_TOP_P is not None:
         request_kwargs["top_p"] = LLM_TOP_P
@@ -282,6 +301,13 @@ def build_chat_request(messages):
     if extra_body:
         request_kwargs["extra_body"] = extra_body
     return request_kwargs
+
+
+async def call_model(client, messages):
+    response = await client.chat.completions.create(**build_chat_request(messages))
+    if LLM_STREAM:
+        return await collect_stream_response(response)
+    return extract_non_stream_response(response)
 
 
 def construct_messages(system_prompt, record):
@@ -300,6 +326,64 @@ def extract_response_text(response):
     if isinstance(content, list):
         return message_content_to_text(content)
     return str(content)
+
+
+def extract_message_text(message):
+    content = getattr(message, "content", "") or ""
+    if isinstance(content, list):
+        return message_content_to_text(content)
+    return str(content)
+
+
+def extract_non_stream_response(response):
+    if not response or not response.choices:
+        return "", None, {}, {}
+
+    choice = response.choices[0]
+    message = getattr(choice, "message", None)
+    output_text = extract_message_text(message) if message is not None else ""
+    usage = usage_to_dict(getattr(response, "usage", None))
+    response_metadata = {
+        "finish_reason": getattr(choice, "finish_reason", None),
+        "message": object_to_dict(message),
+    }
+    return output_text, response_metadata["finish_reason"], usage, response_metadata
+
+
+async def collect_stream_response(stream):
+    content_parts = []
+    finish_reason = None
+    usage = {}
+    chunk_count = 0
+    last_delta = {}
+
+    async for chunk in stream:
+        chunk_count += 1
+        chunk_usage = usage_to_dict(getattr(chunk, "usage", None))
+        if chunk_usage:
+            add_usage(usage, chunk_usage)
+
+        for choice in getattr(chunk, "choices", None) or []:
+            current_finish_reason = getattr(choice, "finish_reason", None)
+            if current_finish_reason is not None:
+                finish_reason = current_finish_reason
+
+            delta = getattr(choice, "delta", None)
+            if delta is None:
+                continue
+            delta_dict = object_to_dict(delta)
+            if delta_dict:
+                last_delta = delta_dict
+            content = delta_dict.get("content")
+            if content:
+                content_parts.append(message_content_to_text(content))
+
+    response_metadata = {
+        "finish_reason": finish_reason,
+        "stream_chunks": chunk_count,
+        "last_delta": last_delta,
+    }
+    return "".join(content_parts), finish_reason, usage, response_metadata
 
 
 def parse_json_output(text):
@@ -400,19 +484,22 @@ async def process_record(client, system_prompt, record, semaphore, record_id):
             print(f"Starting request for {label}...", flush=True)
 
         try:
-            response = await asyncio.wait_for(
-                client.chat.completions.create(**build_chat_request(messages)),
+            output_text, finish_reason, usage, response_metadata = await asyncio.wait_for(
+                call_model(client, messages),
                 timeout=LLM_REQUEST_TIMEOUT_S,
             )
             request_duration_seconds = time.perf_counter() - start_time
-            output_text = extract_response_text(response)
-            usage = usage_to_dict(getattr(response, "usage", None))
             if BENCHMARK_LOG_REQUESTS:
                 print(
                     f"Finished request for {label} in {request_duration_seconds:.2f}s "
-                    f"({len(output_text)} chars).",
+                    f"({len(output_text)} chars, finish_reason={finish_reason}).",
                     flush=True,
                 )
+                if not output_text:
+                    print(
+                        f"Empty response for {label}: {json.dumps(response_metadata, ensure_ascii=False)}",
+                        flush=True,
+                    )
             return {
                 "id": label,
                 "input": record.get("input") or record.get("input_text") or "",
@@ -422,6 +509,8 @@ async def process_record(client, system_prompt, record, semaphore, record_id):
                 "request_duration_seconds": request_duration_seconds,
                 "request_error": None,
                 "usage": usage,
+                "finish_reason": finish_reason,
+                "response_metadata": response_metadata,
             }
         except asyncio.TimeoutError as e:
             request_duration_seconds = time.perf_counter() - start_time
@@ -441,6 +530,8 @@ async def process_record(client, system_prompt, record, semaphore, record_id):
                 "request_duration_seconds": request_duration_seconds,
                 "request_error": error_message,
                 "usage": {},
+                "finish_reason": None,
+                "response_metadata": {},
             }
         except Exception as e:
             request_duration_seconds = time.perf_counter() - start_time
@@ -457,6 +548,8 @@ async def process_record(client, system_prompt, record, semaphore, record_id):
                 "request_duration_seconds": request_duration_seconds,
                 "request_error": error_message,
                 "usage": {},
+                "finish_reason": None,
+                "response_metadata": {},
             }
 
 
@@ -489,6 +582,7 @@ async def run_benchmark(args):
     print(f"Output dir: {output_dir}")
     print(f"Concurrency: {BENCHMARK_CONCURRENCY}")
     print(f"Preflight: {BENCHMARK_PREFLIGHT}")
+    print(f"Stream: {LLM_STREAM}")
     print(f"Max tokens: {LLM_MAX_TOKENS}")
     print(f"Request timeout: {LLM_REQUEST_TIMEOUT_S}s")
     print(f"Baichuan search enhance: {BAICHUAN_WITH_SEARCH_ENHANCE}")
@@ -540,6 +634,7 @@ async def run_benchmark(args):
             "total_request_duration_seconds": total_duration,
             "usage_total": usage_total,
             "concurrency": BENCHMARK_CONCURRENCY,
+            "stream": LLM_STREAM,
             "max_tokens": LLM_MAX_TOKENS,
             "baichuan_with_search_enhance": BAICHUAN_WITH_SEARCH_ENHANCE,
         },
