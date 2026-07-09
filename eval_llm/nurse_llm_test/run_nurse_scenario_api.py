@@ -24,6 +24,7 @@ load_dotenv(find_dotenv())
 
 BAICHUAN_DEFAULT_BASE_URL = "https://api.baichuan-ai.com/v1/"
 QWEN_DEFAULT_BASE_URL = "https://dashscope.aliyuncs.com/compatible-mode/v1"
+ANT_LING_DEFAULT_BASE_URL = "https://api.ant-ling.com/v1/"
 
 
 def first_env(*names):
@@ -76,14 +77,33 @@ def infer_provider():
     if explicit_provider:
         return explicit_provider.strip().lower()
 
-    model_hint = first_env("BAICHUAN_MODEL_NAME", "LLM_MODEL_NAME") or ""
-    base_url_hint = first_env("BAICHUAN_BASE_URL", "LLM_BASE_URL") or ""
+    model_hint = first_env(
+        "BAICHUAN_MODEL_NAME",
+        "BAILING_MODEL_NAME",
+        "ANT_LING_MODEL_NAME",
+        "LING_MODEL_NAME",
+        "LLM_MODEL_NAME",
+    ) or ""
+    base_url_hint = first_env(
+        "BAICHUAN_BASE_URL",
+        "BAILING_BASE_URL",
+        "ANT_LING_BASE_URL",
+        "LLM_BASE_URL",
+    ) or ""
     if (
         os.getenv("BAICHUAN_API_KEY")
         or "baichuan" in model_hint.lower()
         or "baichuan-ai.com" in base_url_hint.lower()
     ):
         return "baichuan"
+    if (
+        os.getenv("BAILING_API_KEY")
+        or os.getenv("ANT_LING_API_KEY")
+        or os.getenv("LING_API_KEY")
+        or "ant-ling.com" in base_url_hint.lower()
+        or model_hint.lower().startswith(("ling-", "ring-"))
+    ):
+        return "bailing"
     return "qwen"
 
 
@@ -94,6 +114,24 @@ if LLM_PROVIDER == "baichuan":
         os.getenv("BAICHUAN_BASE_URL") or BAICHUAN_DEFAULT_BASE_URL
     )
     LLM_MODEL_NAME = first_env("BAICHUAN_MODEL_NAME", "LLM_MODEL_NAME") or "Baichuan-M3"
+elif LLM_PROVIDER in ("bailing", "antling", "ant-ling", "ling"):
+    LLM_API_KEY = first_env(
+        "BAILING_API_KEY",
+        "ANT_LING_API_KEY",
+        "LING_API_KEY",
+        "LLM_API_KEY",
+    )
+    LLM_BASE_URL = normalize_openai_base_url(
+        os.getenv("BAILING_BASE_URL")
+        or os.getenv("ANT_LING_BASE_URL")
+        or os.getenv("LING_BASE_URL")
+        or os.getenv("LLM_BASE_URL")
+        or ANT_LING_DEFAULT_BASE_URL
+    )
+    LLM_MODEL_NAME = (
+        first_env("BAILING_MODEL_NAME", "ANT_LING_MODEL_NAME", "LING_MODEL_NAME", "LLM_MODEL_NAME")
+        or "AntAngelMed"
+    )
 else:
     LLM_API_KEY = first_env("LLM_API_KEY", "QWEN_API_KEY")
     LLM_BASE_URL = normalize_openai_base_url(os.getenv("LLM_BASE_URL") or QWEN_DEFAULT_BASE_URL)
@@ -428,6 +466,8 @@ async def run_benchmark(args):
     if not LLM_API_KEY:
         if LLM_PROVIDER == "baichuan":
             raise RuntimeError("Missing API key. Set BAICHUAN_API_KEY for Baichuan.")
+        if LLM_PROVIDER in ("bailing", "antling", "ant-ling", "ling"):
+            raise RuntimeError("Missing API key. Set BAILING_API_KEY or ANT_LING_API_KEY for Bailing/Ant Ling.")
         raise RuntimeError("Missing API key. Set LLM_API_KEY or QWEN_API_KEY.")
 
     scenario_dir = os.path.abspath(args.scenario_dir)
